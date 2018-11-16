@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import UserBasicInfo from './UserBasicInfo';
 import UserEducation from './UserEducation';
-// import UserProject from './UserProject';
+import UserProject from './UserProject';
 // import UserInterestField from './UserInterestField';
 // import UserInterestTech from './UserInterestTech';
-// import UserExperience from './UserExperience';
+import UserExperience from './UserExperience';
 
 export default class UserContainer extends Component {
   render() {
@@ -12,10 +12,10 @@ export default class UserContainer extends Component {
       <div className="usercontainer">
         <UserBasicInfo />
         <UserEducation />
-        {/* <UserExperience />
+        <UserExperience />
         <UserProject />
-        <UserInterestField />
-        <UserInterestTech /> */}
+        {/* <UserInterestField /> */}
+        {/* <UserInterestTech /> */}
       </div>
     );
   }
