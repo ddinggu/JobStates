@@ -26,5 +26,4 @@ yarn-error.log*
 .package-lock.json
 package-lock.json
 .yarn.lock
-.README.node_modules
 .prettierrc
