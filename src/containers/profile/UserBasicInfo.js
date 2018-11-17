@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { fetchUser, fetchUserProfileBegin } from 'actions/index';
+import { bindActionCreators } from 'redux';
+import { fetchUserProfileBegin, fetchUser } from '../../actions/index';
 
 class UserBasicInfo extends Component {
   constructor() {
@@ -17,7 +20,14 @@ class UserBasicInfo extends Component {
     };
   }
 
+  componentDidMount() {
+    const { beginFetch, isFetching } = this.props;
+    beginFetch();
+    isFetching();
+  }
+
   render() {
+    // console.log(this.props);
     const { name, phoneNum, email, snsBlog, snsGithub, picture } = this.props;
     const { onButtonClick } = this;
     const { status } = this.state;
@@ -95,6 +105,8 @@ UserBasicInfo.propTypes = {
   snsBlog: PropTypes.string,
   snsGithub: PropTypes.string,
   picture: PropTypes.string,
+  beginFetch: PropTypes.func,
+  isFetching: PropTypes.func,
 };
 
 UserBasicInfo.defaultProps = {
@@ -104,6 +116,8 @@ UserBasicInfo.defaultProps = {
   snsBlog: 'default snsBlog',
   snsGithub: 'default snsGithub',
   picture: 'default img',
+  beginFetch: () => {},
+  isFetching: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -115,4 +129,16 @@ const mapStateToProps = state => ({
   picture: state.Profile.picture,
 });
 
-export default connect(mapStateToProps)(UserBasicInfo);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      beginFetch: fetchUser,
+      isFetching: fetchUserProfileBegin,
+    },
+    dispatch,
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UserBasicInfo);
