@@ -1,6 +1,16 @@
-import { createStore } from 'redux';
-import Reducers from './reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+import ReduxThunk from 'redux-thunk';
 
-const store = createStore(Reducers);
+import Reducers from './reducers';
+/* eslint no-underscore-dangle: 0 */
+
+const store = createStore(
+  Reducers,
+  compose(
+    applyMiddleware(ReduxThunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__(),
+  ),
+);
 
 export default store;
