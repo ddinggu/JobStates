@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { fetchUser, fetchUserProfileBegin } from 'actions/index';
-import { bindActionCreators } from 'redux';
-import { fetchUserProfileBegin, fetchUser } from '../../actions/index';
 
 class UserBasicInfo extends Component {
   constructor() {
     super();
     this.state = {
-      status: true, // true가 '정보 확인 ' false가 '정보 추가/수정'
+      status: true, // true : 정보 확인 뷰 & false : 정보 추가/수정 뷰
     };
 
     this.onButtonClick = () => {
@@ -18,23 +15,22 @@ class UserBasicInfo extends Component {
         status: !status,
       });
     };
-  }
+  } // <--------- commit 위해 임시로 disable 해놓음
 
-  componentDidMount() {
-    const { beginFetch, isFetching } = this.props;
-    beginFetch();
-    isFetching();
-  }
+  /* eslint-disable  */ render() {
+    const {
+      name,
+      phoneNum,
+      email,
+      snsBlog,
+      snsGithub,
+      picture,
+    } = this.props.basicinfo;
 
-  render() {
-    // console.log(this.props);
-    const { name, phoneNum, email, snsBlog, snsGithub, picture } = this.props;
+    /* eslint-enable */
+
     const { onButtonClick } = this;
     const { status } = this.state;
-
-    // const createupdateDiv = {
-    //   display: 'none',
-    // };
 
     return (
       <div className="UserBasicInfo">
@@ -44,7 +40,7 @@ class UserBasicInfo extends Component {
           +
         </button>
         <div
-          className="readUserBasicInfo"
+          className="read UserBasicInfo"
           style={
             status
               ? null
@@ -63,7 +59,7 @@ class UserBasicInfo extends Component {
           <div>대표 깃헙: {snsGithub}</div>
         </div>
         <div
-          className="createUserBasicInfo"
+          className="create UserBasicInfo"
           style={
             status
               ? {
@@ -98,15 +94,12 @@ class UserBasicInfo extends Component {
 }
 
 UserBasicInfo.propTypes = {
-  // profile: PropTypes.
   name: PropTypes.string,
   phoneNum: PropTypes.string,
   email: PropTypes.string,
   snsBlog: PropTypes.string,
   snsGithub: PropTypes.string,
   picture: PropTypes.string,
-  beginFetch: PropTypes.func,
-  isFetching: PropTypes.func,
 };
 
 UserBasicInfo.defaultProps = {
@@ -116,29 +109,6 @@ UserBasicInfo.defaultProps = {
   snsBlog: 'default snsBlog',
   snsGithub: 'default snsGithub',
   picture: 'default img',
-  beginFetch: () => {},
-  isFetching: () => {},
 };
 
-const mapStateToProps = state => ({
-  name: state.Profile.name,
-  email: state.Profile.email,
-  phoneNum: state.Profile.phoneNum,
-  snsBlog: state.Profile.snsBlog,
-  snsGithub: state.Profile.snsGithub,
-  picture: state.Profile.picture,
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      beginFetch: fetchUser,
-      isFetching: fetchUserProfileBegin,
-    },
-    dispatch,
-  );
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(UserBasicInfo);
+export default connect()(UserBasicInfo);

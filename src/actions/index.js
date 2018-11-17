@@ -2,26 +2,6 @@ import axios from 'axios';
 
 export const FETCH_USER_PROFILE_BEGIN = 'FETCH_USER_PROFILE_BEGIN';
 export const FETCH_USER_PROFILE_SUCCESS = 'FETCH_USER_PROFILE_SUCCESS';
-
-// action
-
-export const FETCH_USER = 'FETCH_USR';
-export const fetchUser = () => {
-  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/user';
-  // const request = axios.get(url);
-
-  const request = axios.get(url);
-
-  // console.log('request in action fetchusr', request);
-
-  return {
-    type: FETCH_USER,
-    payload: request,
-  };
-};
-
-//= ======= https://daveceddia.com/where-fetch-data-redux/ =====
-
 export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
 
 export const fetchUserProfileBegin = () => ({
@@ -37,6 +17,27 @@ export const fetchProductsFailure = error => ({
   type: FETCH_PRODUCTS_FAILURE,
   payload: { error },
 });
+
+// action
+
+export const FETCH_USER = 'FETCH_USR';
+export const fetchUser = () => {
+  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/user';
+
+  return dispatch => {
+    dispatch(fetchUserProfileBegin());
+    return axios.get(url).then(user => {
+      dispatch(fetchUserProfileSuccess(user.data));
+    });
+  };
+
+  // return dispatch => ({
+  //   type: FETCH_USER,
+  //   payload: request,
+  // });
+};
+
+//= ======= https://daveceddia.com/where-fetch-data-redux/ =====
 
 // Handle HTTP errors since fetch won't.
 // function handleErrors(response) {
