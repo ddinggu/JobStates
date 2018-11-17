@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 import UserContainer from '../containers/profile/UserContainer';
-import Header from './header';
+import HeaderContainer from '../containers/header/headerContainer';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         Job states
-        <Header />
+        <HeaderContainer />
         <UserContainer />
       </div>
     );
