@@ -91,15 +91,23 @@ UserContainer.defaultProps = {
 
 const mapStateToProps = state => {
   console.log('HHHAHAHHAHA', state);
-
   return {
-    name: state.fetchedProfile.items.nick,
-    email: state.fetchedProfile.items.email,
-    phoneNum: state.fetchedProfile.items.phone,
-    snsBlog: state.fetchedProfile.items.blog,
-    snsGithub: state.fetchedProfile.items.github,
-    picture: state.fetchedProfile.items.photo,
+    name: state.Profile.nick,
+    email: state.Profile.email,
+    phoneNum: state.Profile.phone,
+    snsBlog: state.Profile.blog,
+    snsGithub: state.Profile.github,
+    picture: state.Profile.photo,
   };
+
+  // return {
+  //   name: state.fetchedProfile.items.nick,
+  //   email: state.fetchedProfile.items.email,
+  //   phoneNum: state.fetchedProfile.items.phone,
+  //   snsBlog: state.fetchedProfile.items.blog,
+  //   snsGithub: state.fetchedProfile.items.github,
+  //   picture: state.fetchedProfile.items.photo,
+  // };
 };
 
 const mapDispatchToProps = dispatch => {
