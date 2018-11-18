@@ -7,8 +7,12 @@ class UserEducation extends Component {
     // const { name, phoneNum, email, snsBlog, snsGithub, picture } = this.props;
     return (
       <div>
+        <hr />
         <h3>학력</h3>
-        <div>discription</div>
+        <div>
+          <li>학력 1</li>
+          <li>학력 2</li>
+        </div>
       </div>
     );
   }
