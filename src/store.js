@@ -1,5 +1,5 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+import ReduxThunk from 'redux-thunk';
 import Reducers from './reducers';
 
 /* eslint-disable no-underscore-dangle */
@@ -7,7 +7,7 @@ import Reducers from './reducers';
 const store = createStore(
   Reducers,
   compose(
-    applyMiddleware(thunkMiddleware),
+    applyMiddleware(ReduxThunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),
