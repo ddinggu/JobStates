@@ -6,9 +6,7 @@ import UserBasicInfo from './UserBasicInfo';
 import UserEducation from './UserEducation';
 import UserProject from './UserProject';
 import UserExperience from './UserExperience';
-
 import { fetchUser } from '../../actions/index';
-
 // import UserInterestField from './UserInterestField';
 // import UserInterestTech from './UserInterestTech';
 
@@ -28,15 +26,20 @@ class UserContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('dispatch here?', this.props.dispatch);
     const { fetch } = this.props;
     fetch();
   }
 
   render() {
-    console.log('2222', this.props);
+    if (this.props.name === 'default name') {
+      return (
+        <div>
+          <img src="https://i.gifer.com/4V0b.gif" />
+        </div>
+      );
+    }
     const basicinfo = {
-      name: this.props.nick,
+      name: this.props.name,
       email: this.props.email,
       phoneNum: this.props.phoneNum,
       snsBlog: this.props.snsBlog,
@@ -48,7 +51,7 @@ class UserContainer extends Component {
     return (
       <div className="usercontainer">
         <UserBasicInfo basicinfo={this.makePropsUnit(basicinfo)} />
-        <UserEducation />
+        <UserEducation edu={this.props.education} />
         <UserExperience />
         <UserProject />
         {/* <UserInterestField /> */}
@@ -91,23 +94,21 @@ UserContainer.defaultProps = {
 
 const mapStateToProps = state => {
   console.log('HHHAHAHHAHA', state);
-  return {
-    name: state.Profile.nick,
-    email: state.Profile.email,
-    phoneNum: state.Profile.phone,
-    snsBlog: state.Profile.blog,
-    snsGithub: state.Profile.github,
-    picture: state.Profile.photo,
-  };
 
-  // return {
-  //   name: state.fetchedProfile.items.nick,
-  //   email: state.fetchedProfile.items.email,
-  //   phoneNum: state.fetchedProfile.items.phone,
-  //   snsBlog: state.fetchedProfile.items.blog,
-  //   snsGithub: state.fetchedProfile.items.github,
-  //   picture: state.fetchedProfile.items.photo,
-  // };
+  if (!(state.fetchedProfile.items === null)) {
+    console.log('22');
+    console.log('hum', state.fetchedProfile);
+    return {
+      name: state.fetchedProfile.items.user.nick,
+      email: state.fetchedProfile.items.user.email,
+      phoneNum: state.fetchedProfile.items.user.phone,
+      snsBlog: state.fetchedProfile.items.user.blog,
+      snsGithub: state.fetchedProfile.items.user.github,
+      picture: state.fetchedProfile.items.user.photo,
+      education: state.fetchedProfile.items.user.education,
+      experience: state.fetchedProfile.items.user.experience,
+    };
+  }
 };
 
 const mapDispatchToProps = dispatch => {
@@ -120,15 +121,6 @@ const mapDispatchToProps = dispatch => {
   const allActionProps = { ...boundActionCreators, dispatch };
   return allActionProps;
 };
-
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(
-//     {
-//       fetchBegin: fetchUserProfileBegin,
-//       fetch: fetchUser,
-//     },
-//     dispatch,
-//   );
 
 export default connect(
   mapStateToProps,

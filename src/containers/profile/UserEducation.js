@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 class UserEducation extends Component {
   render() {
+    console.log('edu props', this.props);
     // const { name, phoneNum, email, snsBlog, snsGithub, picture } = this.props;
     return (
       <div>

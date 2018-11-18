@@ -15,9 +15,11 @@ class UserBasicInfo extends Component {
         status: !status,
       });
     };
-  } // <--------- commit 위해 임시로 disable 해놓음
+  }
 
-  /* eslint-disable  */ render() {
+  /* eslint-disable  */
+
+  render() {
     const {
       name,
       phoneNum,

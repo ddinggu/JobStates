@@ -1,7 +1,7 @@
 import {
   FETCH_USER_PROFILE_BEGIN,
   FETCH_USER_PROFILE_SUCCESS,
-  FETCH_PRODUCTS_FAILURE,
+  FETCH_USER_PROFILE_FAILURE,
   FETCH_USER,
 } from '../actions';
 
@@ -11,7 +11,7 @@ const initialState = {
   error: null,
 };
 
-export default function productReducer(state = initialState, action) {
+export default function userProfileReducer(state = initialState, action) {
   // console.log('action received', action);
   switch (action.type) {
     case FETCH_USER_PROFILE_BEGIN:
@@ -35,7 +35,7 @@ export default function productReducer(state = initialState, action) {
         items: action.payload,
       };
 
-    case FETCH_PRODUCTS_FAILURE:
+    case FETCH_USER_PROFILE_FAILURE:
       return {
         ...state,
         loading: false,
