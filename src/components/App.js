@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import UserContainer from '../containers/profile/UserContainer';
+import UserContainer from 'containers/profile/UserContainer';
+import AnalysisContainer from 'containers/analysis/AnalysisContainer';
 
 class App extends Component {
   render() {
@@ -7,6 +8,7 @@ class App extends Component {
       <div className="App">
         Job states
         <UserContainer />
+        <AnalysisContainer />
       </div>
     );
   }
