@@ -6,7 +6,7 @@ import fetchedProfile from './reducer_fetchedProfile';
 const rootReducers = combineReducers({
   Profile,
   fetchedProfile,
-  hedear,
+  header,
 });
 
 export default rootReducers;
