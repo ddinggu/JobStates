@@ -6,18 +6,22 @@ class UserBasicInfo extends Component {
   constructor() {
     super();
     this.state = {
-      status: true, // true : 정보 확인 뷰 & false : 정보 추가/수정 뷰
+      createOrEdit: false, // false : 정보 확인 뷰 & true : 정보 추가/수정 뷰
     };
 
     this.onButtonClick = () => {
-      const { status } = this.state;
+      const { createOrEdit } = this.state;
       this.setState({
-        status: !status,
+        createOrEdit: !createOrEdit,
       });
     };
-  } // <--------- commit 위해 임시로 disable 해놓음
+  }
 
-  /* eslint-disable  */ render() {
+  /* eslint-disable  */
+
+  render() {
+    const { createOrEdit } = this.state;
+    const { onButtonClick } = this;
     const {
       name,
       phoneNum,
@@ -25,12 +29,22 @@ class UserBasicInfo extends Component {
       snsBlog,
       snsGithub,
       picture,
+      updateField,
+      submit,
     } = this.props.basicinfo;
 
-    /* eslint-enable */
-
-    const { onButtonClick } = this;
-    const { status } = this.state;
+    // handling onChange & onSubmit //
+    const updateFieldEvent = key => ev => updateField(key, ev.target.value);
+    const changeName = updateFieldEvent('nick');
+    const changePhone = updateFieldEvent('phone');
+    const changeEmail = updateFieldEvent('email');
+    const changeBlog = updateFieldEvent('blog');
+    const changeGithub = updateFieldEvent('github');
+    const onSubmitPost = e => {
+      e.preventDefault();
+      submit(this.props.editedData);
+    };
+    ///////////////////////////////////
 
     return (
       <div className="UserBasicInfo">
@@ -40,9 +54,9 @@ class UserBasicInfo extends Component {
           +
         </button>
         <div
-          className="read UserBasicInfo"
+          className="UserBasicInfo read"
           style={
-            status
+            !createOrEdit
               ? null
               : {
                   display: 'none',
@@ -59,9 +73,9 @@ class UserBasicInfo extends Component {
           <div>대표 깃헙: {snsGithub}</div>
         </div>
         <div
-          className="create UserBasicInfo"
+          className="UserBasicInfo create"
           style={
-            status
+            !createOrEdit
               ? {
                   display: 'none',
                 }
@@ -70,22 +84,21 @@ class UserBasicInfo extends Component {
         >
           <hr />
           <h3>이름</h3>
-          <div>
-            <form>
-              <input />
-            </form>
-          </div>
-          <h3>연락처</h3>
-          <form>
-            휴대폰 번호: <input />
+          <form onSubmit={onSubmitPost}>
+            <input onChange={changeName} />
+            <h3>연락처</h3>
+            휴대폰 번호: <input onChange={changePhone} />
             <br />
-            이메일 주소: <input />
-          </form>
-          <h3>SNS</h3>
-          <form>
-            대표 블로그: <input />
+            이메일 주소: <input onChange={changeEmail} />
+            <h3>SNS</h3>
+            대표 블로그: <input onChange={changeBlog} />
             <br />
-            대표 깃헙: <input />
+            대표 깃헙: <input onChange={changeGithub} />
+            <br />
+            <button type="button" onClick={onButtonClick}>
+              취소
+            </button>{' '}
+            <button type="submit">변경</button>
           </form>
         </div>
       </div>
@@ -111,4 +124,11 @@ UserBasicInfo.defaultProps = {
   picture: 'default img',
 };
 
-export default connect()(UserBasicInfo);
+const mapStateToProps = state => {
+  return {
+    editedData: state.fetchedProfile.editor,
+  };
+};
+export default connect(mapStateToProps)(UserBasicInfo);
+
+/* eslint-enable */
