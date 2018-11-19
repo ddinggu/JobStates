@@ -27,7 +27,7 @@ class UserEducation extends Component {
 
     // handling onChange & onSubmit //
     const updateFieldEvent = key => ev => updateField(key, ev.target.value);
-    const changeOrg = updateFieldEvent('nick');
+    const changeName = updateFieldEvent('nick');
     const changePhone = updateFieldEvent('phone');
     const changeEmail = updateFieldEvent('email');
     const changeBlog = updateFieldEvent('blog');
