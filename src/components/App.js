@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import UserContainer from '../containers/profile/UserContainer';
+import UserContainer from 'containers/profile/UserContainer';
+import AnalysisContainer from 'containers/analysis/AnalysisContainer';
 import HeaderContainer from '../containers/header/HeaderContainer';
 
 class App extends Component {
@@ -10,6 +10,7 @@ class App extends Component {
         Job states
         <HeaderContainer />
         <UserContainer />
+        <AnalysisContainer />
       </div>
     );
   }
