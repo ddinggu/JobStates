@@ -1,9 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
-
 import Reducers from './reducers';
-/* eslint no-underscore-dangle: 0 */
 
+/* eslint-disable */
 const store = createStore(
   Reducers,
   compose(
@@ -12,5 +11,7 @@ const store = createStore(
       window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),
 );
+
+/* eslint-disable no-underscore-dangle */
 
 export default store;

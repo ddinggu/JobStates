@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-
-import UserContainer from '../containers/profile/UserContainer';
+import UserContainer from 'containers/profile/UserContainer';
+import AnalysisContainer from 'containers/analysis/AnalysisContainer';
 import HeaderContainer from '../containers/header/HeaderContainer';
+import JobDetail from '../containers/job/JobDetail';
+import JobList from '../containers/job/JobList';
 
 class App extends Component {
   render() {
@@ -10,6 +12,9 @@ class App extends Component {
         Job states
         <HeaderContainer />
         <UserContainer />
+        <AnalysisContainer />
+        <JobDetail />
+        <JobList />
       </div>
     );
   }
