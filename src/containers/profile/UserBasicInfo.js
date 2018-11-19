@@ -45,8 +45,8 @@ class UserBasicInfo extends Component {
             status
               ? null
               : {
-                  display: 'none',
-                }
+                display: 'none',
+              }
           }
         >
           <h3>이름</h3>
@@ -63,8 +63,8 @@ class UserBasicInfo extends Component {
           style={
             status
               ? {
-                  display: 'none',
-                }
+                display: 'none',
+              }
               : null
           }
         >
