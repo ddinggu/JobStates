@@ -52,8 +52,8 @@ class UserContainer extends Component {
       <div className="usercontainer">
         <UserBasicInfo basicinfo={this.makePropsUnit(basicinfo)} />
         <UserEducation edu={this.props.education} />
-        <UserExperience />
-        <UserProject />
+        <UserExperience exp={this.props.experience} />
+        <UserProject project={this.props.project} />
         {/* <UserInterestField /> */}
         {/* <UserInterestTech /> */}
       </div>
@@ -96,8 +96,6 @@ const mapStateToProps = state => {
   console.log('HHHAHAHHAHA', state);
 
   if (!(state.fetchedProfile.items === null)) {
-    console.log('22');
-    console.log('hum', state.fetchedProfile);
     return {
       name: state.fetchedProfile.items.user.nick,
       email: state.fetchedProfile.items.user.email,
@@ -107,6 +105,7 @@ const mapStateToProps = state => {
       picture: state.fetchedProfile.items.user.photo,
       education: state.fetchedProfile.items.user.education,
       experience: state.fetchedProfile.items.user.experience,
+      project: state.fetchedProfile.items.user.project,
     };
   }
 };

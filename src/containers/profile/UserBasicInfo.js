@@ -6,13 +6,13 @@ class UserBasicInfo extends Component {
   constructor() {
     super();
     this.state = {
-      status: true, // true : 정보 확인 뷰 & false : 정보 추가/수정 뷰
+      createOrEdit: false, // false : 정보 확인 뷰 & true : 정보 추가/수정 뷰
     };
 
     this.onButtonClick = () => {
-      const { status } = this.state;
+      const { createOrEdit } = this.state;
       this.setState({
-        status: !status,
+        createOrEdit: !createOrEdit,
       });
     };
   }
@@ -29,10 +29,8 @@ class UserBasicInfo extends Component {
       picture,
     } = this.props.basicinfo;
 
-    /* eslint-enable */
-
     const { onButtonClick } = this;
-    const { status } = this.state;
+    const { createOrEdit } = this.state;
 
     return (
       <div className="UserBasicInfo">
@@ -42,9 +40,9 @@ class UserBasicInfo extends Component {
           +
         </button>
         <div
-          className="read UserBasicInfo"
+          className="UserBasicInfo read"
           style={
-            status
+            !createOrEdit
               ? null
               : {
                   display: 'none',
@@ -61,9 +59,9 @@ class UserBasicInfo extends Component {
           <div>대표 깃헙: {snsGithub}</div>
         </div>
         <div
-          className="create UserBasicInfo"
+          className="UserBasicInfo create"
           style={
-            status
+            !createOrEdit
               ? {
                   display: 'none',
                 }
@@ -89,6 +87,11 @@ class UserBasicInfo extends Component {
             <br />
             대표 깃헙: <input />
           </form>
+          <br />
+          <button type="button" onClick={onButtonClick}>
+            취소
+          </button>{' '}
+          <button>변경</button>
         </div>
       </div>
     );
@@ -114,3 +117,5 @@ UserBasicInfo.defaultProps = {
 };
 
 export default connect()(UserBasicInfo);
+
+/* eslint-enable */
