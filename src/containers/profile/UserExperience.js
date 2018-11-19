@@ -23,8 +23,8 @@ class UserExperience extends Component {
     const { createOrEdit } = this.state;
     const { exps } = this.props;
 
-    if (exps === undefined) {
-      return <div>loading...</div>;
+    if (this.props.exps === undefined) {
+      return <div>Experience loading...</div>;
     }
 
     return (

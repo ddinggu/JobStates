@@ -6,23 +6,19 @@ import UserBasicInfo from './UserBasicInfo';
 import UserEducation from './UserEducation';
 import UserProject from './UserProject';
 import UserExperience from './UserExperience';
-import { fetchUser } from '../../actions/index';
-// import UserInterestField from './UserInterestField';
-// import UserInterestTech from './UserInterestTech';
+import {
+  fetchUser,
+  onUpdateField,
+  onSubmit,
+} from '../../actions/action_userprofile';
+import UserInterestTech from './UserInterestTech';
+import UserInterestField from './UserInterestField';
 
 /* eslint-disable */
 
 class UserContainer extends Component {
   constructor() {
     super();
-
-    this.makePropsUnit = props => {
-      const propsUnit = {};
-      for (const prop in props) {
-        propsUnit[prop] = props[prop];
-      }
-      return propsUnit;
-    };
   }
 
   componentDidMount() {
@@ -45,17 +41,24 @@ class UserContainer extends Component {
       snsBlog: this.props.snsBlog,
       snsGithub: this.props.snsGithub,
       picture: this.props.picture,
+      updateField: this.props.updateField,
+      submit: this.props.submit,
+    };
+
+    const funcs = {
+      updateField: this.props.updateField,
+      submit: this.props.submit,
     };
     console.log('STATETE', this.state);
 
     return (
       <div className="usercontainer">
-        <UserBasicInfo basicinfo={this.makePropsUnit(basicinfo)} />
-        <UserEducation edu={this.props.education} />
-        <UserExperience exp={this.props.experience} />
+        <UserBasicInfo basicinfo={basicinfo} />
+        <UserEducation edu={this.props.education} funcs={funcs} />
+        <UserExperience exps={this.props.experience} />
         <UserProject project={this.props.project} />
-        {/* <UserInterestField /> */}
-        {/* <UserInterestTech /> */}
+        <UserInterestTech userFavTech={this.props.userFavTech} />
+        <UserInterestField userFavField={this.props.userFavField} />
       </div>
     );
   }
@@ -93,8 +96,6 @@ UserContainer.defaultProps = {
 // ////////////////////////////////////////////////////////////////////////
 
 const mapStateToProps = state => {
-  console.log('HHHAHAHHAHA', state);
-
   if (!(state.fetchedProfile.items === null)) {
     return {
       name: state.fetchedProfile.items.user.nick,
@@ -106,6 +107,8 @@ const mapStateToProps = state => {
       education: state.fetchedProfile.items.user.education,
       experience: state.fetchedProfile.items.user.experience,
       project: state.fetchedProfile.items.user.project,
+      userFavTech: state.fetchedProfile.items.user.favoriteTech,
+      userFavField: state.fetchedProfile.items.user.favoriteCategory,
     };
   }
 };
@@ -114,6 +117,8 @@ const mapDispatchToProps = dispatch => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
+      updateField: onUpdateField,
+      submit: onSubmit,
     },
     dispatch,
   );
@@ -125,4 +130,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(UserContainer);
+
 /* eslint-enable */

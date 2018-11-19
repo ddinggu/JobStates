@@ -20,11 +20,25 @@ class UserEducation extends Component {
   }
 
   render() {
+    console.log('edu props', this.props);
     const { onButtonClick } = this;
     const { createOrEdit } = this.state;
-    const { edu } = this.props;
+    const { edu, funcs } = this.props;
 
-    if (edu === undefined) {
+    // handling onChange & onSubmit //
+    const updateFieldEvent = key => ev => updateField(key, ev.target.value);
+    const changeName = updateFieldEvent('nick');
+    const changePhone = updateFieldEvent('phone');
+    const changeEmail = updateFieldEvent('email');
+    const changeBlog = updateFieldEvent('blog');
+    const changeGithub = updateFieldEvent('github');
+    const onSubmitPost = e => {
+      e.preventDefault();
+      submit(this.props.editedData);
+    };
+    ///////////////////////////////////
+
+    if (this.props.edu === undefined) {
       return <div>loading...</div>;
     }
     return (
@@ -34,10 +48,7 @@ class UserEducation extends Component {
           +
         </button>
         <h3>학력</h3>
-        <div
-          className="UserEducation read"
-          // style={!createOrEdit ? null : { display: 'none' }}
-        >
+        <div className="UserEducation read">
           {edu.map(eduProp => (
             <div>
               <span>{eduProp.organization} </span>
@@ -53,22 +64,30 @@ class UserEducation extends Component {
           className="UserEducation create"
           style={createOrEdit ? null : { display: 'none' }}
         >
-          학교 : <input />
-          &nbsp; 재학 기간 : <input />
-          <br />
-          간단 설명 : <input />
-          <br />
-          <br />
-          <button type="button" onClick={onButtonClick}>
-            취소
-          </button>{' '}
-          <button type="button">추가</button>
+          <form>
+            학교 : <input />
+            &nbsp; 재학 기간 : <input />
+            <br />
+            간단 설명 : <input />
+            <br />
+            <br />
+            <button type="button" onClick={onButtonClick}>
+              취소
+            </button>{' '}
+            <button type="button">추가</button>
+          </form>
         </div>
       </div>
     );
   }
 }
 
-export default connect()(UserEducation);
+const mapStateToProps = state => {
+  return {
+    editedData: state.fetchedProfile.editor,
+  };
+};
+
+export default connect(mapStateToProps)(UserEducation);
 
 /* eslint-enable */
