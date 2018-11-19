@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import getAnalysis from 'actions';
+import { getAnalysis } from 'actions';
 import PropTypes from 'prop-types';
 import DonutChart from './DonutChart';
 import UserCurrent from './UserCurrent';
