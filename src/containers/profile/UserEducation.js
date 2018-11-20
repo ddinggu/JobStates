@@ -70,25 +70,32 @@ class UserEducation extends Component {
             }
             <div className="row">
               {edu.map(eduProp => (
-                <div className="ui grid">
-                  <div className="column eight wide left aligned">
-                    <span>{eduProp.organization}</span>
-                    &nbsp;<span>({eduProp.term})</span>
-                    <li>{eduProp.content}</li>
+                <div>
+                  <div className="row">
+                    <div className="ui grid">
+                      <div className="column four wide left aligned" />
+                      <div className="column eight wide center aligned">
+                        <span>{eduProp.organization}</span>
+                        &nbsp;<span>({eduProp.term})</span>
+                      </div>
+                      <div className="column four wide right aligned">
+                        <span className="ui mini basic icon buttons">
+                          <button type="button" className="ui button">
+                            <i className="edit icon" />
+                          </button>
+                          <button
+                            type="button"
+                            className="ui button"
+                            onClick={() => funcs.delete(eduProp)}
+                          >
+                            <i className="delete icon" />
+                          </button>
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="column three wide right floated">
-                    <span className="ui mini basic icon buttons">
-                      <button type="button" className="ui button">
-                        <i className="edit icon" />
-                      </button>
-                      <button
-                        type="button"
-                        className="ui button"
-                        onClick={() => funcs.delete(eduProp)}
-                      >
-                        <i className="delete icon" />
-                      </button>
-                    </span>
+                  <div className="row">
+                    <li>{eduProp.content}</li>
                   </div>
                 </div>
               ))}
