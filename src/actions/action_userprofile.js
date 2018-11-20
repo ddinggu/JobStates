@@ -22,11 +22,11 @@ export const fetchUserProfileFailure = error => ({
 export const fetchUser = () => {
   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/user';
 
-  return dispatch => {
+  return (dispatch) => {
     dispatch(fetchUserProfileBegin());
     return axios
       .get(url)
-      .then(user => {
+      .then((user) => {
         dispatch(fetchUserProfileSuccess(user.data));
       })
       .catch(error => dispatch(fetchUserProfileFailure(error)));
@@ -39,15 +39,21 @@ export const onUpdateField = (key, value) => ({
   value,
 });
 
-export const onSubmit = payload => {
+export const onSubmit = (payload) => {
   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
 
-  return dispatch =>
-    axios.post(url, payload).then(() => {
-      axios.get(url).then(() => {
-        // console.log('work');
-        // console.log(data);
-        dispatch(fetchUser());
-      });
+  return dispatch => axios.post(url, payload).then(() => {
+    axios.get(url).then((data) => {
+      // console.log('work');
+      console.log(data);
+      dispatch(fetchUser());
     });
+  });
+};
+
+export const deleteUserProfile = (payload) => {
+  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
+  return dispatch => axios.delete(url, payload).then(() => {
+    dispatch(fetchUser());
+  });
 };

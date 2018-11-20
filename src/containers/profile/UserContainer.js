@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Container } from 'semantic-ui-react';
 import UserBasicInfo from './UserBasicInfo';
 import UserEducation from './UserEducation';
 import UserProject from './UserProject';
@@ -10,9 +11,11 @@ import {
   fetchUser,
   onUpdateField,
   onSubmit,
+  deleteUserProfile,
 } from '../../actions/action_userprofile';
 import UserInterestTech from './UserInterestTech';
 import UserInterestField from './UserInterestField';
+import './UserContainer.css';
 
 /* eslint-disable */
 
@@ -48,18 +51,22 @@ class UserContainer extends Component {
     const funcs = {
       updateField: this.props.updateField,
       submit: this.props.submit,
+      delete: this.props.delete,
     };
     console.log('STATETE', this.state);
 
     return (
-      <div className="usercontainer">
-        <UserBasicInfo basicinfo={basicinfo} />
+      <Container className="usercontainer">
+        <UserBasicInfo basicinfo={basicinfo} funcs={funcs} />
         <UserEducation edu={this.props.education} funcs={funcs} />
-        <UserExperience exps={this.props.experience} />
-        <UserProject project={this.props.project} />
-        <UserInterestTech userFavTech={this.props.userFavTech} />
-        <UserInterestField userFavField={this.props.userFavField} />
-      </div>
+        <UserExperience exps={this.props.experience} funcs={funcs} />
+        <UserProject project={this.props.project} funcs={funcs} />
+        <UserInterestTech userFavTech={this.props.userFavTech} funcs={funcs} />
+        <UserInterestField
+          userFavField={this.props.userFavField}
+          funcs={funcs}
+        />
+      </Container>
     );
   }
 }
@@ -119,6 +126,7 @@ const mapDispatchToProps = dispatch => {
       fetch: fetchUser,
       updateField: onUpdateField,
       submit: onSubmit,
+      delete: deleteUserProfile,
     },
     dispatch,
   );
