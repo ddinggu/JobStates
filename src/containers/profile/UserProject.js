@@ -44,32 +44,20 @@ class UserProject extends Component {
 
     return (
       <Container className="UserProject">
-        <button type="button" onClick={onButtonClick}>
-          +
-        </button>
-        <div className="ui two column grid centered">
-          <span className="cloumn profilename">Project</span>
-          <div className="UserProject read ten wide column profilebox">
+        <div className="ui grid centered">
+          <span className="column profilename two wide">Project</span>
+          <div className="column UserProject read ten wide profilebox">
             {project.map(proj => (
-              <div>
+              <div className="row">
                 <b>{proj.title} </b>
                 <span>({proj.term})</span>
                 &nbsp;
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log(proj);
-                    funcs.delete(proj);
-                  }}
-                >
-                  x
-                </button>
                 <li>{proj.description}</li>
                 <br />
               </div>
             ))}
             <div
-              className="UserProejct create ten wide column profilebox"
+              className="UserProejct create ten wide profilebox row"
               style={createOrEdit ? null : { display: 'none' }}
             >
               <form onSubmit={onSubmitPost}>
@@ -89,6 +77,17 @@ class UserProject extends Component {
               </form>
             </div>
           </div>
+          <span className="column two wide">
+            <span className="ui mini basic icon buttons">
+              <button
+                type="button"
+                className="ui button"
+                onClick={onButtonClick}
+              >
+                <i className="plus icon" />
+              </button>
+            </span>
+          </span>
         </div>
       </Container>
     );

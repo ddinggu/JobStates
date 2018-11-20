@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import './UserBasicInfo.css';
 
 /* eslint-disable */
@@ -72,31 +72,10 @@ class UserBasicInfo extends Component {
             />
           </div>
         </div>
-        <Button type="button" onClick={onButtonClick}>
-          +
-        </Button>
-        &nbsp;
-        <button
-          type="button"
-          onClick={() => {
-            console.log(deletedData);
-            funcs.delete(deletedData);
-          }}
-        >
-          x
-        </button>
-        <div className="ui two column grid centered">
-          <span className="cloumn profilename">Basic Info.</span>
+        <div className="ui grid centered">
+          <span className="column profilename two wide">Basic Info.</span>
           {!createOrEdit ? (
             <div className="UserBasicInfo read ten wide column profilebox">
-              <span class="ui mini basic icon buttons">
-                <button class="ui button">
-                  <i class="edit icon" />
-                </button>
-                <button class="ui button">
-                  <i class="delete icon" />
-                </button>
-              </span>
               <span>이름 : {name}</span>
               <br />
               <span>휴대폰 번호: {phoneNum}</span>
@@ -127,6 +106,20 @@ class UserBasicInfo extends Component {
               </form>
             </div>
           )}
+          <div className="column two wide">
+            <span className="ui mini basic icon buttons ">
+              <button type="button" className="ui button">
+                <i className="edit icon" />
+              </button>
+              <button
+                type="button"
+                className="ui button"
+                onClick={() => funcs.delete(eduProp)}
+              >
+                <i className="delete icon" />
+              </button>
+            </span>
+          </div>
         </div>
         {/* </div> */}
         {/* </div> */}
