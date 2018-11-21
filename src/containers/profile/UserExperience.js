@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Button, Container } from 'semantic-ui-react';
+import { Button, Container, Form, Input, TextArea } from 'semantic-ui-react';
 // import PropTypes from 'prop-types';
 
 class UserExperience extends Component {
   constructor() {
     super();
     this.state = {
-      createOrEdit: false,
+      createOrEdit: true,
       title: '',
       term: '',
       content: '',
@@ -110,23 +110,30 @@ class UserExperience extends Component {
                 className="UserExperience create"
                 style={createOrEdit ? null : { display: 'none' }}
               >
-                <form onSubmit={onSubmitPost}>
-                  기업명 : <input onChange={e => this.onChange(e, 'title')} />
-                  <br />
-                  기간 : <input onChange={e => this.onChange(e, 'term')} />
-                  <br />
-                  역할 :{' '}
-                  <input onChange={e => this.onChange(e, 'description')} />
-                  <br />
-                  간단 설명 :{' '}
-                  <input onChange={e => this.onChange(e, 'content')} />
-                  <br />
-                  <br />
-                  <button type="button" onClick={onButtonClick}>
-                    취소
-                  </button>{' '}
-                  <button type="submit">추가</button>
-                </form>
+                <Form onSubmit={onSubmitPost}>
+                  <Form.Field>
+                    <label>기업명</label>
+                    <input
+                      size="mini"
+                      onChange={e => this.onChange(e, 'title')}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>기간</label>
+                    <input onChange={e => this.onChange(e, 'term')} />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>역할</label>
+                    <input onChange={e => this.onChange(e, 'description')} />
+                  </Form.Field>
+                  <Form.Field
+                    control={TextArea}
+                    label="간단 설명"
+                    onChange={e => this.onChange(e, 'content')}
+                  />
+                  <Button compact content="취소" onClick={onButtonClick} />
+                  <Button compact content="추가" />
+                </Form>
               </div>
             </div>
           </div>

@@ -1,10 +1,9 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Container } from 'semantic-ui-react';
+import { Container, List, Grid, Input, Form, Button } from 'semantic-ui-react';
 import './UserBasicInfo.css';
-
-/* eslint-disable */
 
 class UserBasicInfo extends Component {
   constructor() {
@@ -76,13 +75,15 @@ class UserBasicInfo extends Component {
           <span className="column profilename two wide">Basic Info.</span>
           {!createOrEdit ? (
             <div className="UserBasicInfo read ten wide column profilebox">
-              <span>이름 : {name}</span>
-              <br />
-              <span>휴대폰 번호: {phoneNum}</span>
-              <br />
-              <span>이메일 주소: {email}</span>
-              <div>대표 블로그: {snsBlog}</div>
-              <div>대표 깃헙: {snsGithub}</div>
+              <Grid>
+                <List>
+                  <List.Item icon="users" content={name} />
+                  <List.Item icon="phone" content={phoneNum} />
+                  <List.Item icon="mail" content={email} />
+                  <List.Item icon="home" content={snsBlog} />
+                  <List.Item icon="github" content={snsGithub} />
+                </List>
+              </Grid>
             </div>
           ) : (
             <div className="UserBasicInfo create ten wide column profilebox">

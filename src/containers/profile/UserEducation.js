@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Container } from 'semantic-ui-react';
+import { Button, Container, Form, TextArea, Input } from 'semantic-ui-react';
 // import PropTypes from 'prop-types';
 // import './UserEducation.css';
 
@@ -86,7 +86,7 @@ class UserEducation extends Component {
                           <button
                             type="button"
                             className="ui button"
-                            onClick={() => funcs.delete(eduProp)}
+                            onClick={() => funcs.delete({ eduProp })}
                           >
                             <i className="delete icon" />
                           </button>
@@ -105,22 +105,38 @@ class UserEducation extends Component {
             }
             <div className="row">
               <div style={createOrEdit ? null : { display: 'none' }}>
-                <form onSubmit={onSubmitPost} className="create">
-                  학교 :{' '}
-                  <input onChange={e => this.onChange(e, 'organization')} />
-                  <br />
-                  재학 기간 :
-                  <input onChange={e => this.onChange(e, 'term')} />
-                  <br />
-                  간단 설명 :{' '}
-                  <input onChange={e => this.onChange(e, 'description')} />
-                  <br />
-                  <br />
-                  <button type="button" onClick={onButtonClick}>
-                    취소
-                  </button>{' '}
-                  <button type="submit">추가</button>
-                </form>
+                <Form onSubmit={onSubmitPost} className="create">
+                  <Form.Field
+                    label="학교"
+                    control={Input}
+                    onChange={e => this.onChange(e, 'organization')}
+                  />
+                  <Form.Field
+                    label="재학 기간"
+                    control={Input}
+                    onChange={e => this.onChange(e, 'term')}
+                  />
+                  <Form.Field
+                    label="간단 설명"
+                    control={TextArea}
+                    onChange={e => this.onChange(e, 'description')}
+                  />
+                  <Button
+                    compact
+                    content="취소"
+                    onClick={e => {
+                      e.preventDefault();
+                      onButtonClick();
+                    }}
+                  />
+                  <Button
+                    compact
+                    content="추가"
+                    onClick={e => {
+                      e.preventDefault();
+                    }}
+                  />
+                </Form>
               </div>
             </div>
           </div>
