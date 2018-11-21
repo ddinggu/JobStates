@@ -78,8 +78,6 @@ class JobPostForm extends Component {
   //     });
   //   };
 
-  /* eslint-enable */
-
   render() {
     const { postJobData, loading, error } = this.props;
     return (
