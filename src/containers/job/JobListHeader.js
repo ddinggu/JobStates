@@ -24,14 +24,12 @@ export default class JobListHeader extends Component {
     this.setState(prevState =>({
       value,
     }));
-    // console.log(value);
   };
 
   _onClickSearch = e => {
     e.preventDefault();
     const { value } = this.state;
     const { job } = this.props;
-    // console.log(job[0]);
     this.props._filterSearch(value)
   };
 

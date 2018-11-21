@@ -9,9 +9,11 @@ import {
 
 class JobList extends Component {
   constructor(props) {
-    super(props);
+    super(props);    
+  }
 
-    const { fetchJob, job } = this.props;
+  componentDidMount(){
+    const { fetchJob } = this.props;
     fetchJob();
   }
 
@@ -41,6 +43,7 @@ class JobList extends Component {
     if (job.length === 0) {
       return <div>loading...</div>;
     }
+    console.log('job:::::::::', this.props)
     return (
       /* equal width => table 적용 */
       <div>
@@ -55,9 +58,12 @@ class JobList extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  job: state.job,
-});
+const mapStateToProps = state => {
+  console.log('state::::: 요거', state)
+  return{ 
+  job: state.job.allJobData,
+}};
+
 
 export default connect(
   mapStateToProps,
