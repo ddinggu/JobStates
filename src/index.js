@@ -1,11 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './components/App';
-import * as serviceWorker from './serviceWorker';
+import store from './store';
+import 'semantic-ui-css/semantic.min.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// import * as serviceWorker from './serviceWorker';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// import { fetchUserProfile } from './actions';
+
+/* eslint-disable no-console */
+// store.dispatch(fetchUserProfile('1').then(() => console.log(store.getState())));
+/* eslint-enable no-console */
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
+
+// serviceWorker.unregister();
