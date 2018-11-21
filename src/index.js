@@ -8,10 +8,6 @@ import 'semantic-ui-css/semantic.min.css';
 
 // import { fetchUserProfile } from './actions';
 
-/* eslint-disable no-console */
-// store.dispatch(fetchUserProfile('1').then(() => console.log(store.getState())));
-/* eslint-enable no-console */
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

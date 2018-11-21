@@ -1,9 +1,9 @@
 import axios from 'axios';
-import getUserAnalysisData from 'api/api';
+import * as api from 'api/api';
 import * as types from 'actions/actionTypes';
 
 const loadingGetAnalysisData = () => ({
-  type: types.LOADING_ANALYSIS,
+  type: types.GET_ANALYSIS_BEGIN,
 });
 
 const successGetAnalysisData = payload => ({
@@ -19,7 +19,7 @@ const failedGetAnalysisData = payload => ({
 export const getAnalysis = () => async (dispatch) => {
   dispatch(loadingGetAnalysisData());
   try {
-    const responseAnalysisData = await getUserAnalysisData();
+    const responseAnalysisData = await api.getUserAnalysisData();
     dispatch(successGetAnalysisData(responseAnalysisData.data));
   } catch (err) {
     console.error(err);
@@ -51,9 +51,9 @@ export const FETCH_USER = 'FETCH_USR';
 export const fetchUser = () => {
   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/user';
 
-  return dispatch => {
+  return (dispatch) => {
     dispatch(fetchUserProfileBegin());
-    return axios.get(url).then(user => {
+    return axios.get(url).then((user) => {
       dispatch(fetchUserProfileSuccess(user.data));
     });
   };

@@ -4,7 +4,6 @@ import {
   Input,
   TextArea,
   Button,
-  Select,
   Grid,
   Dropdown,
   Image,
@@ -12,16 +11,25 @@ import {
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import * as jobutils from 'utils/jobutils';
+import * as jobUtils from 'utils/jobutils';
+import NewPortal from './NewPortal';
+// import { ClipLoader } from 'react-spinners';
+import postUserJobData from 'actions/action_jobpost';
+import { connect } from 'react-redux';
+import DropdownSearchQuery from './DropdownSearchQuery';
 
+/* eslint-disable */
 class JobPostForm extends Component {
   state = {
+    hireId: null,
     status: '',
     statusDate: new Date(),
-    logo: [],
+    scheduleId: null,
+    logo: '',
     brand: '',
     category: [],
-    url: '',
+    companyUrl: '',
+    hireUrl: '',
     intro: '',
     title: '',
     importantInfo: '',
@@ -35,15 +43,73 @@ class JobPostForm extends Component {
     disadvantage: '',
     strategy: '',
     hireType: '',
+    showWindowPortal: false,
   };
 
-  _handleChange = (e, { value }) => this.setState({ hireType: value });
-  _dateChange = key => date => this.setState({ [key]: date });
+  onHandleChange = key => e =>
+    this.setState({
+      ...this.state,
+      [key]: e.target.value ? e.target.value : e.target.innerText,
+    });
+
+  onDateChange = key => date => this.setState({ ...this.state, [key]: date });
+
+  toggleWindowPortal = () =>
+    this.setState(state => ({
+      ...this.state,
+      showWindowPortal: !state.showWindowPortal,
+    }));
+
+  onHandleGetArray = key => data =>
+    this.setState({
+      ...this.state,
+      [key]: data,
+    });
+
+  //   onHandleArrayChange = key => e => {
+  //     const filteredState = jobUtils.filterToJobArray(
+  //       this.state[key],
+  //       e.target.innerText,
+  //     );
+
+  //     this.setState({
+  //       ...this.state,
+  //       [key]: filteredState,
+  //     });
+  //   };
+
+  /* eslint-enable */
 
   render() {
+    const { postJobData, loading, error } = this.props;
     return (
       <div style={{ marginTop: '5rem' }}>
+        {/* {loading ? <ClipLoader size={150} /> : null} */}
+        {/* 포탈 띄우기 */}
+        {this.state.showWindowPortal && (
+          <NewPortal onClickLoadData={this.loadData} />
+        )}
+
         <Form>
+          <div className="jobPostHeader" style={{ height: '4rem' }}>
+            <Button
+              floated="right"
+              color="green"
+              style={{ marginRight: '4rem' }}
+              onClick={() => postJobData(this.state)}
+            >
+              등록
+            </Button>
+            <Button
+              floated="right"
+              color="blue"
+              style={{ marginRight: '1.5rem' }}
+              onClick={this.toggleWindowPortal}
+            >
+              자동완성
+            </Button>
+          </div>
+          <div style={{ border: '1px solid gray', marginBottom: '1rem' }} />
           <Grid>
             <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '2rem' }}>
@@ -55,8 +121,8 @@ class JobPostForm extends Component {
                   현재 이 채용공고는{' '}
                   <Dropdown
                     inline
-                    options={jobutils.current}
-                    defaultValue={jobutils.current[0].value}
+                    options={jobUtils.current}
+                    onChange={this.onHandleChange('status')}
                   />
                 </span>
               </Grid.Column>
@@ -72,6 +138,7 @@ class JobPostForm extends Component {
                   control={Input}
                   label="회사명"
                   placeholder="회사명"
+                  onChange={this.onHandleChange('brand')}
                 />
                 <Form.Field
                   id="form-input-control-company-logo"
@@ -79,11 +146,13 @@ class JobPostForm extends Component {
                   placeholder="회사 로고"
                 />
                 <input type="file" />
+                <Image src={this.state.logo} size="small" />
                 <Form.Field
                   id="form-input-control-company-url"
                   control={Input}
                   label="회사 사이트"
                   placeholder="회사사이트"
+                  onChange={this.onHandleChange('companyUrl')}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -94,13 +163,23 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {jobutils.selectCategory.map((val, idx) => {
-                  return (
-                    <Button size="mini" style={{ marginBottom: '0.4rem' }}>
-                      {val}
-                    </Button>
-                  );
-                })}
+                {/* {jobUtils.selectCategory.map((val, idx) => (
+                  <Button
+                    size="mini"
+                    style={{ marginBottom: '0.4rem' }}
+                    onClick={e => {
+                      this.onHandleArrayChange('category')(e);
+                      e.target.classList.toggle('blue');
+                    }}
+                  >
+                    {val}
+                  </Button>
+                ))} */}
+                <DropdownSearchQuery
+                  stateOptions={jobUtils.selectCategory}
+                  title={'산업 분야'}
+                  handleArrayChange={this.onHandleGetArray('category')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -114,6 +193,22 @@ class JobPostForm extends Component {
                   id="form-input-control-company-name"
                   control={Input}
                   placeholder="채용명"
+                  onChange={this.onHandleChange('title')}
+                />
+              </Grid.Column>
+            </Grid.Row>
+
+            <Grid.Row>
+              <Grid.Column width={3} style={{ marginLeft: '2rem' }}>
+                <div>공고 URL</div>
+                <div style={{ border: '1px solid' }} />
+              </Grid.Column>
+              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
+                <Form.Field
+                  id="form-input-control-company-name"
+                  control={Input}
+                  placeholder="공고 URL"
+                  onChange={this.onHandleChange('hireUrl')}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -123,14 +218,25 @@ class JobPostForm extends Component {
                 <div>요구 기술 스택</div>
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
+
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {jobutils.selectTech.map((val, idx) => {
-                  return (
-                    <Button size="mini" style={{ marginBottom: '0.4rem' }}>
-                      {val}
-                    </Button>
-                  );
-                })}
+                {/* {jobUtils.selectTech.map((val, idx) => (
+                  <Button
+                    size="mini"
+                    style={{ marginBottom: '0.4rem' }}
+                    onClick={e => {
+                      this.onHandleArrayChange('hireTech')(e);
+                      e.target.classList.toggle('blue');
+                    }}
+                  >
+                    {val}
+                  </Button>
+                ))} */}
+                <DropdownSearchQuery
+                  stateOptions={jobUtils.selectTech}
+                  title={'요구 기술 스택'}
+                  handleArrayChange={this.onHandleGetArray('hireTech')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -140,9 +246,10 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea placeholder="주요 업무" style={{ minHeight: 150 }}>
-                  {' '}
-                </TextArea>
+                <TextArea
+                  style={{ minHeight: 150 }}
+                  onChange={this.onHandleChange('importantInfo')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -152,9 +259,10 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea placeholder="채용 상세" style={{ minHeight: 230 }}>
-                  {' '}
-                </TextArea>
+                <TextArea
+                  style={{ minHeight: 230 }}
+                  onChange={this.onHandleChange('detailInfo')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -164,6 +272,7 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
+                <input type="file" />
                 <Image src={this.state.hireImage} size="medium" />
               </Grid.Column>
             </Grid.Row>
@@ -174,7 +283,10 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <Input placeholder="연봉" />
+                <Input
+                  placeholder="연봉"
+                  onChange={this.onHandleChange('salary')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -189,24 +301,27 @@ class JobPostForm extends Component {
                   label="인턴"
                   name="checkboxRadioGroup"
                   value="인턴"
-                  checked={this.state.value === '인턴'}
-                  onChange={this._handleChange}
+                  checked={this.state.hireType === '인턴'}
+                  style={{ marginRight: '1rem' }}
+                  onChange={this.onHandleChange('hireType')}
                 />{' '}
                 <Checkbox
                   radio
                   label="신입"
                   name="checkboxRadioGroup"
                   value="신입"
-                  checked={this.state.value === '신입'}
-                  onChange={this._handleChange}
+                  checked={this.state.hireType === '신입'}
+                  style={{ marginRight: '1rem' }}
+                  onChange={this.onHandleChange('hireType')}
                 />{' '}
                 <Checkbox
                   radio
                   label="경력"
                   name="checkboxRadioGroup"
                   value="경력"
-                  checked={this.state.value === '경력'}
-                  onChange={this._handleChange}
+                  checked={this.state.hireType === '경력'}
+                  style={{ marginRight: '1rem' }}
+                  onChange={this.onHandleChange('hireType')}
                 />{' '}
               </Grid.Column>
             </Grid.Row>
@@ -220,7 +335,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <DatePicker
                   selected={this.state.statusDate}
-                  onChange={this._dateChange('statusDate')}
+                  onChange={this.onDateChange('statusDate')}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -233,7 +348,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <DatePicker
                   selected={this.state.deadLine}
-                  onChange={this._dateChange('deadLine')}
+                  onChange={this.onDateChange('deadLine')}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -244,7 +359,10 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <Input placeholder="지역" />
+                <Input
+                  placeholder="지역"
+                  onChange={this.onHandleChange('address')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -254,9 +372,10 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea placeholder="장점" style={{ minHeight: 100 }}>
-                  {' '}
-                </TextArea>
+                <TextArea
+                  style={{ minHeight: 100 }}
+                  onChange={this.onHandleChange('advantage')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -266,9 +385,10 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea placeholder="단점" style={{ minHeight: 100 }}>
-                  {' '}
-                </TextArea>
+                <TextArea
+                  style={{ minHeight: 100 }}
+                  onChange={this.onHandleChange('disadvantage')}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -278,9 +398,10 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea placeholder="전략" style={{ minHeight: 100 }}>
-                  {' '}
-                </TextArea>
+                <TextArea
+                  style={{ minHeight: 100 }}
+                  onChange={this.onHandleChange('strategy')}
+                />
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -290,4 +411,16 @@ class JobPostForm extends Component {
   }
 }
 
-export default JobPostForm;
+const mapDispatchToProps = dispatch => ({
+  postJobData: data => dispatch(postUserJobData(data)),
+});
+
+const mapStateToProps = state => ({
+  loading: state.loading,
+  error: state.error,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(JobPostForm);
