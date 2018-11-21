@@ -1,10 +1,13 @@
+/* eslint-disable */
 import React, { Component } from 'react';
+import { Button, Container } from 'semantic-ui-react';
 
 export default class UserInterestField extends Component {
   constructor() {
     super();
     this.state = {
       createOrEdit: false,
+      favfield: [],
     };
 
     this.onButtonClick = () => {
@@ -15,17 +18,17 @@ export default class UserInterestField extends Component {
     };
   }
 
-  /* eslint-disable */
+  // /* eslint-disable */
 
   render() {
-    const { userFavField } = this.props;
+    const { userFavField, funcs } = this.props;
     return (
-      <div className="UserInterestTech">
+      <Container className="UserInterestTech">
         <h3>관심 분야</h3>
         {userFavField.map(field => (
           <span>{field} </span>
         ))}
-      </div>
+      </Container>
     );
   }
 }
