@@ -63,14 +63,14 @@ export default function userProfileReducer(state = initialState, action) {
         },
       };
 
-    // case 'UPDATE_FIELD_PUSH':
-    // return {
-    //   ...state,
-    //   editor: {
-    //     ...state.editor,
+      // case 'UPDATE_FIELD_PUSH':
+      // return {
+      //   ...state,
+      //   editor: {
+      //     ...state.editor,
 
-    //   }
-    // }
+      //   }
+      // }
 
     default:
       return state;
