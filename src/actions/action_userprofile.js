@@ -43,10 +43,17 @@ export const onSubmit = (payload) => {
   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
 
   return dispatch => axios.post(url, payload).then(() => {
-    axios.get(url).then(() => {
-      // console.log('work');
-      // console.log(data);
+      axios.get(url).then((data) => {
+        // console.log('work');
+        console.log(data);
+        dispatch(fetchUser());
+      });
+    });
+};
+
+export const deleteUserProfile = (payload) => {
+  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
+  return dispatch => axios.delete(url, payload).then(() => {
       dispatch(fetchUser());
     });
-  });
 };

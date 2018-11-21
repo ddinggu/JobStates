@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import UserContainer from 'containers/profile/UserContainer';
 import AnalysisContainer from 'containers/analysis/AnalysisContainer';
-import HeaderContainer from '../containers/header/HeaderContainer';
+import HeaderContainer from 'containers/header/HeaderContainer';
+import JobPostForm from 'containers/job/post/JobPostForm';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <HeaderContainer />
         <UserContainer />
         <AnalysisContainer />
+        <JobPostForm />
       </div>
     );
   }
