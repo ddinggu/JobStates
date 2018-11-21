@@ -11,7 +11,7 @@ class UserEducation extends Component {
     super();
     this.state = {
       create: false,
-      edit: false,
+      edit: '',
       organization: '',
       term: '',
       content: '',
@@ -24,9 +24,10 @@ class UserEducation extends Component {
       });
     };
 
-    this.onButtonClick_edit = () => {
-      const { edit } = this.state;
-      console.log(this.state.edit, 'editing');
+    this.onButtonClick_edit = index => {
+      this.setState({
+        edit: index,
+      });
     };
 
     this.onChange = (e, attr) => {
@@ -114,16 +115,16 @@ class UserEducation extends Component {
             </div>
             <div className="row">
               {edu.map((eduProp, index) => {
-                //  this.state.edit ? <div>edit true</div> : <div>eidt false</div>
-                const option = { display: null };
                 const test = { edi: false };
                 console.log('iii', index);
+
                 return (
                   <div>
                     <div
                       className="read"
-                      className={index}
-                      style={test.edi ? { display: 'none' } : null}
+                      style={
+                        this.state.edit === index ? { display: 'none' } : null
+                      }
                     >
                       <div className="row">
                         <div className="ui grid">
@@ -138,7 +139,7 @@ class UserEducation extends Component {
                                 type="button"
                                 className="ui button"
                                 onClick={() => {
-                                  console.log('clicked');
+                                  console.log('mm');
                                 }}
                               >
                                 <i className="edit icon" />
