@@ -8,13 +8,12 @@ import JobList from '../containers/job/JobList';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        Job states
+      <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
         <HeaderContainer />
-        <UserContainer />
-        <AnalysisContainer />
-        <JobDetail />
+        {/* <UserContainer />
+        <AnalysisContainer /> */}
         <JobList />
+        <JobDetail />
       </div>
     );
   }

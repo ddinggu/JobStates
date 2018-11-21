@@ -1,46 +1,55 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJob } from '../../actions/action_Job';
+import JobListHeader from './JobListHeader';
+import {
+  Grid,
+  Segment,
+} from 'semantic-ui-react';
 
 class JobList extends Component {
   constructor(props) {
     super(props);
 
-    const { fetchJob } = this.props;
+    const { fetchJob, job } = this.props;
     fetchJob();
   }
 
-  _mapList = jobData => {
-    console.log(jobData);
+  _mapList = (jobData) => {
     return (
-      <div style={{ border: '1px solid black', margin: '1em' }}>
-        <span>
-          <img src={jobData.logo} width="35px" height="50px" />
-        </span>
-        <span> / {jobData.brand}</span>
-        <span> / {jobData.title}</span>
-        <span> / {jobData.status}</span>
-      </div>
+      <Grid>
+        <Grid.Column width={16}>
+          <Segment>
+            <span>
+              <img src={jobData.logo} width="35px" height="50px" />
+            </span>
+            <span> / {jobData.brand}</span>
+            <span> / {jobData.title}</span>
+            <span> / {jobData.status}</span>
+          </Segment>
+        </Grid.Column>
+      </Grid>
     );
   };
 
+  _filterSearch = (value) => {
+    console.log(value)
+  }
+
   render() {
-    const { job } = this.props;
+    const {job} = this.props;
     if (job.length === 0) {
       return <div>loading...</div>;
     }
-
     return (
-      <div
-        className="job-list container"
-        style={{
-          border: '1px solid black',
-          padding: '2em',
-          position: 'relative',
-          bottom: '-1em',
-        }}
-      >
-        {job[0].map(this._mapList)}
+      /* equal width => table 적용 */
+      <div>
+        <JobListHeader _filterSearch={this._filterSearch} />
+        <Grid className="job-list container">
+          <Grid.Column width={16}>
+            <Segment>{job[0].map(this._mapList)}</Segment>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }
