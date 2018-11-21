@@ -18,7 +18,6 @@ import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
 import DropdownSearchQuery from './DropdownSearchQuery';
 
-/* eslint-disable */
 class JobPostForm extends Component {
   state = {
     hireId: null,
@@ -43,6 +42,7 @@ class JobPostForm extends Component {
     disadvantage: '',
     strategy: '',
     hireType: '',
+    provider: 'user',
     showWindowPortal: false,
   };
 
@@ -86,9 +86,7 @@ class JobPostForm extends Component {
       <div style={{ marginTop: '5rem' }}>
         {/* {loading ? <ClipLoader size={150} /> : null} */}
         {/* 포탈 띄우기 */}
-        {this.state.showWindowPortal && (
-          <NewPortal onClickLoadData={this.loadData} />
-        )}
+        {this.state.showWindowPortal && <NewPortal />}
 
         <Form>
           <div className="jobPostHeader" style={{ height: '4rem' }}>

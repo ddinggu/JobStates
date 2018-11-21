@@ -32,6 +32,7 @@ class NewPortal extends React.PureComponent {
       deadLine: new Date(),
       advantage: '???',
       disadvantage: 'good!',
+      provider: 'rocketpunch',
       strategy: 'yep!!',
     };
   }
@@ -51,8 +52,6 @@ class NewPortal extends React.PureComponent {
 
   render() {
     const { onClickLoadData } = this.props;
-    console.log(onClickLoadData);
-
     const rendering = (
       <button
         onClick={() => {
