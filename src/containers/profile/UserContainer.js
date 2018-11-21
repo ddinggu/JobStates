@@ -55,6 +55,8 @@ class UserContainer extends Component {
     };
     console.log('STATETE', this.state);
 
+    // console.log('here', this.props);
+
     return (
       <Container className="usercontainer">
         <UserBasicInfo basicinfo={basicinfo} funcs={funcs} />

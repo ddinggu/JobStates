@@ -15,16 +15,16 @@ class UserProject extends Component {
   constructor() {
     super();
     this.state = {
-      createOrEdit: true,
+      create: false,
       title: '',
       term: '',
       content: '',
     };
 
     this.onButtonClick = () => {
-      const { createOrEdit } = this.state;
+      const { create } = this.state;
       this.setState({
-        createOrEdit: !createOrEdit,
+        create: !create,
       });
     };
     this.onChange = (e, attr) => {
@@ -36,7 +36,7 @@ class UserProject extends Component {
 
   render() {
     const { onButtonClick } = this;
-    const { createOrEdit } = this.state;
+    const { create } = this.state;
     const { project, funcs } = this.props;
 
     const onSubmitPost = e => {
@@ -110,10 +110,7 @@ class UserProject extends Component {
                 </Grid>
               </div>
             ))}
-            <div
-              className="row"
-              style={createOrEdit ? null : { display: 'none' }}
-            >
+            <div className="row" style={create ? null : { display: 'none' }}>
               <Form onSubmit={onSubmitPost}>
                 <br />
                 <Form.Field>

@@ -7,7 +7,7 @@ class UserExperience extends Component {
   constructor() {
     super();
     this.state = {
-      createOrEdit: true,
+      createOrEdit: false,
       title: '',
       term: '',
       content: '',

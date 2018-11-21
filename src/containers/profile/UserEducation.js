@@ -10,17 +10,23 @@ class UserEducation extends Component {
   constructor() {
     super();
     this.state = {
-      createOrEdit: false,
+      create: false,
+      edit: false,
       organization: '',
       term: '',
       content: '',
     };
 
     this.onButtonClick = () => {
-      const { createOrEdit } = this.state;
+      const { create } = this.state;
       this.setState({
-        createOrEdit: !createOrEdit,
+        create: !create,
       });
+    };
+
+    this.onButtonClick_edit = () => {
+      const { edit } = this.state;
+      console.log(this.state.edit, 'editing');
     };
 
     this.onChange = (e, attr) => {
@@ -31,9 +37,9 @@ class UserEducation extends Component {
   }
 
   render() {
-    // console.log('edu props', this.props);
-    const { onButtonClick } = this;
-    const { createOrEdit } = this.state;
+    console.log('edu props', this.props, this.props.edu.length);
+    const { onButtonClick, onButtonClick_edit } = this;
+    const { create } = this.state;
     const { edu, funcs } = this.props;
 
     // handling onChange & onSubmit //
@@ -69,42 +75,7 @@ class UserEducation extends Component {
               /////////22222의 첫 row////////////
             }
             <div className="row">
-              {edu.map(eduProp => (
-                <div>
-                  <div className="row">
-                    <div className="ui grid">
-                      <div className="column four wide left aligned" />
-                      <div className="column eight wide center aligned">
-                        <span>{eduProp.organization}</span>
-                        &nbsp;<span>({eduProp.term})</span>
-                      </div>
-                      <div className="column four wide right aligned">
-                        <span className="ui mini basic icon buttons">
-                          <button type="button" className="ui button">
-                            <i className="edit icon" />
-                          </button>
-                          <button
-                            type="button"
-                            className="ui button"
-                            onClick={() => funcs.delete({ eduProp })}
-                          >
-                            <i className="delete icon" />
-                          </button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <li>{eduProp.content}</li>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {
-              /////////22222의 둘째 row////////////
-            }
-            <div className="row">
-              <div style={createOrEdit ? null : { display: 'none' }}>
+              <div style={create ? null : { display: 'none' }}>
                 <Form onSubmit={onSubmitPost} className="create">
                   <Form.Field
                     label="학교"
@@ -119,6 +90,7 @@ class UserEducation extends Component {
                   <Form.Field
                     label="간단 설명"
                     control={TextArea}
+                    name="description"
                     onChange={e => this.onChange(e, 'description')}
                   />
                   <Button
@@ -137,8 +109,100 @@ class UserEducation extends Component {
                     }}
                   />
                 </Form>
+                l
               </div>
             </div>
+            <div className="row">
+              {edu.map((eduProp, index) => {
+                //  this.state.edit ? <div>edit true</div> : <div>eidt false</div>
+                const option = { display: null };
+                const test = { edi: false };
+                console.log('iii', index);
+                return (
+                  <div>
+                    <div
+                      className="read"
+                      className={index}
+                      style={test.edi ? { display: 'none' } : null}
+                    >
+                      <div className="row">
+                        <div className="ui grid">
+                          <div className="column four wide left aligned" />
+                          <div className="column eight wide center aligned">
+                            <span>{eduProp.organization}</span>
+                            &nbsp;<span>({eduProp.term})</span>
+                          </div>
+                          <div className="column four wide right aligned">
+                            <span className="ui mini basic icon buttons">
+                              <button
+                                type="button"
+                                className="ui button"
+                                onClick={() => {
+                                  console.log('clicked');
+                                }}
+                              >
+                                <i className="edit icon" />
+                              </button>
+                              <button
+                                type="button"
+                                className="ui button"
+                                onClick={() => funcs.delete({ eduProp })}
+                              >
+                                <i className="delete icon" />
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <li>{eduProp.content}</li>
+                      </div>
+                    </div>
+                    <div>
+                      <Form onSubmit={onSubmitPost} className="create">
+                        <Form.Field
+                          label="학교"
+                          control={Input}
+                          onChange={e => this.onChange(e, 'organization')}
+                          value={eduProp.organization}
+                        />
+                        <Form.Field
+                          label="재학 기간"
+                          control={Input}
+                          onChange={e => this.onChange(e, 'term')}
+                          value={eduProp.term}
+                        />
+                        <Form.Field
+                          label="간단 설명"
+                          control={TextArea}
+                          name="description"
+                          onChange={e => this.onChange(e, 'description')}
+                          value={eduProp.content}
+                        />
+                        <Button
+                          compact
+                          content="취소"
+                          onClick={e => {
+                            e.preventDefault();
+                            onButtonClick();
+                          }}
+                        />
+                        <Button
+                          compact
+                          content="추가"
+                          onClick={e => {
+                            e.preventDefault();
+                          }}
+                        />
+                      </Form>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {
+              /////////22222의 둘째 row////////////
+            }
           </div>
 
           {
@@ -149,7 +213,9 @@ class UserEducation extends Component {
               <button
                 type="button"
                 className="ui button"
-                onClick={onButtonClick}
+                onClick={() => {
+                  onButtonClick();
+                }}
               >
                 <i className="plus icon" />
               </button>
