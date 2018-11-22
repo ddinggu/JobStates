@@ -12,3 +12,6 @@ export const fetchJob = () => dispatch => axios.get(URL_JOB).then((res) => {
 export const filterFetchData = (filterTargetValue, filterTargetInputValue) => (dispatch) => {
   dispatch({ type: SEARCH_FILTER, payload: filterTargetValue, payload2: filterTargetInputValue });
 };
+
+
+//status && company 로 수정!

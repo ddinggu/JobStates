@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJob, filterFetchData } from '../../actions/action_Job';
+import { fetchJob, filterFetchData } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment } from 'semantic-ui-react';
 
@@ -35,26 +35,10 @@ class JobList extends Component {
   };
 
   _filterSearch = (value, inputValue) => {
-    console.log('value;;;; ', value);
-    const { filter } = this.props;
+    // console.log('value;;;; ', value);
+    // const { filter } = this.props;
     this.props.filterFetchData(value, inputValue);
-    //console.log('value:::', value ,'InputValue@@', inputValue)
-    // if (value === '전체') {
-    //   this.setState({ filterFlag: false });
-    // } else {
-    //   this.setState({ filterFlag: true });
-    // }
-    // this.setState({ filterFlag: true })
-    /*
-      if(value === '전체' && !!inputValue){
-        this.setState({ filterFlag: true });
-      } else if(value === '전체'){
-        this.setState({ filterFlag: false });
-      } else{
-        this.setState({ filterFlag: true });
-      }
-
-   */
+  
     if (value === '전체' && !!inputValue) {
       this.setState({ filterFlag: true });
     } else if (value === '전체') {
@@ -66,7 +50,6 @@ class JobList extends Component {
 
   render() {
     const { job, filter } = this.props;
-    //console.log('job::', job, 'filter::', filter, this.state);
     if (job.length === 0) {
       return <div>loading...</div>;
     }
