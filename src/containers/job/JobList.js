@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJob, filterFetchData } from '../../actions/action_Job';
+import {
+  fetchJob,
+  filterFetchData,
+  getDetailJob,
+} from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment } from 'semantic-ui-react';
 
 class JobList extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       filterFlag: false,
     };
@@ -14,14 +19,21 @@ class JobList extends Component {
 
   componentDidMount() {
     const { fetchJob, job } = this.props;
-    fetchJob();
+        fetchJob();
   }
 
+
   _mapList = jobData => {
+    const { getDetailJob } = this.props;
+    
     return (
       <Grid>
         <Grid.Column width={16}>
-          <Segment>
+          <Segment
+            key={jobData.hireId}
+            id={jobData.hireId}
+            onClick={e => getDetailJob(e.target.id)}
+          >
             <span>
               <img src={jobData.logo} width="35px" height="50px" />
             </span>
@@ -38,23 +50,7 @@ class JobList extends Component {
     console.log('value;;;; ', value);
     const { filter } = this.props;
     this.props.filterFetchData(value, inputValue);
-    //console.log('value:::', value ,'InputValue@@', inputValue)
-    // if (value === '전체') {
-    //   this.setState({ filterFlag: false });
-    // } else {
-    //   this.setState({ filterFlag: true });
-    // }
-    // this.setState({ filterFlag: true })
-    /*
-      if(value === '전체' && !!inputValue){
-        this.setState({ filterFlag: true });
-      } else if(value === '전체'){
-        this.setState({ filterFlag: false });
-      } else{
-        this.setState({ filterFlag: true });
-      }
 
-   */
     if (value === '전체' && !!inputValue) {
       this.setState({ filterFlag: true });
     } else if (value === '전체') {
@@ -65,11 +61,11 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, filter } = this.props;
-    //console.log('job::', job, 'filter::', filter, this.state);
+    const { job, getDetailJob, filter } = this.props;
     if (job.length === 0) {
       return <div>loading...</div>;
     }
+
     return (
       /* equal width => table 적용 */
       <div>
@@ -97,5 +93,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchJob, filterFetchData },
+  { fetchJob, getDetailJob, filterFetchData },
 )(JobList);

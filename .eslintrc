@@ -11,7 +11,9 @@
   "globals": {
     "FormData": false,
     "FileReader": false,
-    "window": false
+    "window": true,
+    "document": true,
+    "localStorage": true
   },
   "env": {
     "browser": true
