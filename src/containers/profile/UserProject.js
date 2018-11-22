@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import {
   Button,
@@ -8,6 +7,7 @@ import {
   Form,
   TextArea,
 } from 'semantic-ui-react';
+import ProjectListItem from './ProjectListItem';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 
@@ -39,7 +39,7 @@ class UserProject extends Component {
     const { create } = this.state;
     const { project, funcs } = this.props;
 
-    const onSubmitPost = e => {
+    const onSubmitPost = (e) => {
       e.preventDefault();
       const { title, term, content } = this.state;
       const obj = { title, term, content };
@@ -69,32 +69,7 @@ class UserProject extends Component {
           <div className="column UserProject read ten wide profilebox">
             {project.map(proj => (
               <div>
-                <Grid>
-                  <Grid.Row>
-                    <Grid.Column width={12} txtAlign="left">
-                      {' '}
-                      <div>
-                        <b>{proj.title}</b>
-                      </div>
-                      <div>{proj.description}</div>
-                    </Grid.Column>
-                    <Grid.Column width={4} textAlign="right">
-                      {' '}
-                      <span className="ui mini basic icon buttons">
-                        <button type="button" className="ui button">
-                          <i className="edit icon" />
-                        </button>
-                        <button
-                          type="button"
-                          className="ui button"
-                          onClick={() => funcs.delete({ proj })}
-                        >
-                          <i className="delete icon" />
-                        </button>
-                      </span>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
+                <ProjectListItem proj={proj} />
               </div>
             ))}
             <div className="row" style={create ? null : { display: 'none' }}>
@@ -119,7 +94,7 @@ class UserProject extends Component {
                 <Button
                   compact
                   content="취소"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     onButtonClick();
                   }}

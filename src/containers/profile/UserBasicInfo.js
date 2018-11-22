@@ -7,10 +7,20 @@ import {
 import './UserBasicInfo.css';
 
 class UserBasicInfo extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log('222', props);
+
     this.state = {
       edit: false,
+      name: props.basicinfo.name,
+      phoneNum: props.basicinfo.phoneNum,
+      email: props.basicinfo.email,
+      snsBlog: props.basicinfo.snsBlog,
+      snsGithub: props.basicinfo.snsGithub,
+      picture: props.basicinfo.picture,
+      submit: props.funcs.submit,
+      delete: props.funcs.delete,
     };
 
     this.onButtonClick = () => {
@@ -20,51 +30,37 @@ class UserBasicInfo extends Component {
       });
     };
 
-    this.onButtonClickEdit = () => {
-      const { edit } = this.state;
+    this.onChange = (e, attr) => {
       this.setState({
-        edit: !edit,
+        [attr]: e.target.value,
       });
     };
   }
 
   render() {
-    console.log('here', this.props);
-    const { edit } = this.state;
     const { onButtonClick } = this;
+
+    // const { funcs } = this.props;
+    console.log('owowowwo', this.state);
+
     const {
+      edit,
       name,
       phoneNum,
       email,
       snsBlog,
       snsGithub,
       picture,
-      updateField,
       submit,
-    } = this.props.basicinfo;
+    } = this.state;
 
-    const { funcs } = this.props;
-
-    const deletedData = {
-      name,
-      phoneNum,
-      email,
-      snsBlog,
-      snsGithub,
-    };
-
-    // handling onChange & onSubmit //
-    const updateFieldEvent = key => ev => updateField(key, ev.target.value);
-    const changeName = updateFieldEvent('nick');
-    const changePhone = updateFieldEvent('phone');
-    const changeEmail = updateFieldEvent('email');
-    const changeBlog = updateFieldEvent('blog');
-    const changeGithub = updateFieldEvent('github');
-    const onSubmitPost = (e) => {
-      e.preventDefault();
-      submit(this.props.editedData);
-    };
-    // /////////////////////////////////
+    // const deletedData = {
+    //   name,
+    //   phoneNum,
+    //   email,
+    //   snsBlog,
+    //   snsGithub,
+    // };
 
     return (
       <Container className="UserBasicInfo">
@@ -103,36 +99,41 @@ class UserBasicInfo extends Component {
             </div>
           ) : (
             <div className="UserBasicInfo create ten wide column profilebox">
-              <Form onSubmit={onSubmitPost}>
+              <Form onSubmit={submit}>
                 <Form.Field
                   label="이름"
                   size="mini"
                   control={Input}
-                  onChange={changeName}
+                  onChange={e => this.onChange(e, 'name')}
+                  value={name}
                 />
                 <Form.Field
                   label="전화번호"
                   size="mini"
                   control={Input}
-                  onChange={changePhone}
+                  onChange={e => this.onChange(e, 'phoneNum')}
+                  value={phoneNum}
                 />
                 <Form.Field
                   label="이메일 주소"
                   size="mini"
                   control={Input}
-                  onChange={changeEmail}
+                  onChange={e => this.onChange(e, 'email')}
+                  value={email}
                 />
                 <Form.Field
                   label="대표 블로그"
                   size="mini"
                   control={Input}
-                  onChange={changeBlog}
+                  onChange={e => this.onChange(e, 'snsBlog')}
+                  value={snsBlog}
                 />
                 <Form.Field
                   label="대표 깃헙"
                   size="mini"
                   control={Input}
-                  onChange={changeGithub}
+                  onChange={e => this.onChange(e, 'snsGithub')}
+                  value={snsGithub}
                 />
                 <Button compact content="취소" onClick={onButtonClick} />
                 <Button compact content="변경" type="submit" />
@@ -148,18 +149,12 @@ class UserBasicInfo extends Component {
               >
                 <i className="edit icon" />
               </button>
-              <button
-                type="button"
-                className="ui button"
-                onClick={() => funcs.delete(deletedData)}
-              >
+              <button type="button" className="ui button" onClick={() => {}}>
                 <i className="delete icon" />
               </button>
             </span>
           </div>
         </div>
-        {/* </div> */}
-        {/* </div> */}
       </Container>
     );
   }

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { Button, Container, Form, Input, TextArea } from 'semantic-ui-react';
-import ExperienceList from './ExperienceList';
+import ExperienceList from './ExperienceListItem';
 
 // import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ class UserExperience extends Component {
   constructor() {
     super();
     this.state = {
-      createOrEdit: false,
+      create: false,
       title: '',
       term: '',
       content: '',
@@ -17,9 +17,9 @@ class UserExperience extends Component {
     };
 
     this.onButtonClick = () => {
-      const { createOrEdit } = this.state;
+      const { create } = this.state;
       this.setState({
-        createOrEdit: !createOrEdit,
+        create: !create,
       });
     };
 
@@ -32,7 +32,7 @@ class UserExperience extends Component {
 
   render() {
     const { onButtonClick } = this;
-    const { createOrEdit } = this.state;
+    const { create } = this.state;
     const { exps, funcs } = this.props;
 
     const onSubmitPost = e => {
@@ -61,7 +61,7 @@ class UserExperience extends Component {
             <div className="row">
               <div
                 className="UserExperience create"
-                style={createOrEdit ? null : { display: 'none' }}
+                style={create ? null : { display: 'none' }}
               >
                 <Form onSubmit={onSubmitPost}>
                   <Form.Field>
@@ -91,38 +91,7 @@ class UserExperience extends Component {
             </div>
             <div className="row">
               {exps.map(exp => (
-                <div className="">
-                  <div>
-                    <div className="row">
-                      <div className="ui grid">
-                        <div className="column four wide left aligned" />
-                        <div className="column eight wide center aligned">
-                          <b>{exp.title}</b> <span>({exp.term})</span>
-                        </div>
-                        <div className="column four wide right aligned">
-                          <span className="ui mini basic icon buttons">
-                            <button type="button" className="ui button">
-                              <i className="edit icon" />
-                            </button>
-                            <button
-                              type="button"
-                              className="ui button"
-                              onClick={() => funcs.delete(exp)}
-                            >
-                              <i className="delete icon" />
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <br />
-                      <div>{exp.description}</div>
-                      <li className="row">{exp.content}</li>
-                    </div>
-                  </div>
-                  <br />
-                </div>
+                <ExperienceList exp={exp} />
               ))}
             </div>
           </div>

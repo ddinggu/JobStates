@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Container, Form, TextArea, Input } from 'semantic-ui-react';
+import {
+ Button, Container, Form, TextArea, Input 
+} from 'semantic-ui-react';
 
 export default class UserEducationList extends Component {
   constructor(props) {
@@ -29,14 +31,12 @@ export default class UserEducationList extends Component {
 
   render() {
     const { edu, funcs } = this.props;
+    const { edit } = this.state;
     return (
       <Container>
         <div className="row">
           <div>
-            <div
-              className="read"
-              style={this.state.edit ? { display: 'none' } : null}
-            >
+            <div className="read" style={edit ? { display: 'none' } : null}>
               <div className="row">
                 <div className="ui grid">
                   <div className="column four wide left aligned" />
@@ -68,7 +68,7 @@ export default class UserEducationList extends Component {
                 <li>{edu.content}</li>
               </div>
             </div>
-            {this.state.edit ? (
+            {edit ? (
               <div>
                 <Form onSubmit={funcs.onSubmitPost} className="edit">
                   <Form.Field
@@ -93,7 +93,7 @@ export default class UserEducationList extends Component {
                   <Button
                     compact
                     content="취소"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       this.onButtonClick();
                     }}
@@ -101,7 +101,7 @@ export default class UserEducationList extends Component {
                   <Button
                     compact
                     content="추가"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                     }}
                   />
