@@ -47,10 +47,9 @@ class JobList extends Component {
   };
 
   _filterSearch = (value, inputValue) => {
-    console.log('value;;;; ', value);
-    const { filter } = this.props;
+    // console.log('value;;;; ', value);
+    // const { filter } = this.props;
     this.props.filterFetchData(value, inputValue);
-
     if (value === '전체' && !!inputValue) {
       this.setState({ filterFlag: true });
     } else if (value === '전체') {

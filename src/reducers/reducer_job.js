@@ -24,8 +24,12 @@ export default function (state = initialState, action) {
             return data.status === action.payload;
           }
           if (action.payload === '전체') {
+            return data.brand.indexOf(action.payload2) !== -1;
+          }
+          if (!!action.payload && !!action.payload2) {
             return (
-              data.brand.indexOf(action.payload2) !== -1
+              data.status === action.payload
+              && data.brand.indexOf(action.payload2) !== -1
             );
           }
         }),
@@ -41,6 +45,3 @@ export default function (state = initialState, action) {
       return state;
   }
 }
-
-// (data.status === action.payload) || (data.brand === action.payload2)
-// data.brand.indexOf(action.payload2) !== -1
