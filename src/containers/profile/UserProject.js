@@ -47,19 +47,6 @@ class UserProject extends Component {
       funcs.submit(obj);
     };
 
-    const GridTest = (projName, button, description) => (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column>1</Grid.Column>
-          <Grid.Column>projName</Grid.Column>
-          <Grid.Column>button</Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <span>description</span>
-        </Grid.Row>
-      </Grid>
-    );
-
     const buttons = proj => (
       <span className="ui mini basic icon buttons">
         <button type="button" className="ui button">

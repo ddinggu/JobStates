@@ -17,13 +17,9 @@ import UserInterestTech from './UserInterestTech';
 import UserInterestField from './UserInterestField';
 import './UserContainer.css';
 
-/* eslint-disable */
+// /* eslint-disable */
 
 class UserContainer extends Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     const { fetch } = this.props;
     fetch();
@@ -104,7 +100,8 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
+  console.log('hrere state', state);
   if (!(state.fetchedProfile.items === null)) {
     return {
       name: state.fetchedProfile.items.user.nick,
@@ -122,7 +119,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
