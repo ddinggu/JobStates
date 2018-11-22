@@ -14,11 +14,21 @@ export default function (state = initialState, action) {
       return {
         ...state,
         allJobData: action.payload,
+        filterData: action.payload,
       };
     case SEARCH_FILTER:
       return {
         ...state,
-        filterData: action.payload,
+        filterData: state.allJobData.filter((data) => {
+          if (!action.payload2) {
+            return data.status === action.payload;
+          }
+          if (action.payload === '전체') {
+            return (
+              data.brand.indexOf(action.payload2) !== -1
+            );
+          }
+        }),
       };
     case types.GET_DETAIL_JOB:
       return {
@@ -31,3 +41,6 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+// (data.status === action.payload) || (data.brand === action.payload2)
+// data.brand.indexOf(action.payload2) !== -1

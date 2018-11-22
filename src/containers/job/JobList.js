@@ -4,23 +4,28 @@ import {
   fetchJob,
   filterFetchData,
   getDetailJob,
-} from '../../actions/action_Job';
+} from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment } from 'semantic-ui-react';
 
 class JobList extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      filterFlag: false,
+    };
   }
 
   componentDidMount() {
-    const { fetchJob, filterFetchData } = this.props;
-    fetchJob();
+    const { fetchJob, job } = this.props;
+        fetchJob();
   }
+
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
-
+    
     return (
       <Grid>
         <Grid.Column width={16}>
@@ -41,13 +46,22 @@ class JobList extends Component {
     );
   };
 
-  _filterSearch = value => {
-    console.log(value);
-    filterFetchData(value);
+  _filterSearch = (value, inputValue) => {
+    console.log('value;;;; ', value);
+    const { filter } = this.props;
+    this.props.filterFetchData(value, inputValue);
+
+    if (value === '전체' && !!inputValue) {
+      this.setState({ filterFlag: true });
+    } else if (value === '전체') {
+      this.setState({ filterFlag: false });
+    } else {
+      this.setState({ filterFlag: true });
+    }
   };
 
   render() {
-    const { job, getDetailJob } = this.props;
+    const { job, getDetailJob, filter } = this.props;
     if (job.length === 0) {
       return <div>loading...</div>;
     }
@@ -58,7 +72,11 @@ class JobList extends Component {
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-            <Segment>{job.map(this._mapList)}</Segment>
+            <Segment>
+              {this.state.filterFlag
+                ? filter.map(this._mapList)
+                : job.map(this._mapList)}
+            </Segment>
           </Grid.Column>
         </Grid>
       </div>
@@ -69,10 +87,11 @@ class JobList extends Component {
 const mapStateToProps = state => {
   return {
     job: state.job.allJobData,
+    filter: state.job.filterData,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchJob, getDetailJob },
+  { fetchJob, getDetailJob, filterFetchData },
 )(JobList);
