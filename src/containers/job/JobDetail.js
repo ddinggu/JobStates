@@ -6,18 +6,20 @@ import {
 import { fetchJob } from '../../actions/action_Job';
 
 class JobDetail extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
-  componentDidMount() {
-    const { fetchJob } = this.props;
-    fetchJob();
-  }
+  // componentDidMount() {
+  //   const { fetchJob } = this.props;
+  //   fetchJob();
+  // }
 
   render() {
+    console.log('rerendering!!');
+
     const { job } = this.props;
-    if (job.length === 0) {
+    if (!Array.isArray(job)) {
       return <div>loading...</div>;
     }
 
@@ -69,7 +71,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[2].category.map(tech => (
+              {job[0].category.map(tech => (
                 <div
                   style={{
                     display: 'inline-block',
@@ -239,7 +241,7 @@ class JobDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-  job: state.job.allJobData,
+  job: state.job.currentData,
 });
 
 export default connect(

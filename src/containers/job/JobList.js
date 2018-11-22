@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJob, filterFetchData } from '../../actions/action_Job';
-import JobListHeader from './JobListHeader';
 import {
-  Grid,
-  Segment,
-} from 'semantic-ui-react';
+  fetchJob,
+  filterFetchData,
+  getDetailJob,
+} from '../../actions/action_Job';
+import JobListHeader from './JobListHeader';
+import { Grid, Segment } from 'semantic-ui-react';
 
 class JobList extends Component {
   constructor(props) {
-    super(props);    
+    super(props);
   }
-  
-  componentDidMount(){
+
+  componentDidMount() {
     const { fetchJob, filterFetchData } = this.props;
     fetchJob();
   }
 
-  _mapList = (jobData) => {
+  _mapList = jobData => {
+    const { getDetailJob } = this.props;
+
     return (
       <Grid>
         <Grid.Column width={16}>
-          <Segment>
+          <Segment
+            key={jobData.hireId}
+            id={jobData.hireId}
+            onClick={e => getDetailJob(e.target.id)}
+          >
             <span>
               <img src={jobData.logo} width="35px" height="50px" />
             </span>
@@ -34,17 +41,17 @@ class JobList extends Component {
     );
   };
 
-  _filterSearch = (value) => {
-    console.log(value)
+  _filterSearch = value => {
+    console.log(value);
     filterFetchData(value);
-  }
+  };
 
   render() {
-    const {job} = this.props;
+    const { job, getDetailJob } = this.props;
     if (job.length === 0) {
       return <div>loading...</div>;
     }
-    // console.log('job:::::::::', this.props)
+
     return (
       /* equal width => table 적용 */
       <div>
@@ -60,12 +67,12 @@ class JobList extends Component {
 }
 
 const mapStateToProps = state => {
-  return{ 
-  job: state.job.allJobData,
-}};
-
+  return {
+    job: state.job.allJobData,
+  };
+};
 
 export default connect(
   mapStateToProps,
-  { fetchJob },
+  { fetchJob, getDetailJob },
 )(JobList);

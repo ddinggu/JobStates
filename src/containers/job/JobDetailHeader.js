@@ -4,8 +4,8 @@ class JobDetailHeader extends Component {
   render() {
     return (
       <div>
-        <input type="submit">수정</input>
-        <input type="submit">삭제</input>
+        <input type="submit" />
+        <input type="submit" />
       </div>
     );
   }
