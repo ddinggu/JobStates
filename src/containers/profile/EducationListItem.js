@@ -3,11 +3,10 @@ import {
  Button, Container, Form, TextArea, Input 
 } from 'semantic-ui-react';
 
-export default class UserEducationList extends Component {
+export default class EducationList extends Component {
   constructor(props) {
     super(props);
 
-    console.log('edulistProps: ', props);
     this.state = {
       edit: false,
       organization: props.edu.organization,

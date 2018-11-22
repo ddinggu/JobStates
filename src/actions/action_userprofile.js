@@ -39,13 +39,12 @@ export const onUpdateField = (key, value) => ({
   value,
 });
 
-export const onSubmit = (payload) => {
+export const onSubmitPostUser = (payload) => {
   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
 
   return dispatch => axios.post(url, payload).then(() => {
-      axios.get(url).then((data) => {
-        // console.log('work');
-        console.log(data);
+      axios.get(url, payload).then((res) => {
+        console.log('post res', res);
         dispatch(fetchUser());
       });
     });
@@ -53,7 +52,15 @@ export const onSubmit = (payload) => {
 
 export const deleteUserProfile = (payload) => {
   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
-  return dispatch => axios.delete(url, payload).then(() => {
+  return dispatch => axios.delete(url, payload).then(() => dispatch(fetchUser()));
+};
+
+export const onSubmitPatchUser = (data) => {
+  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
+  return dispatch => axios.patch(url, data).then((res) => {
+      dispatch(fetchUserProfileSuccess(res.data));
+
+      console.log('res', res);
       dispatch(fetchUser());
     });
 };

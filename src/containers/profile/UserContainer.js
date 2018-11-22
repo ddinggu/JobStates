@@ -10,8 +10,9 @@ import UserExperience from './UserExperience';
 import {
   fetchUser,
   onUpdateField,
-  onSubmit,
+  onSubmitPostUser,
   deleteUserProfile,
+  onSubmitPatchUser,
 } from '../../actions/action_userprofile';
 import UserInterestTech from './UserInterestTech';
 import UserInterestField from './UserInterestField';
@@ -48,10 +49,8 @@ class UserContainer extends Component {
       updateField: this.props.updateField,
       submit: this.props.submit,
       delete: this.props.delete,
+      update: this.props.update,
     };
-    console.log('STATETE', this.state);
-
-    // console.log('here', this.props);
 
     return (
       <Container className="usercontainer">
@@ -101,7 +100,6 @@ UserContainer.defaultProps = {
 // ////////////////////////////////////////////////////////////////////////
 
 const mapStateToProps = (state) => {
-  console.log('hrere state', state);
   if (!(state.fetchedProfile.items === null)) {
     return {
       name: state.fetchedProfile.items.user.nick,
@@ -124,8 +122,9 @@ const mapDispatchToProps = (dispatch) => {
     {
       fetch: fetchUser,
       updateField: onUpdateField,
-      submit: onSubmit,
+      submit: onSubmitPostUser,
       delete: deleteUserProfile,
+      update: onSubmitPatchUser,
     },
     dispatch,
   );

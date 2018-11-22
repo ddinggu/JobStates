@@ -12,8 +12,8 @@ import ProjectListItem from './ProjectListItem';
 // import PropTypes from 'prop-types';
 
 class UserProject extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       create: false,
       title: '',
@@ -32,35 +32,19 @@ class UserProject extends Component {
         [attr]: e.target.value,
       });
     };
+    console.log(props);
+
+    this.onSubmitPost = () => {
+      // console.log('ddd', props);
+      props.funcs.submit(this.state);
+      this.onButtonClick();
+    };
   }
 
   render() {
     const { onButtonClick } = this;
     const { create } = this.state;
     const { project, funcs } = this.props;
-
-    const onSubmitPost = (e) => {
-      e.preventDefault();
-      const { title, term, content } = this.state;
-      const obj = { title, term, content };
-      // console.log(this.state);
-      funcs.submit(obj);
-    };
-
-    const buttons = proj => (
-      <span className="ui mini basic icon buttons">
-        <button type="button" className="ui button">
-          <i className="edit icon" />
-        </button>
-        <button
-          type="button"
-          className="ui button"
-          onClick={() => funcs.delete(proj)}
-        >
-          <i className="delete icon" />
-        </button>
-      </span>
-    );
 
     return (
       <Container className="UserProject">
@@ -69,11 +53,11 @@ class UserProject extends Component {
           <div className="column UserProject read ten wide profilebox">
             {project.map(proj => (
               <div>
-                <ProjectListItem proj={proj} />
+                <ProjectListItem proj={proj} funcs={funcs} />
               </div>
             ))}
             <div className="row" style={create ? null : { display: 'none' }}>
-              <Form onSubmit={onSubmitPost}>
+              <Form onSubmit={this.onSubmitPost}>
                 <br />
                 <Form.Field>
                   <label>프로젝트명</label>
@@ -99,7 +83,7 @@ class UserProject extends Component {
                     onButtonClick();
                   }}
                 />
-                <Button compact content="추가" />
+                <Button type="submit" compact content="추가" />
               </Form>
             </div>
           </div>

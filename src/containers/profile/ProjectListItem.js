@@ -16,6 +16,7 @@ export default class ProjectListItem extends Component {
       title: props.proj.title,
       description: props.proj.description,
       term: props.proj.term,
+      update: props.funcs.update,
     };
 
     this.onButtonClick = () => {
@@ -29,6 +30,11 @@ export default class ProjectListItem extends Component {
       this.setState({
         [attr]: e.target.value,
       });
+    };
+
+    this.onSubmitUpdate = () => {
+      this.onButtonClick();
+      this.state.update(this.state);
     };
   }
 
@@ -82,11 +88,10 @@ export default class ProjectListItem extends Component {
                       }}
                     />
                     <Button
+                      type="submit"
                       compact
                       content="추가"
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
+                      onClick={this.onSubmitUpdate}
                     />
                   </Form>
                 </div>

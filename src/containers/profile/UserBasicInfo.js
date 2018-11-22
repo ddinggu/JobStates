@@ -9,7 +9,6 @@ import './UserBasicInfo.css';
 class UserBasicInfo extends Component {
   constructor(props) {
     super(props);
-    console.log('222', props);
 
     this.state = {
       edit: false,
@@ -39,9 +38,6 @@ class UserBasicInfo extends Component {
 
   render() {
     const { onButtonClick } = this;
-
-    // const { funcs } = this.props;
-    console.log('owowowwo', this.state);
 
     const {
       edit,
