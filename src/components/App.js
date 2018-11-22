@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import UserContainer from 'containers/profile/UserContainer';
-import AnalysisContainer from 'containers/analysis/AnalysisContainer';
+// import UserContainer from 'containers/profile/UserContainer';
+// import AnalysisContainer from 'containers/analysis/AnalysisContainer';
 import HeaderContainer from 'containers/header/HeaderContainer';
 import JobDetail from 'containers/job/JobDetail';
 import JobList from 'containers/job/JobList';
-import JobPostForm from 'containers/job/post/JobPostForm';
+// import JobPostForm from 'containers/job/post/JobPostForm';
 
 class App extends Component {
   render() {
     return (
       <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
         <HeaderContainer />
-        <UserContainer />
-        <AnalysisContainer />
-        <JobPostForm />
-        <JobList />
+        {/* <UserContainer /> */}
+        {/* <AnalysisContainer /> */}
+        {/* <JobPostForm /> */}
+        {/* <JobList /> */}
         <JobDetail />
       </div>
     );
