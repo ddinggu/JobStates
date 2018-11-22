@@ -9,6 +9,6 @@ export const fetchJob = () => dispatch => axios.get(URL_JOB).then((res) => {
   dispatch({ type: FETCH_JOB, payload: res.data });
 });
 
-export const filterFetchData = filterTarget => (dispatch) => {
-  dispatch({ type: SEARCH_FILTER, payload: filterTarget });
+export const filterFetchData = (filterTargetValue, filterTargetInputValue) => (dispatch) => {
+  dispatch({ type: SEARCH_FILTER, payload: filterTargetValue, payload2: filterTargetInputValue });
 };

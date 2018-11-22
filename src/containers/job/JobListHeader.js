@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Button, Select, Input, Form } from 'semantic-ui-react';
 
 const options = [
@@ -16,7 +15,8 @@ export default class JobListHeader extends Component {
     super(props);
 
     this.state = {
-      value: '',
+      value: '전체',
+      inputValue: '',
     };
   }
 
@@ -26,15 +26,18 @@ export default class JobListHeader extends Component {
     }));
   };
 
-  _onInputChange = (e, { value }) => {
-      console.log(value)
+  _onInputChange = e => {
+    this.setState({
+        inputValue: e.target.value
+    })
+    // console.log(this.state.inputValue)
   }
 
   _onClickSearch = e => {
     e.preventDefault();
-    const { value } = this.state;
-    // const { job } = this.props;
-    this.props._filterSearch(value);
+    const { value, inputValue } = this.state;
+    this.props._filterSearch(value, inputValue);
+    this.setState({inputValue: ''})
   };
 
   render() {
@@ -46,7 +49,7 @@ export default class JobListHeader extends Component {
             defaultValue="전체"
             onChange={this._onSelectChange}
           />
-          <Form.Input placeholder="회사명 검색" onChange={this._onInputChange} />
+          <Form.Input placeholder="회사명 검색" value={this.state.inputValue} onChange={this._onInputChange}  />
           <Form.Button onClick={this._onClickSearch} type="submit">
             Search
           </Form.Button>
