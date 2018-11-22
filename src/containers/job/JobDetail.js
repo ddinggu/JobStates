@@ -11,7 +11,9 @@ import { fetchJob } from '../../actions/action_Job';
 class JobDetail extends Component {
   constructor(props) {
     super(props);
-
+  }
+  
+  componentDidMount(){
     const { fetchJob } = this.props;
     fetchJob();
   }
@@ -31,7 +33,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              <span>현재 이 채용공고는 {job[0][0].status} </span>
+              <span>현재 이 채용공고는 {job[0].status} </span>
             </Grid.Column>
           </Grid.Row>
 
@@ -42,13 +44,13 @@ class JobDetail extends Component {
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
               <span>
-                <Image src={job[0][0].logo} alt="" height="20px" width="15px" />
-                <List.Content>{job[0][0].brand}</List.Content>
+                <Image src={job[0].logo} alt="" height="20px" width="15px" />
+                <List.Content>{job[0].brand}</List.Content>
               </span>
               <List.Item>
                 <List.Icon name="linkify" />
                 <List.Content>
-                  <a href={job[0][0].companyUrl}>www.rocketpunch.com</a>
+                  <a href={job[0].companyUrl}>www.rocketpunch.com</a>
                 </List.Content>
               </List.Item>
             </Grid.Column>
@@ -60,7 +62,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].hireTech}
+              {job[0].hireTech}
             </Grid.Column>
           </Grid.Row>
 
@@ -70,7 +72,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].detailInfo}
+              {job[0].detailInfo}
             </Grid.Column>
           </Grid.Row>
 
@@ -80,7 +82,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].salary}
+              {job[0].salary}
             </Grid.Column>
           </Grid.Row>
 
@@ -90,7 +92,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].address}
+              {job[0].address}
             </Grid.Column>
           </Grid.Row>
 
@@ -110,7 +112,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].deadLine}
+              {job[0].deadLine}
             </Grid.Column>
           </Grid.Row>
 
@@ -120,7 +122,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].advantage}
+              {job[0].advantage}
             </Grid.Column>
           </Grid.Row>
 
@@ -130,7 +132,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].disadvantage}
+              {job[0].disadvantage}
             </Grid.Column>
           </Grid.Row>
 
@@ -140,7 +142,7 @@ class JobDetail extends Component {
               <div style={{ border: '1px solid' }} />
             </Grid.Column>
             <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-              {job[0][0].strategy}
+              {job[0].strategy}
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -150,7 +152,7 @@ class JobDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-  job: state.job,
+  job: state.job.allJobData,
 });
 
 export default connect(

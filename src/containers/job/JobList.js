@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJob } from '../../actions/action_Job';
+import { fetchJob, filterFetchData } from '../../actions/action_Job';
 import JobListHeader from './JobListHeader';
 import {
   Grid,
@@ -11,9 +11,9 @@ class JobList extends Component {
   constructor(props) {
     super(props);    
   }
-
+  
   componentDidMount(){
-    const { fetchJob } = this.props;
+    const { fetchJob, filterFetchData } = this.props;
     fetchJob();
   }
 
@@ -36,6 +36,7 @@ class JobList extends Component {
 
   _filterSearch = (value) => {
     console.log(value)
+    filterFetchData(value);
   }
 
   render() {
@@ -43,14 +44,14 @@ class JobList extends Component {
     if (job.length === 0) {
       return <div>loading...</div>;
     }
-    console.log('job:::::::::', this.props)
+    // console.log('job:::::::::', this.props)
     return (
       /* equal width => table 적용 */
       <div>
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-            <Segment>{job[0].map(this._mapList)}</Segment>
+            <Segment>{job.map(this._mapList)}</Segment>
           </Grid.Column>
         </Grid>
       </div>
@@ -59,7 +60,6 @@ class JobList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state::::: 요거', state)
   return{ 
   job: state.job.allJobData,
 }};

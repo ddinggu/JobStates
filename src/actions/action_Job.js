@@ -11,7 +11,7 @@ export const fetchJob = () => (dispatch) => {
   });
 };
 
-export const filterFetchData = () => (dispatch) => {
+export const filterFetchData = (data) => (dispatch) => {
   axios.get(URL_JOB).then((res) => {
     dispatch({ type: SEARCH_FILTER, payload: res.data });
   });
