@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Button, Container, Form, TextArea, Input } from 'semantic-ui-react';
+import {
+ Button, Container, Form, TextArea, Input 
+} from 'semantic-ui-react';
 import EducationList from './EducationListItem';
 // import PropTypes from 'prop-types';
 // import './UserEducation.css';
 
-class UserEducation extends Component {
+export default class UserEducation extends Component {
   constructor() {
     super();
     this.state = {
@@ -34,7 +35,7 @@ class UserEducation extends Component {
     const { create } = this.state;
     const { edu, funcs } = this.props;
 
-    const onSubmitPost = e => {
+    const onSubmitPost = (e) => {
       e.preventDefault();
       const { organization, term, content } = this.state;
       const obj = { organization, term, content };
@@ -71,18 +72,12 @@ class UserEducation extends Component {
                   <Button
                     compact
                     content="취소"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       onButtonClick();
                     }}
                   />
-                  <Button
-                    compact
-                    content="추가"
-                    onClick={e => {
-                      e.preventDefault();
-                    }}
-                  />
+                  <Button compact content="추가" />
                 </Form>
               </div>
             </div>
@@ -110,11 +105,3 @@ class UserEducation extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  editedData: state.fetchedProfile.editor,
-});
-
-export default connect(mapStateToProps)(UserEducation);
-
-/* eslint-enable */

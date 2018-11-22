@@ -1,6 +1,7 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-import { Button, Container, Form, Input, TextArea } from 'semantic-ui-react';
+import {
+ Button, Container, Form, TextArea, Input 
+} from 'semantic-ui-react';
 import ExperienceList from './ExperienceListItem';
 
 // import PropTypes from 'prop-types';
@@ -35,16 +36,17 @@ class UserExperience extends Component {
     const { create } = this.state;
     const { exps, funcs } = this.props;
 
-    const onSubmitPost = e => {
+    const onSubmitPost = (e) => {
       e.preventDefault();
-      const { title, description, term, content } = this.state;
+      const {
+ title, description, term, content 
+} = this.state;
       const obj = {
         title,
         description,
         term,
         content,
       };
-      // console.log(this.state);
       funcs.submit(obj);
     };
 
@@ -64,21 +66,21 @@ class UserExperience extends Component {
                 style={create ? null : { display: 'none' }}
               >
                 <Form onSubmit={onSubmitPost}>
-                  <Form.Field>
-                    <label>기업명</label>
-                    <input
-                      size="mini"
-                      onChange={e => this.onChange(e, 'title')}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>기간</label>
-                    <input onChange={e => this.onChange(e, 'term')} />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>역할</label>
-                    <input onChange={e => this.onChange(e, 'description')} />
-                  </Form.Field>
+                  <Form.Field
+                    label="기업명"
+                    control={Input}
+                    onChange={e => this.onChange(e, 'title')}
+                  />
+                  <Form.Field
+                    label="기간"
+                    control={Input}
+                    onChange={e => this.onChange(e, 'term')}
+                  />
+                  <Form.Field
+                    label="역할"
+                    control={Input}
+                    onChange={e => this.onChange(e, 'description')}
+                  />
                   <Form.Field
                     control={TextArea}
                     label="간단 설명"
@@ -95,10 +97,6 @@ class UserExperience extends Component {
               ))}
             </div>
           </div>
-
-          {
-            ////////////////33333 컬럼
-          }
           <span className="column two wide">
             <span className="ui mini basic icon buttons">
               <button
@@ -116,8 +114,4 @@ class UserExperience extends Component {
   }
 }
 
-// UserExperience.propTypes = {};
-
 export default UserExperience;
-
-/* eslint-enable */

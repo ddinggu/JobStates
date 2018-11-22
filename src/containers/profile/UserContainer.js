@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
-import UserBasicInfo from './UserBasicInfo';
-import UserEducation from './UserEducation';
-import UserProject from './UserProject';
-import UserExperience from './UserExperience';
+import UserBasicInfo from '../../components/UserBasicInfo';
+import UserEducation from '../../components/UserEducation';
+import UserProject from '../../components/UserProject';
+import UserExperience from '../../components/UserExperience';
 import {
   fetchUser,
-  onUpdateField,
   onSubmitPostUser,
   deleteUserProfile,
   onSubmitPatchUser,
@@ -99,7 +98,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   if (!(state.fetchedProfile.items === null)) {
     return {
       name: state.fetchedProfile.items.user.nick,
@@ -117,11 +116,10 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
-      updateField: onUpdateField,
       submit: onSubmitPostUser,
       delete: deleteUserProfile,
       update: onSubmitPatchUser,

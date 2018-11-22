@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Button,
-  Container,
-  Grid,
-  Input,
-  Form,
-  TextArea,
+ Button, Container, Input, Form, TextArea 
 } from 'semantic-ui-react';
 import ProjectListItem from './ProjectListItem';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 
-class UserProject extends Component {
+export default class UserProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,7 +98,3 @@ class UserProject extends Component {
     );
   }
 }
-
-export default UserProject;
-
-/* eslint-enable */

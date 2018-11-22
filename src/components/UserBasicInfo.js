@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
  Container, List, Grid, Input, Form, Button 
 } from 'semantic-ui-react';
 import './UserBasicInfo.css';
 
-class UserBasicInfo extends Component {
+export default class UserBasicInfo extends Component {
   constructor(props) {
     super(props);
-
+    console.log('ddd', props.funcs.update);
     this.state = {
       edit: false,
       name: props.basicinfo.name,
@@ -18,7 +17,7 @@ class UserBasicInfo extends Component {
       snsBlog: props.basicinfo.snsBlog,
       snsGithub: props.basicinfo.snsGithub,
       picture: props.basicinfo.picture,
-      submit: props.funcs.submit,
+      update: props.funcs.update,
       delete: props.funcs.delete,
     };
 
@@ -47,7 +46,7 @@ class UserBasicInfo extends Component {
       snsBlog,
       snsGithub,
       picture,
-      submit,
+      update,
     } = this.state;
 
     // const deletedData = {
@@ -95,7 +94,7 @@ class UserBasicInfo extends Component {
             </div>
           ) : (
             <div className="UserBasicInfo create ten wide column profilebox">
-              <Form onSubmit={submit}>
+              <Form onSubmit={update}>
                 <Form.Field
                   label="이름"
                   size="mini"
@@ -173,10 +172,3 @@ UserBasicInfo.defaultProps = {
   snsGithub: 'default snsGithub',
   picture: 'default img',
 };
-
-const mapStateToProps = state => ({
-  editedData: state.fetchedProfile.editor,
-});
-export default connect(mapStateToProps)(UserBasicInfo);
-
-/* eslint-enable */
