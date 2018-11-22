@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJob, filterFetchData } from '../../actions/action_Job';
 import JobListHeader from './JobListHeader';
-import {
-  Grid,
-  Segment,
-} from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 
 class JobList extends Component {
   constructor(props) {
-    super(props);    
+    super(props);
+    this.state = {
+      filterFlag: false,
+    };
   }
-  
-  componentDidMount(){
-    const { fetchJob, filterFetchData } = this.props;
+
+  componentDidMount() {
+    const { fetchJob, job } = this.props;
     fetchJob();
   }
 
-  _mapList = (jobData) => {
+  _mapList = jobData => {
     return (
       <Grid>
         <Grid.Column width={16}>
@@ -34,24 +34,34 @@ class JobList extends Component {
     );
   };
 
-  _filterSearch = (value) => {
-    console.log(value)
-    filterFetchData(value);
-  }
+  _filterSearch = value => {
+    const { filter } = this.props;
+    this.props.filterFetchData(value);
+    console.log('value@@', typeof value)
+    if (value === '전체') {
+      this.setState({ filterFlag: false });
+    } else {
+      this.setState({ filterFlag: true });
+    }
+  };
 
   render() {
-    const {job} = this.props;
+    const { job, filter } = this.props;
+    console.log('job::', job, 'filter::', filter, this.state);
     if (job.length === 0) {
       return <div>loading...</div>;
     }
-    // console.log('job:::::::::', this.props)
     return (
       /* equal width => table 적용 */
       <div>
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-            <Segment>{job.map(this._mapList)}</Segment>
+            <Segment>
+              {this.state.filterFlag
+                ? filter.map(this._mapList)
+                : job.map(this._mapList)}
+            </Segment>
           </Grid.Column>
         </Grid>
       </div>
@@ -60,12 +70,13 @@ class JobList extends Component {
 }
 
 const mapStateToProps = state => {
-  return{ 
-  job: state.job.allJobData,
-}};
-
+  return {
+    job: state.job.allJobData,
+    filter: state.job.filterData,
+  };
+};
 
 export default connect(
   mapStateToProps,
-  { fetchJob },
+  { fetchJob, filterFetchData },
 )(JobList);

@@ -6,17 +6,18 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  console.log('job action::: ', action);
+  // console.log('job action::: ', action);
   switch (action.type) {
     case FETCH_JOB:
       return {
         ...state,
         allJobData: action.payload,
+        filterData: action.payload,
       };
     case SEARCH_FILTER:
-      return { 
+      return {
         ...state,
-        filterData: action.payload,
+        filterData: state.allJobData.filter(data => data.status === action.payload),  
       };
     default:
       return state;

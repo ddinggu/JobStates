@@ -14,23 +14,27 @@ const options = [
 export default class JobListHeader extends Component {
   constructor(props) {
     super(props);
-   
+
     this.state = {
       value: '',
     };
   }
 
-  _onChangeSelect = (e, { value }) => {
-    this.setState(prevState =>({
-      value,
+  _onSelectChange = (e, { value }) => {
+    this.setState(prevState => ({
+        value
     }));
   };
+
+  _onInputChange = (e, { value }) => {
+      console.log(value)
+  }
 
   _onClickSearch = e => {
     e.preventDefault();
     const { value } = this.state;
-    const { job } = this.props;
-    this.props._filterSearch(value)
+    // const { job } = this.props;
+    this.props._filterSearch(value);
   };
 
   render() {
@@ -40,19 +44,18 @@ export default class JobListHeader extends Component {
           <Form.Select
             options={options}
             defaultValue="전체"
-            onChange={this._onChangeSelect}
+            onChange={this._onSelectChange}
           />
-          <Form.Input />
+          <Form.Input placeholder="회사명 검색" onChange={this._onInputChange} />
           <Form.Button onClick={this._onClickSearch} type="submit">
             Search
           </Form.Button>
+        <Button.Group>
+          <Form.Button primary>수정</Form.Button>
+          <Form.Button secondary>삭제</Form.Button>
+        </Button.Group>
         </Form.Input>
-
-        <Form.Button primary>수정</Form.Button>
-        <Form.Button secondary>삭제</Form.Button>
       </Form>
     );
   }
 }
-
-
