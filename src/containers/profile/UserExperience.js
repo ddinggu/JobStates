@@ -158,8 +158,4 @@ class UserExperience extends Component {
   }
 }
 
-// UserExperience.propTypes = {};
-
 export default UserExperience;
-
-/* eslint-enable */

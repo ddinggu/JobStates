@@ -159,5 +159,3 @@ class UserProject extends Component {
 }
 
 export default UserProject;
-
-/* eslint-enable */
