@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as types from 'actions/actionTypes';
 
 const URL_JOB = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/job';
 
@@ -13,5 +14,6 @@ export const filterFetchData = (filterTargetValue, filterTargetInputValue) => (d
   dispatch({ type: SEARCH_FILTER, payload: filterTargetValue, payload2: filterTargetInputValue });
 };
 
-
-//status && company 로 수정!
+export const getDetailJob = id => (dispatch) => {
+  dispatch({ type: types.GET_DETAIL_JOB, id });
+};

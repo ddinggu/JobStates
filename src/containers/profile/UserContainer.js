@@ -2,58 +2,73 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Container } from 'semantic-ui-react';
 import UserBasicInfo from './UserBasicInfo';
 import UserEducation from './UserEducation';
 import UserProject from './UserProject';
 import UserExperience from './UserExperience';
-
-import { fetchUser } from '../../actions/index';
-
-// import UserInterestField from './UserInterestField';
-// import UserInterestTech from './UserInterestTech';
+import {
+  fetchUser,
+  onUpdateField,
+  onSubmit,
+  deleteUserProfile,
+} from '../../actions/action_userprofile';
+import UserInterestTech from './UserInterestTech';
+import UserInterestField from './UserInterestField';
+import './UserContainer.css';
 
 /* eslint-disable */
 
 class UserContainer extends Component {
   constructor() {
     super();
-
-    this.makePropsUnit = props => {
-      const propsUnit = {};
-      for (const prop in props) {
-        propsUnit[prop] = props[prop];
-      }
-      return propsUnit;
-    };
   }
 
   componentDidMount() {
-    // console.log('dispatch here?', this.props.dispatch);
     const { fetch } = this.props;
     fetch();
   }
 
   render() {
-    // console.log('2222', this.props);
+    if (this.props.name === 'default name') {
+      return (
+        <div>
+          <img src="https://i.gifer.com/4V0b.gif" />
+        </div>
+      );
+    }
     const basicinfo = {
-      name: this.props.nick,
+      name: this.props.name,
       email: this.props.email,
       phoneNum: this.props.phoneNum,
       snsBlog: this.props.snsBlog,
       snsGithub: this.props.snsGithub,
       picture: this.props.picture,
+      updateField: this.props.updateField,
+      submit: this.props.submit,
     };
-    // console.log('STATETE', this.state);
+
+    const funcs = {
+      updateField: this.props.updateField,
+      submit: this.props.submit,
+      delete: this.props.delete,
+    };
+    console.log('STATETE', this.state);
+
+    // console.log('here', this.props);
 
     return (
-      <div className="usercontainer">
-        <UserBasicInfo basicinfo={this.makePropsUnit(basicinfo)} />
-        <UserEducation />
-        <UserExperience />
-        <UserProject />
-        {/* <UserInterestField /> */}
-        {/* <UserInterestTech /> */}
-      </div>
+      <Container className="usercontainer">
+        <UserBasicInfo basicinfo={basicinfo} funcs={funcs} />
+        <UserEducation edu={this.props.education} funcs={funcs} />
+        <UserExperience exps={this.props.experience} funcs={funcs} />
+        <UserProject project={this.props.project} funcs={funcs} />
+        <UserInterestTech userFavTech={this.props.userFavTech} funcs={funcs} />
+        <UserInterestField
+          userFavField={this.props.userFavField}
+          funcs={funcs}
+        />
+      </Container>
     );
   }
 }
@@ -90,46 +105,36 @@ UserContainer.defaultProps = {
 // ////////////////////////////////////////////////////////////////////////
 
 const mapStateToProps = state => {
-  // console.log('HHHAHAHHAHA', state);
-  return {
-    name: state.Profile.nick,
-    email: state.Profile.email,
-    phoneNum: state.Profile.phone,
-    snsBlog: state.Profile.blog,
-    snsGithub: state.Profile.github,
-    picture: state.Profile.photo,
-  };
-
-  // return {
-  //   name: state.fetchedProfile.items.nick,
-  //   email: state.fetchedProfile.items.email,
-  //   phoneNum: state.fetchedProfile.items.phone,
-  //   snsBlog: state.fetchedProfile.items.blog,
-  //   snsGithub: state.fetchedProfile.items.github,
-  //   picture: state.fetchedProfile.items.photo,
-  // };
+  if (!(state.fetchedProfile.items === null)) {
+    return {
+      name: state.fetchedProfile.items.user.nick,
+      email: state.fetchedProfile.items.user.email,
+      phoneNum: state.fetchedProfile.items.user.phone,
+      snsBlog: state.fetchedProfile.items.user.blog,
+      snsGithub: state.fetchedProfile.items.user.github,
+      picture: state.fetchedProfile.items.user.photo,
+      education: state.fetchedProfile.items.user.education,
+      experience: state.fetchedProfile.items.user.experience,
+      project: state.fetchedProfile.items.user.project,
+      userFavTech: state.fetchedProfile.items.user.favoriteTech,
+      userFavField: state.fetchedProfile.items.user.favoriteCategory,
+    };
+  }
 };
 
 const mapDispatchToProps = dispatch => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
+      updateField: onUpdateField,
+      submit: onSubmit,
+      delete: deleteUserProfile,
     },
     dispatch,
   );
   const allActionProps = { ...boundActionCreators, dispatch };
   return allActionProps;
 };
-
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(
-//     {
-//       fetchBegin: fetchUserProfileBegin,
-//       fetch: fetchUser,
-//     },
-//     dispatch,
-//   );
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

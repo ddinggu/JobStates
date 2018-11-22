@@ -5,18 +5,19 @@ const initialState = {
   error: false,
 };
 
-function setUserAnalysisData(state = initialState, action) {
+const postUserJobData = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_ANALYSIS_BEGIN:
+    case types.POST_JOB_BEGIN:
       return { ...state, loading: true };
 
-    case types.GET_ANALYSIS_SUCCESS:
+    case types.POST_JOB_SUCCESS:
       return {
         loading: !state.loading,
-        ...action.payload,
+        // api 완성되면 수정될 것!!
+        ...action.payload.data,
       };
 
-    case types.GET_ANALYSIS_FAILURE:
+    case types.POST_JOB_FAILURE:
       return {
         ...state,
         error: true,
@@ -25,6 +26,6 @@ function setUserAnalysisData(state = initialState, action) {
     default:
       return state;
   }
-}
+};
 
-export default setUserAnalysisData;
+export default postUserJobData;

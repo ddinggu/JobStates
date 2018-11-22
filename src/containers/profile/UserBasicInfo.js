@@ -1,23 +1,30 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Container, List, Grid, Input, Form, Button } from 'semantic-ui-react';
+import './UserBasicInfo.css';
 
 class UserBasicInfo extends Component {
   constructor() {
     super();
     this.state = {
-      status: true, // true : 정보 확인 뷰 & false : 정보 추가/수정 뷰
+      createOrEdit: false, // false : 정보 확인 뷰 & true : 정보 추가/수정 뷰
     };
 
     this.onButtonClick = () => {
-      const { status } = this.state;
+      const { createOrEdit } = this.state;
       this.setState({
-        status: !status,
+        createOrEdit: !createOrEdit,
       });
     };
-  } // <--------- commit 위해 임시로 disable 해놓음
+  }
 
-  /* eslint-disable  */ render() {
+  // /* eslint-disable  */
+
+  render() {
+    const { createOrEdit } = this.state;
+    const { onButtonClick } = this;
     const {
       name,
       phoneNum,
@@ -25,70 +32,99 @@ class UserBasicInfo extends Component {
       snsBlog,
       snsGithub,
       picture,
+      updateField,
+      submit,
     } = this.props.basicinfo;
 
-    /* eslint-enable */
+    const { funcs } = this.props;
 
-    const { onButtonClick } = this;
-    const { status } = this.state;
+    const deletedData = {
+      name,
+      phoneNum,
+      email,
+      snsBlog,
+      snsGithub,
+    };
+
+    // handling onChange & onSubmit //
+    const updateFieldEvent = key => ev => updateField(key, ev.target.value);
+    const changeName = updateFieldEvent('nick');
+    const changePhone = updateFieldEvent('phone');
+    const changeEmail = updateFieldEvent('email');
+    const changeBlog = updateFieldEvent('blog');
+    const changeGithub = updateFieldEvent('github');
+    const onSubmitPost = e => {
+      e.preventDefault();
+      submit(this.props.editedData);
+    };
+    // /////////////////////////////////
 
     return (
-      <div className="UserBasicInfo">
-        <img alt="userpicture" src={picture} />
-        <hr />
-        <button type="button" onClick={onButtonClick}>
-          +
-        </button>
-        <div
-          className="read UserBasicInfo"
-          style={
-            status
-              ? null
-              : {
-                display: 'none',
-              }
-          }
-        >
-          <h3>이름</h3>
-          <div>{name}</div>
-          <h3>연락처</h3>
-          <div>휴대폰 번호: {phoneNum}</div>
-          <div>이메일 주소: {email}</div>
-          <h3>SNS</h3>
-          <div>대표 블로그: {snsBlog}</div>
-          <div>대표 깃헙: {snsGithub}</div>
-        </div>
-        <div
-          className="create UserBasicInfo"
-          style={
-            status
-              ? {
-                display: 'none',
-              }
-              : null
-          }
-        >
-          <hr />
-          <h3>이름</h3>
-          <div>
-            <form>
-              <input />
-            </form>
+      <Container className="UserBasicInfo">
+        {/* <img alt="userpicture" src={picture} /> */}
+        <div className="ui grid">
+          <div className="column centered ui grid">
+            <img
+              alt="userpicture"
+              src="http://cdn.onlinewebfonts.com/svg/img_508630.png"
+              width="100"
+            />
           </div>
-          <h3>연락처</h3>
-          <form>
-            휴대폰 번호: <input />
-            <br />
-            이메일 주소: <input />
-          </form>
-          <h3>SNS</h3>
-          <form>
-            대표 블로그: <input />
-            <br />
-            대표 깃헙: <input />
-          </form>
         </div>
-      </div>
+        <div className="ui grid centered">
+          <span className="column profilename two wide">Basic Info.</span>
+          {!createOrEdit ? (
+            <div className="UserBasicInfo read ten wide column profilebox">
+              <Grid>
+                <List>
+                  <List.Item icon="users" content={name} />
+                  <List.Item icon="phone" content={phoneNum} />
+                  <List.Item icon="mail" content={email} />
+                  <List.Item icon="home" content={snsBlog} />
+                  <List.Item icon="github" content={snsGithub} />
+                </List>
+              </Grid>
+            </div>
+          ) : (
+            <div className="UserBasicInfo create ten wide column profilebox">
+              {/* <div className="ten wide column profilebox"> */}
+              <form onSubmit={onSubmitPost}>
+                <span>이름: </span>
+                <input onChange={changeName} />
+                <br />
+                휴대폰 번호: <input onChange={changePhone} />
+                <br />
+                이메일 주소: <input onChange={changeEmail} />
+                <br />
+                대표 블로그: <input onChange={changeBlog} />
+                <br />
+                대표 깃헙: <input onChange={changeGithub} />
+                <br />
+                <button type="button" onClick={onButtonClick}>
+                  취소
+                </button>{' '}
+                <button type="submit">변경</button>
+              </form>
+            </div>
+          )}
+          <div className="column two wide">
+            <span className="ui mini basic icon buttons ">
+              <button type="button" className="ui button">
+                <i className="edit icon" />
+              </button>
+              <button
+                type="button"
+                className="ui button"
+                onClick={() => funcs.delete(eduProp)}
+              >
+                <i className="delete icon" />
+              </button>
+            </span>
+          </div>
+        </div>
+        {/* </div> */}
+        {/* </div> */}
+      </Container>
     );
   }
 }
@@ -111,4 +147,9 @@ UserBasicInfo.defaultProps = {
   picture: 'default img',
 };
 
-export default connect()(UserBasicInfo);
+const mapStateToProps = state => ({
+  editedData: state.fetchedProfile.editor,
+});
+export default connect(mapStateToProps)(UserBasicInfo);
+
+/* eslint-enable */
