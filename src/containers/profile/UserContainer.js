@@ -127,8 +127,8 @@ const mapDispatchToProps = (dispatch) => {
   const allActionProps = { ...boundActionCreators, dispatch };
   return allActionProps;
 };
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(UserContainer);
+/* eslint-enable */
