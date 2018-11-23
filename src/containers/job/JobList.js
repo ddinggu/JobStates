@@ -32,7 +32,7 @@ class JobList extends Component {
           <Segment
             key={jobData.hireId}
             id={jobData.hireId}
-            onClick={e => getDetailJob(e.target.id)}
+            onClick={e => getDetailJob(e.currentTarget.id)}
           >
             <span>
               <img src={jobData.logo} width="35px" height="50px" />

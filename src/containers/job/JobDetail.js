@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
  Form, Grid, Image, List 
 } from 'semantic-ui-react';
-import { fetchJob } from '../../actions/action_Job';
+import { fetchJob } from 'actions/action_Job';
 
 class JobDetail extends Component {
   // constructor(props) {
