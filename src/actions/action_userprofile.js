@@ -1,59 +1,78 @@
-import axios from 'axios';
+import * as types from 'actions/actionTypes';
+import * as api from 'api/api';
 
-export const FETCH_USER_PROFILE_BEGIN = 'FETCH_USER_PROFILE_BEGIN';
-export const FETCH_USER_PROFILE_SUCCESS = 'FETCH_USER_PROFILE_SUCCESS';
-export const FETCH_USER_PROFILE_FAILURE = 'FETCH_USER_PROFILE_FAILURE';
-export const FETCH_USER = 'FETCH_USER';
-
-export const fetchUserProfileBegin = () => ({
-  type: FETCH_USER_PROFILE_BEGIN,
+const fetchUserProfileBegin = () => ({
+  type: types.FETCH_USER_PROFILE_BEGIN,
 });
 
-export const fetchUserProfileSuccess = user => ({
-  type: FETCH_USER_PROFILE_SUCCESS,
+const fetchUserProfileSuccess = user => ({
+  type: types.FETCH_USER_PROFILE_SUCCESS,
   payload: { user },
 });
 
-export const fetchUserProfileFailure = error => ({
-  type: FETCH_USER_PROFILE_FAILURE,
+const fetchUserProfileFailure = error => ({
+  type: types.FETCH_USER_PROFILE_FAILURE,
   payload: { error },
 });
 
-export const fetchUser = () => {
-  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/user';
-
-  return (dispatch) => {
-    dispatch(fetchUserProfileBegin());
-    return axios
-      .get(url)
-      .then((user) => {
-        dispatch(fetchUserProfileSuccess(user.data));
-      })
-      .catch(error => dispatch(fetchUserProfileFailure(error)));
-  };
-};
-
-export const onUpdateField = (key, value) => ({
-  type: 'UPDATE_FIELD',
-  key,
-  value,
+const uploadUserImageSuccess = imgUrl => ({
+  type: types.GET_USER_IMAGE_URL,
+  payload: { imgUrl },
 });
 
-export const onSubmit = (payload) => {
-  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
+export const fetchUser = () => async (dispatch) => {
+  dispatch(fetchUserProfileBegin());
 
-  return dispatch => axios.post(url, payload).then(() => {
-      axios.get(url).then((data) => {
-        // console.log('work');
-        console.log(data);
-        dispatch(fetchUser());
-      });
-    });
+  try {
+    const responseGetUserProfile = await api.getUserProfile();
+    dispatch(fetchUserProfileSuccess(responseGetUserProfile.data));
+  } catch (err) {
+    dispatch(fetchUserProfileFailure(err));
+  }
 };
 
-export const deleteUserProfile = (payload) => {
-  const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
-  return dispatch => axios.delete(url, payload).then(() => {
-      dispatch(fetchUser());
-    });
+export const onSubmitPostUser = data => async (dispatch) => {
+  dispatch(fetchUserProfileBegin());
+  try {
+    const responsePostUserData = await api.postUserProfile(data);
+    dispatch(fetchUserProfileSuccess(responsePostUserData.data));
+  } catch (err) {
+    console.log('action_userprofile: onSubmitPostUser error', err);
+    dispatch(fetchUserProfileFailure(err));
+  }
+};
+
+// export const deleteUserProfile = (payload) => {
+//   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
+//   return dispatch => axios.delete(url, payload).then(() => dispatch(fetchUser()));
+// };
+
+export const deleteUserProfile = payload => async (dispatch) => {
+  try {
+    dispatch(api.deleteUserProfile(payload).then(() => fetchUser()));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const onSubmitPatchUser = data => async (dispatch) => {
+  dispatch(fetchUserProfileBegin());
+  try {
+    const responsePostUserData = await api.postUserProfile(data);
+    dispatch(fetchUserProfileSuccess(responsePostUserData.data));
+  } catch (err) {
+    dispatch(fetchUserProfileFailure(err));
+  }
+};
+
+export const uploadUserImage = data => async (dispatch) => {
+  try {
+    const imgUrlResponse = await api.postUserImage(data);
+    console.log('img data', data);
+    console.log('img response', imgUrlResponse);
+
+    dispatch(uploadUserImageSuccess(imgUrlResponse));
+  } catch (err) {
+    console.log(err);
+  }
 };
