@@ -30,7 +30,9 @@ export default class EducationList extends Component {
 
   render() {
     const { edu, funcs } = this.props;
-    const { edit } = this.state;
+    const {
+ edit, organization, term, content 
+} = this.state;
     return (
       <Container>
         <div className="row">
@@ -74,20 +76,20 @@ export default class EducationList extends Component {
                     label="학교"
                     control={Input}
                     onChange={e => this.onChange(e, 'organization')}
-                    value={this.state.organization}
+                    value={organization}
                   />
                   <Form.Field
                     label="재학 기간"
                     control={Input}
                     onChange={e => this.onChange(e, 'term')}
-                    value={this.state.term}
+                    value={term}
                   />
                   <Form.Field
                     label="간단 설명"
                     control={TextArea}
                     name="description"
                     onChange={e => this.onChange(e, 'description')}
-                    value={this.state.content}
+                    value={content}
                   />
                   <Button
                     compact

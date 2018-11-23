@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import {
- Button, Container, Form, TextArea, Input 
+  Button,
+  Container,
+  Form,
+  TextArea,
+  Input,
+  Header,
 } from 'semantic-ui-react';
-import ExperienceList from './ExperienceListItem';
-
+import EducationList from './EducationListItem';
 // import PropTypes from 'prop-types';
+// import './UserEducation.css';
 
-class UserExperience extends Component {
+export default class UserEducation extends Component {
   constructor() {
     super();
     this.state = {
       create: false,
-      title: '',
+      organization: '',
       term: '',
       content: '',
-      description: '',
     };
 
     this.onButtonClick = () => {
@@ -34,75 +38,70 @@ class UserExperience extends Component {
   render() {
     const { onButtonClick } = this;
     const { create } = this.state;
-    const { exps, funcs } = this.props;
+    const { edu, funcs } = this.props;
 
     const onSubmitPost = (e) => {
       e.preventDefault();
-      const {
- title, description, term, content 
-} = this.state;
-      const obj = {
-        title,
-        description,
-        term,
-        content,
-      };
+      const { organization, term, content } = this.state;
+      const obj = { organization, term, content };
       funcs.submit(obj);
     };
 
-    if (this.props.exps === undefined) {
-      return <div>Experience loading...</div>;
+    if (this.props.edu === undefined) {
+      return <div>loading...</div>;
     }
-
     return (
-      <Container className="UserExperience">
+      <Container className="UserEducation">
         <div className="ui grid centered">
-          <span className="column profilename two wide">Experience</span>
-
-          <div className="userExperience read ten wide column profilebox">
+          <span className="column profilename two wide">
+            <Header>Education</Header>
+          </span>
+          <div className="column UserEducation read ten wide profilebox">
             <div className="row">
-              <div
-                className="UserExperience create"
-                style={create ? null : { display: 'none' }}
-              >
-                <Form onSubmit={onSubmitPost}>
+              <div style={create ? null : { display: 'none' }}>
+                <Form onSubmit={onSubmitPost} className="create">
                   <Form.Field
-                    label="기업명"
+                    label="학교"
                     control={Input}
-                    onChange={e => this.onChange(e, 'title')}
+                    onChange={e => this.onChange(e, 'organization')}
                   />
                   <Form.Field
-                    label="기간"
+                    label="재학 기간"
                     control={Input}
                     onChange={e => this.onChange(e, 'term')}
                   />
                   <Form.Field
-                    label="역할"
-                    control={Input}
+                    label="간단 설명"
+                    control={TextArea}
+                    name="description"
                     onChange={e => this.onChange(e, 'description')}
                   />
-                  <Form.Field
-                    control={TextArea}
-                    label="간단 설명"
-                    onChange={e => this.onChange(e, 'content')}
+                  <Button
+                    compact
+                    content="취소"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onButtonClick();
+                    }}
                   />
-                  <Button compact content="취소" onClick={onButtonClick} />
                   <Button compact content="추가" />
                 </Form>
               </div>
             </div>
-            <div className="row">
-              {exps.map(exp => (
-                <ExperienceList exp={exp} />
-              ))}
-            </div>
+            {edu.map(eduProp => (
+              <div>
+                <EducationList key={eduProp.id} edu={eduProp} funcs={funcs} />
+              </div>
+            ))}
           </div>
           <span className="column two wide">
             <span className="ui mini basic icon buttons">
               <button
                 type="button"
                 className="ui button"
-                onClick={onButtonClick}
+                onClick={() => {
+                  onButtonClick();
+                }}
               >
                 <i className="plus icon" />
               </button>
@@ -113,5 +112,3 @@ class UserExperience extends Component {
     );
   }
 }
-
-export default UserExperience;

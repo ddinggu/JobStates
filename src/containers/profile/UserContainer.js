@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
-import UserBasicInfo from '../../components/UserBasicInfo';
-import UserEducation from '../../components/UserEducation';
-import UserProject from '../../components/UserProject';
-import UserExperience from '../../components/UserExperience';
+import UserBasicInfo from '../../components/profile/UserBasicInfo';
+import UserEducation from '../../components/profile/UserEducation';
+import UserProject from '../../components/profile/UserProject';
+import UserExperience from '../../components/profile/UserExperience';
 import {
   fetchUser,
   onSubmitPostUser,
@@ -16,8 +16,6 @@ import {
 import UserInterestTech from './UserInterestTech';
 import UserInterestField from './UserInterestField';
 import './UserContainer.css';
-
-// /* eslint-disable */
 
 class UserContainer extends Component {
   componentDidMount() {
@@ -98,7 +96,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   if (!(state.fetchedProfile.items === null)) {
     return {
       name: state.fetchedProfile.items.user.nick,
@@ -116,7 +114,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
@@ -134,5 +132,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(UserContainer);
-
-/* eslint-enable */

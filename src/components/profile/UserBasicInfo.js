@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
- Container, List, Grid, Input, Form, Button 
+  Container,
+  List,
+  Grid,
+  Input,
+  Form,
+  Button,
+  Header,
 } from 'semantic-ui-react';
 import './UserBasicInfo.css';
+import UserImagePortal from '../../containers/profile/UserImagePortal';
 
 export default class UserBasicInfo extends Component {
   constructor(props) {
     super(props);
-    console.log('ddd', props.funcs.update);
     this.state = {
       edit: false,
       name: props.basicinfo.name,
@@ -72,16 +78,16 @@ export default class UserBasicInfo extends Component {
                   width="100"
                 />
               </Grid.Row>
+              <UserImagePortal />
             </Grid.Column>
-            <Grid.Column textAlign="right" floated="right">
-              {' '}
-              <button>+</button>
-            </Grid.Column>
+            <Grid.Column textAlign="right" floated="right" />
           </Grid>
         </div>
 
         <div className="ui grid centered">
-          <span className="column profilename two wide">Basic Info.</span>
+          <span className="column profilename two wide">
+            <Header>Basic Info.</Header>
+          </span>
           {!edit ? (
             <div className="UserBasicInfo read ten wide column profilebox">
               <List>

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {
- Button, Container, Input, Form, TextArea 
+  Button,
+  Container,
+  Input,
+  Form,
+  TextArea,
+  Header,
 } from 'semantic-ui-react';
 import ProjectListItem from './ProjectListItem';
 // import { connect } from 'react-redux';
@@ -30,7 +35,6 @@ export default class UserProject extends Component {
     console.log(props);
 
     this.onSubmitPost = () => {
-      // console.log('ddd', props);
       props.funcs.submit(this.state);
       this.onButtonClick();
     };
@@ -44,11 +48,13 @@ export default class UserProject extends Component {
     return (
       <Container className="UserProject">
         <div className="ui grid centered">
-          <span className="column profilename two wide">Project</span>
+          <span className="column profilename two wide">
+            <Header>Project</Header>
+          </span>
           <div className="column UserProject read ten wide profilebox">
             {project.map(proj => (
               <div>
-                <ProjectListItem proj={proj} funcs={funcs} />
+                <ProjectListItem key={proj.id} proj={proj} funcs={funcs} />
               </div>
             ))}
             <div className="row" style={create ? null : { display: 'none' }}>

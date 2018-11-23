@@ -3,6 +3,7 @@ import UserContainer from 'containers/profile/UserContainer';
 import AnalysisContainer from 'containers/analysis/AnalysisContainer';
 import HeaderContainer from 'containers/header/HeaderContainer';
 import JobPostForm from 'containers/job/post/JobPostForm';
+import './App.css';
 
 class App extends Component {
   render() {

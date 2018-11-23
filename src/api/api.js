@@ -9,3 +9,7 @@ export const postUserJobPosting = data => axios.post(`${URL}/test`, data);
 export const postUserProfile = data => axios.post(`${URL}/test`, data);
 
 export const getUserProfile = () => axios.get(`${URL}/user`);
+
+export const deleteUserProfile = data => axios.delete(`${URL}/test`, data);
+
+export const postUserImage = data => axios.post(`${URL}/test`, data);
