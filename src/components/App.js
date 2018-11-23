@@ -26,7 +26,7 @@ class App extends Component {
                   <li>localhost:3000/joblist</li>
                   <li>localhost:3000/jobpost</li>
                   <li>localhost:3000/jobdetail</li>
-                  <li>localhost:3000/</li>
+                  <li>localhost:3000/analysis</li>
                 </ul>
               </div>
             )}
