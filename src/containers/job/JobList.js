@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchJob,
-  filterFetchData,
-  getDetailJob,
-} from 'actions/action_Job';
+import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment } from 'semantic-ui-react';
 
@@ -19,20 +15,19 @@ class JobList extends Component {
 
   componentDidMount() {
     const { fetchJob, job } = this.props;
-        fetchJob();
+    fetchJob();
   }
-
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
-    
+
     return (
       <Grid>
         <Grid.Column width={16}>
           <Segment
             key={jobData.hireId}
             id={jobData.hireId}
-            onClick={e => getDetailJob(e.target.id)}
+            onClick={e => getDetailJob(e.currentTarget.id)}
           >
             <span>
               <img src={jobData.logo} width="35px" height="50px" />

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import HeaderContainer from 'containers/header/HeaderContainer';
 import JobDetail from 'containers/job/JobDetail';
 import JobList from 'containers/job/JobList';
-// import JobPostForm from 'containers/job/post/JobPostForm';
+import JobPostForm from 'containers/job/post/JobPostForm';
 import JobDetailHeader from 'containers/job/JobDetailHeader';
 
 class App extends Component {
@@ -14,10 +14,10 @@ class App extends Component {
         <HeaderContainer />
         {/* <UserContainer /> */}
         {/* <AnalysisContainer /> */}
-        {/* <JobPostForm /> */}
-        <JobList />
-        <JobDetailHeader />
-        <JobDetail />
+        <JobPostForm />
+        {/* <JobList /> */}
+        {/* <JobDetailHeader /> */}
+        {/* <JobDetail /> */}
       </div>
     );
   }

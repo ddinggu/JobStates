@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getAnalysis from 'actions/action_analysis';
 import PropTypes from 'prop-types';
-import DonutChart from './DonutChart';
-import UserCurrent from './UserCurrent';
+import DonutChart from 'components/analysis/DonutChart';
+import UserCurrent from 'components/analysis/UserCurrent';
 
 class AnalysisContainer extends Component {
   componentDidMount() {
