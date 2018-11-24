@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
- Form, Grid, Image, List 
-} from 'semantic-ui-react';
+import { Form, Grid, Image, List } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import { fetchJob } from '../../actions/action_Job';
 
@@ -231,13 +229,13 @@ class JobDetail extends Component {
   }
 }
 
+JobDetail.propTypes = {
+  job: PropTypes.instanceOf(Object),
+};
+
 const mapStateToProps = state => ({
   job: state.job.currentData.data,
 });
-
-JobDetail.propType = {
-  job: PropTypes.instanceOf(Object),
-};
 
 export default connect(
   mapStateToProps,
