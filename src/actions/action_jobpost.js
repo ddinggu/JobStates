@@ -19,6 +19,8 @@ export default jobData => async (dispatch) => {
   dispatch(loadingPostJobData());
   try {
     const responsePostJobData = await api.postUserJobPosting(jobData);
+    console.log('post log!!', responsePostJobData);
+
     dispatch(successPostJobData(responsePostJobData));
   } catch (err) {
     console.error(err);
