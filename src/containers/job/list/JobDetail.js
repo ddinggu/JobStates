@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import {
  Form, Grid, Image, List 
 } from 'semantic-ui-react';
-import { Redirect } from 'react-router-dom';
 import { fetchJob } from 'actions/action_Job';
+import { Redirect } from 'react-router-dom';
 import JobDetailHeader from './JobDetailHeader';
 
 class JobDetail extends Component {

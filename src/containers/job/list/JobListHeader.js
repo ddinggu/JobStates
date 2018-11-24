@@ -60,11 +60,6 @@ export default class JobListHeader extends Component {
             onChange={this._onInputChange}
             style={{ width: '30rem' }}
           />
-          {/* <Form.Input
-            placeholder="회사명 검색"
-            value={this.state.inputValue}
-            onChange={this._onInputChange}
-          /> */}
           <Form.Button onClick={this._onClickSearch} type="submit">
             Search
           </Form.Button>
