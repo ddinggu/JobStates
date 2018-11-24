@@ -52,7 +52,8 @@ class UserExperience extends Component {
         term,
         content,
       };
-      funcs.submit(obj);
+      this.onButtonClick();
+      funcs.submit(obj, 'experience');
     };
 
     if (this.props.exps === undefined) {
@@ -100,7 +101,7 @@ class UserExperience extends Component {
             </div>
             <div className="row">
               {exps.map(exp => (
-                <ExperienceList key={exp.id} exp={exp} />
+                <ExperienceList key={exp.id} exp={exp} funcs={funcs} />
               ))}
             </div>
           </div>

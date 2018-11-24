@@ -9,9 +9,10 @@ export default class EducationList extends Component {
 
     this.state = {
       edit: false,
+      id: props.edu.id,
       organization: props.edu.organization,
       term: props.edu.term,
-      content: props.edu.term,
+      content: props.edu.content,
     };
 
     this.onButtonClick = () => {
@@ -31,8 +32,27 @@ export default class EducationList extends Component {
   render() {
     const { edu, funcs } = this.props;
     const {
- edit, organization, term, content 
+ edit, organization, term, content, id 
 } = this.state;
+
+    const onSubmitPatch = () => {
+      const obj = {
+        id,
+        organization,
+        term,
+        content,
+      };
+      funcs.update(obj, 'education');
+      this.onButtonClick();
+    };
+
+    const onDelete = () => {
+      const obj = {
+        id,
+      };
+      funcs.delete(obj, 'education');
+    };
+
     return (
       <Container>
         <div className="row">
@@ -57,7 +77,7 @@ export default class EducationList extends Component {
                       <button
                         type="button"
                         className="ui button"
-                        onClick={() => funcs.delete({ edu })}
+                        onClick={onDelete}
                       >
                         <i className="delete icon" />
                       </button>
@@ -71,7 +91,7 @@ export default class EducationList extends Component {
             </div>
             {edit ? (
               <div>
-                <Form onSubmit={funcs.onSubmitPost} className="edit">
+                <Form onSubmit={onSubmitPatch} className="edit">
                   <Form.Field
                     label="학교"
                     control={Input}
@@ -87,8 +107,8 @@ export default class EducationList extends Component {
                   <Form.Field
                     label="간단 설명"
                     control={TextArea}
-                    name="description"
-                    onChange={e => this.onChange(e, 'description')}
+                    name="content"
+                    onChange={e => this.onChange(e, 'content')}
                     value={content}
                   />
                   <Button
@@ -99,13 +119,7 @@ export default class EducationList extends Component {
                       this.onButtonClick();
                     }}
                   />
-                  <Button
-                    compact
-                    content="추가"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
-                  />
+                  <Button compact content="추가" />
                 </Form>
               </div>
             ) : null}

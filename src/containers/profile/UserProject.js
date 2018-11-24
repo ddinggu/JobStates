@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import {
   Button,
@@ -8,8 +7,6 @@ import {
   Form,
   TextArea,
 } from 'semantic-ui-react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
 
 class UserProject extends Component {
   constructor() {
@@ -18,7 +15,7 @@ class UserProject extends Component {
       create: false,
       title: '',
       term: '',
-      content: '',
+      description: '',
     };
 
     this.onButtonClick = () => {
@@ -35,45 +32,18 @@ class UserProject extends Component {
   }
 
   render() {
+    console.log(this.state);
     const { onButtonClick } = this;
     const { create } = this.state;
     const { project, funcs } = this.props;
 
-    const onSubmitPost = e => {
+    const onSubmitPost = (e) => {
       e.preventDefault();
-      const { title, term, content } = this.state;
-      const obj = { title, term, content };
-      // console.log(this.state);
-      funcs.submit(obj);
+      const { title, term, description } = this.state;
+      const obj = { title, term, description };
+      funcs.submit(obj, 'project');
+      this.onButtonClick();
     };
-
-    const GridTest = (projName, button, description) => (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column>1</Grid.Column>
-          <Grid.Column>projName</Grid.Column>
-          <Grid.Column>button</Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <span>description</span>
-        </Grid.Row>
-      </Grid>
-    );
-
-    const buttons = proj => (
-      <span className="ui mini basic icon buttons">
-        <button type="button" className="ui button">
-          <i className="edit icon" />
-        </button>
-        <button
-          type="button"
-          className="ui button"
-          onClick={() => funcs.delete(proj)}
-        >
-          <i className="delete icon" />
-        </button>
-      </span>
-    );
 
     return (
       <Container className="UserProject">
@@ -122,17 +92,17 @@ class UserProject extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>프로젝트 기간</label>
-                  <Input size="mini" onChange={e => this.onChange(e, 'term')} />
+                  <Input onChange={e => this.onChange(e, 'term')} />
                 </Form.Field>
                 <Form.Field
                   control={TextArea}
                   label="간단 설명"
-                  onChange={e => this.onChange(e, 'content')}
+                  onChange={e => this.onChange(e, 'description')}
                 />
                 <Button
                   compact
                   content="취소"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     onButtonClick();
                   }}
