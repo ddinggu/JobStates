@@ -8,15 +8,17 @@ import {
   Dropdown,
   Image,
   Checkbox,
+  Icon,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as jobUtils from 'utils/jobutils';
-import NewPortal from './NewPortal';
+import { getCrwalingJobData } from 'api/api';
 // import { ClipLoader } from 'react-spinners';
 import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
-import DropdownSearchQuery from './DropdownSearchQuery';
+import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
+import JobAutoComplete from './JobAutoComplete';
 
 class JobPostForm extends Component {
   state = {
@@ -43,8 +45,16 @@ class JobPostForm extends Component {
     strategy: '',
     hireType: '',
     provider: 'user',
-    showWindowPortal: false,
+    end: '',
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.props.filteredAutocompleteData.hireId !==
+      nextProps.filteredAutocompleteData.hireId
+    )
+      this.setState(nextProps.filteredAutocompleteData);
+  }
 
   onHandleChange = key => e =>
     this.setState({
@@ -53,12 +63,6 @@ class JobPostForm extends Component {
     });
 
   onDateChange = key => date => this.setState({ ...this.state, [key]: date });
-
-  toggleWindowPortal = () =>
-    this.setState(state => ({
-      ...this.state,
-      showWindowPortal: !state.showWindowPortal,
-    }));
 
   onHandleGetArray = key => data =>
     this.setState({
@@ -81,31 +85,24 @@ class JobPostForm extends Component {
   render() {
     const { postJobData, loading, error } = this.props;
     return (
-      <div style={{ marginTop: '5rem' }}>
+      <div>
         {/* {loading ? <ClipLoader size={150} /> : null} */}
         {/* 포탈 띄우기 */}
-        {this.state.showWindowPortal && <NewPortal />}
-
+        {/* {this.state.showWindowPortal && <NewPortal />} */}
         <Form>
           <div className="jobPostHeader" style={{ height: '4rem' }}>
             <Button
               floated="right"
-              color="green"
+              labelPosition="left"
               style={{ marginRight: '4rem' }}
               onClick={() => postJobData(this.state)}
             >
+              <Icon name="plus" />
               등록
             </Button>
-            <Button
-              floated="right"
-              color="blue"
-              style={{ marginRight: '1.5rem' }}
-              onClick={this.toggleWindowPortal}
-            >
-              자동완성
-            </Button>
+            <JobAutoComplete onAutoCompleteData={this.onAutoCompleteData} />
           </div>
-          <div style={{ border: '1px solid gray', marginBottom: '1rem' }} />
+          {/* <div style={{ border: '1px solid gray', marginBottom: '1rem' }} /> */}
           <Grid>
             <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '2rem' }}>
@@ -119,6 +116,7 @@ class JobPostForm extends Component {
                     inline
                     options={jobUtils.current}
                     onChange={this.onHandleChange('status')}
+                    value={this.state.status}
                   />
                 </span>
               </Grid.Column>
@@ -135,6 +133,7 @@ class JobPostForm extends Component {
                   label="회사명"
                   placeholder="회사명"
                   onChange={this.onHandleChange('brand')}
+                  value={this.state.brand}
                 />
                 <Form.Field
                   id="form-input-control-company-logo"
@@ -149,6 +148,7 @@ class JobPostForm extends Component {
                   label="회사 사이트"
                   placeholder="회사사이트"
                   onChange={this.onHandleChange('companyUrl')}
+                  value={this.state.companyUrl}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -175,6 +175,7 @@ class JobPostForm extends Component {
                   stateOptions={jobUtils.selectCategory}
                   title={'산업 분야'}
                   handleArrayChange={this.onHandleGetArray('category')}
+                  value={this.state.category}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -190,6 +191,7 @@ class JobPostForm extends Component {
                   control={Input}
                   placeholder="채용명"
                   onChange={this.onHandleChange('title')}
+                  value={this.state.title}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -205,6 +207,7 @@ class JobPostForm extends Component {
                   control={Input}
                   placeholder="공고 URL"
                   onChange={this.onHandleChange('hireUrl')}
+                  value={this.state.hireUrl}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -232,6 +235,7 @@ class JobPostForm extends Component {
                   stateOptions={jobUtils.selectTech}
                   title={'요구 기술 스택'}
                   handleArrayChange={this.onHandleGetArray('hireTech')}
+                  value={this.state.hireTech}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -245,6 +249,7 @@ class JobPostForm extends Component {
                 <TextArea
                   style={{ minHeight: 150 }}
                   onChange={this.onHandleChange('importantInfo')}
+                  value={this.state.importantInfo}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -258,6 +263,7 @@ class JobPostForm extends Component {
                 <TextArea
                   style={{ minHeight: 230 }}
                   onChange={this.onHandleChange('detailInfo')}
+                  value={this.state.detailInfo}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -282,6 +288,7 @@ class JobPostForm extends Component {
                 <Input
                   placeholder="연봉"
                   onChange={this.onHandleChange('salary')}
+                  value={this.state.salary}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -292,33 +299,11 @@ class JobPostForm extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <Checkbox
-                  radio
-                  label="인턴"
-                  name="checkboxRadioGroup"
-                  value="인턴"
-                  checked={this.state.hireType === '인턴'}
-                  style={{ marginRight: '1rem' }}
+                <Input
+                  placeholder="채용조건"
                   onChange={this.onHandleChange('hireType')}
-                />{' '}
-                <Checkbox
-                  radio
-                  label="신입"
-                  name="checkboxRadioGroup"
-                  value="신입"
-                  checked={this.state.hireType === '신입'}
-                  style={{ marginRight: '1rem' }}
-                  onChange={this.onHandleChange('hireType')}
-                />{' '}
-                <Checkbox
-                  radio
-                  label="경력"
-                  name="checkboxRadioGroup"
-                  value="경력"
-                  checked={this.state.hireType === '경력'}
-                  style={{ marginRight: '1rem' }}
-                  onChange={this.onHandleChange('hireType')}
-                />{' '}
+                  value={this.state.hireType}
+                />
               </Grid.Column>
             </Grid.Row>
 
@@ -330,7 +315,11 @@ class JobPostForm extends Component {
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <DatePicker
-                  selected={this.state.statusDate}
+                  selected={
+                    typeof this.state.statusDate === 'string'
+                      ? null
+                      : new Date()
+                  }
                   onChange={this.onDateChange('statusDate')}
                 />
               </Grid.Column>
@@ -343,7 +332,11 @@ class JobPostForm extends Component {
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <DatePicker
-                  selected={this.state.deadLine}
+                  selected={
+                    typeof this.state.statusDate === 'string'
+                      ? null
+                      : new Date()
+                  }
                   onChange={this.onDateChange('deadLine')}
                 />
               </Grid.Column>
@@ -356,8 +349,10 @@ class JobPostForm extends Component {
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <Input
+                  fluid
                   placeholder="지역"
                   onChange={this.onHandleChange('address')}
+                  value={this.state.address}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -371,6 +366,7 @@ class JobPostForm extends Component {
                 <TextArea
                   style={{ minHeight: 100 }}
                   onChange={this.onHandleChange('advantage')}
+                  value={this.state.advantage}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -384,6 +380,7 @@ class JobPostForm extends Component {
                 <TextArea
                   style={{ minHeight: 100 }}
                   onChange={this.onHandleChange('disadvantage')}
+                  value={this.state.disadvantage}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -397,6 +394,7 @@ class JobPostForm extends Component {
                 <TextArea
                   style={{ minHeight: 100 }}
                   onChange={this.onHandleChange('strategy')}
+                  value={this.state.strategy}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -412,8 +410,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  loading: state.loading,
-  error: state.error,
+  loading: state.job.loading,
+  error: state.job.error,
+  filteredAutocompleteData: state.job.filteredAutocompleteData,
 });
 
 export default connect(

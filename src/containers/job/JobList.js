@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchJob,
-  filterFetchData,
-  getDetailJob,
-} from 'actions/action_Job';
+import { Redirect } from 'react-router-dom';
+import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment } from 'semantic-ui-react';
 
@@ -14,25 +11,29 @@ class JobList extends Component {
 
     this.state = {
       filterFlag: false,
+      redirect: false,
     };
   }
 
   componentDidMount() {
-    const { fetchJob, job } = this.props;
-        fetchJob();
+    const { fetchJob } = this.props;
+    fetchJob();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isMoveToDetail) this.setState({ redirect: true });
+  }
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
-    
+
     return (
       <Grid>
         <Grid.Column width={16}>
           <Segment
             key={jobData.hireId}
             id={jobData.hireId}
-            onClick={e => getDetailJob(e.target.id)}
+            onClick={e => getDetailJob(e.currentTarget.id)}
           >
             <span>
               <img src={jobData.logo} width="35px" height="50px" />
@@ -47,8 +48,6 @@ class JobList extends Component {
   };
 
   _filterSearch = (value, inputValue) => {
-    // console.log('value;;;; ', value);
-    // const { filter } = this.props;
     this.props.filterFetchData(value, inputValue);
     if (value === '전체' && !!inputValue) {
       this.setState({ filterFlag: true });
@@ -60,7 +59,11 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, getDetailJob, filter } = this.props;
+    if (this.state.redirect) {
+      return <Redirect to="/jobdetail" />;
+    }
+
+    const { job, filter } = this.props;
     if (job.length === 0) {
       return <div>loading...</div>;
     }
@@ -87,6 +90,7 @@ const mapStateToProps = state => {
   return {
     job: state.job.allJobData,
     filter: state.job.filterData,
+    isMoveToDetail: state.job.currentData.isMoveToDetail,
   };
 };
 

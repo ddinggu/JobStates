@@ -12,7 +12,7 @@ const header = {
 
 export const getUserAnalysisData = () => axios.get(`${URL}/analysis`);
 
-export const postUserJobPosting = data => axios.post(`${URL}/test`, data);
+export const getAutoCompleteData = company => axios.get(`${URL}/job?brand=${company}`);
 
 export const getUserProfile = () => axios.get(`${URL}/user/profile`, header);
 export const postUserProfile = (data, part) => axios.post(`${URL}/user/${part}`, data, header);
@@ -21,4 +21,11 @@ export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${par
 
 // export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${part}/${data.id}`, header);
 
-export const postUserImage = data => axios.post(`${URL}/user`, data);
+
+export const postUserImage = data => axios.post(`${URL}/test`, data);
+
+export const fetchJob = () => axios.get(`${URL}/job`);
+
+export const postUserJobPosting = data => axios.post(`${URL}/test`, data);
+export const deletePostingJob = id => axios.delete(`${URL}/test`, id);
+
