@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
- Form, Grid, Image, List 
+ Form, Grid, Image, List,
 } from 'semantic-ui-react';
 import { fetchJob } from 'actions/action_Job';
 
@@ -16,7 +16,7 @@ class JobDetail extends Component {
   // }
 
   render() {
-    console.log('rerendering!!');
+   // console.log('rerendering!!');
 
     const { job } = this.props;
     if (!Array.isArray(job)) {
