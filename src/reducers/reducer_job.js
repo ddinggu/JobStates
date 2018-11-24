@@ -119,6 +119,12 @@ export default function (state = initialState, action) {
         error: true,
       };
 
+    case types.CHANGE_STATE_DETAILPAGE:
+      return {
+        ...state,
+        currentData: { ...state.currentData, isMoveToDetail: false },
+      };
+
     default:
       return state;
   }

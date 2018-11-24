@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
+import { Redirect } from 'react-router-dom';
+import {
+  fetchJob,
+  filterFetchData,
+  getDetailJob,
+  changeStateDetail,
+} from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
-import { Grid, Segment, Table } from 'semantic-ui-react';
-import './JobList.css';
+import { Grid, Segment } from 'semantic-ui-react';
 
 class JobList extends Component {
   constructor(props) {
@@ -11,6 +16,7 @@ class JobList extends Component {
 
     this.state = {
       filterFlag: false,
+      redirect: false,
     };
   }
 
@@ -19,46 +25,36 @@ class JobList extends Component {
     fetchJob();
   }
 
-  getDetailJob = () => {
-    this.history.push("/jobdetail");
-  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isMoveToDetail) this.setState({ redirect: true });
+  }
+
+  async componentWillUnmount() {
+    const { changeStateDetail } = this.props;
+
+    await changeStateDetail();
+  }
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
-  
-    return (
-      // <Grid>
-      //   <Grid.Column width={16}>
-      //     <Segment
-      //       className="job-list specific"
-      //       key={jobData.hireId}
-      //       id={jobData.hireId}
-      //       onClick={e => getDetailJob(e.currentTarget.id)}
-      //     >
-      //       <span>
-      //         <img src={jobData.logo} width="35px" height="50px" />
-      //       </span>
-      //       <span className="job-list brand"> / {jobData.brand}</span>
-      //       <span> / {jobData.title}</span>
-      //       <span> / {jobData.status}</span>
-      //     </Segment>
-      //   </Grid.Column>
-      // </Grid>
 
-      <Table>
-        <Table.Body>
-          <Table.Row  className="job-list specific"
-             key={jobData.hireId}
-             id={jobData.hireId}
-             onClick={e => {getDetailJob(e.currentTarget.id)}}
-             style={{cursor: 'pointer'}}>
-            <Table.Cell width={3}><img src={jobData.logo} width="35px" height="50px" /></Table.Cell>
-            <Table.Cell width={4}>{jobData.brand}</Table.Cell>
-            <Table.Cell width={4}>{jobData.title}</Table.Cell>
-            <Table.Cell width={4} >{jobData.status}</Table.Cell>
-          </Table.Row> 
-        </Table.Body>
-      </Table>
+    return (
+      <Grid>
+        <Grid.Column width={16}>
+          <Segment
+            key={jobData.hireId}
+            id={jobData.hireId}
+            onClick={e => getDetailJob(e.currentTarget.id)}
+          >
+            <span>
+              <img src={jobData.logo} width="35px" height="50px" />
+            </span>
+            <span> / {jobData.brand}</span>
+            <span> / {jobData.title}</span>
+            <span> / {jobData.status}</span>
+          </Segment>
+        </Grid.Column>
+      </Grid>
     );
   };
 
@@ -74,7 +70,11 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, getDetailJob, filter } = this.props;
+    if (this.state.redirect) {
+      return <Redirect to="/jobdetail" />;
+    }
+
+    const { job, filter } = this.props;
     if (job.length === 0) {
       return <div>loading...</div>;
     }
@@ -85,16 +85,6 @@ class JobList extends Component {
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-            <Table>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell width={4}>Company</Table.HeaderCell>
-                  <Table.HeaderCell width={4}>회사명</Table.HeaderCell>
-                  <Table.HeaderCell width={4}>직무</Table.HeaderCell>
-                  <Table.HeaderCell width={4}>지원상태</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-            </Table>
             <Segment>
               {this.state.filterFlag
                 ? filter.map(this._mapList)
@@ -111,10 +101,11 @@ const mapStateToProps = state => {
   return {
     job: state.job.allJobData,
     filter: state.job.filterData,
+    isMoveToDetail: state.job.currentData.isMoveToDetail,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchJob, getDetailJob, filterFetchData },
+  { fetchJob, getDetailJob, filterFetchData, changeStateDetail },
 )(JobList);
