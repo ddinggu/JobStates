@@ -11,8 +11,7 @@ const initialState = {
   filteredAutocompleteData: {},
 };
 
-export default function(state = initialState, action) {
-  // console.log('job action::: ', action);
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_JOB:
       return {
@@ -24,7 +23,7 @@ export default function(state = initialState, action) {
     case SEARCH_FILTER:
       return {
         ...state,
-        filterData: state.allJobData.filter(data => {
+        filterData: state.allJobData.filter((data) => {
           if (!action.payload2) {
             return data.status === action.payload;
           }
@@ -33,8 +32,8 @@ export default function(state = initialState, action) {
           }
           if (!!action.payload && !!action.payload2) {
             return (
-              data.status === action.payload &&
-              data.brand.indexOf(action.payload2) !== -1
+              data.status === action.payload
+              && data.brand.indexOf(action.payload2) !== -1
             );
           }
         }),
@@ -57,7 +56,7 @@ export default function(state = initialState, action) {
     case types.POST_JOB_SUCCESS:
       return {
         ...state,
-        loading: !state.loading,
+        loading: false,
         // api 완성되면 수정될 것!!
         currentData: action.payload.data,
       };
@@ -65,6 +64,7 @@ export default function(state = initialState, action) {
     case types.POST_JOB_FAILURE:
       return {
         ...state,
+        loading: false,
         error: true,
       };
 
@@ -83,6 +83,7 @@ export default function(state = initialState, action) {
     case types.GET_AUTOCOMPLETEJOB_FAILURE:
       return {
         ...state,
+        loading: false,
         error: true,
       };
 

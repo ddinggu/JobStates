@@ -34,9 +34,8 @@ const successDeleteJobData = () => ({
   type: types.DELETE_JOB_SUCCESS,
 });
 
-const failedDeleteJobData = error => ({
+const failedDeleteJobData = () => ({
   type: types.DELETE_JOB_FAILURE,
-  error,
 });
 
 export const deleteJobData = hireId => async (dispatch) => {
@@ -44,10 +43,14 @@ export const deleteJobData = hireId => async (dispatch) => {
 
   try {
     // 추후 수정 필요!!
-    await api.deletePostingJob(hireId);
-    dispatch(successDeleteJobData());
+    const response = await api.deletePostingJob(hireId);
+    if (response.status === 500) {
+      dispatch(failedDeleteJobData());
+    } else {
+      dispatch(successDeleteJobData());
+    }
   } catch (err) {
     console.error(err);
-    dispatch(failedDeleteJobData(err));
+    dispatch(failedDeleteJobData());
   }
 };

@@ -10,9 +10,8 @@ const successAutoComplete = crawlingData => ({
   crawlingData,
 });
 
-const failedAutoComplete = err => ({
+const failedAutoComplete = () => ({
   type: types.GET_AUTOCOMPLETEJOB_FAILURE,
-  err,
 });
 
 const filteringAutoCompleteData = hireId => ({
@@ -37,6 +36,6 @@ export const setAutoCompleteData = company => async (dispatch) => {
     dispatch(successAutoComplete(responseAutoCompleteData.data));
   } catch (err) {
     console.error(err);
-    dispatch(failedAutoComplete(err));
+    dispatch(failedAutoComplete());
   }
 };

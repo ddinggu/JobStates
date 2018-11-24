@@ -7,18 +7,13 @@ import { Redirect } from 'react-router-dom';
 class JobDetailHeader extends Component {
   state = { open: false };
 
-  onModifyClick = () => {};
-
-  onDeleteClick = () => {};
-
-  show = () => this.setState({ open: true });
-  close = () => this.setState({ open: false });
+  toggle = () => this.setState({ open: !this.state.open });
 
   render() {
     const { open } = this.state;
     const { hireId, deleteJobData, loading, error } = this.props;
 
-    if (!hireId) return <Redirect to="/list" />;
+    if (!hireId) return <Redirect to="/joblist" />;
 
     return (
       <div style={{ float: 'right' }}>
@@ -30,19 +25,19 @@ class JobDetailHeader extends Component {
           icon
           labelPosition="left"
           style={{ marginRight: '4rem' }}
-          onClick={this.show}
+          onClick={this.toggle}
         >
           <Icon name="eraser" />
           삭제
         </Button>
 
-        <Modal size={'mini'} open={open} onClose={this.close}>
+        <Modal size={'mini'} open={open} onClose={this.toggle}>
           <Modal.Header>삭제</Modal.Header>
           <Modal.Content>
             <p>정말 삭제하시겠습니까?</p>
           </Modal.Content>
           <Modal.Actions>
-            <Button negative onClick={this.close}>
+            <Button negative onClick={this.toggle}>
               취소
             </Button>
             <Button
