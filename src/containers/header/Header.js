@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './Header.css';
 
@@ -18,9 +19,15 @@ class Header extends Component {
         <span className="nav-logo">JOB | STATES</span>
         {/* <a className="logo" /> 나중에 <a href> 태그로 수정하자 (+) nav-link도 각각의 도메인으로 연결 */}
         <nav role="navigation" className="nav-menu">
-          <span className="main-nav-link content-mypage">마이페이지</span>
-          <span className="main-nav-link content-joblist">정리페이지</span>
-          <span className="main-nav-link content-analysis">분석</span>
+          <Link to="/user">
+            <span className="main-nav-link content-mypage">마이페이지</span>
+          </Link>
+          <Link to="/joblist">
+            <span className="main-nav-link content-joblist">정리페이지</span>
+          </Link>
+          <Link to="/analysis">
+            <span className="main-nav-link content-analysis">분석</span>
+          </Link>
           <span className="main-nav-link content-login">로그아웃</span>
         </nav>
         <span className="nav-profile">
