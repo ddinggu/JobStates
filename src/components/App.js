@@ -7,7 +7,8 @@ import HeaderContainer from 'containers/header/HeaderContainer';
 import JobDetail from 'containers/job/list/JobDetail';
 import JobList from 'containers/job/list/JobList';
 import JobPostForm from 'containers/job/post/JobPostForm';
-import JobDetailHeader from 'containers/job/list/JobDetailHeader';
+// import JobDetailHeader from 'containers/job/JobDetailHeader';
+import Login from 'containers/login';
 
 class App extends Component {
   render() {
@@ -15,22 +16,7 @@ class App extends Component {
       <BrowserRouter id="test">
         <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
           <HeaderContainer />
-          <Route
-            path="/"
-            exact
-            component={() => (
-              <div>
-                <h1>url lists</h1>
-                <ul>
-                  <li>localhost:3000/user</li>
-                  <li>localhost:3000/joblist</li>
-                  <li>localhost:3000/jobpost</li>
-                  <li>localhost:3000/jobdetail</li>
-                  <li>localhost:3000/analysis</li>
-                </ul>
-              </div>
-            )}
-          />
+          <Route path="/" exact component={Login} />
           <Route path="/user" component={UserContainer} />
           <Route path="/joblist" component={JobList} />
           <Route path="/jobpost" component={JobPostForm} />
