@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { deleteJobData } from 'actions/action_Job';
+import { Redirect } from 'react-router-dom';
 
 class JobDetailHeader extends Component {
   state = { open: false };
@@ -13,6 +16,9 @@ class JobDetailHeader extends Component {
 
   render() {
     const { open } = this.state;
+    const { hireId, deleteJobData, loading, error } = this.props;
+
+    if (!hireId) return <Redirect to="/list" />;
 
     return (
       <div style={{ float: 'right' }}>
@@ -41,10 +47,11 @@ class JobDetailHeader extends Component {
             </Button>
             <Button
               positive
-              icon="checkmark"
+              icon={loading ? null : 'checkmark'}
               labelPosition="right"
               content="삭제"
-              onClick={this.close}
+              onClick={() => deleteJobData(hireId)}
+              loading={loading}
             />
           </Modal.Actions>
         </Modal>
@@ -53,4 +60,13 @@ class JobDetailHeader extends Component {
   }
 }
 
-export default JobDetailHeader;
+const mapStateToProps = state => ({
+  hireId: state.job.currentData.data.hireId,
+  loading: state.job.loading,
+  error: state.job.error,
+});
+
+export default connect(
+  mapStateToProps,
+  { deleteJobData },
+)(JobDetailHeader);

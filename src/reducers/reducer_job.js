@@ -100,6 +100,26 @@ export default function(state = initialState, action) {
         autocompleteData: [],
       };
 
+    case types.DELETE_JOB_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.DELETE_JOB_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentData: { isMoveToDetail: false, data: {} },
+      };
+
+    case types.DELETE_JOB_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+
     default:
       return state;
   }

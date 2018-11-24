@@ -30,9 +30,8 @@ const loadingDeleteJobData = () => ({
   type: types.DELETE_JOB_BEGIN,
 });
 
-const successDeleteJobData = hireId => ({
+const successDeleteJobData = () => ({
   type: types.DELETE_JOB_SUCCESS,
-  hireId,
 });
 
 const failedDeleteJobData = error => ({
@@ -44,8 +43,9 @@ export const deleteJobData = hireId => async (dispatch) => {
   dispatch(loadingDeleteJobData());
 
   try {
-    const response = await api.deletePostingJob(hireId);
-    dispatch(successDeleteJobData(response.data));
+    // 추후 수정 필요!!
+    await api.deletePostingJob(hireId);
+    dispatch(successDeleteJobData());
   } catch (err) {
     console.error(err);
     dispatch(failedDeleteJobData(err));
