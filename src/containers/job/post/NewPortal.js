@@ -38,12 +38,8 @@ class NewPortal extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.externalWindow = window.open(
-      '',
-      '',
-      'width=600,height=600,left=200,top=200',
-    );
-    this.externalWindow.document.body.appendChild(this.containerEl);
+    this.externalWindow = document.getElementById('app');
+    this.externalWindow.appendChild(this.containerEl);
   }
 
   componentWillUnmount() {
