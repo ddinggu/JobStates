@@ -18,7 +18,6 @@ class AddUserImagePortal extends Component {
       open: false,
     };
 
-    console.log('hoho', props);
     this.handleClick = () => {
       this.setState({ open: !this.state.open });
     };

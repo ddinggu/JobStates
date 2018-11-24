@@ -43,7 +43,6 @@ class UserProject extends Component {
       e.preventDefault();
       const { title, term, content } = this.state;
       const obj = { title, term, content };
-      // console.log(this.state);
       funcs.submit(obj);
     };
 
