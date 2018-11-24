@@ -6,7 +6,7 @@ const initialState = {
   error: false,
   allJobData: [],
   filterData: [],
-  currentData: {},
+  currentData: { isMoveToDetail: false, data: {} },
   autocompleteData: [],
   filteredAutocompleteData: {},
 };
@@ -43,9 +43,12 @@ export default function(state = initialState, action) {
     case types.GET_DETAIL_JOB:
       return {
         ...state,
-        currentData: state.allJobData.filter(
-          job => `${job.hireId}` === action.id,
-        ),
+        currentData: {
+          isMoveToDetail: true,
+          data: state.allJobData.filter(
+            job => `${job.hireId}` === action.id,
+          )[0],
+        },
       };
 
     case types.POST_JOB_BEGIN:

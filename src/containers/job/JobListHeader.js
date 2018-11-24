@@ -51,10 +51,6 @@ export default class JobListHeader extends Component {
           <Form.Button onClick={this._onClickSearch} type="submit">
             Search
           </Form.Button>
-          <Button.Group>
-            <Form.Button primary>수정</Form.Button>
-            <Form.Button secondary>삭제</Form.Button>
-          </Button.Group>
         </Form.Input>
       </Form>
     );
