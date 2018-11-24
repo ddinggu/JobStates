@@ -4,10 +4,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import UserContainer from 'containers/profile/UserContainer';
 import AnalysisContainer from 'containers/analysis/AnalysisContainer';
 import HeaderContainer from 'containers/header/HeaderContainer';
-import JobDetail from 'containers/job/JobDetail';
-import JobList from 'containers/job/JobList';
+import JobDetail from 'containers/job/list/JobDetail';
+import JobList from 'containers/job/list/JobList';
 import JobPostForm from 'containers/job/post/JobPostForm';
-import JobDetailHeader from 'containers/job/JobDetailHeader';
+import JobDetailHeader from 'containers/job/list/JobDetailHeader';
 
 class App extends Component {
   render() {

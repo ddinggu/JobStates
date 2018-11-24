@@ -92,3 +92,12 @@ export const filterToJobArray = (stateArr, target) => {
   copiedArr.push(target);
   return copiedArr;
 };
+
+export const options = [
+  { text: '전체', value: '전체' },
+  { text: '합격', value: '합격' },
+  { text: '불합격', value: '불합격' },
+  { text: ' 서류대기', value: '서류대기' },
+  { text: '면접대기', value: '면접대기' },
+  { text: '지원하지 않음', value: '지원하지 않음' },
+];

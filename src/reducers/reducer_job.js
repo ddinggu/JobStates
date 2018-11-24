@@ -1,5 +1,4 @@
 import * as types from 'actions/actionTypes';
-import { FETCH_JOB, SEARCH_FILTER } from '../actions/action_Job';
 
 const initialState = {
   loading: false,
@@ -13,14 +12,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case FETCH_JOB:
+    case types.FETCH_JOB:
       return {
         ...state,
         allJobData: action.payload,
         filterData: action.payload,
       };
-
-    case SEARCH_FILTER:
+    case types.SEARCH_FILTER:
       return {
         ...state,
         filterData: state.allJobData.filter((data) => {

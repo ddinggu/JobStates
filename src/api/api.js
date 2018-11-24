@@ -14,5 +14,7 @@ export const deleteUserProfile = data => axios.delete(`${URL}/test`, data);
 
 export const postUserImage = data => axios.post(`${URL}/test`, data);
 
+export const fetchJob = () => axios.get(`${URL}/job`);
+
 export const postUserJobPosting = data => axios.post(`${URL}/test`, data);
 export const deletePostingJob = id => axios.delete(`${URL}/test`, id);
