@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <BrowserRouter id="test">
         <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
-          {/* <HeaderContainer /> */}
+          <HeaderContainer />
           <Route
             path="/"
             exact
