@@ -52,3 +52,7 @@ export const deleteJobData = hireId => async (dispatch) => {
     dispatch(failedDeleteJobData());
   }
 };
+
+export const changeStateDetail = () => ({
+  type: types.CHANGE_STATE_DETAILPAGE,
+});
