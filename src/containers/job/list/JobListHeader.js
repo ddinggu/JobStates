@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Select, Input, Form } from 'semantic-ui-react';
+<<<<<<< HEAD:src/containers/job/list/JobListHeader.js
 import * as util from 'utils/jobutils';
+=======
+import { current } from 'utils/jobutils';
+
+const options = [{ text: '전체', value: '전체' }, ...current];
+>>>>>>> 10758eb442f583a7b0a99582bd6c07013a980ec2:src/containers/job/JobListHeader.js
 
 export default class JobListHeader extends Component {
   constructor(props) {
@@ -53,6 +59,14 @@ export default class JobListHeader extends Component {
             onChange={this._onInputChange}
             style={{width: '30rem'}}
           />
+<<<<<<< HEAD:src/containers/job/list/JobListHeader.js
+=======
+          <Form.Input
+            placeholder="회사명 검색"
+            value={this.state.inputValue}
+            onChange={this._onInputChange}
+          />
+>>>>>>> 10758eb442f583a7b0a99582bd6c07013a980ec2:src/containers/job/JobListHeader.js
           <Form.Button onClick={this._onClickSearch} type="submit">
             Search
           </Form.Button>

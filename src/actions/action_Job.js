@@ -1,8 +1,6 @@
 import * as types from 'actions/actionTypes';
 import * as api from 'api/api';
 
-// const URL_JOB = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/job';
-
 export const fetchJob = () => async (dispatch) => {
   try {
     const response = await api.fetchJob();
@@ -24,4 +22,33 @@ export const filterFetchData = (
 
 export const getDetailJob = id => (dispatch) => {
   dispatch({ type: types.GET_DETAIL_JOB, id });
+};
+
+const loadingDeleteJobData = () => ({
+  type: types.DELETE_JOB_BEGIN,
+});
+
+const successDeleteJobData = () => ({
+  type: types.DELETE_JOB_SUCCESS,
+});
+
+const failedDeleteJobData = () => ({
+  type: types.DELETE_JOB_FAILURE,
+});
+
+export const deleteJobData = hireId => async (dispatch) => {
+  dispatch(loadingDeleteJobData());
+
+  try {
+    // 추후 수정 필요!!
+    const response = await api.deletePostingJob(hireId);
+    if (response.status === 500) {
+      dispatch(failedDeleteJobData());
+    } else {
+      dispatch(successDeleteJobData());
+    }
+  } catch (err) {
+    console.error(err);
+    dispatch(failedDeleteJobData());
+  }
 };

@@ -34,7 +34,7 @@ class App extends Component {
           <Route path="/user" component={UserContainer} />
           <Route path="/joblist" component={JobList} />
           <Route path="/jobpost" component={JobPostForm} />
-          <Route path="/jobdetail" component={JobDetailHeader} />
+          {/* <Route path="/jobdetail" component={JobDetailHeader} /> */}
           <Route path="/jobdetail" component={JobDetail} />
           <Route path="/analysis" component={AnalysisContainer} />
         </div>
