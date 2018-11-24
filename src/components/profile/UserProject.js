@@ -8,8 +8,6 @@ import {
   Header,
 } from 'semantic-ui-react';
 import ProjectListItem from './ProjectListItem';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
 
 export default class UserProject extends Component {
   constructor(props) {
@@ -18,7 +16,7 @@ export default class UserProject extends Component {
       create: false,
       title: '',
       term: '',
-      content: '',
+      description: '',
     };
 
     this.onButtonClick = () => {
@@ -32,10 +30,8 @@ export default class UserProject extends Component {
         [attr]: e.target.value,
       });
     };
-    console.log(props);
-
     this.onSubmitPost = () => {
-      props.funcs.submit(this.state);
+      props.funcs.submit(this.state, 'project');
       this.onButtonClick();
     };
   }
@@ -74,7 +70,7 @@ export default class UserProject extends Component {
                 <Form.Field
                   control={TextArea}
                   label="간단 설명"
-                  onChange={e => this.onChange(e, 'content')}
+                  onChange={e => this.onChange(e, 'description')}
                 />
                 <Button
                   compact

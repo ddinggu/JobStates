@@ -13,6 +13,7 @@ export default class ProjectListItem extends Component {
     super(props);
     this.state = {
       edit: false,
+      id: props.proj.id,
       title: props.proj.title,
       description: props.proj.description,
       term: props.proj.term,
@@ -33,8 +34,17 @@ export default class ProjectListItem extends Component {
     };
 
     this.onSubmitUpdate = () => {
+      const {
+ id, title, description, term, update 
+} = this.state;
+      const obj = {
+        id,
+        title,
+        description,
+        term,
+      };
       this.onButtonClick();
-      this.state.update(this.state);
+      update(obj, 'project');
     };
   }
 
@@ -90,7 +100,7 @@ export default class ProjectListItem extends Component {
                     <Button
                       type="submit"
                       compact
-                      content="추가"
+                      content="변경"
                       onClick={this.onSubmitUpdate}
                     />
                   </Form>

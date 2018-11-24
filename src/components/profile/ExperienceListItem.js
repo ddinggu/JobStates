@@ -8,6 +8,7 @@ export default class Experience extends Component {
     super(props);
     this.state = {
       edit: false,
+      id: props.exp.id,
       title: props.exp.title,
       term: props.exp.term,
       content: props.exp.content,
@@ -30,8 +31,25 @@ export default class Experience extends Component {
 
   render() {
     const {
- edit, title, term, content, description 
+ id, edit, title, term, content, description 
 } = this.state;
+
+    const { funcs } = this.props;
+
+    const onSubmitPatch = (e) => {
+      e.preventDefault();
+
+      const obj = {
+        id,
+        term,
+        title,
+        content,
+        description,
+      };
+      console.log('here funcs', funcs);
+      funcs.update(obj, 'experience');
+      this.onButtonClick();
+    };
 
     return (
       <Container>
@@ -75,7 +93,7 @@ export default class Experience extends Component {
           <br />
           {edit ? (
             <div>
-              <Form className="edit">
+              <Form className="edit" onSubmit={onSubmitPatch}>
                 <Form.Field
                   label="학교"
                   control={Input}
@@ -103,13 +121,7 @@ export default class Experience extends Component {
                     this.onButtonClick();
                   }}
                 />
-                <Button
-                  compact
-                  content="추가"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                />
+                <Button compact content="추가" />
               </Form>
             </div>
           ) : null}
