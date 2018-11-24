@@ -10,14 +10,18 @@ import UserExperience from '../../components/profile/UserExperience';
 import {
   fetchUser,
   onSubmitPostUser,
-  deleteUserProfile,
   onSubmitPatchUser,
+  deleteUserProfile,
 } from '../../actions/action_userprofile';
 import UserInterestTech from './UserInterestTech';
 import UserInterestField from './UserInterestField';
 import './UserContainer.css';
 
 class UserContainer extends Component {
+  constructor() {
+    super();
+  }
+
   componentDidMount() {
     const { fetch } = this.props;
     fetch();
@@ -31,6 +35,7 @@ class UserContainer extends Component {
         </div>
       );
     }
+
     const basicinfo = {
       name: this.props.name,
       email: this.props.email,
@@ -38,12 +43,9 @@ class UserContainer extends Component {
       snsBlog: this.props.snsBlog,
       snsGithub: this.props.snsGithub,
       picture: this.props.picture,
-      updateField: this.props.updateField,
-      submit: this.props.submit,
     };
 
     const funcs = {
-      updateField: this.props.updateField,
       submit: this.props.submit,
       delete: this.props.delete,
       update: this.props.update,
@@ -70,7 +72,6 @@ class UserContainer extends Component {
 // ////////////////////////////////////////////////////////////////////////
 
 UserContainer.propTypes = {
-  // profile: PropTypes.
   name: PropTypes.string,
   phoneNum: PropTypes.string,
   email: PropTypes.string,
@@ -119,16 +120,16 @@ const mapDispatchToProps = (dispatch) => {
     {
       fetch: fetchUser,
       submit: onSubmitPostUser,
-      delete: deleteUserProfile,
       update: onSubmitPatchUser,
+      delete: deleteUserProfile,
     },
     dispatch,
   );
   const allActionProps = { ...boundActionCreators, dispatch };
   return allActionProps;
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(UserContainer);
-/* eslint-enable */

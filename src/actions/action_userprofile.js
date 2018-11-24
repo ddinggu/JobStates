@@ -25,41 +25,42 @@ export const fetchUser = () => async (dispatch) => {
 
   try {
     const responseGetUserProfile = await api.getUserProfile();
+    console.log('herere', responseGetUserProfile);
     dispatch(fetchUserProfileSuccess(responseGetUserProfile.data));
   } catch (err) {
     dispatch(fetchUserProfileFailure(err));
   }
 };
 
-export const onSubmitPostUser = data => async (dispatch) => {
+export const onSubmitPostUser = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
   try {
-    const responsePostUserData = await api.postUserProfile(data);
+    const responsePostUserData = await api.postUserProfile(data, part);
     dispatch(fetchUserProfileSuccess(responsePostUserData.data));
   } catch (err) {
-    console.log('action_userprofile: onSubmitPostUser error', err);
+    console.log('action_userprofile: onSubmitPostUserEdu error', err);
     dispatch(fetchUserProfileFailure(err));
   }
 };
 
-// export const deleteUserProfile = (payload) => {
-//   const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com/test';
-//   return dispatch => axios.delete(url, payload).then(() => dispatch(fetchUser()));
-// };
-
-export const deleteUserProfile = payload => async (dispatch) => {
+export const onSubmitPatchUser = (data, part) => async (dispatch) => {
+  dispatch(fetchUserProfileBegin());
   try {
-    dispatch(api.deleteUserProfile(payload).then(() => fetchUser()));
+    console.log('patching data', data);
+    const responsePostUserData = await api.updateUserProfile(data, part);
+    dispatch(fetchUserProfileSuccess(responsePostUserData.data));
   } catch (err) {
-    console.log(err);
+    dispatch(fetchUserProfileFailure(err));
   }
 };
 
-export const onSubmitPatchUser = data => async (dispatch) => {
+export const deleteUserProfile = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
   try {
-    const responsePostUserData = await api.postUserProfile(data);
-    dispatch(fetchUserProfileSuccess(responsePostUserData.data));
+    console.log('deleting data', data, part);
+    const deletedRes = await api.deleteUserProfile(data, part);
+    console.log('deleted', deletedRes.data);
+    dispatch(fetchUserProfileSuccess(deletedRes.data));
   } catch (err) {
     dispatch(fetchUserProfileFailure(err));
   }
@@ -68,8 +69,6 @@ export const onSubmitPatchUser = data => async (dispatch) => {
 export const uploadUserImage = data => async (dispatch) => {
   try {
     const imgUrlResponse = await api.postUserImage(data);
-    console.log('img data', data);
-    console.log('img response', imgUrlResponse);
 
     dispatch(uploadUserImageSuccess(imgUrlResponse));
   } catch (err) {

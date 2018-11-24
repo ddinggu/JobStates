@@ -17,14 +17,14 @@ export default class UserBasicInfo extends Component {
     super(props);
     this.state = {
       edit: false,
+      submit: props.funcs.submit,
+      delete: props.funcs.delete,
       name: props.basicinfo.name,
       phoneNum: props.basicinfo.phoneNum,
       email: props.basicinfo.email,
       snsBlog: props.basicinfo.snsBlog,
       snsGithub: props.basicinfo.snsGithub,
       picture: props.basicinfo.picture,
-      update: props.funcs.update,
-      delete: props.funcs.delete,
     };
 
     this.onButtonClick = () => {
@@ -39,10 +39,26 @@ export default class UserBasicInfo extends Component {
         [attr]: e.target.value,
       });
     };
+
+    this.onSubmitUpdate = (e) => {
+      e.preventDefault();
+      const {
+ name, phoneNum, email, snsBlog, snsGithub, submit 
+} = this.state;
+      const obj = {
+        name,
+        phoneNum,
+        email,
+        snsBlog,
+        snsGithub,
+      };
+      this.onButtonClick();
+      submit(obj, 'profile');
+    };
   }
 
   render() {
-    const { onButtonClick } = this;
+    const { onButtonClick, onSubmitUpdate } = this;
 
     const {
       edit,
@@ -137,7 +153,7 @@ export default class UserBasicInfo extends Component {
                   value={snsGithub}
                 />
                 <Button compact content="취소" onClick={onButtonClick} />
-                <Button compact content="변경" type="submit" />
+                <Button compact content="변경" onClick={onSubmitUpdate} />
               </Form>
             </div>
           )}

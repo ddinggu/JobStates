@@ -8,12 +8,10 @@ import {
   Header,
 } from 'semantic-ui-react';
 import EducationList from './EducationListItem';
-// import PropTypes from 'prop-types';
-// import './UserEducation.css';
 
 export default class UserEducation extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       create: false,
       organization: '',
@@ -39,12 +37,12 @@ export default class UserEducation extends Component {
     const { onButtonClick } = this;
     const { create } = this.state;
     const { edu, funcs } = this.props;
-
     const onSubmitPost = (e) => {
       e.preventDefault();
       const { organization, term, content } = this.state;
       const obj = { organization, term, content };
-      funcs.submit(obj);
+      funcs.submit(obj, 'education');
+      this.onButtonClick();
     };
 
     if (this.props.edu === undefined) {
@@ -74,7 +72,7 @@ export default class UserEducation extends Component {
                     label="간단 설명"
                     control={TextArea}
                     name="description"
-                    onChange={e => this.onChange(e, 'description')}
+                    onChange={e => this.onChange(e, 'content')}
                   />
                   <Button
                     compact

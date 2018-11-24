@@ -14,7 +14,7 @@ export default class Login extends Component {
       <Container>
         <Grid centered>
           <Grid.Row verticalAlign="middle">
-            <Form>
+            {/* <Form>
               <Form.Field>
                 <Input label=" email " />
               </Form.Field>
@@ -22,7 +22,7 @@ export default class Login extends Component {
                 <Input label="password" type="password" />
               </Form.Field>
               <Button type="submit">Submit</Button>
-            </Form>
+            </Form> */}
           </Grid.Row>
           <Grid.Row>
             <Grid.Column />

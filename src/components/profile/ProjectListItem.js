@@ -13,6 +13,7 @@ export default class ProjectListItem extends Component {
     super(props);
     this.state = {
       edit: false,
+      id: props.proj.id,
       title: props.proj.title,
       description: props.proj.description,
       term: props.proj.term,
@@ -31,17 +32,31 @@ export default class ProjectListItem extends Component {
         [attr]: e.target.value,
       });
     };
-
-    this.onSubmitUpdate = () => {
-      this.onButtonClick();
-      this.state.update(this.state);
-    };
   }
 
   render() {
+    const { funcs } = this.props;
     const {
- edit, title, description, term 
+ id, title, description, term, update, edit 
 } = this.state;
+
+    const onSubmitUpdate = () => {
+      const obj = {
+        id,
+        title,
+        description,
+        term,
+      };
+      this.onButtonClick();
+      update(obj, 'project');
+    };
+
+    const onDelete = () => {
+      const obj = {
+        id,
+      };
+      funcs.delete(obj, 'project');
+    };
 
     return (
       <Container>
@@ -90,8 +105,8 @@ export default class ProjectListItem extends Component {
                     <Button
                       type="submit"
                       compact
-                      content="추가"
-                      onClick={this.onSubmitUpdate}
+                      content="변경"
+                      onClick={onSubmitUpdate}
                     />
                   </Form>
                 </div>
@@ -107,7 +122,7 @@ export default class ProjectListItem extends Component {
                 >
                   <i className="edit icon" />
                 </button>
-                <button type="button" className="ui button" onClick={() => {}}>
+                <button type="button" className="ui button" onClick={onDelete}>
                   <i className="delete icon" />
                 </button>
               </span>

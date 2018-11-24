@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Select, Input, Form } from 'semantic-ui-react';
-import { current } from 'utils/jobutils';
-
-const options = [{ text: '전체', value: '전체' }, ...current];
+import * as util from 'utils/jobutils';
 
 export default class JobListHeader extends Component {
   constructor(props) {
@@ -37,24 +35,32 @@ export default class JobListHeader extends Component {
   render() {
     return (
       <Form>
-        <Form.Input type="text" placeholder="Search..." action>
+        {/* <Button.Group floated="right" style={{marginRight: '12rem' }}>
+          <Form.Button primary>수정</Form.Button>
+          <Form.Button secondary>삭제</Form.Button>
+        </Button.Group> */}
+
+        <Form.Input
+          type="text"
+          placeholder="Search..."
+          action
+          style={{ marginLeft: '25rem' }}
+        >
           <Form.Select
-            options={options}
+            options={util.options}
             defaultValue="전체"
             onChange={this._onSelectChange}
+            style={{ width: '3rem' }}
           />
           <Form.Input
             placeholder="회사명 검색"
             value={this.state.inputValue}
             onChange={this._onInputChange}
+            style={{ width: '30rem' }}
           />
           <Form.Button onClick={this._onClickSearch} type="submit">
             Search
           </Form.Button>
-          <Button.Group>
-            <Form.Button primary>수정</Form.Button>
-            <Form.Button secondary>삭제</Form.Button>
-          </Button.Group>
         </Form.Input>
       </Form>
     );
