@@ -2,24 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
- Form, Grid, Image, List,
+ Form, Grid, Image, List 
 } from 'semantic-ui-react';
-<<<<<<< HEAD:src/containers/job/list/JobDetail.js
-import { fetchJob } from 'actions/action_Job';
-=======
 import { Redirect } from 'react-router-dom';
 import { fetchJob } from 'actions/action_Job';
-import JobDetailHeader from 'containers/job/JobDetailHeader';
->>>>>>> 10758eb442f583a7b0a99582bd6c07013a980ec2:src/containers/job/JobDetail.js
+import JobDetailHeader from './JobDetailHeader';
 
 class JobDetail extends Component {
   render() {
-<<<<<<< HEAD:src/containers/job/list/JobDetail.js
-   // console.log('rerendering!!');
+    // console.log('rerendering!!');
 
-=======
-    console.log('rerendering!!');
->>>>>>> 10758eb442f583a7b0a99582bd6c07013a980ec2:src/containers/job/JobDetail.js
     const { job } = this.props;
 
     if (!job.hireId) return <Redirect to="/joblist" />;
