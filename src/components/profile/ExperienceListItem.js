@@ -51,6 +51,13 @@ export default class Experience extends Component {
       this.onButtonClick();
     };
 
+    const onDelete = () => {
+      const obj = {
+        id,
+      };
+      funcs.delete(obj, 'experience');
+    };
+
     return (
       <Container>
         <div className="">
@@ -74,7 +81,7 @@ export default class Experience extends Component {
                       <button
                         type="button"
                         className="ui button"
-                        onClick={() => {}}
+                        onClick={onDelete}
                       >
                         <i className="delete icon" />
                       </button>

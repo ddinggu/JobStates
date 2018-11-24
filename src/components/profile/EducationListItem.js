@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Container, Form, TextArea, Input } from 'semantic-ui-react';
+import {
+ Button, Container, Form, TextArea, Input 
+} from 'semantic-ui-react';
 
 export default class EducationList extends Component {
   constructor(props) {
@@ -29,10 +31,11 @@ export default class EducationList extends Component {
 
   render() {
     const { edu, funcs } = this.props;
-    const { edit, organization, term, content, id } = this.state;
+    const {
+ edit, organization, term, content, id 
+} = this.state;
 
-    const onSubmitPatch = e => {
-      e.preventDefault();
+    const onSubmitPatch = () => {
       const obj = {
         id,
         organization,
@@ -111,7 +114,7 @@ export default class EducationList extends Component {
                   <Button
                     compact
                     content="취소"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       this.onButtonClick();
                     }}
