@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import {
   fetchJob,
   filterFetchData,
@@ -16,23 +15,12 @@ class JobList extends Component {
 
     this.state = {
       filterFlag: false,
-      redirect: false,
     };
   }
 
   componentDidMount() {
     const { fetchJob } = this.props;
     fetchJob();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isMoveToDetail) this.setState({ redirect: true });
-  }
-
-  async componentWillUnmount() {
-    const { changeStateDetail } = this.props;
-
-    await changeStateDetail();
   }
 
   _mapList = jobData => {
@@ -70,10 +58,6 @@ class JobList extends Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/jobdetail" />;
-    }
-
     const { job, filter } = this.props;
     if (job.length === 0) {
       return <div>loading...</div>;
@@ -101,7 +85,6 @@ const mapStateToProps = state => {
   return {
     job: state.job.allJobData,
     filter: state.job.filterData,
-    isMoveToDetail: state.job.currentData.isMoveToDetail,
   };
 };
 

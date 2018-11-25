@@ -5,12 +5,12 @@ const initialState = {
   error: false,
   allJobData: [],
   filterData: [],
-  currentData: { isMoveToDetail: false, data: {} },
+  currentData: { data: {} },
   autocompleteData: [],
   filteredAutocompleteData: {},
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_JOB:
       return {
@@ -21,7 +21,7 @@ export default function (state = initialState, action) {
     case types.SEARCH_FILTER:
       return {
         ...state,
-        filterData: state.allJobData.filter((data) => {
+        filterData: state.allJobData.filter(data => {
           if (!action.payload2) {
             return data.status === action.payload;
           }
@@ -30,8 +30,8 @@ export default function (state = initialState, action) {
           }
           if (!!action.payload && !!action.payload2) {
             return (
-              data.status === action.payload
-              && data.brand.indexOf(action.payload2) !== -1
+              data.status === action.payload &&
+              data.brand.indexOf(action.payload2) !== -1
             );
           }
         }),
@@ -41,7 +41,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentData: {
-          isMoveToDetail: true,
           data: state.allJobData.filter(
             job => `${job.hireId}` === action.id,
           )[0],
@@ -109,7 +108,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        currentData: { isMoveToDetail: false, data: {} },
+        currentData: { data: {} },
       };
 
     case types.DELETE_JOB_FAILURE:
@@ -122,7 +121,7 @@ export default function (state = initialState, action) {
     case types.CHANGE_STATE_DETAILPAGE:
       return {
         ...state,
-        currentData: { ...state.currentData, isMoveToDetail: false },
+        currentData: { ...state.currentData },
       };
 
     default:

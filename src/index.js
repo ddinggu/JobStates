@@ -4,12 +4,13 @@ import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import App from 'components/App';
-import store from './store';
+import configureStore from './store';
 
 import 'semantic-ui-css/semantic.min.css';
 // import * as serviceWorker from './serviceWorker';
 
 const history = createBrowserHistory();
+const store = configureStore(history);
 
 ReactDOM.render(
   <Provider store={store}>
