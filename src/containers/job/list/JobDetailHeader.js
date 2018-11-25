@@ -17,12 +17,11 @@ class JobDetailHeader extends Component {
 
     return (
       <div style={{ float: 'right' }}>
-        <Button icon labelPosition="left" style={{ marginRight: '2rem' }}>
+        <Button labelPosition="left" style={{ marginRight: '2rem' }}>
           <Icon name="cut" />
           수정
         </Button>
         <Button
-          icon
           labelPosition="left"
           style={{ marginRight: '4rem' }}
           onClick={this.toggle}

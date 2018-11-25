@@ -13,8 +13,9 @@ class JobDetail extends Component {
     // console.log('rerendering!!');
 
     const { job } = this.props;
+    console.log(job);
 
-    if (!job.hireId) return <Redirect to="/joblist" />;
+    if (!job.title) return <Redirect to="/joblist" />;
 
     return (
       <div>

@@ -86,9 +86,6 @@ class JobPostForm extends Component {
     const { postJobData, loading, error } = this.props;
     return (
       <div>
-        {/* {loading ? <ClipLoader size={150} /> : null} */}
-        {/* 포탈 띄우기 */}
-        {/* {this.state.showWindowPortal && <NewPortal />} */}
         <Form>
           <div className="jobPostHeader" style={{ height: '4rem' }}>
             <Button
