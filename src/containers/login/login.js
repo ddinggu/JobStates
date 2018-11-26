@@ -9,9 +9,9 @@ import {
 } from 'semantic-ui-react';
 import { GoogleLoginButton } from 'react-social-login-buttons';
 import { createButton } from 'react-social-login-buttons';
-import kakaobtn from './Login_KAKAO.png';
-import naverbtn from './Login_NAVER.png';
-import naver from './icon.PNG';
+// import kakaobtn from './Login_KAKAO.png';
+// import naverbtn from './Login_NAVER.png';
+// import naver from './icon.PNG';
 
 export default class Login extends Component {
   render() {

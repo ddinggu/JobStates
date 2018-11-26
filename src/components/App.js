@@ -8,7 +8,7 @@ import JobDetail from 'containers/job/list/JobDetail';
 import JobList from 'containers/job/list/JobList';
 import JobPostForm from 'containers/job/post/JobPostForm';
 import JobDetailHeader from 'containers/job/list/JobDetailHeader';
-import Login from 'containers/login';
+import Login from 'containers/login/login';
 
 class App extends Component {
   render() {
