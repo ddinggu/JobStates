@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Select, Input, Form } from 'semantic-ui-react';
 import * as util from 'utils/jobutils';
 
+const options = [{ text: '전체', value: '전체' }, ...util.current];
+
 export default class JobListHeader extends Component {
   constructor(props) {
     super(props);
