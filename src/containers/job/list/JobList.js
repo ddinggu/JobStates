@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
+import { Redirect } from 'react-router-dom';
 import './JobList.css';
 
 class JobList extends Component {
@@ -11,52 +12,45 @@ class JobList extends Component {
 
     this.state = {
       filterFlag: false,
+      redirect: false,
     };
-  }
+  };
 
   componentDidMount() {
     const { fetchJob } = this.props;
     fetchJob();
-  }
+  };
 
-  getDetailJob = () => {
-    this.history.push("/jobdetail");
+  componentWillReceiveProps(nextProps) {
+    //조건문 쓰는 이유: isMoveToDetail이 실행될때만 렌더시킬수 있게 조건문주기
+    console.log('nextprops', nextProps.forRedirect.isMoveToDetail);
+    if (nextProps.forRedirect.isMoveToDetail) {
+      this.setState({ redirect: nextProps.forRedirect.isMoveToDetail });
+    } 
   };
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
-  
-    return (
-      // <Grid>
-      //   <Grid.Column width={16}>
-      //     <Segment
-      //       className="job-list specific"
-      //       key={jobData.hireId}
-      //       id={jobData.hireId}
-      //       onClick={e => getDetailJob(e.currentTarget.id)}
-      //     >
-      //       <span>
-      //         <img src={jobData.logo} width="35px" height="50px" />
-      //       </span>
-      //       <span className="job-list brand"> / {jobData.brand}</span>
-      //       <span> / {jobData.title}</span>
-      //       <span> / {jobData.status}</span>
-      //     </Segment>
-      //   </Grid.Column>
-      // </Grid>
 
+    return (
       <Table>
         <Table.Body>
-          <Table.Row  className="job-list specific"
-             key={jobData.hireId}
-             id={jobData.hireId}
-             onClick={e => {getDetailJob(e.currentTarget.id)}}
-             style={{cursor: 'pointer'}}>
-            <Table.Cell width={3}><img src={jobData.logo} width="35px" height="50px" /></Table.Cell>
+          <Table.Row
+            className="job-list specific"
+            key={jobData.hireId}
+            id={jobData.hireId}
+            onClick={e => {
+              getDetailJob(e.currentTarget.id);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            <Table.Cell width={3}>
+              <img src={jobData.logo} width="35px" height="50px" />
+            </Table.Cell>
             <Table.Cell width={4}>{jobData.brand}</Table.Cell>
             <Table.Cell width={4}>{jobData.title}</Table.Cell>
-            <Table.Cell width={4} >{jobData.status}</Table.Cell>
-          </Table.Row> 
+            <Table.Cell width={4}>{jobData.status}</Table.Cell>
+          </Table.Row>
         </Table.Body>
       </Table>
     );
@@ -74,9 +68,14 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, getDetailJob, filter } = this.props;
+    const { job, filter } = this.props;
+    const { redirect } = this.state;
     if (job.length === 0) {
       return <div>loading...</div>;
+    }
+
+    if (redirect) {
+      return <Redirect to="/jobdetail" />; 
     }
 
     return (
@@ -111,6 +110,7 @@ const mapStateToProps = state => {
   return {
     job: state.job.allJobData,
     filter: state.job.filterData,
+    forRedirect: state.job.currentData,
   };
 };
 
