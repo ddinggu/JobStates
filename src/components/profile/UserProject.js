@@ -18,7 +18,7 @@ export default class UserProject extends Component {
       create: false,
       title: '',
       term: '',
-      content: '',
+      description: '',
     };
 
     this.onButtonClick = () => {
@@ -32,18 +32,19 @@ export default class UserProject extends Component {
         [attr]: e.target.value,
       });
     };
-    console.log(props);
-
-    this.onSubmitPost = () => {
-      props.funcs.submit(this.state);
-      this.onButtonClick();
-    };
   }
 
   render() {
     const { onButtonClick } = this;
     const { create } = this.state;
     const { project, funcs } = this.props;
+    const onSubmitPost = (e) => {
+      e.preventDefault();
+      const { title, term, description } = this.state;
+      const obj = { title, term, description };
+      funcs.submit(obj, 'project');
+      this.onButtonClick();
+    };
 
     return (
       <Container className="UserProject">
@@ -58,7 +59,7 @@ export default class UserProject extends Component {
               </div>
             ))}
             <div className="row" style={create ? null : { display: 'none' }}>
-              <Form onSubmit={this.onSubmitPost}>
+              <Form onSubmit={onSubmitPost}>
                 <br />
                 <Form.Field>
                   <label>프로젝트명</label>
@@ -74,7 +75,7 @@ export default class UserProject extends Component {
                 <Form.Field
                   control={TextArea}
                   label="간단 설명"
-                  onChange={e => this.onChange(e, 'content')}
+                  onChange={e => this.onChange(e, 'description')}
                 />
                 <Button
                   compact
