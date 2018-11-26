@@ -46,7 +46,6 @@ export default class Experience extends Component {
         content,
         description,
       };
-      console.log('here funcs', funcs);
       funcs.update(obj, 'experience');
       this.onButtonClick();
     };
