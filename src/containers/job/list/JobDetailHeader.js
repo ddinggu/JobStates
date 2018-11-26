@@ -13,7 +13,7 @@ class JobDetailHeader extends Component {
     const { hireId, deleteJobData, loading, error } = this.props;
 
     return (
-      <div style={{ float: 'right' }}>
+      <div>
         <Button labelPosition="left" style={{ marginRight: '2rem' }}>
           <Icon name="cut" />
           수정
