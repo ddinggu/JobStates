@@ -9,9 +9,15 @@ import { Redirect } from 'react-router-dom';
 import JobDetailHeader from './JobDetailHeader';
 
 class JobDetail extends Component {
-  render() {
-    // console.log('rerendering!!');
+  // state = {
+  //   redirect: true,
+  // };
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
+
+  render() {
     const { job } = this.props;
     console.log(job);
 
@@ -246,6 +252,7 @@ JobDetail.propTypes = {
 
 const mapStateToProps = state => ({
   job: state.job.currentData.data,
+  forRedirect: state.job.currentData.isMoveToDetail,
 });
 
 export default connect(

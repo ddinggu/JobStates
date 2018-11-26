@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Select, Input, Form } from 'semantic-ui-react';
 import * as util from 'utils/jobutils';
+import { Redirect } from 'react-router-dom';
 
 const options = [{ text: '전체', value: '전체' }, ...util.current];
 
@@ -11,6 +12,7 @@ export default class JobListHeader extends Component {
     this.state = {
       value: '전체',
       inputValue: '',
+      redirect: null,
     };
   }
 
@@ -34,7 +36,13 @@ export default class JobListHeader extends Component {
     this.setState({ inputValue: '' });
   };
 
+  _setRedirect = () => {
+    this.setState({ redirect: '/jobpost' });
+  };
+
   render() {
+    const { redirect } = this.state;
+    if (redirect) return <Redirect to={redirect} />;
     return (
       <Form>
         {/* <Button.Group floated="right" style={{marginRight: '12rem' }}>
@@ -42,6 +50,14 @@ export default class JobListHeader extends Component {
           <Form.Button secondary>삭제</Form.Button>
         </Button.Group> */}
 
+        <Form.Button
+          onClick={this._setRedirect}
+          primary
+          floated="right"
+          style={{ marginRight: '12rem' }}
+        >
+          등록하기
+        </Form.Button>
         <Form.Input
           type="text"
           placeholder="Search..."
