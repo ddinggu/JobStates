@@ -10,6 +10,7 @@ export const fetchJob = () => async (dispatch) => {
     console.log(error);
   }
 };
+
 export const filterFetchData = (
   filterTargetValue,
   filterTargetInputValue,

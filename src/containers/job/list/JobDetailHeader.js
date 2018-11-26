@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { deleteJobData } from 'actions/action_Job';
-import { Redirect } from 'react-router-dom';
 
 class JobDetailHeader extends Component {
   state = { open: false };
@@ -12,8 +11,6 @@ class JobDetailHeader extends Component {
   render() {
     const { open } = this.state;
     const { hireId, deleteJobData, loading, error } = this.props;
-
-    if (!hireId) return <Redirect to="/joblist" />;
 
     return (
       <div style={{ float: 'right' }}>

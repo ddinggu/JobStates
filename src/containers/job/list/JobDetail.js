@@ -15,7 +15,8 @@ class JobDetail extends Component {
     const { job } = this.props;
     console.log(job);
 
-    if (!job.title) return <Redirect to="/joblist" />;
+    // 추후 hireId를 발급받을 수 있으면 수정
+    // if (!job.hireId) return <Redirect to="/joblist" />;
 
     return (
       <div>
