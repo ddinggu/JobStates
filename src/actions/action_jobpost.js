@@ -1,5 +1,6 @@
 import * as types from 'actions/actionTypes';
 import * as api from 'api/api';
+import { push } from 'connected-react-router';
 
 const loadingPostJobData = () => ({
   type: types.POST_JOB_BEGIN,
@@ -10,9 +11,8 @@ const successPostJobData = payload => ({
   payload,
 });
 
-const failedPostJobData = payload => ({
+const failedPostJobData = () => ({
   type: types.POST_JOB_FAILURE,
-  payload,
 });
 
 export default jobData => async (dispatch) => {
@@ -21,7 +21,8 @@ export default jobData => async (dispatch) => {
     const responsePostJobData = await api.postUserJobPosting(jobData);
     console.log('post log!!', responsePostJobData);
 
-    dispatch(successPostJobData(responsePostJobData));
+    await dispatch(successPostJobData(responsePostJobData.data));
+    dispatch(push('/jobdetail'));
   } catch (err) {
     console.error(err);
     dispatch(failedPostJobData(err));

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Form, Grid, Image, List } from 'semantic-ui-react';
+import {
+ Form, Grid, Image, List 
+} from 'semantic-ui-react';
 import { fetchJob } from 'actions/action_Job';
 import { Redirect } from 'react-router-dom';
 import JobDetailHeader from './JobDetailHeader';
@@ -14,11 +16,13 @@ class JobDetail extends Component {
     window.scrollTo(0, 0);
   }
 
+
   render() {
     const { job } = this.props;
-    // forRedirect = false;
-    // console.log('forRedirect', forRedirect)
-    if (!job.hireId) return <Redirect to="/joblist" />;
+    console.log(job);
+
+    // 추후 hireId를 발급받을 수 있으면 수정
+    // if (!job.hireId) return <Redirect to="/joblist" />;
 
     return (
       <div>

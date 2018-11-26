@@ -3,6 +3,8 @@ import { Button, Select, Input, Form } from 'semantic-ui-react';
 import * as util from 'utils/jobutils';
 import { Redirect } from 'react-router-dom';
 
+const options = [{ text: '전체', value: '전체' }, ...util.current];
+
 export default class JobListHeader extends Component {
   constructor(props) {
     super(props);

@@ -40,7 +40,8 @@ export default class ProjectListItem extends Component {
  id, title, description, term, update, edit 
 } = this.state;
 
-    const onSubmitUpdate = () => {
+    const onSubmitPatch = (e) => {
+      e.preventDefault();
       const obj = {
         id,
         title,
@@ -106,7 +107,7 @@ export default class ProjectListItem extends Component {
                       type="submit"
                       compact
                       content="변경"
-                      onClick={onSubmitUpdate}
+                      onClick={onSubmitPatch}
                     />
                   </Form>
                 </div>

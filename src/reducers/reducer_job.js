@@ -5,7 +5,7 @@ const initialState = {
   error: false,
   allJobData: [],
   filterData: [],
-  currentData: { isMoveToDetail: false, data: {} },
+  currentData: { data: {} },
   autocompleteData: [],
   filteredAutocompleteData: {},
 };
@@ -41,7 +41,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentData: {
-          isMoveToDetail: true,
           data: state.allJobData.filter(
             job => `${job.hireId}` === action.id,
           )[0],
@@ -56,7 +55,7 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         // api 완성되면 수정될 것!!
-        currentData: action.payload.data,
+        currentData: { ...state.currentData, data: action.payload },
       };
 
     case types.POST_JOB_FAILURE:
@@ -109,7 +108,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        currentData: { isMoveToDetail: false, data: {} },
+        currentData: { data: {} },
       };
 
     case types.DELETE_JOB_FAILURE:
@@ -117,6 +116,12 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         error: true,
+      };
+
+    case types.CHANGE_STATE_DETAILPAGE:
+      return {
+        ...state,
+        currentData: { ...state.currentData },
       };
 
     default:

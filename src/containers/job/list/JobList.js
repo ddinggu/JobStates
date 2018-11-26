@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
+import {
+  fetchJob,
+  filterFetchData,
+  getDetailJob,
+  changeStateDetail,
+} from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
@@ -19,14 +24,6 @@ class JobList extends Component {
   componentDidMount() {
     const { fetchJob } = this.props;
     fetchJob();
-  };
-
-  componentWillReceiveProps(nextProps) {
-    //조건문 쓰는 이유: isMoveToDetail이 실행될때만 렌더시킬수 있게 조건문주기
-    console.log('nextprops', nextProps.forRedirect.isMoveToDetail);
-    if (nextProps.forRedirect.isMoveToDetail) {
-      this.setState({ redirect: nextProps.forRedirect.isMoveToDetail });
-    } 
   };
 
   _mapList = jobData => {
@@ -84,16 +81,6 @@ class JobList extends Component {
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-            <Table>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell width={4}>Company</Table.HeaderCell>
-                  <Table.HeaderCell width={4}>회사명</Table.HeaderCell>
-                  <Table.HeaderCell width={4}>직무</Table.HeaderCell>
-                  <Table.HeaderCell width={4}>지원상태</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-            </Table>
             <Segment>
               {this.state.filterFlag
                 ? filter.map(this._mapList)
@@ -116,5 +103,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchJob, getDetailJob, filterFetchData },
+  { fetchJob, getDetailJob, filterFetchData, changeStateDetail },
 )(JobList);
