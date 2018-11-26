@@ -39,16 +39,10 @@ class UserProject extends Component {
 
     const onSubmitPost = (e) => {
       e.preventDefault();
-<<<<<<< HEAD
       const { title, term, description } = this.state;
       const obj = { title, term, description };
       funcs.submit(obj, 'project');
       this.onButtonClick();
-=======
-      const { title, term, content } = this.state;
-      const obj = { title, term, content };
-      funcs.submit(obj);
->>>>>>> cd447b39c1eafd35abfcc9898c943e966a50aeb5
     };
 
     return (

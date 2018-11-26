@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchJob,
-  filterFetchData,
-  getDetailJob,
-  changeStateDetail,
-} from 'actions/action_Job';
+import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
@@ -19,12 +14,12 @@ class JobList extends Component {
       filterFlag: false,
       redirect: false,
     };
-  };
+  }
 
   componentDidMount() {
     const { fetchJob } = this.props;
     fetchJob();
-  };
+  }
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
@@ -72,7 +67,7 @@ class JobList extends Component {
     }
 
     if (redirect) {
-      return <Redirect to="/jobdetail" />; 
+      return <Redirect to="/jobdetail" />;
     }
 
     return (
@@ -103,5 +98,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchJob, getDetailJob, filterFetchData, changeStateDetail },
+  { fetchJob, getDetailJob, filterFetchData },
 )(JobList);

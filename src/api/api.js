@@ -21,12 +21,11 @@ export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${par
 
 // export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${part}/${data.id}`, header);
 
-
 export const postUserImage = data => axios.post(`${URL}/test`, data);
-
 
 export const fetchJob = () => axios.get(`${JSON_URL}/job`);
 
-
 export const postUserJobPosting = data => axios.post(`${JSON_URL}/test`, data);
 export const deletePostingJob = id => axios.delete(`${JSON_URL}/test`, id);
+
+export const updateJobPostData = (data, part) => axios.patch(`${JSON_URL}/job/${part}`, data);

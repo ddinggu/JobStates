@@ -7,14 +7,11 @@ import {
   Grid,
   Dropdown,
   Image,
-  Checkbox,
   Icon,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as jobUtils from 'utils/jobutils';
-import { getCrwalingJobData } from 'api/api';
-// import { ClipLoader } from 'react-spinners';
 import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
@@ -118,6 +115,25 @@ class JobPostForm extends Component {
                 </span>
               </Grid.Column>
             </Grid.Row>
+
+            {/* 전형 일자는 채용 상황이 서류대기, 면접대기인 경우에만 설정!! */}
+            <Grid.Row>
+              <Grid.Column width={3} style={{ marginLeft: '2rem' }}>
+                <div>전형 일자</div>
+                <div style={{ border: '1px solid' }} />
+              </Grid.Column>
+              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
+                <DatePicker
+                  selected={
+                    typeof this.state.statusDate === 'string'
+                      ? null
+                      : new Date()
+                  }
+                  onChange={this.onDateChange('statusDate')}
+                />
+              </Grid.Column>
+            </Grid.Row>
+
             <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '2rem' }}>
                 <div>회사</div>
@@ -300,24 +316,6 @@ class JobPostForm extends Component {
                   placeholder="채용조건"
                   onChange={this.onHandleChange('hireType')}
                   value={this.state.hireType}
-                />
-              </Grid.Column>
-            </Grid.Row>
-
-            {/* 전형 일자는 채용 상황이 서류대기, 면접대기인 경우에만 설정!! */}
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '2rem' }}>
-                <div>전형 일자</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <DatePicker
-                  selected={
-                    typeof this.state.statusDate === 'string'
-                      ? null
-                      : new Date()
-                  }
-                  onChange={this.onDateChange('statusDate')}
                 />
               </Grid.Column>
             </Grid.Row>
