@@ -1,47 +1,63 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
- Form, Grid, Image, List 
-} from 'semantic-ui-react';
+import { Form, Grid, Image, List } from 'semantic-ui-react';
 import { fetchJob } from 'actions/action_Job';
-import { Redirect } from 'react-router-dom';
+import editJobData from 'actions/action_JobEdit';
+import './JobDetail.css';
+import JobSchedule from 'components/job/edit/JobSchedule';
+import JobCompany from 'components/job/edit/JobCompany';
+import JobHire from 'components/job/edit/JobHire';
+import JobComment from 'components/job/edit/JobComment';
 import JobDetailHeader from './JobDetailHeader';
 
 class JobDetail extends Component {
-  // state = {
-  //   redirect: true,
-  // };
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
-
   render() {
-    const { job } = this.props;
-    console.log(job);
+    const { job, editJobData } = this.props;
+
+    const hireMapping = category => <div className="mapping">{category}</div>;
 
     // 추후 hireId를 발급받을 수 있으면 수정
     // if (!job.hireId) return <Redirect to="/joblist" />;
 
     return (
-      <div>
+      <div id="job-detail">
         <Form>
           <div style={{ height: '4.2rem' }}>
             <JobDetailHeader />
           </div>
           <Grid>
-            <Grid.Row>
+            {/* <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
                 <div>채용공고 상황</div>
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={9} style={{ marginLeft: '5rem' }}>
-                현재 이 채용공고는 {job.status}
+                현재 이 채용공고는 <b>{job.status}</b>
               </Grid.Column>
             </Grid.Row>
 
             <Grid.Row>
+              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
+                <div>전형 일자</div>
+                <div style={{ border: '1px solid' }} />
+              </Grid.Column>
+              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
+                {job.statusDate}
+              </Grid.Column>
+            </Grid.Row> */}
+            <JobSchedule
+              scheduleId={/* job.scheduleId */ 1}
+              status={job.status}
+              statusDate={job.statusDate}
+              onSubmitEditData={editJobData}
+            />
+
+            {/* <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
                 <div>회사</div>
                 <div style={{ border: '1px solid' }} />
@@ -57,16 +73,16 @@ class JobDetail extends Component {
                 <List.Content
                   style={{ display: 'inline-block', marginLeft: '3rem' }}
                 >
-                  {job.brand}
+                  <span>{job.brand}</span>
                 </List.Content>
-                <List.Item>
+                <span>
                   <List.Icon
                     name="linkify"
                     style={{ display: 'inline-block', marginLeft: '3rem' }}
                   />
                   <a href={job.companyUrl}>{job.companyUrl}</a>
-                </List.Item>
-                회사소개 : <span>{job.intro}</span>
+                </span>
+                <p>회사소개 : {job.intro}</p>
               </Grid.Column>
             </Grid.Row>
 
@@ -76,22 +92,27 @@ class JobDetail extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {job.category.map(tech => (
-                  <div
-                    style={{
-                      display: 'inline-block',
-                      border: '1px solid #bbc5d8',
-                      borderRadius: '500rem',
-                      marginRight: '1rem',
-                      minWidth: '3em',
-                      textAlign: 'center',
-                      fontSize: '.85714286rem',
-                      padding: '0.35rem',
-                    }}
-                  >
-                    {tech}
-                  </div>
-                ))}
+                {job.category.map(hireMapping)}
+              </Grid.Column>
+            </Grid.Row> */}
+
+            <JobCompany
+              companyId={/* job.companyId */ 1}
+              brand={job.brand}
+              logo={job.logo}
+              intro={job.intro}
+              category={job.category}
+              companyUrl={job.companyUrl}
+              onSubmitEditData={editJobData}
+            />
+
+            {/* <Grid.Row>
+              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
+                <div>채용명</div>
+                <div style={{ border: '1px solid' }} />
+              </Grid.Column>
+              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
+                {job.title}
               </Grid.Column>
             </Grid.Row>
 
@@ -101,32 +122,19 @@ class JobDetail extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {job.hireTech.map(tech => (
-                  <div
-                    style={{
-                      display: 'inline-block',
-                      border: '1px solid #bbc5d8',
-                      borderRadius: '500rem',
-                      marginRight: '1rem',
-                      minWidth: '3em',
-                      textAlign: 'center',
-                      fontSize: '.85714286rem',
-                      padding: '0.35rem',
-                    }}
-                  >
-                    {tech}
-                  </div>
-                ))}
+                {job.hireTech.map(hireMapping)}
               </Grid.Column>
             </Grid.Row>
 
             <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>채용명</div>
+                <div>채용링크</div>
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {job.title}
+                <div>
+                  <a href={job.hireUrl}>{job.hireUrl}</a>{' '}
+                </div>
               </Grid.Column>
             </Grid.Row>
 
@@ -182,16 +190,6 @@ class JobDetail extends Component {
 
             <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>전형 일자</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {job.statusDate}
-              </Grid.Column>
-            </Grid.Row>
-
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
                 <div>지원 마감일</div>
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
@@ -208,9 +206,26 @@ class JobDetail extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 {job.address}
               </Grid.Column>
-            </Grid.Row>
+            </Grid.Row> */}
 
-            <Grid.Row>
+            <JobHire
+              hireId={/* this.props.hireId */ 1}
+              edit={job.edit}
+              title={job.title}
+              hireTech={job.hireTech}
+              hireUrl={job.hireUrl}
+              importantInfo={job.importantInfo}
+              detailInfo={job.detailInfo}
+              hireImage={job.hireImage}
+              salary={job.salary}
+              deadLine={job.deadLine}
+              address={job.address}
+              provider={job.provider}
+              hireType={job.hireType}
+              onSubmitEditData={editJobData}
+            />
+
+            {/* <Grid.Row>
               <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
                 <div>내가 생각하는 이 공고의 장점</div>
                 <div style={{ border: '1px solid' }} />
@@ -238,7 +253,15 @@ class JobDetail extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 {job.strategy}
               </Grid.Column>
-            </Grid.Row>
+            </Grid.Row> */}
+
+            <JobComment
+              onSubmitEditData={editJobData}
+              commentId={/* this.props.commentId */ 1}
+              advantage={job.advantage}
+              disadvantage={job.disadvantage}
+              strategy={job.strategy}
+            />
           </Grid>
         </Form>
       </div>
@@ -252,10 +275,9 @@ JobDetail.propTypes = {
 
 const mapStateToProps = state => ({
   job: state.job.currentData.data,
-  forRedirect: state.job.currentData.isMoveToDetail,
 });
 
 export default connect(
   mapStateToProps,
-  { fetchJob },
+  { fetchJob, editJobData },
 )(JobDetail);
