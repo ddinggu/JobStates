@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { deleteJobData } from 'actions/action_Job';
-import { Redirect } from 'react-router-dom';
 
 class JobDetailHeader extends Component {
   state = { open: false };
@@ -13,16 +12,13 @@ class JobDetailHeader extends Component {
     const { open } = this.state;
     const { hireId, deleteJobData, loading, error } = this.props;
 
-    if (!hireId) return <Redirect to="/joblist" />;
-
     return (
       <div style={{ float: 'right' }}>
-        <Button icon labelPosition="left" style={{ marginRight: '2rem' }}>
+        <Button labelPosition="left" style={{ marginRight: '2rem' }}>
           <Icon name="cut" />
           수정
         </Button>
         <Button
-          icon
           labelPosition="left"
           style={{ marginRight: '4rem' }}
           onClick={this.toggle}

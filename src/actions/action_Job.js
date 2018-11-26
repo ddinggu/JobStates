@@ -1,5 +1,6 @@
 import * as types from 'actions/actionTypes';
 import * as api from 'api/api';
+import { push } from 'connected-react-router';
 
 export const fetchJob = () => async (dispatch) => {
   try {
@@ -9,6 +10,7 @@ export const fetchJob = () => async (dispatch) => {
     console.log(error);
   }
 };
+
 export const filterFetchData = (
   filterTargetValue,
   filterTargetInputValue,
@@ -22,6 +24,7 @@ export const filterFetchData = (
 
 export const getDetailJob = id => (dispatch) => {
   dispatch({ type: types.GET_DETAIL_JOB, id });
+  dispatch(push('/jobdetail'));
 };
 
 const loadingDeleteJobData = () => ({
