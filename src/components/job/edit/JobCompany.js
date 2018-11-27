@@ -8,6 +8,7 @@ import {
   Input,
   Container,
   Header,
+  Label,
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
@@ -55,12 +56,21 @@ class JobCompany extends Component {
     const { onSubmitEditData } = this.props;
 
     return (
-      <Container>
+      <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Row>
             <Grid.Column width={2} />
             <Grid.Column width={10} textAlign="left">
-              {status}
+              <Grid column="two">
+                <Grid.Column width={12}>
+                  <Label tag color="blue" size="large">
+                    {status}
+                  </Label>
+                </Grid.Column>
+                <Grid.Column width={4} textAlign="right">
+                  <Button compact>공고 전체삭제</Button>
+                </Grid.Column>
+              </Grid>
             </Grid.Column>
             <Grid.Column width={2} />
           </Grid.Row>
@@ -68,120 +78,149 @@ class JobCompany extends Component {
             <Grid.Column width={2}>
               <Header>회사</Header>
             </Grid.Column>
-            {/* <Grid.Row> */}
             {!edit ? (
-              <Grid.Column textAlign="center" width={10} className="jobbody">
-                <Grid>
-                  <Grid.Column width={1}>
-                    <Image src={this.props.logo} alt="" textAlign="left" />
-                  </Grid.Column>
-                  <Grid.Column width={10}>
-                    <span>{this.props.brand}</span>
-                  </Grid.Column>
-                  <Grid.Column width={2}>
-                    <span>
-                      <List.Icon
-                        name="linkify"
+              <Grid.Column textAlign="left" width={10} className="jobbody">
+                <div className="ItemsInContainer">
+                  <Grid padded="vertically horizontally">
+                    <Grid.Row>
+                      <Grid.Column textAlign="left" width={10}>
+                        <Header>{this.props.brand}</Header>
+                      </Grid.Column>
+                      <Grid.Column width={4} />
+                      <Grid.Column width={2} textAlign="right">
+                        <span className="linkBtn">
+                          <a href="www.naver.com">
+                            <img
+                              src="https://png.pngtree.com/svg/20170904/url_650529.png"
+                              height="30px"
+                            />
+                          </a>
+                        </span>
+                      </Grid.Column>
+                    </Grid.Row>
+
+                    <Grid.Row textAlign="left">
+                      <List bulleted>
+                        <List.Item className="jobpostItem">회사소개</List.Item>
+                      </List>
+                      <p>{this.props.intro}</p>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <List bulleted>
+                        <List.Item className="jobpostItem">산업분야</List.Item>
+                      </List>
+                    </Grid.Row>
+
+                    {category.map(tech => (
+                      <div
                         style={{
                           display: 'inline-block',
-                          marginLeft: '3rem',
+                          border: '1px solid #bbc5d8',
+                          borderRadius: '500rem',
+                          marginRight: '1rem',
+                          minWidth: '3em',
+                          textAlign: 'center',
+                          fontSize: '.85714286rem',
+                          padding: '0.35rem',
                         }}
-                      />
-                      //{' '}
-                      <a href={this.props.companyUrl}>
-                        // {this.props.companyUrl}
-                        //{' '}
-                      </a>
-                      //{' '}
-                    </span>
-                  </Grid.Column>
-
-                  <p>회사소개 : {this.props.intro}</p>
-                </Grid>
+                      >
+                        {tech}
+                      </div>
+                    ))}
+                  </Grid>
+                </div>
               </Grid.Column>
             ) : (
-              <>
+              <Grid.Column textAlign="left" width={10} className="jobbody">
                 <Grid.Row>
-                  <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                    <div>회사</div>
-                    <div style={{ border: '1px solid' }} />
-                  </Grid.Column>
-                  <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                    <Form.Field
-                      id="form-input-control-company-name"
-                      control={Input}
-                      label="회사명"
-                      placeholder="회사명"
-                      onChange={this.onHandleChange('brand')}
-                      value={brand}
-                    />
-                    <Form.Field
-                      id="form-input-control-company-logo"
-                      label="회사 로고"
-                      placeholder="회사 로고"
-                    />
-                    <input type="file" />
-                    <Image src={logo} size="small" />
-                    <Form.Field
-                      id="form-input-control-company-url"
-                      control={Input}
-                      label="회사 사이트"
-                      placeholder="회사사이트"
-                      onChange={this.onHandleChange('companyUrl')}
-                      value={companyUrl}
-                    />
-                  </Grid.Column>
-                </Grid.Row>
+                  <Form>
+                    <Grid.Row>
+                      <div class="ItemsInContainer">
+                        <Form.Field>
+                          <List bulleted>
+                            <List.Item className="jobpostItem">
+                              회사명
+                            </List.Item>
+                            <Input
+                              value={brand}
+                              onChange={this.onHandleChange('brand')}
+                            />
+                          </List>
+                        </Form.Field>
+                      </div>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <div class="ItemsInContainer">
+                        <Form.Field>
+                          <List bulleted>
+                            <List.Item className="jobpostItem">
+                              회사 로고
+                            </List.Item>
+                            <Input control={Input} type="file" />
+                          </List>
+                        </Form.Field>
+                      </div>
+                    </Grid.Row>
 
-                <Grid.Row>
-                  <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                    <div>산업 분야</div>
-                    <div style={{ border: '1px solid' }} />
-                  </Grid.Column>
-                  <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                    <DropdownSearchQuery
-                      stateOptions={jobUtils.selectCategory}
-                      title={'산업 분야'}
-                      handleArrayChange={this.onHandleGetArray('category')}
-                      value={category}
-                    />
-                  </Grid.Column>
+                    <Grid.Row>
+                      <div class="ItemsInContainer">
+                        <Form.Field>
+                          <List bulleted>
+                            <List.Item className="jobpostItem">
+                              회사 사이트
+                            </List.Item>
+                            <Input
+                              onChange={this.onHandleChange('companyUrl')}
+                              value={companyUrl}
+                            />
+                          </List>
+                        </Form.Field>
+                      </div>
+                    </Grid.Row>
+                    <Grid.Row />
+
+                    <Grid.Row>
+                      <div class="ItemsInContainer">
+                        <List bulleted>
+                          <List.Item className="jobpostItem">
+                            산업 분야
+                          </List.Item>
+                          <DropdownSearchQuery
+                            stateOptions={jobUtils.selectCategory}
+                            title={'산업 분야'}
+                            handleArrayChange={this.onHandleGetArray(
+                              'category',
+                            )}
+                            value={category}
+                          />
+                        </List>
+                      </div>
+                    </Grid.Row>
+                    <Grid textAlign="center">
+                      <Grid.Row>
+                        <div class="ItemsInContainer">
+                          <Button compact onClick={this.onEditing}>
+                            취소
+                          </Button>
+                          <Button
+                            compact
+                            onClick={() => {
+                              onSubmitEditData(this.state, 'company');
+                            }}
+                          >
+                            변경
+                          </Button>
+                        </div>
+                      </Grid.Row>
+                    </Grid>
+                  </Form>
                 </Grid.Row>
-                <Button
-                  compact
-                  onClick={() => {
-                    onSubmitEditData(this.state, 'company');
-                  }}
-                >
-                  추가
-                </Button>
-                <Button compact onClick={this.onEditing}>
-                  취소
-                </Button>
-              </>
+              </Grid.Column>
             )}
-
-            <span className="linkBtn">
-              <a href="www.naver.com">
-                <img
-                  src="https://png.pngtree.com/svg/20170904/url_650529.png"
-                  height="30px"
-                />
-              </a>
-            </span>
-            {/* </Grid.Row> */}
-
-            <Grid.Column width={2}>
-              <Button
-                basic
-                icon="edit"
-                floated="right"
-                onClick={this.onEditing}
-              />
+            <Grid.Column width={2} textAlign="left">
+              <Button basic icon="edit" onClick={this.onEditing} />
             </Grid.Column>
           </Grid.Row>
-
-          <></>
         </Grid>
       </Container>
     );

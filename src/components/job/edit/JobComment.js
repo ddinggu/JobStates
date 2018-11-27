@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Grid, Button, TextArea } from 'semantic-ui-react';
+import {
+  Grid,
+  Button,
+  TextArea,
+  Container,
+  Header,
+  List,
+  Form,
+  Input,
+} from 'semantic-ui-react';
 
 class JobComment extends Component {
   state = {
@@ -27,106 +36,113 @@ class JobComment extends Component {
     const { onSubmitEditData } = this.props;
 
     return (
-      <>
-        {!edit ? (
-          <>
-            <Grid.Row reversed>
-              <Button
-                basic
-                icon="edit"
-                floated="right"
-                onClick={this.onEditing}
-              />
-            </Grid.Row>
+      <Container className="jobContainer">
+        <Grid textAlign="center">
+          <Grid.Column width={2}>
+            <Header>메모</Header>
+          </Grid.Column>
+          {!edit ? (
+            <Grid.Column textAlign="left" width={10} className="jobbody">
+              <div className="ItemsInContainer">
+                <Grid.Row>
+                  <List bulleted>
+                    <List.Item className="jobpostItem">공고 장점</List.Item>
+                    {this.props.advantage}
+                  </List>
+                </Grid.Row>
+              </div>
+              <div className="ItemsInContainer">
+                <Grid.Row>
+                  <List bulleted>
+                    <List.Item className="jobpostItem">공고 단점</List.Item>
+                    {this.props.disadvantage}
+                  </List>
+                </Grid.Row>
+              </div>
+              <Grid.Row className="ItemsInContainer">
+                <List bulleted>
+                  <List.Item className="jobpostItem">필요 전략</List.Item>
+                  {this.props.strategy}
+                </List>
+              </Grid.Row>
+            </Grid.Column>
+          ) : (
+            <Grid.Column textAlign="left" width={10} className="jobbody">
+              <Grid.Row>
+                <Form>
+                  <Grid.Row>
+                    <div class="ItemsInContainer">
+                      <Form.Field>
+                        <List bulleted>
+                          <List.Item className="jobpostItem">
+                            공고 장점
+                          </List.Item>
+                          <TextArea
+                            control={TextArea}
+                            value={this.props.advantage}
+                          />
+                        </List>
+                      </Form.Field>
+                    </div>
+                  </Grid.Row>
 
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>내가 생각하는 이 공고의 장점</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {this.props.advantage}
-              </Grid.Column>
-            </Grid.Row>
+                  <Grid.Row>
+                    <div class="ItemsInContainer">
+                      <Form.Field>
+                        <List bulleted>
+                          <List.Item className="jobpostItem">
+                            공고 단점
+                          </List.Item>
+                          <TextArea
+                            control={TextArea}
+                            value={this.props.disadvantage}
+                          />
+                        </List>
+                      </Form.Field>
+                    </div>
+                  </Grid.Row>
 
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>내가 생각하는 이 공고의 단점</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {this.props.disadvantage}
-              </Grid.Column>
-            </Grid.Row>
-
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>해당 공고만의 취업 전략</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {this.props.strategy}
-              </Grid.Column>
-            </Grid.Row>
-          </>
-        ) : (
-          <>
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>내가 생각하는 이 공고의 장점</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea
-                  style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('advantage')}
-                  value={advantage}
-                />
-              </Grid.Column>
-            </Grid.Row>
-
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>내가 생각하는 이 공고의 단점</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea
-                  style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('disadvantage')}
-                  value={disadvantage}
-                />
-              </Grid.Column>
-            </Grid.Row>
-
-            <Grid.Row>
-              <Grid.Column width={3} style={{ marginLeft: '5rem' }}>
-                <div>해당 공고만의 취업 전략</div>
-                <div style={{ border: '1px solid' }} />
-              </Grid.Column>
-              <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                <TextArea
-                  style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('strategy')}
-                  value={strategy}
-                />
-              </Grid.Column>
-            </Grid.Row>
-
-            <Button
-              compact
-              onClick={() => {
-                onSubmitEditData(this.state, 'comment');
-              }}
-            >
-              추가
-            </Button>
-            <Button compact onClick={this.onEditing}>
-              취소
-            </Button>
-          </>
-        )}
-      </>
+                  <Grid.Row>
+                    <div class="ItemsInContainer">
+                      <Form.Field>
+                        <List bulleted>
+                          <List.Item className="jobpostItem">
+                            필요 취업 전략
+                          </List.Item>
+                          <TextArea
+                            control={TextArea}
+                            value={this.props.strategy}
+                          />
+                        </List>
+                      </Form.Field>
+                    </div>
+                  </Grid.Row>
+                </Form>
+              </Grid.Row>
+              <Grid textAlign="center">
+                <Grid.Row>
+                  <div class="ItemsInContainer">
+                    <Button compact onClick={this.onEditing}>
+                      취소
+                    </Button>
+                    <Button
+                      compact
+                      onClick={() => {
+                        onSubmitEditData(this.state, 'commnet');
+                      }}
+                    >
+                      변경
+                    </Button>
+                  </div>
+                </Grid.Row>
+              </Grid>
+            </Grid.Column>
+          )}
+          <Grid.Column width={2} textAlign="left">
+            <Button basic icon="edit" onClick={this.onEditing} />
+          </Grid.Column>
+        </Grid>
+      </Container>
     );
   }
 }
