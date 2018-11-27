@@ -84,11 +84,14 @@ class JobCompany extends Component {
                 <div className="ItemsInContainer">
                   <Grid padded="vertically horizontally">
                     <Grid.Row>
-                      <Grid.Column textAlign="left" width={10}>
+                      <Grid.Column width={4}>
+                        <Image src={logo} avatar />
+                      </Grid.Column>
+                      <Grid.Column textAlign="center" width={8}>
                         <Header>{this.props.brand}</Header>
                       </Grid.Column>
-                      <Grid.Column width={4} />
-                      <Grid.Column width={2} textAlign="right">
+                      {/* <Grid.Column width={4} /> */}
+                      <Grid.Column width={4} textAlign="right">
                         <span className="linkBtn">
                           <a href="www.naver.com">
                             <img

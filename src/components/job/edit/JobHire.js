@@ -82,19 +82,18 @@ class JobCompany extends Component {
           {!edit ? (
             <Grid.Column textAlign="left" width={10} className="jobbody">
               <div className="ItemsInContainer">
-                {/* <Grid padded="horizontally"> */}
                 <Grid padded="vertically horizontally">
                   <Grid.Row>
-                    <Grid.Column textAlign="left" width={10}>
+                    <Grid.Column width={4} />
+                    <Grid.Column textAlign="center" width={8}>
                       <Grid.Row>
                         <Header>{title}</Header>
                       </Grid.Row>
                       <Grid.Row>
-                        (채용 기간 : {statusDate} ~ {deadLine})
+                        (채용 마감일 : {statusDate} ~ {deadLine})
                       </Grid.Row>
                     </Grid.Column>
-                    <Grid.Column width={4} />
-                    <Grid.Column textAlign="right" width={2}>
+                    <Grid.Column textAlign="right" width={4}>
                       <span className="linkBtn">
                         <a href={hireUrl}>
                           <img
@@ -202,7 +201,7 @@ class JobCompany extends Component {
                   <Grid.Row>
                     <div class="ItemsInContainer">
                       <Grid>
-                        <Grid.Column width={5}>
+                        <Grid.Column width={10}>
                           <Form.Field>
                             <List bulleted>
                               <List.Item className="jobpostItem">
