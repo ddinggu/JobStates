@@ -18,9 +18,9 @@ class JobComment extends Component {
       [key]: e.target.value ? e.target.value : e.target.innerText,
     });
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ edit: !this.state.edit });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({ edit: !this.state.edit });
+  // }
 
   render() {
     const { edit, commentId, advantage, disAdvantage, strategy } = this.state;

@@ -112,7 +112,7 @@ class JobDetail extends Component {
             </Grid.Row> */}
 
             <JobCompany
-              companyId={/* job.companyId */ 1}
+              companyId={job.companyId}
               brand={job.brand}
               logo={job.logo}
               intro={job.intro}
@@ -224,8 +224,7 @@ class JobDetail extends Component {
             </Grid.Row> */}
 
             <JobHire
-              hireId={/* this.props.hireId */ 1}
-              edit={job.edit}
+              hireId={job.hireId}
               title={job.title}
               hireTech={job.hireTech}
               hireUrl={job.hireUrl}
@@ -236,7 +235,7 @@ class JobDetail extends Component {
               deadLine={job.deadLine}
               address={job.address}
               provider={job.provider}
-              hireType={job.hireType}
+              experience={job.experience}
               onSubmitEditData={editJobData}
             />
 
@@ -272,9 +271,9 @@ class JobDetail extends Component {
 
             <JobComment
               onSubmitEditData={editJobData}
-              commentId={/* this.props.commentId */ 1}
+              commentId={job.commentId}
               advantage={job.advantage}
-              disadvantage={job.disadvantage}
+              disAdvantage={job.disAdvantage}
               strategy={job.strategy}
             />
           </Grid>
