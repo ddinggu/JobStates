@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { push } from 'connected-react-router';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
  Form, Grid, Image, List 
@@ -26,7 +28,7 @@ class JobDetail extends Component {
     // const hireMapping = category => <div className="mapping">{category}</div>;
 
     // 추후 hireId를 발급받을 수 있으면 수정
-    // if (!job.hireId) return <Redirect to="/joblist" />;
+    if (!job.hireId) return <Redirect to="joblist" />;
 
     return (
       <div id="job-detail">

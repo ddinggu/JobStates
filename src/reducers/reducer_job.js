@@ -93,7 +93,7 @@ export default function (state = initialState, action) {
         filteredAutocompleteData: filters.findTargetFilter(
           state.autocompleteData,
           'hireId',
-          `${action.hireId}`,
+          action.hireId,
         )[0],
       };
 
