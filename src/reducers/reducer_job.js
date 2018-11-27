@@ -153,10 +153,24 @@ export default function (state = initialState, action) {
         error: true,
       };
 
-    case types.CHANGE_STATE_DETAILPAGE:
+    case types.EDIT_JOB_BEGIN:
       return {
         ...state,
-        currentData: { ...state.currentData },
+        loading: true,
+      };
+
+    case types.EDIT_JOB_SUCCESS:
+      return {
+        ...state,
+        ...action.data,
+        loading: false,
+      };
+
+    case types.EDIT_JOB_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
 
     default:

@@ -8,6 +8,15 @@
   margin-right: 10px;
 }
 
-.jobpostItem {
-  padding: 0px 0px 20px 0px;
+/* .jobpostItem {
+  padding: 0px 0px 20px 0px; */
+#job-detail .mapping {
+  display: inline-block;
+  border: 1px solid #bbc5d8;
+  border-radius: 500rem;
+  margin-right: 1rem;
+  min-width: 3em;
+  text-align: center;
+  font-size: 0.85714286rem;
+  padding: 0.35rem;
 }
