@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Grid, Button, Image, List, Form, Input } from 'semantic-ui-react';
+import {
+  Grid,
+  Button,
+  Image,
+  List,
+  Form,
+  Input,
+  TextArea,
+} from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 
@@ -107,6 +115,14 @@ class JobCompany extends Component {
                   placeholder="회사사이트"
                   onChange={this.onHandleChange('companyUrl')}
                   value={companyUrl}
+                />
+                <Form.Field
+                  id="form-input-control-company-url"
+                  control={TextArea}
+                  label="회사 소개"
+                  placeholder="회사소개"
+                  onChange={this.onHandleChange('intro')}
+                  value={intro}
                 />
               </Grid.Column>
             </Grid.Row>

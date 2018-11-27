@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import { Image, List, Modal, Button } from 'semantic-ui-react';
 import './JobAutoCompleteList.css';
 import { connect } from 'react-redux';
-import { filterAutoCompleteData } from 'actions/action_autocomplete';
+import {
+  filterAutoCompleteData,
+  clearAutoCompleteData,
+} from 'actions/action_autocomplete';
 
 const renderList = (job, onChangeTargetClick, currentId) => (
   <List.Item
     id={currentId === `${job.hireId}` ? 'autocomplete' : null}
+    key={job.hireId}
     jobid={job.hireId}
     onClick={onChangeTargetClick}
   >
     <Image avatar src={job.logo} />
     <List.Content>
       <List.Header>{job.brand}</List.Header>
-      <List.Description>iOS 개발자</List.Description>
+      <List.Description>{job.title}</List.Description>
     </List.Content>
   </List.Item>
 );
@@ -38,7 +42,13 @@ class JobAutoCompleteList extends Component {
   };
 
   render() {
-    const { list, close, filterAutoCompleteData } = this.props;
+    const {
+      list,
+      loading,
+      close,
+      filterAutoCompleteData,
+      clearAutoCompleteData,
+    } = this.props;
     const { currentClicked } = this.state;
 
     return (
@@ -51,18 +61,28 @@ class JobAutoCompleteList extends Component {
             borderBottom: '1px solid rgba(34,36,38,.15)',
           }}
         >
-          {list.map(job =>
-            renderList(job, this.onListClick, this.state.currentClicked),
+          {list !== null ? (
+            list.map(job =>
+              renderList(job, this.onListClick, this.state.currentClicked),
+            )
+          ) : (
+            <span className="list_none">검색결과가 없습니다!</span>
           )}
         </List>
         <Modal.Actions>
           <div style={{ float: 'right', paddingBottom: '1.2rem' }}>
-            <Button color="black" onClick={close}>
+            <Button
+              color="black"
+              onClick={() => {
+                close();
+                clearAutoCompleteData();
+              }}
+            >
               취소
             </Button>
             <Button
               positive
-              icon="checkmark"
+              icon={loading ? null : 'checkmark'}
               labelPosition="right"
               content="선택"
               onClick={() => {
@@ -70,6 +90,7 @@ class JobAutoCompleteList extends Component {
                 filterAutoCompleteData(currentClicked);
               }}
               disabled={currentClicked ? false : true}
+              loading={loading}
             />
           </div>
         </Modal.Actions>
@@ -78,7 +99,11 @@ class JobAutoCompleteList extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loading: state.job.loading,
+});
+
 export default connect(
-  null,
-  { filterAutoCompleteData },
+  mapStateToProps,
+  { filterAutoCompleteData, clearAutoCompleteData },
 )(JobAutoCompleteList);

@@ -19,7 +19,7 @@ const filteringAutoCompleteData = hireId => ({
   hireId,
 });
 
-const clearAutoCompleteData = () => ({
+export const clearAutoCompleteData = () => ({
   type: types.CLEAR_AUTOCOMPLETEJOB,
 });
 

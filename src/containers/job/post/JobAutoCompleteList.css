@@ -1,3 +1,11 @@
 #autocomplete {
   background: rgba(0, 0, 0, 0.1);
 }
+
+.list_none {
+  display: block;
+  text-align: center;
+  margin: 1.2rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.87);
+}

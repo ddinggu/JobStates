@@ -6,7 +6,7 @@ class JobComment extends Component {
     edit: false,
     commentId: this.props.commentId,
     advantage: this.props.advantage,
-    disadvantage: this.props.disadvantage,
+    disAdvantage: this.props.disAdvantage,
     strategy: this.props.strategy,
   };
 
@@ -23,7 +23,7 @@ class JobComment extends Component {
   }
 
   render() {
-    const { edit, commentId, advantage, disadvantage, strategy } = this.state;
+    const { edit, commentId, advantage, disAdvantage, strategy } = this.state;
     const { onSubmitEditData } = this.props;
 
     return (
@@ -55,7 +55,7 @@ class JobComment extends Component {
                 <div style={{ border: '1px solid' }} />
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
-                {this.props.disadvantage}
+                {this.props.disAdvantage}
               </Grid.Column>
             </Grid.Row>
 
@@ -93,8 +93,8 @@ class JobComment extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('disadvantage')}
-                  value={disadvantage}
+                  onChange={this.onHandleChange('disAdvantage')}
+                  value={disAdvantage}
                 />
               </Grid.Column>
             </Grid.Row>
