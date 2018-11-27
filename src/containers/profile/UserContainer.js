@@ -97,7 +97,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   if (!(state.fetchedProfile.items === null)) {
     return {
       name: state.fetchedProfile.items.user.nick,
@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,

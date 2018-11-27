@@ -22,7 +22,13 @@ class JobDetailHeader extends Component {
     } = this.props;
 
     return (
-      <div style={{ float: 'right' }}>
+      <div>
+        <Button labelPosition="left" style={{ marginRight: '2rem' }}>
+          <Icon name="cut" />
+          수정
+        </Button>
+        <div style={{ float: 'right' }} />
+
         <Button
           labelPosition="left"
           style={{ marginRight: '4rem' }}
@@ -31,7 +37,6 @@ class JobDetailHeader extends Component {
           <Icon name="eraser" />
           삭제
         </Button>
-
         <Modal size={'mini'} open={open} onClose={this.toggle}>
           <Modal.Header>삭제</Modal.Header>
           <Modal.Content>
