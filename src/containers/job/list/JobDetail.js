@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Form, Grid, Image, List, Container, Header } from 'semantic-ui-react';
 import { fetchJob } from 'actions/action_Job';
+// import { push } from 'connected-react-router';
+import { Redirect } from 'react-router-dom';
+
+
+import { deleteJobData } from 'actions/action_Job';
+
+
 import editJobData from 'actions/action_JobEdit';
 import './JobDetail.css';
 import JobSchedule from 'components/job/edit/JobSchedule';
@@ -26,18 +32,17 @@ class JobDetail extends Component {
 
   render() {
     const { open } = this.state;
-    const { hireId, deleteJobData, loading, error } = this.props;
-    const { job } = this.props;
-    console.log(job);
-    // const { job, editJobData } = this.props;
+    const {
+ job, editJobData, loading, error, deleteJobData 
+} = this.props;
 
-    const hireMapping = category => <div className="mapping">{category}</div>;
+    // const hireMapping = category => <div className="mapping">{category}</div>;
 
     // 추후 hireId를 발급받을 수 있으면 수정
-    if (!job.hireId) return <Redirect to="/joblist" />;
 
-    //
+    if (!job.hireId) return <Redirect to="/joblist" />;
     return (
+
       <Container className="jobdetail">
         <JobCompany
           companyId={/* job.companyId */ 1}
@@ -85,6 +90,10 @@ class JobDetail extends Component {
 
 JobDetail.propTypes = {
   job: PropTypes.instanceOf(Object),
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  editJobData: PropTypes.func,
+  deleteJobData: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -97,5 +106,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchJob, editJobData },
+  { editJobData, deleteJobData },
 )(JobDetail);

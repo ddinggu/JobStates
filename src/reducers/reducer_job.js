@@ -1,4 +1,5 @@
 import * as types from 'actions/actionTypes';
+import * as filters from 'utils/filter';
 
 const initialState = {
   loading: false,
@@ -90,7 +91,7 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         // api 완성되면 수정될 것!!
-        currentData: { ...state.currentData, data: action.payload },
+        currentData: { data: action.payload },
       };
 
     case types.POST_JOB_FAILURE:
@@ -109,7 +110,9 @@ export default function (state = initialState, action) {
     case types.GET_AUTOCOMPLETEJOB_SUCCESS:
       return {
         ...state,
-        autocompleteData: action.crawlingData,
+        loading: false,
+        autocompleteData:
+          action.crawlingData.length > 0 ? action.crawlingData : null,
       };
 
     case types.GET_AUTOCOMPLETEJOB_FAILURE:
@@ -122,8 +125,10 @@ export default function (state = initialState, action) {
     case types.FILTER_AUTOCOMPLETEJOB:
       return {
         ...state,
-        filteredAutocompleteData: state.autocompleteData.filter(
-          job => `${job.hireId}` === `${action.hireId}`,
+        filteredAutocompleteData: filters.findTargetFilter(
+          state.autocompleteData,
+          'hireId',
+          action.hireId,
         )[0],
       };
 
@@ -143,6 +148,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
+        allJobData: filters.deleteTargetFilter(
+          state.allJobData,
+          'hireId',
+          action.hireId,
+        ),
         currentData: { data: {} },
       };
 

@@ -31,24 +31,30 @@ const loadingDeleteJobData = () => ({
   type: types.DELETE_JOB_BEGIN,
 });
 
-const successDeleteJobData = () => ({
+const successDeleteJobData = hireId => ({
   type: types.DELETE_JOB_SUCCESS,
+  hireId,
 });
 
 const failedDeleteJobData = () => ({
   type: types.DELETE_JOB_FAILURE,
 });
 
-export const deleteJobData = hireId => async (dispatch) => {
+export const deleteJobData = data => async (dispatch) => {
   dispatch(loadingDeleteJobData());
+
+  console.log('delete data: ', data);
 
   try {
     // 추후 수정 필요!!
-    const response = await api.deletePostingJob(hireId);
+    const response = await api.deletePostingJob(data);
     if (response.status === 500) {
       dispatch(failedDeleteJobData());
     } else {
-      dispatch(successDeleteJobData());
+      console.log('response: ', response);
+
+      dispatch(successDeleteJobData(data.hireId));
+      dispatch(push('/joblist'));
     }
   } catch (err) {
     console.error(err);

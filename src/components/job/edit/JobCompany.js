@@ -9,6 +9,7 @@ import {
   Container,
   Header,
   Label,
+  TextArea,
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
@@ -98,7 +99,6 @@ class JobCompany extends Component {
                         </span>
                       </Grid.Column>
                     </Grid.Row>
-
                     <Grid.Row textAlign="left">
                       <List bulleted>
                         <List.Item className="jobpostItem">회사소개</List.Item>

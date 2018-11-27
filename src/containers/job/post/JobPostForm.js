@@ -21,8 +21,9 @@ class JobPostForm extends Component {
   state = {
     hireId: null,
     status: '',
-    statusDate: new Date(),
+    statusDate: '',
     scheduleId: null,
+    logoKey: null,
     logo: '',
     brand: '',
     category: [],
@@ -36,13 +37,13 @@ class JobPostForm extends Component {
     hireImage: '',
     salary: '',
     address: '',
-    deadLine: new Date(),
+    deadLine: '',
     advantage: '',
-    disadvantage: '',
+    disAdvantage: '',
     strategy: '',
-    hireType: '',
+    experience: '',
     provider: 'user',
-    end: '',
+    hireStatus: null,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -53,19 +54,34 @@ class JobPostForm extends Component {
       this.setState(nextProps.filteredAutocompleteData);
   }
 
-  onHandleChange = key => e =>
-    this.setState({
-      ...this.state,
-      [key]: e.target.value ? e.target.value : e.target.innerText,
-    });
+  componentDidUpdate(prevProps, prevState) {
+    // const { brand } = this.state;
+    // if (prevState.brand !== brand) this.setState({ provider: 'user' });
+  }
 
-  onDateChange = key => date => this.setState({ ...this.state, [key]: date });
+  onHandleChange = (key, shouldChange) => e => {
+    if (!shouldChange)
+      this.setState({
+        ...this.state,
+        [key]: e.target.value ? e.target.value : e.target.innerText,
+      });
+    else
+      this.setState({
+        ...this.state,
+        [key]: e.target.value ? e.target.value : e.target.innerText,
+        provider: 'user',
+      });
+  };
 
-  onHandleGetArray = key => data =>
-    this.setState({
-      ...this.state,
-      [key]: data,
-    });
+  // onHandleDataChange = (key, shouldChange) => date => {
+  //   if (!shouldChange) this.setState({ ...this.state, [key]: date });
+  //   else this.setState({ ...this.state, [key]: date, provider: 'user' });
+  // };
+
+  onHandleDataChange = (key, shouldChange) => data => {
+    if (!shouldChange) this.setState({ ...this.state, [key]: data });
+    else this.setState({ ...this.state, [key]: data, provider: 'user' });
+  };
 
   //   onHandleArrayChange = key => e => {
   //     const filteredState = jobUtils.filterToJobArray(
@@ -109,7 +125,7 @@ class JobPostForm extends Component {
                   <Dropdown
                     inline
                     options={jobUtils.current}
-                    onChange={this.onHandleChange('status')}
+                    onChange={this.onHandleChange('status', false)}
                     value={this.state.status}
                   />
                 </span>
@@ -124,12 +140,8 @@ class JobPostForm extends Component {
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <DatePicker
-                  selected={
-                    typeof this.state.statusDate === 'string'
-                      ? null
-                      : new Date()
-                  }
-                  onChange={this.onDateChange('statusDate')}
+                  selected={this.state.statusDate}
+                  onChange={this.onHandleDataChange('statusDate', false)}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -145,7 +157,7 @@ class JobPostForm extends Component {
                   control={Input}
                   label="회사명"
                   placeholder="회사명"
-                  onChange={this.onHandleChange('brand')}
+                  onChange={this.onHandleChange('brand', true)}
                   value={this.state.brand}
                 />
                 <Form.Field
@@ -159,9 +171,17 @@ class JobPostForm extends Component {
                   id="form-input-control-company-url"
                   control={Input}
                   label="회사 사이트"
-                  placeholder="회사사이트"
-                  onChange={this.onHandleChange('companyUrl')}
+                  placeholder="회사 사이트"
+                  onChange={this.onHandleChange('companyUrl', true)}
                   value={this.state.companyUrl}
+                />
+                <Form.Field
+                  id="form-input-control-company-url"
+                  control={TextArea}
+                  label="회사 소개"
+                  placeholder="회사소개"
+                  onChange={this.onHandleChange('intro', true)}
+                  value={this.state.intro}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -187,7 +207,7 @@ class JobPostForm extends Component {
                 <DropdownSearchQuery
                   stateOptions={jobUtils.selectCategory}
                   title={'산업 분야'}
-                  handleArrayChange={this.onHandleGetArray('category')}
+                  handleArrayChange={this.onHandleDataChange('category', true)}
                   value={this.state.category}
                 />
               </Grid.Column>
@@ -203,7 +223,7 @@ class JobPostForm extends Component {
                   id="form-input-control-company-name"
                   control={Input}
                   placeholder="채용명"
-                  onChange={this.onHandleChange('title')}
+                  onChange={this.onHandleChange('title', true)}
                   value={this.state.title}
                 />
               </Grid.Column>
@@ -219,7 +239,7 @@ class JobPostForm extends Component {
                   id="form-input-control-company-name"
                   control={Input}
                   placeholder="공고 URL"
-                  onChange={this.onHandleChange('hireUrl')}
+                  onChange={this.onHandleChange('hireUrl', true)}
                   value={this.state.hireUrl}
                 />
               </Grid.Column>
@@ -247,7 +267,7 @@ class JobPostForm extends Component {
                 <DropdownSearchQuery
                   stateOptions={jobUtils.selectTech}
                   title={'요구 기술 스택'}
-                  handleArrayChange={this.onHandleGetArray('hireTech')}
+                  handleArrayChange={this.onHandleDataChange('hireTech', true)}
                   value={this.state.hireTech}
                 />
               </Grid.Column>
@@ -261,7 +281,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 150 }}
-                  onChange={this.onHandleChange('importantInfo')}
+                  onChange={this.onHandleChange('importantInfo', true)}
                   value={this.state.importantInfo}
                 />
               </Grid.Column>
@@ -275,7 +295,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 230 }}
-                  onChange={this.onHandleChange('detailInfo')}
+                  onChange={this.onHandleChange('detailInfo', true)}
                   value={this.state.detailInfo}
                 />
               </Grid.Column>
@@ -300,7 +320,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <Input
                   placeholder="연봉"
-                  onChange={this.onHandleChange('salary')}
+                  onChange={this.onHandleChange('salary', true)}
                   value={this.state.salary}
                 />
               </Grid.Column>
@@ -314,8 +334,8 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <Input
                   placeholder="채용조건"
-                  onChange={this.onHandleChange('hireType')}
-                  value={this.state.hireType}
+                  onChange={this.onHandleChange('experience', true)}
+                  value={this.state.experience}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -327,12 +347,8 @@ class JobPostForm extends Component {
               </Grid.Column>
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <DatePicker
-                  selected={
-                    typeof this.state.statusDate === 'string'
-                      ? null
-                      : new Date()
-                  }
-                  onChange={this.onDateChange('deadLine')}
+                  selected={this.state.deadLine}
+                  onChange={this.onHandleDataChange('deadLine', true)}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -346,7 +362,7 @@ class JobPostForm extends Component {
                 <Input
                   fluid
                   placeholder="지역"
-                  onChange={this.onHandleChange('address')}
+                  onChange={this.onHandleChange('address', true)}
                   value={this.state.address}
                 />
               </Grid.Column>
@@ -360,7 +376,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('advantage')}
+                  onChange={this.onHandleChange('advantage', true)}
                   value={this.state.advantage}
                 />
               </Grid.Column>
@@ -374,8 +390,8 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('disadvantage')}
-                  value={this.state.disadvantage}
+                  onChange={this.onHandleChange('disAdvantage', true)}
+                  value={this.state.disAdvantage}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -388,7 +404,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('strategy')}
+                  onChange={this.onHandleChange('strategy', true)}
                   value={this.state.strategy}
                 />
               </Grid.Column>

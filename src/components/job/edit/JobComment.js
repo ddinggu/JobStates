@@ -15,7 +15,7 @@ class JobComment extends Component {
     edit: false,
     commentId: this.props.commentId,
     advantage: this.props.advantage,
-    disadvantage: this.props.disadvantage,
+    disAdvantage: this.props.disAdvantage,
     strategy: this.props.strategy,
   };
 
@@ -32,7 +32,7 @@ class JobComment extends Component {
   }
 
   render() {
-    const { edit, commentId, advantage, disadvantage, strategy } = this.state;
+    const { edit, commentId, advantage, disAdvantage, strategy } = this.state;
     const { onSubmitEditData } = this.props;
 
     return (
@@ -101,7 +101,6 @@ class JobComment extends Component {
                       </Form.Field>
                     </div>
                   </Grid.Row>
-
                   <Grid.Row>
                     <div class="ItemsInContainer">
                       <Form.Field>
