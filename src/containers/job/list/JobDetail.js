@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Grid, Image, List, Container, Header } from 'semantic-ui-react';
 import { fetchJob } from 'actions/action_Job';
 // import { push } from 'connected-react-router';
-import { Redirect } from 'react-router-dom';
-
-
 import { deleteJobData } from 'actions/action_Job';
-
 
 import editJobData from 'actions/action_JobEdit';
 import './JobDetail.css';
@@ -17,7 +13,6 @@ import JobCompany from 'components/job/edit/JobCompany';
 import JobHire from 'components/job/edit/JobHire';
 import JobComment from 'components/job/edit/JobComment';
 import JobDetailHeader from './JobDetailHeader';
-import { deleteJobData } from 'actions/action_Job';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import './JobDetail.css';
 import { Redirect } from 'react-router';
@@ -32,9 +27,7 @@ class JobDetail extends Component {
 
   render() {
     const { open } = this.state;
-    const {
- job, editJobData, loading, error, deleteJobData 
-} = this.props;
+    const { job, editJobData, loading, error, deleteJobData } = this.props;
 
     // const hireMapping = category => <div className="mapping">{category}</div>;
 
@@ -42,7 +35,6 @@ class JobDetail extends Component {
 
     if (!job.hireId) return <Redirect to="/joblist" />;
     return (
-
       <Container className="jobdetail">
         <JobCompany
           companyId={/* job.companyId */ 1}
