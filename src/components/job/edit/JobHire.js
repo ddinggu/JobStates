@@ -30,6 +30,8 @@ class JobCompany extends Component {
     address: this.props.address,
     provider: this.props.provider,
     experience: this.props.experience,
+    statusDate: this.props.statusData,
+    hireType: this.props.hireType,
   };
 
   onEditing = () => this.setState({ edit: !this.state.edit });
@@ -67,6 +69,8 @@ class JobCompany extends Component {
       address,
       provider,
       experience,
+      statusDate,
+      hireType,
     } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
