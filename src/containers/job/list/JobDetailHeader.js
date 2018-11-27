@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { deleteJobData } from 'actions/action_Job';
+// import { connect } from 'react-redux';
+// import { deleteJobData } from 'actions/action_Job';
 
 class JobDetailHeader extends Component {
   state = { open: false };
@@ -10,14 +10,19 @@ class JobDetailHeader extends Component {
 
   render() {
     const { open } = this.state;
-    const { hireId, deleteJobData, loading, error } = this.props;
+    const {
+      provider,
+      commentId,
+      companyId,
+      hireId,
+      scheduleId,
+      loading,
+      error,
+      deleteJobData,
+    } = this.props;
 
     return (
       <div style={{ float: 'right' }}>
-        <Button labelPosition="left" style={{ marginRight: '2rem' }}>
-          <Icon name="cut" />
-          수정
-        </Button>
         <Button
           labelPosition="left"
           style={{ marginRight: '4rem' }}
@@ -41,7 +46,15 @@ class JobDetailHeader extends Component {
               icon={loading ? null : 'checkmark'}
               labelPosition="right"
               content="삭제"
-              onClick={() => deleteJobData(hireId)}
+              onClick={() =>
+                deleteJobData({
+                  provider,
+                  commentId,
+                  companyId,
+                  hireId,
+                  scheduleId,
+                })
+              }
               loading={loading}
             />
           </Modal.Actions>
@@ -51,13 +64,4 @@ class JobDetailHeader extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  hireId: state.job.currentData.data.hireId,
-  loading: state.job.loading,
-  error: state.job.error,
-});
-
-export default connect(
-  mapStateToProps,
-  { deleteJobData },
-)(JobDetailHeader);
+export default JobDetailHeader;

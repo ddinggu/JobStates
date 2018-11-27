@@ -18,7 +18,7 @@ class JobCompany extends Component {
     deadLine: this.props.deadLine,
     address: this.props.address,
     provider: this.props.provider,
-    hireType: this.props.hireType,
+    exprience: this.props.exprience,
   };
 
   onEditing = () => this.setState({ edit: !this.state.edit });
@@ -55,7 +55,7 @@ class JobCompany extends Component {
       deadLine,
       address,
       provider,
-      hireType,
+      exprience,
     } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
@@ -285,8 +285,8 @@ class JobCompany extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <Input
                   placeholder="채용조건"
-                  onChange={this.onHandleChange('hireType')}
-                  value={hireType}
+                  onChange={this.onHandleChange('exprience')}
+                  value={exprience}
                 />
               </Grid.Column>
             </Grid.Row>

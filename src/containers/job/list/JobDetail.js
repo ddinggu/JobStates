@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { push } from 'connected-react-router';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Form, Grid, Image, List } from 'semantic-ui-react';
-import { fetchJob } from 'actions/action_Job';
+import {
+ Form, Grid, Image, List 
+} from 'semantic-ui-react';
+import { deleteJobData } from 'actions/action_Job';
 import editJobData from 'actions/action_JobEdit';
 import './JobDetail.css';
 import JobSchedule from 'components/job/edit/JobSchedule';
@@ -17,18 +21,29 @@ class JobDetail extends Component {
   }
 
   render() {
-    const { job, editJobData } = this.props;
+    const {
+ job, editJobData, loading, error, deleteJobData 
+} = this.props;
 
-    const hireMapping = category => <div className="mapping">{category}</div>;
+    // const hireMapping = category => <div className="mapping">{category}</div>;
 
     // 추후 hireId를 발급받을 수 있으면 수정
-    // if (!job.hireId) return <Redirect to="/joblist" />;
+    if (!job.hireId) return <Redirect to="joblist" />;
 
     return (
       <div id="job-detail">
         <Form>
           <div style={{ height: '4.2rem' }}>
-            <JobDetailHeader />
+            <JobDetailHeader
+              provider={job.provider}
+              commentId={job.commentId}
+              companyId={job.companyId}
+              hireId={job.hireId}
+              scheduleId={job.scheduleId}
+              loading={loading}
+              error={error}
+              deleteJobData={deleteJobData}
+            />
           </div>
           <Grid>
             {/* <Grid.Row>
@@ -271,13 +286,19 @@ class JobDetail extends Component {
 
 JobDetail.propTypes = {
   job: PropTypes.instanceOf(Object),
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  editJobData: PropTypes.func,
+  deleteJobData: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   job: state.job.currentData.data,
+  loading: state.job.loading,
+  error: state.job.error,
 });
 
 export default connect(
   mapStateToProps,
-  { fetchJob, editJobData },
+  { editJobData, deleteJobData },
 )(JobDetail);
