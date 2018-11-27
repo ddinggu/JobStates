@@ -29,8 +29,7 @@ class JobCompany extends Component {
     deadLine: this.props.deadLine,
     address: this.props.address,
     provider: this.props.provider,
-    hireType: this.props.hireType,
-    statusDate: this.props.statusDate,
+    experience: this.props.experience,
   };
 
   onEditing = () => this.setState({ edit: !this.state.edit });
@@ -49,9 +48,9 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ edit: !this.state.edit });
-  }
+  //   componentWillReceiveProps(nextProps) {
+  //     this.setState({ edit: !this.state.edit });
+  //   }
 
   render() {
     const {
@@ -67,8 +66,7 @@ class JobCompany extends Component {
       deadLine,
       address,
       provider,
-      hireType,
-      statusDate,
+      experience,
     } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;

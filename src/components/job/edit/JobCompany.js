@@ -40,9 +40,9 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ edit: !this.state.edit });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({ edit: !this.state.edit });
+  // }
 
   render() {
     const {

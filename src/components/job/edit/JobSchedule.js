@@ -21,9 +21,9 @@ class JobSchedule extends Component {
 
   onDateChange = key => date => this.setState({ ...this.state, [key]: date });
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ edit: !this.state.edit });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({ edit: !this.state.edit });
+  // }
 
   render() {
     const { edit, scheduleId, status, statusDate } = this.state;
