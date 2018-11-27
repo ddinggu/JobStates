@@ -22,7 +22,13 @@ class JobDetailHeader extends Component {
     } = this.props;
 
     return (
+      <div>
+        <Button labelPosition="left" style={{ marginRight: '2rem' }}>
+          <Icon name="cut" />
+          수정
+        </Button>
       <div style={{ float: 'right' }}>
+
         <Button
           labelPosition="left"
           style={{ marginRight: '4rem' }}
