@@ -27,7 +27,7 @@ class JobDetailHeader extends Component {
           <Icon name="cut" />
           수정
         </Button>
-      <div style={{ float: 'right' }}>
+        <div style={{ float: 'right' }} />
 
         <Button
           labelPosition="left"
@@ -37,7 +37,6 @@ class JobDetailHeader extends Component {
           <Icon name="eraser" />
           삭제
         </Button>
-
         <Modal size={'mini'} open={open} onClose={this.toggle}>
           <Modal.Header>삭제</Modal.Header>
           <Modal.Content>
