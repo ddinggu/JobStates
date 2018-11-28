@@ -20,6 +20,7 @@ export default jobData => async (dispatch) => {
   dispatch(loadingPostJobData());
   try {
     const responsePostJobData = await api.postUserJobPosting(jobData);
+    console.log('postData: ', responsePostJobData);
 
     await dispatch(successPostJobData(responsePostJobData.data));
     dispatch(push('/jobdetail'));

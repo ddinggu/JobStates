@@ -18,7 +18,9 @@ import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
+// import CommonLoading from 'components/common/Loading';
 import * as api from 'api/api';
+
 
 class JobPostForm extends Component {
   state = {
@@ -96,6 +98,7 @@ class JobPostForm extends Component {
     const { postJobData, loading, error } = this.props;
     return (
       <Container className="jobdetail">
+        {/* {loading ? <CommonLoading /> : null} */}
         <div className="jobPostHeader" style={{ height: '4rem' }}>
           <Button
             floated="right"
