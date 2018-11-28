@@ -18,6 +18,7 @@ import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
+import * as api from 'api/api';
 
 class JobPostForm extends Component {
   state = {
@@ -73,6 +74,22 @@ class JobPostForm extends Component {
   onHandleDataChange = (key, shouldChange) => data => {
     if (!shouldChange) this.setState({ ...this.state, [key]: data });
     else this.setState({ ...this.state, [key]: data, provider: 'user' });
+  };
+
+  _sendImageForLogo = () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
+    api.jobPostImage(imageForm).then(data => {
+      this.setState({ logo: data.data.url });
+    });
+  };
+
+  _sendImageForHireImage = () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('imagefileHire').files[0]);
+    api.jobPostImage(imageForm).then(data => {
+      this.setState({ hireImage: data.data.url });
+    });
   };
 
   render() {
@@ -168,7 +185,15 @@ class JobPostForm extends Component {
                             <List.Item className="jobpostItem">
                               회사 로고
                             </List.Item>
-                            <Input control={Input} type="file" />
+                            <Input
+                              control={Input}
+                              type="file"
+                              name="file"
+                              id="imagefileLogo"
+                              onChange={() => {
+                                this._sendImageForLogo();
+                              }}
+                            />
                             <Image src={this.state.logo} />
                           </List>
                         </Form.Field>
@@ -368,7 +393,15 @@ class JobPostForm extends Component {
                           <List.Item className="jobpostItem">
                             공고 이미지
                           </List.Item>
-                          <Input control={Input} type="file" />
+                          <Input
+                            control={Input}
+                            type="file"
+                            name="file"
+                            id="imagefileHire"
+                            onChange={() => {
+                              this._sendImageForHireImage();
+                            }}
+                          />
                           <Image src={this.state.hireImage} />
                         </List>
                       </Form.Field>
