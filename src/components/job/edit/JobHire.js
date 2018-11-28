@@ -5,7 +5,6 @@ import {
   Image,
   Form,
   Input,
-  TextArea,
   Container,
   Header,
   List,
