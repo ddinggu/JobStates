@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
+import CommonLoading from 'components/common/Loading';
 import UserBasicInfo from '../../components/profile/UserBasicInfo';
 import UserEducation from '../../components/profile/UserEducation';
 import UserProject from '../../components/profile/UserProject';
@@ -30,9 +31,9 @@ class UserContainer extends Component {
   render() {
     if (this.props.name === 'default name') {
       return (
-        <div>
-          <img src="https://i.gifer.com/4V0b.gif" />
-        </div>
+        <>
+          <CommonLoading />
+        </>
       );
     }
 
@@ -97,7 +98,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   if (!(state.fetchedProfile.items === null)) {
     return {
       name: state.fetchedProfile.items.user.nick,
@@ -115,7 +116,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,

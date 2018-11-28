@@ -4,6 +4,8 @@ import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
+import CommonLoading from 'components/common/Loading';
+
 import './JobList.css';
 
 class JobList extends Component {
@@ -63,7 +65,11 @@ class JobList extends Component {
     const { job, filter } = this.props;
     const { redirect } = this.state;
     if (job.length === 0) {
-      return <div>loading...</div>;
+      return (
+        <>
+          <CommonLoading />
+        </>
+      );
     }
 
     if (redirect) {
