@@ -21,9 +21,7 @@ class JobDetail extends Component {
   }
 
   render() {
-    const {
- job, editJobData, loading, error, deleteJobData 
-} = this.props;
+    const { job, editJobData, loading, error, deleteJobData } = this.props;
 
     if (!job.hireId) return <Redirect to="/joblist" />;
 
@@ -37,6 +35,12 @@ class JobDetail extends Component {
           loading={job.loading}
           error={job.error}
           deleteJobData={deleteJobData}
+        />
+        <JobSchedule
+          scheduleId={job.scheduleId}
+          status={job.status}
+          statusDate={job.statusDate}
+          onSubmitEditData={editJobData}
         />
         <JobCompany
           companyId={job.companyId}

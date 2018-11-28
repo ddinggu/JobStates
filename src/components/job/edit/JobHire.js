@@ -5,7 +5,6 @@ import {
   Image,
   Form,
   Input,
-  TextArea,
   Container,
   Header,
   List,
@@ -13,6 +12,7 @@ import {
 import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
+import * as api from 'api/api';
 
 class JobCompany extends Component {
   state = {
@@ -46,6 +46,18 @@ class JobCompany extends Component {
       ...this.state,
       [key]: data,
     });
+
+  onInputChange = () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('jobHireImage').files[0]);
+    api
+      .jobPostImage(imageForm)
+      .then(data => {
+         this.setState({ hireImage : data.data.url });
+        console.log(data)
+      })
+      .catch(err => console.log('error:::', err));
+  };
 
   render() {
     const {
@@ -165,7 +177,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">공고 이미지</div>
                           </List.Item>
-                          <img src={this.props.hireImage} alt="" />
+                          <Image src={this.props.hireImage} alt="" />
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -295,7 +307,16 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             공고 이미지
                           </List.Item>
-                          <Input control={Input} type="file" />
+                          <Input
+                            control={Input}
+                            type="file"
+                            name="file"
+                            id="jobHireImage"
+                            onChange={() => {
+                              this.onInputChange();
+                            }}
+                          />
+                          <Image src={this.state.hireImage} />
                         </List>
                       </Form.Field>
                     </div>

@@ -7,6 +7,7 @@ import App from 'components/App';
 import configureStore from './store';
 
 import 'semantic-ui-css/semantic.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
 // import * as serviceWorker from './serviceWorker';
 
 const history = createBrowserHistory();
