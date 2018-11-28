@@ -172,8 +172,8 @@ export default function (state = initialState, action) {
     case types.EDIT_JOB_SUCCESS:
       return {
         ...state,
-        ...action.data,
         loading: false,
+        currentData: { data: { ...state.currentData.data, ...action.data } },
       };
 
     case types.EDIT_JOB_FAILURE:

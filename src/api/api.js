@@ -28,4 +28,4 @@ export const fetchJob = () => axios.get(`${URL}/schedule`, header);
 export const postUserJobPosting = data => axios.post(`${URL}/schedule/write`, data, header);
 export const deletePostingJob = data => axios.delete(`${URL}/schedule`, { data, ...header });
 
-export const updateJobPostData = (data, part) => axios.patch(`${URL}/job/${part}`, data, header);
+export const updateJobPostData = (data, part) => axios.patch(`${URL}/schedule/${part}`, data, header);

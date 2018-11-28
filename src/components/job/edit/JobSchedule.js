@@ -6,9 +6,9 @@ import DatePicker from 'react-datepicker';
 class JobSchedule extends Component {
   state = {
     edit: false,
-    scheduleId: this.props.scheduleId,
-    status: this.props.status,
-    statusDate: this.props.statusDate,
+    scheduleId: this.props.scheduleId || null,
+    status: this.props.status || null,
+    statusDate: this.props.statusDate || null,
   };
 
   onEditing = () => this.setState({ edit: !this.state.edit });
@@ -20,10 +20,6 @@ class JobSchedule extends Component {
     });
 
   onDateChange = key => date => this.setState({ ...this.state, [key]: date });
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({ edit: !this.state.edit });
-  // }
 
   render() {
     const { edit, scheduleId, status, statusDate } = this.state;
@@ -96,6 +92,7 @@ class JobSchedule extends Component {
               compact
               onClick={() => {
                 onSubmitEditData(this.state, 'schedule');
+                this.onEditing();
               }}
             >
               추가
