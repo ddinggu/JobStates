@@ -17,6 +17,7 @@ class JobList extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { fetchJob } = this.props;
     fetchJob();
   }
@@ -76,6 +77,16 @@ class JobList extends Component {
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
+          <Table fixed>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>company</Table.HeaderCell>
+                  <Table.HeaderCell>회사명</Table.HeaderCell>
+                  <Table.HeaderCell>직무</Table.HeaderCell>
+                  <Table.HeaderCell>지원상태</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+            </Table>
             <Segment>
               {this.state.filterFlag
                 ? filter.map(this._mapList)
