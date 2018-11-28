@@ -116,7 +116,8 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">채용조건 / 연봉</div>
                           </List.Item>
-                          {this.props.experience || '...'} / {salary}
+                          {this.props.experience || '등록되지 않음'} /{' '}
+                          {salary || '등록되지 않음'}
                         </List>
                       </Grid.Column>
                     </Grid>
