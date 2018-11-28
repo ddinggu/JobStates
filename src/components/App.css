@@ -5,3 +5,14 @@
 #root {
   background-color: #f7f7f7;
 }
+
+.mapping {
+  display: inline-block;
+  border: 1px solid #bbc5d8;
+  border-radius: 480rem;
+  margin-right: 0.4rem;
+  min-width: 4em;
+  text-align: center;
+  font-size: 0.85714286rem;
+  padding: 0.25rem;
+}

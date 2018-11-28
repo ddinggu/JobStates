@@ -1,43 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Form, Grid, Image, List, Container, Header } from 'semantic-ui-react';
-import { fetchJob } from 'actions/action_Job';
-// import { push } from 'connected-react-router';
-import { deleteJobData } from 'actions/action_Job';
+import { Redirect } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
 
+import { deleteJobData } from 'actions/action_Job';
 import editJobData from 'actions/action_JobEdit';
+
 import './JobDetail.css';
-import JobSchedule from 'components/job/edit/JobSchedule';
+
 import JobCompany from 'components/job/edit/JobCompany';
 import JobHire from 'components/job/edit/JobHire';
 import JobComment from 'components/job/edit/JobComment';
+import JobSchedule from 'components/job/edit/JobSchedule';
 import JobDetailHeader from './JobDetailHeader';
-import { Button, Icon, Modal } from 'semantic-ui-react';
-import './JobDetail.css';
-import { Redirect } from 'react-router';
 
 class JobDetail extends Component {
-  state = { open: false };
-  toggle = () => this.setState({ open: !this.state.open });
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
-    const { open } = this.state;
-    const { job, editJobData, loading, error, deleteJobData } = this.props;
-
-    // const hireMapping = category => <div className="mapping">{category}</div>;
-
-    // 추후 hireId를 발급받을 수 있으면 수정
+    const {
+ job, editJobData, loading, error, deleteJobData 
+} = this.props;
 
     if (!job.hireId) return <Redirect to="/joblist" />;
+
     return (
       <Container className="jobdetail">
+        <JobDetailHeader
+          provider={job.provider}
+          commentId={job.commentId}
+          hireId={job.hireId}
+          scheduleId={job.scheduleId}
+          loading={job.loading}
+          error={job.error}
+          deleteJobData={deleteJobData}
+        />
         <JobCompany
-          companyId={/* job.companyId */ 1}
+          companyId={job.companyId}
           brand={job.brand}
           logo={job.logo}
           intro={job.intro}
@@ -47,13 +49,9 @@ class JobDetail extends Component {
           status={job.status}
           statusDate={job.statusDate}
         />
-        {/* <JobSchedule
-          scheduleId={1} // job.scheduleId
-          onSubmitEditData={editJobData}
-        /> */}
 
         <JobHire
-          hireId={/* this.props.hireId */ 1}
+          hireId={job.hireId}
           edit={job.edit}
           title={job.title}
           hireTech={job.hireTech}
@@ -70,9 +68,9 @@ class JobDetail extends Component {
         />
         <JobComment
           onSubmitEditData={editJobData}
-          commentId={/* this.props.commentId */ 1}
+          commentId={job.commentId}
           advantage={job.advantage}
-          disadvantage={job.disadvantage}
+          disAdvantage={job.disAdvantage}
           strategy={job.strategy}
         />
       </Container>

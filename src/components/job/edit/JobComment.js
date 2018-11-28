@@ -7,16 +7,15 @@ import {
   Header,
   List,
   Form,
-  Input,
 } from 'semantic-ui-react';
 
 class JobComment extends Component {
   state = {
     edit: false,
-    commentId: this.props.commentId,
-    advantage: this.props.advantage,
-    disAdvantage: this.props.disAdvantage,
-    strategy: this.props.strategy,
+    commentId: this.props.commentId || null,
+    advantage: this.props.advantage || null,
+    disAdvantage: this.props.disAdvantage || null,
+    strategy: this.props.strategy || null,
   };
 
   onEditing = () => this.setState({ edit: !this.state.edit });
@@ -26,10 +25,6 @@ class JobComment extends Component {
       ...this.state,
       [key]: e.target.value ? e.target.value : e.target.innerText,
     });
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({ edit: !this.state.edit });
-  // }
 
   render() {
     const { edit, commentId, advantage, disAdvantage, strategy } = this.state;
@@ -55,7 +50,7 @@ class JobComment extends Component {
                 <Grid.Row>
                   <List bulleted>
                     <List.Item className="jobpostItem">공고 단점</List.Item>
-                    {this.props.disadvantage}
+                    {this.props.disAdvantage}
                   </List>
                 </Grid.Row>
               </div>
@@ -79,7 +74,8 @@ class JobComment extends Component {
                           </List.Item>
                           <TextArea
                             control={TextArea}
-                            value={this.props.advantage}
+                            value={advantage}
+                            onChange={this.onHandleChange('advantage')}
                           />
                         </List>
                       </Form.Field>
@@ -95,7 +91,8 @@ class JobComment extends Component {
                           </List.Item>
                           <TextArea
                             control={TextArea}
-                            value={this.props.disadvantage}
+                            value={disAdvantage}
+                            onChange={this.onHandleChange('disAdvantage')}
                           />
                         </List>
                       </Form.Field>
@@ -110,7 +107,8 @@ class JobComment extends Component {
                           </List.Item>
                           <TextArea
                             control={TextArea}
-                            value={this.props.strategy}
+                            value={strategy}
+                            onChange={this.onHandleChange('strategy')}
                           />
                         </List>
                       </Form.Field>
@@ -127,7 +125,8 @@ class JobComment extends Component {
                     <Button
                       compact
                       onClick={() => {
-                        onSubmitEditData(this.state, 'commnet');
+                        onSubmitEditData(this.state, 'comment');
+                        this.onEditing();
                       }}
                     >
                       변경

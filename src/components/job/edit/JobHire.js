@@ -9,7 +9,6 @@ import {
   Container,
   Header,
   List,
-  Divider,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
@@ -18,20 +17,18 @@ import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 class JobCompany extends Component {
   state = {
     edit: false,
-    hireId: this.props.hireId,
-    title: this.props.title,
-    hireTech: this.props.hireTech,
-    hireUrl: this.props.hireUrl,
-    importantInfo: this.props.importantInfo,
-    detailInfo: this.props.detailInfo,
-    hireImage: this.props.hireImage,
-    salary: this.props.salary,
-    deadLine: this.props.deadLine,
-    address: this.props.address,
-    provider: this.props.provider,
-    experience: this.props.experience,
-    statusDate: this.props.statusData,
-    hireType: this.props.hireType,
+    hireId: this.props.hireId || null,
+    title: this.props.title || null,
+    hireTech: this.props.hireTech || null,
+    hireUrl: this.props.hireUrl || null,
+    importantInfo: this.props.importantInfo || null,
+    detailInfo: this.props.detailInfo || null,
+    hireImage: this.props.hireImage || null,
+    salary: this.props.salary || null,
+    deadLine: this.props.deadLine || null,
+    address: this.props.address || null,
+    provider: this.props.provider || null,
+    experience: this.props.experience || null,
   };
 
   onEditing = () => this.setState({ edit: !this.state.edit });
@@ -50,14 +47,9 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  //   componentWillReceiveProps(nextProps) {
-  //     this.setState({ edit: !this.state.edit });
-  //   }
-
   render() {
     const {
       edit,
-      hireId,
       title,
       hireTech,
       hireUrl,
@@ -89,15 +81,15 @@ class JobCompany extends Component {
                     <Grid.Column width={4} />
                     <Grid.Column textAlign="center" width={8}>
                       <Grid.Row>
-                        <Header>{title}</Header>
+                        <Header>{this.props.title}</Header>
                       </Grid.Row>
                       <Grid.Row>
-                        (채용 마감일 : {statusDate} ~ {deadLine})
+                        (채용 마감일 : {this.props.deadLine.substr(0, 10)})
                       </Grid.Row>
                     </Grid.Column>
                     <Grid.Column textAlign="right" width={4}>
                       <span className="linkBtn">
-                        <a href={hireUrl}>
+                        <a href={this.props.hireUrl}>
                           <img
                             src="https://png.pngtree.com/svg/20170904/url_650529.png"
                             height="30px"
@@ -114,7 +106,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">필요 기술 스택</div>
                           </List.Item>
-                          {hireTech.map(hireMapping)}
+                          {this.props.hireTech.map(hireMapping)}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -126,7 +118,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">채용조건 / 연봉</div>
                           </List.Item>
-                          {hireType} / {salary}
+                          {this.props.experience || '...'} / {salary}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -138,7 +130,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">주요업무</div>
                           </List.Item>
-                          {importantInfo}
+                          {this.props.importantInfo}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -150,7 +142,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">채용상세</div>
                           </List.Item>
-                          {detailInfo}
+                          {this.props.detailInfo}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -162,7 +154,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">지역</div>
                           </List.Item>
-                          {address}
+                          {this.props.address}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -174,7 +166,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">공고 이미지</div>
                           </List.Item>
-                          <img src={hireImage} alt="" />
+                          <img src={this.props.hireImage} alt="" />
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -210,11 +202,7 @@ class JobCompany extends Component {
                                 채용 마감일
                               </List.Item>
                               <DatePicker
-                                selected={
-                                  typeof statusDate === 'string'
-                                    ? null
-                                    : new Date()
-                                }
+                                selected={new Date(deadLine)}
                                 onChange={this.onDateChange('deadLine')}
                               />
                             </List>
@@ -321,8 +309,8 @@ class JobCompany extends Component {
                             채용 조건
                           </List.Item>
                           <Input
-                            onChange={this.onHandleChange('hireType')}
-                            value={hireType}
+                            onChange={this.onHandleChange('experience')}
+                            value={experience}
                           />
                         </List>
                       </Form.Field>
@@ -354,6 +342,7 @@ class JobCompany extends Component {
                       compact
                       onClick={() => {
                         onSubmitEditData(this.state, 'hire');
+                        this.onEditing();
                       }}
                     >
                       변경
