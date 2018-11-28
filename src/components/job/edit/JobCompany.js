@@ -9,7 +9,6 @@ import {
   Container,
   Header,
   Label,
-  TextArea,
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
@@ -17,13 +16,12 @@ import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 class JobCompany extends Component {
   state = {
     edit: false,
-    companyId: this.props.companyId,
-    logo: this.props.logo,
-    brand: this.props.brand,
-    companyUrl: this.props.companyUrl,
-    intro: this.props.intro,
-    category: this.props.category,
-    status: this.props.status,
+    companyId: this.props.companyId || null,
+    logo: this.props.logo || null,
+    brand: this.props.brand || null,
+    companyUrl: this.props.companyUrl || null,
+    intro: this.props.intro || null,
+    category: this.props.category || null,
   };
 
   onEditing = () => this.setState({ edit: !this.state.edit });
@@ -52,20 +50,21 @@ class JobCompany extends Component {
       companyUrl,
       intro,
       category,
-      status,
+      // status,
     } = this.state;
     const { onSubmitEditData } = this.props;
+    const hireMapping = category => <div className="mapping">{category}</div>;
 
     return (
       <Container className="jobContainer">
         <Grid textAlign="center">
-          <Grid.Row>
+          {/* <Grid.Row>
             <Grid.Column width={2} />
             <Grid.Column width={10} textAlign="left">
               <Grid column="two">
                 <Grid.Column width={12}>
                   <Label tag color="blue" size="large">
-                    {status}
+                    {this.props.status}
                   </Label>
                 </Grid.Column>
                 <Grid.Column width={4} textAlign="right">
@@ -74,7 +73,7 @@ class JobCompany extends Component {
               </Grid>
             </Grid.Column>
             <Grid.Column width={2} />
-          </Grid.Row>
+          </Grid.Row> */}
           <Grid.Row>
             <Grid.Column width={2}>
               <Header>회사</Header>
@@ -93,7 +92,7 @@ class JobCompany extends Component {
                       {/* <Grid.Column width={4} /> */}
                       <Grid.Column width={4} textAlign="right">
                         <span className="linkBtn">
-                          <a href="www.naver.com">
+                          <a href={this.props.companyUrl}>
                             <img
                               src="https://png.pngtree.com/svg/20170904/url_650529.png"
                               height="30px"
@@ -105,31 +104,15 @@ class JobCompany extends Component {
                     <Grid.Row textAlign="left">
                       <List bulleted>
                         <List.Item className="jobpostItem">회사소개</List.Item>
+                        {this.props.intro}
                       </List>
-                      <p>{this.props.intro}</p>
                     </Grid.Row>
                     <Grid.Row>
                       <List bulleted>
                         <List.Item className="jobpostItem">산업분야</List.Item>
                       </List>
                     </Grid.Row>
-
-                    {category.map(tech => (
-                      <div
-                        style={{
-                          display: 'inline-block',
-                          border: '1px solid #bbc5d8',
-                          borderRadius: '500rem',
-                          marginRight: '1rem',
-                          minWidth: '3em',
-                          textAlign: 'center',
-                          fontSize: '.85714286rem',
-                          padding: '0.35rem',
-                        }}
-                      >
-                        {tech}
-                      </div>
-                    ))}
+                    {this.props.category.map(hireMapping)}
                   </Grid>
                 </div>
               </Grid.Column>
@@ -184,6 +167,23 @@ class JobCompany extends Component {
 
                     <Grid.Row>
                       <div class="ItemsInContainer">
+                        <Form.Field>
+                          <List bulleted>
+                            <List.Item className="jobpostItem">
+                              회사 소개
+                            </List.Item>
+                            <Input
+                              onChange={this.onHandleChange('intro')}
+                              value={intro}
+                            />
+                          </List>
+                        </Form.Field>
+                      </div>
+                    </Grid.Row>
+                    <Grid.Row />
+
+                    <Grid.Row>
+                      <div class="ItemsInContainer">
                         <List bulleted>
                           <List.Item className="jobpostItem">
                             산업 분야
@@ -209,6 +209,7 @@ class JobCompany extends Component {
                             compact
                             onClick={() => {
                               onSubmitEditData(this.state, 'company');
+                              this.onEditing();
                             }}
                           >
                             변경

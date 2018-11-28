@@ -83,18 +83,6 @@ class JobPostForm extends Component {
     else this.setState({ ...this.state, [key]: data, provider: 'user' });
   };
 
-  //   onHandleArrayChange = key => e => {
-  //     const filteredState = jobUtils.filterToJobArray(
-  //       this.state[key],
-  //       e.target.innerText,
-  //     );
-
-  //     this.setState({
-  //       ...this.state,
-  //       [key]: filteredState,
-  //     });
-  //   };
-
   render() {
     const { postJobData, loading, error } = this.props;
     return (
@@ -376,7 +364,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('advantage', true)}
+                  onChange={this.onHandleChange('advantage', false)}
                   value={this.state.advantage}
                 />
               </Grid.Column>
@@ -390,7 +378,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('disAdvantage', true)}
+                  onChange={this.onHandleChange('disAdvantage', false)}
                   value={this.state.disAdvantage}
                 />
               </Grid.Column>
@@ -404,7 +392,7 @@ class JobPostForm extends Component {
               <Grid.Column width={10} style={{ marginLeft: '5rem' }}>
                 <TextArea
                   style={{ minHeight: 100 }}
-                  onChange={this.onHandleChange('strategy', true)}
+                  onChange={this.onHandleChange('strategy', false)}
                   value={this.state.strategy}
                 />
               </Grid.Column>
