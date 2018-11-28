@@ -19,6 +19,7 @@ import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
+import GoogleVisionPortal from './GoogleVisionPortal';
 
 class JobPostForm extends Component {
   state = {
@@ -96,6 +97,7 @@ class JobPostForm extends Component {
             등록
           </Button>
           <JobAutoComplete onAutoCompleteData={this.onAutoCompleteData} />
+          <GoogleVisionPortal />
         </div>
 
         <Container className="jobContainer">
