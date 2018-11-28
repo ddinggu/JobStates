@@ -29,3 +29,5 @@ export const postUserJobPosting = data => axios.post(`${URL}/schedule/write`, da
 export const deletePostingJob = data => axios.delete(`${URL}/schedule`, { data, ...header });
 
 export const updateJobPostData = (data, part) => axios.patch(`${URL}/schedule/${part}`, data, header);
+
+export const jobPostImage = data => axios.post(`${URL}/image`, data, header);

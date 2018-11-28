@@ -12,6 +12,7 @@ import {
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
+import * as api from 'api/api';
 
 class JobCompany extends Component {
   state = {
@@ -37,6 +38,14 @@ class JobCompany extends Component {
       ...this.state,
       [key]: data,
     });
+
+   onImageChange = () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('imagefile').files[0]);
+    api.jobPostImage(imageForm).then(data => {
+      this.setState({ logo: data.data.url })
+    }).catch(err => console.log('error:::', err))
+   } 
 
   // componentWillReceiveProps(nextProps) {
   //   this.setState({ edit: !this.state.edit });
@@ -68,7 +77,8 @@ class JobCompany extends Component {
                   <Grid padded="vertically horizontally">
                     <Grid.Row>
                       <Grid.Column width={4}>
-                        <Image src={logo} avatar />
+                     
+                        <Image src={this.props.logo} avatar />
                       </Grid.Column>
                       <Grid.Column textAlign="center" width={8}>
                         <Header>{this.props.brand}</Header>
@@ -126,7 +136,17 @@ class JobCompany extends Component {
                             <List.Item className="jobpostItem">
                               회사 로고
                             </List.Item>
-                            <Input control={Input} type="file" />
+                            <Input
+                            control={Input}
+                            type="file"
+                            name="file"
+                            id="imagefile"
+                            onChange={() => {
+                              this.onImageChange();
+                            }}
+                          />
+                          <Image src={this.state.logo} avatar />
+                            
                           </List>
                         </Form.Field>
                       </div>
