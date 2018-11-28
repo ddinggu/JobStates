@@ -39,13 +39,24 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-   onImageChange = () => {
+  //  onImageChange = () => {
+  //   let imageForm = new FormData();
+  //   imageForm.append('img', document.getElementById('imagefile').files[0]);
+  //   api.jobPostImage(imageForm).then(data => {
+  //     this.setState({ logo: data.data.url })
+  //   }).catch(err => console.log('error:::', err))
+  //  } 
+
+   onImageChange = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefile').files[0]);
-    api.jobPostImage(imageForm).then(data => {
-      this.setState({ logo: data.data.url })
-    }).catch(err => console.log('error:::', err))
-   } 
+    try {
+       let data = await api.jobPostImage(imageForm);
+       this.setState({ logo: data.data.url})
+    } catch(err) {
+      console.log(err)
+    }
+   }
 
   // componentWillReceiveProps(nextProps) {
   //   this.setState({ edit: !this.state.edit });

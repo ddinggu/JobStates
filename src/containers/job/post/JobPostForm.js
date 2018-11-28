@@ -82,21 +82,43 @@ class JobPostForm extends Component {
     else this.setState({ ...this.state, [key]: data, provider: 'user' });
   };
 
-  _sendImageForLogo = () => {
+  // _sendImageForLogo = () => {
+  //   let imageForm = new FormData();
+  //   imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
+  //   api.jobPostImage(imageForm).then(data => {
+  //     this.setState({ logo: data.data.url });
+  //   });
+  // };
+
+  _sendImageForLogo = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
-    api.jobPostImage(imageForm).then(data => {
-      this.setState({ logo: data.data.url });
-    });
-  };
+    try{
+      let data = await api.jobPostImage(imageForm);
+      this.setState({ logo: data.data.url })
+    } catch(err){
+      console.log(err)
+    }
+  }
 
-  _sendImageForHireImage = () => {
+  // _sendImageForHireImage = () => {
+  //   let imageForm = new FormData();
+  //   imageForm.append('img', document.getElementById('imagefileHire').files[0]);
+  //   api.jobPostImage(imageForm).then(data => {
+  //     this.setState({ hireImage: data.data.url });
+  //   });
+  // };
+
+  _sendImageForHireImage = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileHire').files[0]);
-    api.jobPostImage(imageForm).then(data => {
+    try{
+      let data = await api.jobPostImage(imageForm);
       this.setState({ hireImage: data.data.url });
-    });
-  };
+    } catch(err){
+      console.log(err);
+    }
+  }
 
   render() {
     const { postJobData, loading, error } = this.props;
