@@ -7,7 +7,6 @@ import {
   Header,
   List,
   Form,
-  Input,
 } from 'semantic-ui-react';
 
 class JobComment extends Component {
