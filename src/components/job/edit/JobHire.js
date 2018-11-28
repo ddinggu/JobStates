@@ -9,7 +9,6 @@ import {
   Container,
   Header,
   List,
-  Divider,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
@@ -51,7 +50,6 @@ class JobCompany extends Component {
   render() {
     const {
       edit,
-      hireId,
       title,
       hireTech,
       hireUrl,

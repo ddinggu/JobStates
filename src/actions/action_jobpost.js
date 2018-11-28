@@ -16,10 +16,10 @@ const failedPostJobData = () => ({
 });
 
 export default jobData => async (dispatch) => {
+  console.log('post log!!', jobData);
   dispatch(loadingPostJobData());
   try {
     const responsePostJobData = await api.postUserJobPosting(jobData);
-    console.log('post log!!', responsePostJobData);
 
     await dispatch(successPostJobData(responsePostJobData.data));
     dispatch(push('/jobdetail'));

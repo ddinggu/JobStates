@@ -58,22 +58,6 @@ class JobCompany extends Component {
     return (
       <Container className="jobContainer">
         <Grid textAlign="center">
-          {/* <Grid.Row>
-            <Grid.Column width={2} />
-            <Grid.Column width={10} textAlign="left">
-              <Grid column="two">
-                <Grid.Column width={12}>
-                  <Label tag color="blue" size="large">
-                    {this.props.status}
-                  </Label>
-                </Grid.Column>
-                <Grid.Column width={4} textAlign="right">
-                  <Button compact>공고 전체삭제</Button>
-                </Grid.Column>
-              </Grid>
-            </Grid.Column>
-            <Grid.Column width={2} />
-          </Grid.Row> */}
           <Grid.Row>
             <Grid.Column width={2}>
               <Header>회사</Header>
