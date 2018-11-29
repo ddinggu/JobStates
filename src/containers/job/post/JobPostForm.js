@@ -19,8 +19,7 @@ import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
 import GoogleVisionPortal from './GoogleVisionPortal';
-import * as api from 'api/api';
-
+import { jobPostImage } from 'api/api';
 
 class JobPostForm extends Component {
   state = {

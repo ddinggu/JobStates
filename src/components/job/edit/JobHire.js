@@ -13,7 +13,7 @@ import {
 import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
-import * as api from 'api/api';
+import { jobPostImage } from 'api/api';
 
 class JobCompany extends Component {
   state = {
