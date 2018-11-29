@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
-// import { Redirect } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import CommonLoading from 'components/common/Loading';
 
@@ -74,7 +73,6 @@ class JobList extends Component {
     }
 
     return (
-      /* equal width => table 적용 */
       <>
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
