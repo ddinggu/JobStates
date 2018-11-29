@@ -63,9 +63,9 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, filter } = this.props;
+    const { job, filter, loading, error } = this.props;
     const { redirect } = this.state;
-    if (job.length === 0) {
+    if (loading) {
       return (
         <>
           <CommonLoading />
@@ -83,7 +83,7 @@ class JobList extends Component {
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-          <Table fixed>
+            <Table fixed>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>company</Table.HeaderCell>
@@ -110,6 +110,7 @@ const mapStateToProps = state => {
     job: state.job.allJobData,
     filter: state.job.filterData,
     forRedirect: state.job.currentData,
+    loading: state.job.loading,
   };
 };
 
