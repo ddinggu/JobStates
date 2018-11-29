@@ -40,6 +40,12 @@ export default class JobListHeader extends Component {
     this.setState({ redirect: '/jobpost' });
   };
 
+  _keyPress = (e) => {
+    if(e.keyCode == 13){
+      this._onClickSearch(e)
+    }
+ }
+
   render() {
     const { redirect } = this.state;
     if (redirect) return <Redirect to={redirect} />;
@@ -74,6 +80,7 @@ export default class JobListHeader extends Component {
             placeholder="회사명 검색"
             value={this.state.inputValue}
             onChange={this._onInputChange}
+            onKeyDown={this._keyPress}
             style={{ width: '30rem' }}
           />
           <Form.Button onClick={this._onClickSearch} type="submit">
