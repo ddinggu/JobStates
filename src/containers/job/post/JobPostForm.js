@@ -29,6 +29,7 @@ class JobPostForm extends Component {
     scheduleId: null,
     logoKey: null,
     logo: null,
+    logoKey: null,
     brand: null,
     category: [],
     companyUrl: null,
@@ -39,6 +40,7 @@ class JobPostForm extends Component {
     hireTech: [],
     detailInfo: null,
     hireImage: null,
+    hireImageKey: null,
     salary: null,
     address: null,
     deadLine: new Date(),
@@ -93,32 +95,24 @@ class JobPostForm extends Component {
   _sendImageForLogo = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
-    try{
+    try {
       let data = await api.jobPostImage(imageForm);
-      this.setState({ logo: data.data.url })
-    } catch(err){
-      console.log(err)
+      this.setState({ logo: data.data.url, logoKey: data.data.key });
+    } catch (err) {
+      console.log(err);
     }
-  }
-
-  // _sendImageForHireImage = () => {
-  //   let imageForm = new FormData();
-  //   imageForm.append('img', document.getElementById('imagefileHire').files[0]);
-  //   api.jobPostImage(imageForm).then(data => {
-  //     this.setState({ hireImage: data.data.url });
-  //   });
-  // };
+  };
 
   _sendImageForHireImage = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileHire').files[0]);
-    try{
+    try {
       let data = await api.jobPostImage(imageForm);
-      this.setState({ hireImage: data.data.url });
-    } catch(err){
+      this.setState({ hireImage: data.data.url, hireImageKey: data.data.key });
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   render() {
     const { postJobData, loading, error } = this.props;

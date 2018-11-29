@@ -25,6 +25,7 @@ class JobCompany extends Component {
     importantInfo: this.props.importantInfo || null,
     detailInfo: this.props.detailInfo || null,
     hireImage: this.props.hireImage || null,
+    hireImageKey: this.props.hireImageKey || null,
     salary: this.props.salary || null,
     deadLine: this.props.deadLine || null,
     address: this.props.address || null,
@@ -63,13 +64,13 @@ class JobCompany extends Component {
   onInputChange = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('jobHireImage').files[0]);
-    try{
+    try {
       let data = await api.jobPostImage(imageForm);
-      this.setState({ hireImage : data.data.url});
-    } catch(err) {
+      this.setState({ hireImage: data.data.url, hireImageKey: data.data.key });
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   render() {
     const {
