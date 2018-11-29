@@ -40,14 +40,15 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  onImageChange = () => {
+  onImageChange = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefile').files[0]);
-    jobPostImage(imageForm)
-      .then(data => {
-        this.setState({ logo: data.data.url, logoKey: data.data.key });
-      })
-      .catch(err => console.log('error:::', err));
+    try {
+      let data = await api.jobPostImage(imageForm);
+      this.setState({ logo: data.data.url, logoKey: data.data.key });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {

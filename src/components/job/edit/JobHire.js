@@ -49,17 +49,27 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  onInputChange = () => {
+  // onInputChange = () => {
+  //   let imageForm = new FormData();
+  //   imageForm.append('img', document.getElementById('jobHireImage').files[0]);
+  //   api
+  //     .jobPostImage(imageForm)
+  //     .then(data => {
+  //        this.setState({ hireImage : data.data.url });
+  //       console.log(data)
+  //     })
+  //     .catch(err => console.log('error:::', err));
+  // };
+
+  onInputChange = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('jobHireImage').files[0]);
-    jobPostImage(imageForm)
-      .then(data => {
-        this.setState({
-          hireImage: data.data.url,
-          hireImageKey: data.data.key,
-        });
-      })
-      .catch(err => console.log('error:::', err));
+    try {
+      let data = await api.jobPostImage(imageForm);
+      this.setState({ hireImage: data.data.url, hireImageKey: data.data.key });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
