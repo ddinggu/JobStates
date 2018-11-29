@@ -1,0 +1,15 @@
+.googleVisionBox {
+  background-color: white;
+  margin: 8px 8px 16px 16px;
+  padding: 10px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.googleVisionPortal {
+  margin: 5px 10px 10px 10px;
+}
+
+.googleVisionText {
+  margin: 5px 22px 10px 22px;
+}

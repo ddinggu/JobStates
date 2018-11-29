@@ -29,3 +29,6 @@ yarn.lock
 # not used
 sementic.json
 
+
+# API keys
+src/config/google.js
