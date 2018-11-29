@@ -48,34 +48,37 @@ export default class Login extends Component {
             <Grid.Column width={7}>
               {/* <img alt="naver login" src={naverbtn} />
               <img alt="kakao login" src={kakaobtn} /> */}
-
-              <Button
-                align="center"
-                href={`${api.URL}/auth/google`}
-                fluid
-                className="loginbtn"
-                id="google"
-              >
-                구글로 로그인
-              </Button>
-              <Button
-                align="center"
-                href={`${api.URL}/auth/naver`}
-                fluid
-                className="loginbtn"
-                id="naver"
-              >
-                네이버로 로그인
-              </Button>
-              <Button
-                align="center"
-                href={`${api.URL}/auth/kakao`}
-                fluid
-                className="loginbtn"
-                id="kakao"
-              >
-                카카오로 로그인
-              </Button>
+              <Grid padded>
+                <Button
+                  align="center"
+                  href={`${api.URL}/auth/google`}
+                  fluid
+                  className="loginbtn"
+                  id="google"
+                >
+                  구글로 로그인
+                </Button>
+                <Grid.Row>
+                  <Button
+                    align="center"
+                    href={`${api.URL}/auth/naver`}
+                    fluid
+                    className="loginbtn"
+                    id="naver"
+                  >
+                    네이버로 로그인
+                  </Button>
+                </Grid.Row>
+                <Button
+                  align="center"
+                  href={`${api.URL}/auth/kakao`}
+                  fluid
+                  className="loginbtn"
+                  id="kakao"
+                >
+                  카카오로 로그인
+                </Button>
+              </Grid>
 
               {/* <Button color="test" fluid>
                 구글 로그인
