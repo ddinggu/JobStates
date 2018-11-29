@@ -6,4 +6,3 @@ export default [
   '#FFE8AF',
   '#ADD5D7',
 ];
-// export const allUserColor = [];

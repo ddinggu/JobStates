@@ -31,7 +31,7 @@ class JobSchedule extends Component {
   onDateChange = key => date => this.setState({ ...this.state, [key]: date });
 
   render() {
-    const { edit, scheduleId, status, statusDate } = this.state;
+    const { edit, status, statusDate } = this.state;
     const { onSubmitEditData } = this.props;
 
     return (

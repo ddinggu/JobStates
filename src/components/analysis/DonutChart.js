@@ -2,9 +2,11 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 import { Container, Grid, Header } from 'semantic-ui-react';
-import color from '../../utils/colors';
+import color from 'utils/colors';
 
-const DonutChart = ({ tech, category, allTech, allCategory }) => {
+const DonutChart = ({
+ tech, category, allTech, allCategory 
+}) => {
   const hiringData = {
     labels: Object.keys(tech),
     datasets: [
@@ -73,9 +75,7 @@ const DonutChart = ({ tech, category, allTech, allCategory }) => {
             </Header>
           </Grid.Column>
           <Grid.Column textAlign="left" width={12} className="jobbody">
-            {[hiringData, categoryData].map((data, idx) =>
-              dougnutGraph(data, idx),
-            )}
+            {[hiringData, categoryData].map((data, idx) => dougnutGraph(data, idx),)}
           </Grid.Column>
         </Grid>
       </Container>
@@ -88,9 +88,7 @@ const DonutChart = ({ tech, category, allTech, allCategory }) => {
             </Header>
           </Grid.Column>
           <Grid.Column textAlign="left" width={12} className="jobbody">
-            {[allHiringData, allCategoryData].map((data, idx) =>
-              dougnutGraph(data, idx),
-            )}
+            {[allHiringData, allCategoryData].map((data, idx) => dougnutGraph(data, idx),)}
           </Grid.Column>
         </Grid>
       </Container>
