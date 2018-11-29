@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
-
-import UserContainer from '../containers/profile/UserContainer';
-import HeaderContainer from '../containers/header/HeaderContainer';
+import { Route, Switch } from 'react-router-dom';
+import UserContainer from 'containers/profile/UserContainer';
+import AnalysisContainer from 'containers/analysis/AnalysisContainer';
+import HeaderContainer from 'containers/header/HeaderContainer';
+import JobDetail from 'containers/job/list/JobDetail';
+import JobList from 'containers/job/list/JobList';
+import JobPostForm from 'containers/job/post/JobPostForm';
+import Login from 'containers/login/login';
+import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        Job states
-        <HeaderContainer />
-        <UserContainer />
-      </div>
+      <Switch>
+        <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
+          <Route path="/" exact component={Login} />
+          <Route path="/" component={HeaderContainer} />
+          <Route path="/user" component={UserContainer} />
+          <Route path="/joblist" component={JobList} />
+          <Route path="/jobpost" component={JobPostForm} />
+          <Route path="/jobdetail" component={JobDetail} />
+          <Route path="/analysis" component={AnalysisContainer} />
+        </div>
+      </Switch>
     );
   }
 }

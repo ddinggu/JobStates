@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './components/App';
-import store from './store';
-import * as serviceWorker from './serviceWorker';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
+import App from 'components/App';
+import configureStore from './store';
+
+import 'semantic-ui-css/semantic.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
+// import * as serviceWorker from './serviceWorker';
+
+const history = createBrowserHistory();
+const store = configureStore(history);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
 );
 
-serviceWorker.unregister();
+// serviceWorker.unregister();

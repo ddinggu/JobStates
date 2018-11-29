@@ -1,0 +1,47 @@
+.jobbody {
+  background-color: white;
+  margin: 8px 8px 16px 16px;
+  padding: 20px;
+}
+
+.linkBtn {
+  margin-right: 5px;
+}
+
+/* .jobpostItem {
+  padding: 0px 0px 20px 0px; */
+#job-detail .mapping {
+  display: inline-block;
+  border: 1px solid #bbc5d8;
+  border-radius: 500rem;
+  margin-right: 1rem;
+  min-width: 3em;
+  text-align: center;
+  font-size: 0.85714286rem;
+  padding: 0.35rem;
+}
+
+/* 회사, 채용공고, 메모 박스 간 간격*/
+
+.jobContainer {
+  margin: 30px;
+}
+
+/* Container 안의 항목별(ex. 회사소개, 산업분야) 간격 */
+
+.ItemsInContainer {
+  margin: 30px 30px 20px 10px;
+}
+
+/* Container 안의 항목 제목(ex. 회사소개, 산업분야) bold 처리 */
+
+.jobpostItem {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 회사명 글자 크기  */
+
+#brand {
+  font-size: large;
+}

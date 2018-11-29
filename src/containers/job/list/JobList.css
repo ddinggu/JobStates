@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Mate+SC');
+
+.job-list.brand{
+    font-family: 'Mate SC', serif;
+}
+.job-list.specific:hover{
+    /* background: #e0e1e2 none; */
+    /* text-decoration: none;  */
+     /* zoom:110%; */
+    font-weight: bold;  
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}

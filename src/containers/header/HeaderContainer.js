@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
+import fetchHeader from 'actions/action_header';
 import Header from './Header';
-import { fetchHeader } from '../../actions/action_header';
 
 const mapStateToProps = state => ({
   header: state.header,
