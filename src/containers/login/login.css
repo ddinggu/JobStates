@@ -1,0 +1,12 @@
+.loginbtn {
+  border-radius: 25px;
+  height: 30px;
+}
+
+#kakao {
+  background-color: #ffeb04;
+}
+
+#google {
+  background-color: #dd4b39;
+}
