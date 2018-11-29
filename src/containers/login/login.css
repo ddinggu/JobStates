@@ -1,6 +1,7 @@
 .loginbtn {
   border-radius: 50px;
   height: 35px;
+  width: 400px;
   margin: 20px;
   color: white;
 }
