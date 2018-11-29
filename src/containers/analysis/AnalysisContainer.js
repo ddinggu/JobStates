@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 import getAnalysis from 'actions/action_analysis';
 import PropTypes from 'prop-types';
 import DonutChart from 'components/analysis/DonutChart';
 import UserCurrent from 'components/analysis/UserCurrent';
+import Loading from 'components/common/Loading';
 
 class AnalysisContainer extends Component {
   componentDidMount() {
@@ -26,13 +28,15 @@ class AnalysisContainer extends Component {
       loading,
     } = this.props;
     return (
-      <div className="DountChart" style={{ border: '1px solid black' }}>
+      <>
         {loading ? (
-          <p>loading...</p>
+          <>
+            <Loading />
+          </>
         ) : error ? (
           <p>error! </p>
         ) : (
-          <div>
+          <Container className="jobdetail">
             <UserCurrent
               allCount={allCount}
               document={document}
@@ -46,9 +50,9 @@ class AnalysisContainer extends Component {
               allTech={allTech}
               allCategory={allCategory}
             />
-          </div>
+          </Container>
         )}
-      </div>
+      </>
     );
   }
 }
@@ -69,16 +73,16 @@ AnalysisContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  tech: state.Analysis.userHiringTechCount,
-  category: state.Analysis.userHiringCategoryCount,
-  allTech: state.Analysis.allUserHiringTechCount,
-  allCategory: state.Analysis.allUserHiringCategoryCount,
-  allCount: state.Analysis.allCount,
-  document: state.Analysis.document,
-  meeting: state.Analysis.meeting,
-  pass: state.Analysis.pass,
-  fail: state.Analysis.fail,
-  error: state.Analysis.error,
+  tech: state.Analysis.data.userHiringTechCount,
+  category: state.Analysis.data.userHiringCategoryCount,
+  allTech: state.Analysis.data.allUserHiringTechCount,
+  allCategory: state.Analysis.data.allUserHiringCategoryCount,
+  allCount: state.Analysis.data.allCount,
+  document: state.Analysis.data.document,
+  meeting: state.Analysis.data.meeting,
+  pass: state.Analysis.data.pass,
+  fail: state.Analysis.data.fail,
+  error: state.Analysis.data.error,
 });
 
 const mapDispatchToProps = dispatch => ({

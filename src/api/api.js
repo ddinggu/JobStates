@@ -12,7 +12,7 @@ const header = {
   timeout: 2500, // 해당 시간안에 응답이 오지 않으면 에러로 간주
 };
 
-export const getUserAnalysisData = () => axios.get(`${URL}/analysis`, header);
+export const getUserAnalysisData = () => axios.get(`${URL}/analytics`, header);
 
 export const getAutoCompleteData = company => axios.get(`${URL}/schedule/search?brand=${company}`, header);
 

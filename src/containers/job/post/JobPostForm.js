@@ -79,19 +79,11 @@ class JobPostForm extends Component {
     else this.setState({ ...this.state, [key]: data, provider: 'user' });
   };
 
-  // _sendImageForLogo = () => {
-  //   let imageForm = new FormData();
-  //   imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
-  //   api.jobPostImage(imageForm).then(data => {
-  //     this.setState({ logo: data.data.url });
-  //   });
-  // };
-
   _sendImageForLogo = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
     try {
-      let data = await api.jobPostImage(imageForm);
+      let data = await jobPostImage(imageForm);
       this.setState({ logo: data.data.url, logoKey: data.data.key });
     } catch (err) {
       console.log(err);
@@ -102,7 +94,7 @@ class JobPostForm extends Component {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileHire').files[0]);
     try {
-      let data = await api.jobPostImage(imageForm);
+      let data = await jobPostImage(imageForm);
       this.setState({ hireImage: data.data.url, hireImageKey: data.data.key });
     } catch (err) {
       console.log(err);

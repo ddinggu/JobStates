@@ -1,11 +1,10 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
+import { Container, Grid, Header } from 'semantic-ui-react';
 import color from '../../utils/colors';
 
-const DonutChart = ({
-  tech, category, allTech, allCategory,
-}) => {
+const DonutChart = ({ tech, category, allTech, allCategory }) => {
   const hiringData = {
     labels: Object.keys(tech),
     datasets: [
@@ -59,22 +58,43 @@ const DonutChart = ({
   };
 
   const dougnutGraph = (data, idx) => (
-    <div style={{ width: '40%', display: 'inline-block', margin: '1.3em' }}>
+    <div style={{ width: '50%', display: 'inline-block' }}>
       <Doughnut data={data} key={idx} />
     </div>
   );
 
   return (
-    <div className="DountChart" style={{ border: '1px solid black' }}>
-      <div style={{ marginBottom: '1.2em' }}>유저가 선택한 데이터</div>
-      <div>
-        {[hiringData, categoryData].map((data, idx) => dougnutGraph(data, idx))}
-      </div>
-      <div style={{ marginBottom: '1.2em' }}>모든 유저가 선택한 데이터</div>
-      <div>
-        {[allHiringData, allCategoryData].map((data, idx) => dougnutGraph(data, idx))}
-      </div>
-    </div>
+    <>
+      <Container className="jobContainer">
+        <Grid textAlign="center">
+          <Grid.Column width={2}>
+            <Header>
+              유저가 <br /> 선택한 <br /> 데이터
+            </Header>
+          </Grid.Column>
+          <Grid.Column textAlign="left" width={12} className="jobbody">
+            {[hiringData, categoryData].map((data, idx) =>
+              dougnutGraph(data, idx),
+            )}
+          </Grid.Column>
+        </Grid>
+      </Container>
+
+      <Container className="jobContainer">
+        <Grid textAlign="center">
+          <Grid.Column width={2}>
+            <Header>
+              모든 유저가 <br /> 선택한 <br /> 데이터
+            </Header>
+          </Grid.Column>
+          <Grid.Column textAlign="left" width={12} className="jobbody">
+            {[allHiringData, allCategoryData].map((data, idx) =>
+              dougnutGraph(data, idx),
+            )}
+          </Grid.Column>
+        </Grid>
+      </Container>
+    </>
   );
 };
 

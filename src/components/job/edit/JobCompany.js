@@ -44,7 +44,7 @@ class JobCompany extends Component {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefile').files[0]);
     try {
-      let data = await api.jobPostImage(imageForm);
+      let data = await jobPostImage(imageForm);
       this.setState({ logo: data.data.url, logoKey: data.data.key });
     } catch (err) {
       console.log(err);
