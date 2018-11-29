@@ -79,7 +79,7 @@ class JobList extends Component {
 
     return (
       /* equal width => table 적용 */
-      <div>
+      <>
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
@@ -93,14 +93,16 @@ class JobList extends Component {
                 </Table.Row>
               </Table.Header>
             </Table>
-            <Segment>
-              {this.state.filterFlag
-                ? filter.map(this._mapList)
-                : job.map(this._mapList)}
+            <Segment className={job.length ? null : 'container-nonedata'}>
+              {job.length
+                ? this.state.filterFlag
+                  ? filter.map(this._mapList)
+                  : job.map(this._mapList)
+                : '채용공고를 등록해 주세요!!'}
             </Segment>
           </Grid.Column>
         </Grid>
-      </div>
+      </>
     );
   }
 }
