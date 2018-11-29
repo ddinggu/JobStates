@@ -13,22 +13,24 @@ import {
   Container,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import * as jobUtils from 'utils/jobutils';
 import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
 import GoogleVisionPortal from './GoogleVisionPortal';
+import * as api from 'api/api';
+
 
 class JobPostForm extends Component {
   state = {
     hireId: null,
     status: null,
-    statusDate: null,
+    statusDate: new Date(),
     scheduleId: null,
     logoKey: null,
     logo: null,
+    logoKey: null,
     brand: null,
     category: [],
     companyUrl: null,
@@ -39,6 +41,7 @@ class JobPostForm extends Component {
     hireTech: [],
     detailInfo: null,
     hireImage: null,
+    hireImageKey: null,
     salary: null,
     address: null,
     deadLine: new Date(),
@@ -56,11 +59,6 @@ class JobPostForm extends Component {
       nextProps.filteredAutocompleteData.hireId
     )
       this.setState(nextProps.filteredAutocompleteData);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // const { brand } = this.state;
-    // if (prevState.brand !== brand) this.setState({ provider: 'user' });
   }
 
   onHandleChange = (key, shouldChange) => e => {
@@ -82,10 +80,41 @@ class JobPostForm extends Component {
     else this.setState({ ...this.state, [key]: data, provider: 'user' });
   };
 
+  // _sendImageForLogo = () => {
+  //   let imageForm = new FormData();
+  //   imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
+  //   api.jobPostImage(imageForm).then(data => {
+  //     this.setState({ logo: data.data.url });
+  //   });
+  // };
+
+  _sendImageForLogo = async () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
+    try {
+      let data = await api.jobPostImage(imageForm);
+      this.setState({ logo: data.data.url, logoKey: data.data.key });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  _sendImageForHireImage = async () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('imagefileHire').files[0]);
+    try {
+      let data = await api.jobPostImage(imageForm);
+      this.setState({ hireImage: data.data.url, hireImageKey: data.data.key });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const { postJobData, loading, error } = this.props;
     return (
       <Container className="jobdetail">
+        {/* {loading ? <CommonLoading /> : null} */}
         <div className="jobPostHeader" style={{ height: '4rem' }}>
           <Button
             floated="right"
@@ -101,6 +130,50 @@ class JobPostForm extends Component {
         </div>
 
         <Container className="jobContainer">
+          <Grid textAlign="center">
+            <Grid.Column width={2}>
+              <Header>현재 상황</Header>
+            </Grid.Column>
+            <Grid.Column textAlign="left" width={10} className="jobbody">
+              <Grid.Row>
+                <div class="ItemsInContainer">
+                  <Form.Field>
+                    <List bulleted>
+                      <List.Item className="jobpostItem">
+                        채용공고 상황
+                      </List.Item>
+                      현재 이 공고는{' '}
+                      <Dropdown
+                        inline
+                        options={jobUtils.current}
+                        onChange={this.onHandleChange('status', false)}
+                        value={this.state.status}
+                      />
+                    </List>
+                  </Form.Field>
+                </div>
+              </Grid.Row>
+              <Grid.Row />
+
+              <Grid.Row>
+                <div class="ItemsInContainer">
+                  <Form.Field>
+                    <List bulleted>
+                      <List.Item className="jobpostItem">전형일자</List.Item>
+                      <DatePicker
+                        selected={this.state.statusDate}
+                        onChange={this.onHandleDataChange('statusDate', false)}
+                      />
+                    </List>
+                  </Form.Field>
+                </div>
+              </Grid.Row>
+              <Grid.Row />
+            </Grid.Column>
+
+            <Grid.Column width={2} textAlign="left" />
+          </Grid>
+
           <Grid textAlign="center">
             <Grid.Row>
               <Grid.Column width={2}>
@@ -132,8 +205,16 @@ class JobPostForm extends Component {
                             <List.Item className="jobpostItem">
                               회사 로고
                             </List.Item>
-                            <Input control={Input} type="file" />
-                            <Image src={this.state.logo} />
+                            <Input
+                              control={Input}
+                              type="file"
+                              name="file"
+                              id="imagefileLogo"
+                              onChange={() => {
+                                this._sendImageForLogo();
+                              }}
+                            />
+                            <Image src={this.state.logo} avatar alt="" />
                           </List>
                         </Form.Field>
                       </div>
@@ -286,7 +367,7 @@ class JobPostForm extends Component {
                           <List.Item className="jobpostItem">
                             주요 업무
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange(
                               'importantInfo',
                               true,
@@ -304,9 +385,10 @@ class JobPostForm extends Component {
                           <List.Item className="jobpostItem">
                             채용 상세
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange('detailInfo', true)}
                             value={this.state.detailInfo}
+                            style={{ minHeight: 200 }}
                           />
                         </List>
                       </Form.Field>
@@ -332,7 +414,15 @@ class JobPostForm extends Component {
                           <List.Item className="jobpostItem">
                             공고 이미지
                           </List.Item>
-                          <Input control={Input} type="file" />
+                          <Input
+                            control={Input}
+                            type="file"
+                            name="file"
+                            id="imagefileHire"
+                            onChange={() => {
+                              this._sendImageForHireImage();
+                            }}
+                          />
                           <Image src={this.state.hireImage} />
                         </List>
                       </Form.Field>

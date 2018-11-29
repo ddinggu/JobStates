@@ -4,6 +4,8 @@ import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
+import CommonLoading from 'components/common/Loading';
+
 import './JobList.css';
 
 class JobList extends Component {
@@ -17,6 +19,7 @@ class JobList extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { fetchJob } = this.props;
     fetchJob();
   }
@@ -63,7 +66,11 @@ class JobList extends Component {
     const { job, filter } = this.props;
     const { redirect } = this.state;
     if (job.length === 0) {
-      return <div>loading...</div>;
+      return (
+        <>
+          <CommonLoading />
+        </>
+      );
     }
 
     if (redirect) {
@@ -76,6 +83,16 @@ class JobList extends Component {
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
+          <Table fixed>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>company</Table.HeaderCell>
+                  <Table.HeaderCell>회사명</Table.HeaderCell>
+                  <Table.HeaderCell>직무</Table.HeaderCell>
+                  <Table.HeaderCell>지원상태</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+            </Table>
             <Segment>
               {this.state.filterFlag
                 ? filter.map(this._mapList)

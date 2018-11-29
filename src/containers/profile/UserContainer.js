@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
+import CommonLoading from 'components/common/Loading';
 import UserBasicInfo from '../../components/profile/UserBasicInfo';
 import UserEducation from '../../components/profile/UserEducation';
 import UserProject from '../../components/profile/UserProject';
@@ -30,9 +31,9 @@ class UserContainer extends Component {
   render() {
     if (this.props.name === 'default name') {
       return (
-        <div>
-          <img src="https://i.gifer.com/4V0b.gif" />
-        </div>
+        <>
+          <CommonLoading />
+        </>
       );
     }
 

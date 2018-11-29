@@ -12,12 +12,14 @@ import {
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
+import { jobPostImage } from 'api/api';
 
 class JobCompany extends Component {
   state = {
     edit: false,
     companyId: this.props.companyId || null,
     logo: this.props.logo || null,
+    logoKey: this.props.logoKey || null,
     brand: this.props.brand || null,
     companyUrl: this.props.companyUrl || null,
     intro: this.props.intro || null,
@@ -38,9 +40,16 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({ edit: !this.state.edit });
-  // }
+  onImageChange = async () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('imagefile').files[0]);
+    try {
+      let data = await api.jobPostImage(imageForm);
+      this.setState({ logo: data.data.url, logoKey: data.data.key });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     const {
@@ -68,7 +77,7 @@ class JobCompany extends Component {
                   <Grid padded="vertically horizontally">
                     <Grid.Row>
                       <Grid.Column width={4}>
-                        <Image src={logo} avatar />
+                        <Image src={this.props.logo} avatar />
                       </Grid.Column>
                       <Grid.Column textAlign="center" width={8}>
                         <Header>{this.props.brand}</Header>
@@ -94,9 +103,9 @@ class JobCompany extends Component {
                     <Grid.Row>
                       <List bulleted>
                         <List.Item className="jobpostItem">산업분야</List.Item>
+                        {this.props.category.map(hireMapping)}
                       </List>
                     </Grid.Row>
-                    {this.props.category.map(hireMapping)}
                   </Grid>
                 </div>
               </Grid.Column>
@@ -126,7 +135,16 @@ class JobCompany extends Component {
                             <List.Item className="jobpostItem">
                               회사 로고
                             </List.Item>
-                            <Input control={Input} type="file" />
+                            <Input
+                              control={Input}
+                              type="file"
+                              name="file"
+                              id="imagefile"
+                              onChange={() => {
+                                this.onImageChange();
+                              }}
+                            />
+                            <Image src={logo} avatar />
                           </List>
                         </Form.Field>
                       </div>

@@ -5,12 +5,13 @@ import header from './reducer_header';
 import fetchedProfile from './reducer_fetchedProfile';
 import job from './reducer_job';
 
+
 const rootReducers = history => combineReducers({
-    router: connectRouter(history),
-    fetchedProfile,
-    header,
-    Analysis,
-    job,
-  });
+  router: connectRouter(history),
+  fetchedProfile,
+  header,
+  Analysis,
+  job,
+});
 
 export default rootReducers;

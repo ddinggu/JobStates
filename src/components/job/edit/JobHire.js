@@ -5,14 +5,15 @@ import {
   Image,
   Form,
   Input,
-  TextArea,
   Container,
   Header,
   List,
+  TextArea,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
+import { jobPostImage } from 'api/api';
 
 class JobCompany extends Component {
   state = {
@@ -24,6 +25,7 @@ class JobCompany extends Component {
     importantInfo: this.props.importantInfo || null,
     detailInfo: this.props.detailInfo || null,
     hireImage: this.props.hireImage || null,
+    hireImageKey: this.props.hireImageKey || null,
     salary: this.props.salary || null,
     deadLine: this.props.deadLine || null,
     address: this.props.address || null,
@@ -46,6 +48,29 @@ class JobCompany extends Component {
       ...this.state,
       [key]: data,
     });
+
+  // onInputChange = () => {
+  //   let imageForm = new FormData();
+  //   imageForm.append('img', document.getElementById('jobHireImage').files[0]);
+  //   api
+  //     .jobPostImage(imageForm)
+  //     .then(data => {
+  //        this.setState({ hireImage : data.data.url });
+  //       console.log(data)
+  //     })
+  //     .catch(err => console.log('error:::', err));
+  // };
+
+  onInputChange = async () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('jobHireImage').files[0]);
+    try {
+      let data = await api.jobPostImage(imageForm);
+      this.setState({ hireImage: data.data.url, hireImageKey: data.data.key });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     const {
@@ -118,7 +143,8 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">채용조건 / 연봉</div>
                           </List.Item>
-                          {this.props.experience || '...'} / {salary}
+                          {this.props.experience || '등록되지 않음'} /{' '}
+                          {salary || '등록되지 않음'}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -166,7 +192,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">공고 이미지</div>
                           </List.Item>
-                          <img src={this.props.hireImage} alt="" />
+                          <Image src={this.props.hireImage} alt="" />
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -253,7 +279,7 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             주요 업무
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange('importantInfo')}
                             value={importantInfo}
                           />
@@ -268,9 +294,10 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             채용 상세
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange('detailInfo')}
                             value={detailInfo}
+                            style={{ minHeight: 200 }}
                           />
                         </List>
                       </Form.Field>
@@ -296,7 +323,16 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             공고 이미지
                           </List.Item>
-                          <Input control={Input} type="file" />
+                          <Input
+                            control={Input}
+                            type="file"
+                            name="file"
+                            id="jobHireImage"
+                            onChange={() => {
+                              this.onInputChange();
+                            }}
+                          />
+                          <Image src={hireImage} />
                         </List>
                       </Form.Field>
                     </div>
