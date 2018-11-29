@@ -24,8 +24,7 @@
   font-family: 'Merriweather', serif;
 }
 .nav-:hover {
-    cursor:pointer;
-
+  cursor: pointer;
 }
 
 .nav-menu {
@@ -33,21 +32,21 @@
   margin: auto;
   text-align: center;
 }
-.main-nav-link.content-mypage:hover{
-    text-decoration:underline;
-    cursor: pointer;
+.main-nav-link.content-mypage:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
-.main-nav-link.content-joblist:hover{
-    text-decoration:underline;
-    cursor: pointer;
+.main-nav-link.content-joblist:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
-.main-nav-link.content-analysis:hover{
-    text-decoration:underline;
-    cursor: pointer;
+.main-nav-link.content-analysis:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
-.main-nav-link.content-login:hover{
-    text-decoration:underline;
-    cursor: pointer;
+.main-nav-link.content-login:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .main-nav-link {

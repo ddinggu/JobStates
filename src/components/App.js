@@ -11,6 +11,13 @@ import Login from 'containers/login/login';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showNoti: false,
+    };
+  }
+
   render() {
     return (
       <Switch>
