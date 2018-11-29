@@ -63,9 +63,9 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, filter } = this.props;
+    const { job, filter, loading, error } = this.props;
     const { redirect } = this.state;
-    if (job.length === 0) {
+    if (loading) {
       return (
         <>
           <CommonLoading />
@@ -79,11 +79,11 @@ class JobList extends Component {
 
     return (
       /* equal width => table 적용 */
-      <div>
+      <>
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-          <Table fixed>
+            <Table fixed>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>company</Table.HeaderCell>
@@ -93,14 +93,16 @@ class JobList extends Component {
                 </Table.Row>
               </Table.Header>
             </Table>
-            <Segment>
-              {this.state.filterFlag
-                ? filter.map(this._mapList)
-                : job.map(this._mapList)}
+            <Segment className={job.length ? null : 'container-nonedata'}>
+              {job.length
+                ? this.state.filterFlag
+                  ? filter.map(this._mapList)
+                  : job.map(this._mapList)
+                : '채용공고를 등록해 주세요!!'}
             </Segment>
           </Grid.Column>
         </Grid>
-      </div>
+      </>
     );
   }
 }
@@ -110,6 +112,7 @@ const mapStateToProps = state => {
     job: state.job.allJobData,
     filter: state.job.filterData,
     forRedirect: state.job.currentData,
+    loading: state.job.loading,
   };
 };
 

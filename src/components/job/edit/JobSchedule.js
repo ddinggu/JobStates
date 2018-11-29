@@ -7,7 +7,6 @@ import {
   Header,
   List,
   Form,
-  Input,
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DatePicker from 'react-datepicker';

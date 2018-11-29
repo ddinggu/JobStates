@@ -2,12 +2,27 @@ import * as types from 'actions/actionTypes';
 import * as api from 'api/api';
 import { push } from 'connected-react-router';
 
+const loadingFetchJobData = () => ({
+  type: types.FETCH_JOB_BEGIN,
+});
+
+const successFetchJobData = payload => ({
+  type: types.FETCH_JOB_SUCCESS,
+  payload,
+});
+
+const failedFetchJobData = () => ({
+  type: types.FETCH_JOB_FAILURE,
+});
+
 export const fetchJob = () => async (dispatch) => {
+  dispatch(loadingFetchJobData());
+
   try {
     const response = await api.fetchJob();
-    dispatch({ type: types.FETCH_JOB, payload: response.data });
+    dispatch(successFetchJobData(response.data));
   } catch (error) {
-    console.log(error);
+    dispatch(failedFetchJobData());
   }
 };
 

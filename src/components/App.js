@@ -7,6 +7,7 @@ import JobDetail from 'containers/job/list/JobDetail';
 import JobList from 'containers/job/list/JobList';
 import JobPostForm from 'containers/job/post/JobPostForm';
 import Login from 'containers/login/login';
+import getToken from 'containers/login/getToken';
 import './App.css';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route path="/" exact component={Login} />
           <Route path="/" component={HeaderContainer} />
           <Route path="/user" component={UserContainer} />
+          <Route path="/login" component={getToken} />
           <Route path="/joblist" component={JobList} />
           <Route path="/jobpost" component={JobPostForm} />
           <Route path="/jobdetail" component={JobDetail} />
