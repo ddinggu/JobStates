@@ -1,6 +1,8 @@
-import randomColor from 'randomcolor';
-
-export default randomColor({
-  count: 10,
-  hue: 'random',
-});
+export default [
+  '#47ACB1',
+  '#F26522',
+  '#F9AA7B',
+  '#FFCD33',
+  '#FFE8AF',
+  '#ADD5D7',
+];
