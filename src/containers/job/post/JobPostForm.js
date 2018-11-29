@@ -19,8 +19,7 @@ import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
 // import CommonLoading from 'components/common/Loading';
-import * as api from 'api/api';
-
+import { jobPostImage } from 'api/api';
 
 class JobPostForm extends Component {
   state = {
@@ -81,17 +80,24 @@ class JobPostForm extends Component {
   _sendImageForLogo = () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
-    api.jobPostImage(imageForm).then(data => {
-      this.setState({ logo: data.data.url });
-    });
+    jobPostImage(imageForm)
+      .then(data => {
+        this.setState({ logo: data.data.url, logoKey: data.data.key });
+      })
+      .catch(err => console.error(err));
   };
 
   _sendImageForHireImage = () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileHire').files[0]);
-    api.jobPostImage(imageForm).then(data => {
-      this.setState({ hireImage: data.data.url });
-    });
+    jobPostImage(imageForm)
+      .then(data => {
+        this.setState({
+          hireImage: data.data.url,
+          hireImageKey: data.data.key,
+        });
+      })
+      .catch(err => console.error(err));
   };
 
   render() {
@@ -197,7 +203,7 @@ class JobPostForm extends Component {
                                 this._sendImageForLogo();
                               }}
                             />
-                            <Image src={this.state.logo} />
+                            <Image src={this.state.logo} avatar alt="" />
                           </List>
                         </Form.Field>
                       </div>
@@ -350,7 +356,7 @@ class JobPostForm extends Component {
                           <List.Item className="jobpostItem">
                             주요 업무
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange(
                               'importantInfo',
                               true,
@@ -368,9 +374,10 @@ class JobPostForm extends Component {
                           <List.Item className="jobpostItem">
                             채용 상세
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange('detailInfo', true)}
                             value={this.state.detailInfo}
+                            style={{ minHeight: 200 }}
                           />
                         </List>
                       </Form.Field>

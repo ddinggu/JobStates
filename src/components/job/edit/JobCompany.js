@@ -12,13 +12,14 @@ import {
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
-import * as api from 'api/api';
+import { jobPostImage } from 'api/api';
 
 class JobCompany extends Component {
   state = {
     edit: false,
     companyId: this.props.companyId || null,
     logo: this.props.logo || null,
+    logoKey: this.props.logoKey || null,
     brand: this.props.brand || null,
     companyUrl: this.props.companyUrl || null,
     intro: this.props.intro || null,
@@ -39,17 +40,15 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-   onImageChange = () => {
+  onImageChange = () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefile').files[0]);
-    api.jobPostImage(imageForm).then(data => {
-      this.setState({ logo: data.data.url })
-    }).catch(err => console.log('error:::', err))
-   } 
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({ edit: !this.state.edit });
-  // }
+    jobPostImage(imageForm)
+      .then(data => {
+        this.setState({ logo: data.data.url, logoKey: data.data.key });
+      })
+      .catch(err => console.log('error:::', err));
+  };
 
   render() {
     const {
@@ -77,7 +76,6 @@ class JobCompany extends Component {
                   <Grid padded="vertically horizontally">
                     <Grid.Row>
                       <Grid.Column width={4}>
-                     
                         <Image src={this.props.logo} avatar />
                       </Grid.Column>
                       <Grid.Column textAlign="center" width={8}>
@@ -137,16 +135,15 @@ class JobCompany extends Component {
                               회사 로고
                             </List.Item>
                             <Input
-                            control={Input}
-                            type="file"
-                            name="file"
-                            id="imagefile"
-                            onChange={() => {
-                              this.onImageChange();
-                            }}
-                          />
-                          <Image src={this.state.logo} avatar />
-                            
+                              control={Input}
+                              type="file"
+                              name="file"
+                              id="imagefile"
+                              onChange={() => {
+                                this.onImageChange();
+                              }}
+                            />
+                            <Image src={logo} avatar />
                           </List>
                         </Form.Field>
                       </div>
