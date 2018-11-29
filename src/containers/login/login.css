@@ -1,6 +1,8 @@
 .loginbtn {
-  border-radius: 25px;
-  height: 30px;
+  border-radius: 50px;
+  height: 40px;
+  margin: 20px;
+  color: white;
 }
 
 #kakao {
@@ -9,4 +11,8 @@
 
 #google {
   background-color: #dd4b39;
+}
+
+#naver {
+  background-color: #03c73c;
 }
