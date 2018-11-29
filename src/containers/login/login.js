@@ -9,6 +9,8 @@ import {
 } from 'semantic-ui-react';
 import { GoogleLoginButton } from 'react-social-login-buttons';
 import { createButton } from 'react-social-login-buttons';
+import * as api from 'api/api';
+
 // import kakaobtn from './Login_KAKAO.png';
 // import naverbtn from './Login_NAVER.png';
 // import naver from './icon.PNG';
@@ -46,7 +48,7 @@ export default class Login extends Component {
 
               <GoogleLoginButton align="center" />
               <NaverLoginButton align="center" />
-              <KakaoLoginButton align="center" />
+              <KakaoLoginButton align="center" href={api.URL} />
               {/* <Button color="test" fluid>
                 구글 로그인
               </Button> */}
