@@ -62,7 +62,10 @@ class JobListHeader extends Component {
               <Form.Select
                 options={util.options}
                 defaultValue="전체"
-                onChange={this._onSelectChange}
+                onChange={async (e, value) => {
+                  await this._onSelectChange(e, value);
+                  this.onInputDebounce(e);
+                }}
               />
               <Form.Input
                 placeholder="회사명 검색"
