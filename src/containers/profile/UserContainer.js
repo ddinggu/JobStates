@@ -58,11 +58,11 @@ class UserContainer extends Component {
         <UserEducation edu={this.props.education} funcs={funcs} />
         <UserExperience exps={this.props.experience} funcs={funcs} />
         <UserProject project={this.props.project} funcs={funcs} />
-        <UserInterestTech userFavTech={this.props.userFavTech} funcs={funcs} />
         <UserInterestField
           userFavField={this.props.userFavField}
           funcs={funcs}
         />
+        <UserInterestTech userFavTech={this.props.userFavTech} funcs={funcs} />
       </Container>
     );
   }
