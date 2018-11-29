@@ -8,11 +8,12 @@ import {
   Container,
   Header,
   List,
+  TextArea,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
-import * as api from 'api/api';
+import { jobPostImage } from 'api/api';
 
 class JobCompany extends Component {
   state = {
@@ -276,7 +277,7 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             주요 업무
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange('importantInfo')}
                             value={importantInfo}
                           />
@@ -291,9 +292,10 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             채용 상세
                           </List.Item>
-                          <Input
+                          <TextArea
                             onChange={this.onHandleChange('detailInfo')}
                             value={detailInfo}
+                            style={{ minHeight: 200 }}
                           />
                         </List>
                       </Form.Field>
@@ -328,7 +330,7 @@ class JobCompany extends Component {
                               this.onInputChange();
                             }}
                           />
-                          <Image src={this.state.hireImage} />
+                          <Image src={hireImage} />
                         </List>
                       </Form.Field>
                     </div>

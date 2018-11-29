@@ -1,12 +1,12 @@
 #loading {
   position: absolute;
-  margin: auto;
+  margin: 0px;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background: #f7f7f7;
-  /* opacity: 1; */
+  background: #bbc5d8;
+  opacity: 0.6;
   z-index: 1000000000;
 }
 
