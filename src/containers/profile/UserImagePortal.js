@@ -70,12 +70,21 @@ class AddUserImagePortal extends Component {
             >
               <div>
                 <Form>
-                  <Input
+                  {/* <Input
                     control={Input}
                     type="file"
                     id="imagefileUser"
                     onChange={this.sendImage}
-                  />
+                  /> */}
+                  <div className="upload-btn-wrapper">
+                    <button className="btn">등록</button>
+                    <input
+                      type="file"
+                      name="file"
+                      id="imagefileUser"
+                      onChange={this.sendImage}
+                    />
+                  </div>
                   <Image src={this.state.photo} size="medium" />
                   <Button
                     compact

@@ -133,7 +133,7 @@ class JobCompany extends Component {
                             <List.Item className="jobpostItem">
                               회사 로고
                             </List.Item>
-                            <Input
+                            {/* <Input
                               control={Input}
                               type="file"
                               name="file"
@@ -142,7 +142,29 @@ class JobCompany extends Component {
                                 this.onImageChange();
                               }}
                             />
-                            <Image src={logo} avatar />
+                            <Image src={logo} avatar /> */}
+                            <div>
+                              <Image
+                                src={this.state.logo}
+                                alt=""
+                                style={{
+                                  maxWidth: '15%',
+                                  borderRadius: '50%',
+                                }}
+                              />
+
+                              <div className="upload-btn-wrapper">
+                                <button className="btn">등록</button>
+                                <input
+                                  type="file"
+                                  name="file"
+                                  id="imagefile"
+                                  onChange={() => {
+                                    this.onImageChange();
+                                  }}
+                                />
+                              </div>
+                            </div>
                           </List>
                         </Form.Field>
                       </div>
