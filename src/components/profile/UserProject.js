@@ -46,6 +46,14 @@ export default class UserProject extends Component {
       this.onButtonClick();
     };
 
+    // const onSubmitPost_test = (e) => {
+    //   e.preventDefault();
+    //   const { title, term } = this.state;
+    //   const obj = { title, term };
+    //   funcs.submit(obj, 'project');
+    //   this.onButtonClick();
+    // };
+
     return (
       <Container className="UserProject">
         <div className="ui grid centered">

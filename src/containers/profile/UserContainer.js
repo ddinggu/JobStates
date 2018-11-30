@@ -15,7 +15,6 @@ import {
   deleteUserProfile,
 } from '../../actions/action_userprofile';
 import UserInterestTech from './UserInterestTech';
-import UserInterestField from './UserInterestField';
 import './UserContainer.css';
 
 class UserContainer extends Component {
@@ -29,7 +28,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    if (this.props.name === 'default name') {
+    if (this.props.nick === 'default name') {
       return (
         <>
           <CommonLoading />
@@ -38,7 +37,8 @@ class UserContainer extends Component {
     }
 
     const basicinfo = {
-      name: this.props.name,
+      id: this.props.id,
+      nick: this.props.nick,
       email: this.props.email,
       phoneNum: this.props.phoneNum,
       snsBlog: this.props.snsBlog,
@@ -58,11 +58,11 @@ class UserContainer extends Component {
         <UserEducation edu={this.props.education} funcs={funcs} />
         <UserExperience exps={this.props.experience} funcs={funcs} />
         <UserProject project={this.props.project} funcs={funcs} />
-        <UserInterestField
+        <UserInterestTech
           userFavField={this.props.userFavField}
+          userFavTech={this.props.userFavTech}
           funcs={funcs}
         />
-        <UserInterestTech userFavTech={this.props.userFavTech} funcs={funcs} />
       </Container>
     );
   }
@@ -73,7 +73,7 @@ class UserContainer extends Component {
 // ////////////////////////////////////////////////////////////////////////
 
 UserContainer.propTypes = {
-  name: PropTypes.string,
+  nick: PropTypes.string,
   phoneNum: PropTypes.string,
   email: PropTypes.string,
   snsBlog: PropTypes.string,
@@ -84,7 +84,7 @@ UserContainer.propTypes = {
 };
 
 UserContainer.defaultProps = {
-  name: 'default name',
+  nick: 'default name',
   phoneNum: 'default phoneNum',
   email: 'default email',
   snsBlog: 'default snsBlog',
@@ -101,7 +101,8 @@ UserContainer.defaultProps = {
 const mapStateToProps = (state) => {
   if (!(state.fetchedProfile.items === null)) {
     return {
-      name: state.fetchedProfile.items.user.nick,
+      id: state.fetchedProfile.items.user.id,
+      nick: state.fetchedProfile.items.user.nick,
       email: state.fetchedProfile.items.user.email,
       phoneNum: state.fetchedProfile.items.user.phone,
       snsBlog: state.fetchedProfile.items.user.blog,

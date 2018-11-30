@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { GoogleVision_API_KEY } from 'config/google';
 
-export const URL = 'http://13.209.99.252:3001';
+// export const URL = 'http://13.209.99.252:3001';
+export const URL =  'http://ec2-13-209-99-252.ap-northeast-2.compute.amazonaws.com:3001';
 const GoogleVisionURL = 'https://vision.googleapis.com/v1/images:annotate?key=';
 const URL_GoogleVision = GoogleVisionURL + GoogleVision_API_KEY;
 
