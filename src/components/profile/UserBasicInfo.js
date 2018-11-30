@@ -73,14 +73,6 @@ export default class UserBasicInfo extends Component {
       nick,
     } = this.state;
 
-    // const deletedData = {
-    //   name,
-    //   phoneNum,
-    //   email,
-    //   snsBlog,
-    //   snsGithub,
-    // };
-
     return (
       <Container className="UserBasicInfo">
         <div className="ui grid centered">
@@ -179,7 +171,7 @@ export default class UserBasicInfo extends Component {
 }
 
 UserBasicInfo.propTypes = {
-  name: PropTypes.string,
+  nick: PropTypes.string,
   phoneNum: PropTypes.string,
   email: PropTypes.string,
   snsBlog: PropTypes.string,
@@ -188,7 +180,7 @@ UserBasicInfo.propTypes = {
 };
 
 UserBasicInfo.defaultProps = {
-  name: 'default name',
+  nick: 'default name',
   phoneNum: 'default phoneNum',
   email: 'default email',
   snsBlog: 'default snsBlog',

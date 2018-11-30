@@ -16,6 +16,7 @@ import {
   deleteUserProfile,
 } from '../../actions/action_userprofile';
 import './UserContainer.css';
+import HaveTech from 'components/profile/HaveTech';
 
 class UserContainer extends Component {
   constructor() {
@@ -58,6 +59,7 @@ class UserContainer extends Component {
         <UserEducation edu={this.props.education} funcs={funcs} />
         <UserExperience exps={this.props.experience} funcs={funcs} />
         <UserProject project={this.props.project} funcs={funcs} />
+        <HaveTech haveTech={this.props.haveTech} funcs={funcs} />
         <UserInterests
           userFavField={this.props.userFavField}
           userFavTech={this.props.userFavTech}
@@ -113,6 +115,7 @@ const mapStateToProps = (state) => {
       project: state.fetchedProfile.items.user.project,
       userFavTech: state.fetchedProfile.items.user.favoriteTech,
       userFavField: state.fetchedProfile.items.user.favoriteCategory,
+      haveTech: state.fetchedProfile.items.user.haveTech,
     };
   }
 };
