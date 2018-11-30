@@ -20,12 +20,8 @@ class Header extends Component {
     fetchHeader();
   }
 
-  // _onDropdownClick = async () => {
-  //  await this.setState({ optionValue: true });
-  //   console.log(this.state.optionValue);
-  // };
-
   _onHandleChange = async (e, { value }) => {
+    alert('test');
     await this.setState({ value });
     if (this.state.value === 'signout') {
       await this.setState({ redirect: true });
@@ -41,7 +37,7 @@ class Header extends Component {
       return <div>loading..</div>;
     }
     if (redirect === true) {
-      return <Redirect to="/" />;
+      // return <Redirect to="/" />;
     }
 
     const trigger = (
@@ -83,7 +79,7 @@ class Header extends Component {
           icon={null}
           options={options}
           onChange={this._onHandleChange}
-          onClick={this._onDropdownClick}
+          // onClick={this._onDropdownClick}
         />
         <span className="nav-profile">
           {/* <span className="nav-profile img">
