@@ -8,11 +8,10 @@ class Header extends Component {
     optionValue: false,
   };
 
-  componentDidMount() {
-    const { fetchHeader } = this.props;
-    fetchHeader();
-    console.log(123);
-  }
+  // componentDidMount() {
+  //   const { fetchHeader } = this.props;
+  //   fetchHeader();
+  // }
 
   _onHandleChange = async (e, { value }) => {
     alert('test');
@@ -20,21 +19,20 @@ class Header extends Component {
     if (this.state.value === 'signout') {
       await this.setState({ redirect: true });
     }
-    // console.log('value state::;', this.state.value);
-    // console.log('redirect state::', this.state.redirect);
   };
 
   render() {
-    const { header, push } = this.props;
-    if (header.length === 0) {
-      return <div>loading..</div>;
-    }
+    const { push } = this.props;
+    const storeProfile = localStorage.getItem('profile');
+    const userProfileImage =
+      storeProfile.slice(-3) === '?sz' ? `${storeProfile}=50` : storeProfile;
 
     const trigger = (
       <Image
+        className="nav-userprofile"
         circular
-        src={header[0].profile}
-        size="tiny"
+        src={userProfileImage}
+        size="mini"
         style={{ marginRight: '3rem' }}
       />
     );
@@ -50,7 +48,6 @@ class Header extends Component {
         <span className="nav-logo" onClick={() => push('/')}>
           JOB | STATES
         </span>
-        {/* <a className="logo" /> 나중에 <a href> 태그로 수정하자 (+) nav-link도 각각의 도메인으로 연결 */}
         <nav role="navigation" className="nav-menu">
           <span
             className="main-nav-link content-mypage"
@@ -70,29 +67,34 @@ class Header extends Component {
           >
             분석
           </span>
-          {/* <span className="main-nav-link content-login">로그아웃</span> */}
         </nav>
+        {/* <Image
+          className="nav-userprofile"
+          circular
+          src={userProfileImage}
+          size="mini"
+          style={{ marginRight: '3rem' }}
+          onClick={() => alert('hello!')}
+        /> */}
+        {/* <div className="nav-userdetail">
+          <div style={{ display: 'inline-block' }}>
+            <Image circular src={userProfileImage} size="mini" />
+          </div>
+          <div style={{ display: 'inline-block' }}>
+            <h4>{localStorage.getItem('nick')}</h4>
+            <div style={{ display: 'inline-block' }}>123</div>
+            <div style={{ display: 'inline-block' }}>456</div>
+          </div>
+        </div> */}
+
         <Dropdown
           trigger={trigger}
           pointing="top left"
           icon={null}
           options={options}
           onChange={this._onHandleChange}
-          // onClick={this._onDropdownClick}
         />
-        <span className="nav-profile">
-          {/* <span className="nav-profile img">
-            <img
-              src={header[0] ? header[0].profile : null}
-              alt=""
-              height="50"
-              width="35"
-            />
-          </span> */}
-          {/* <span className="nav-profile nick">
-            {header[0] ? header[0].nick : null}
-          </span> */}
-        </span>
+        <span className="nav-profile" />
       </div>
     );
   }
