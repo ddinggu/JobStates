@@ -8,7 +8,6 @@ import {
   Form,
   Button,
   Header,
-  Image,
 } from 'semantic-ui-react';
 import './UserBasicInfo.css';
 import UserImagePortal from '../../containers/profile/UserImagePortal';
@@ -20,7 +19,7 @@ export default class UserBasicInfo extends Component {
       edit: false,
       id: props.basicinfo.id,
       delete: props.funcs.delete,
-      nick: props.basicinfo.nick,
+      name: props.basicinfo.name,
       phone: props.basicinfo.phoneNum,
       email: props.basicinfo.email,
       blog: props.basicinfo.snsBlog,
@@ -46,13 +45,16 @@ export default class UserBasicInfo extends Component {
     const { onButtonClick } = this;
     console.log('funcs', this.props.funcs);
     const { submit } = this.props.funcs;
+    const {
+ edit, phone, email, blog, github, update, name 
+} = this.state;
 
     const onSubmitUpdate = () => {
       const {
- nick, phone, email, blog, github 
+ name, phone, email, blog, github 
 } = this.state;
       const obj = {
-        nick,
+        name,
         phone,
         email,
         blog,
@@ -62,59 +64,79 @@ export default class UserBasicInfo extends Component {
       submit(obj, 'profile');
       onButtonClick();
     };
-    const {
-      edit,
-      phone,
-      email,
-      blog,
-      github,
-      picture,
-      update,
-      nick,
-    } = this.state;
 
-    // const deletedData = {
-    //   name,
-    //   phoneNum,
-    //   email,
-    //   snsBlog,
-    //   snsGithub,
-    // };
+    const onDelete = () => {
+      const data = {
+        name: '',
+        phone: '',
+        email: 'null@gmail.com',
+        blog: '',
+        github: '',
+      };
+      submit(data, 'profile');
+      this.setState({
+        name: '',
+        phone: '',
+        email: 'null@gmail.com',
+        blog: '',
+        github: '',
+      });
+    };
 
     return (
-      <Container className="UserBasicInfo">
+      <Container>
         <div className="ui grid centered">
           <Grid>
             <Grid.Column />
             <Grid.Column textAlign="center">
-              {/* <Grid.Row>
-                {' '}
-                <img
-                  alt="userpicture"
-                  src="http://cdn.onlinewebfonts.com/svg/img_508630.png"
-                  width="100"
-                />
-              </Grid.Row> */}
               <UserImagePortal />
             </Grid.Column>
             <Grid.Column textAlign="right" floated="right" />
           </Grid>
         </div>
-
-        <div className="ui grid centered">
-          <span className="column profilename two wide">
+        <Grid textAlign="center">
+          <Grid.Column className="profilename" width={2}>
             <Header>Basic Info.</Header>
-          </span>
+          </Grid.Column>
           {!edit ? (
-            <div className="UserBasicInfo read ten wide column profilebox">
-              <List>
-                <List.Item icon="users" content={nick} />
-                <List.Item icon="phone" content={phone} />
-                <List.Item icon="mail" content={email} />
-                <List.Item icon="home" content={blog} />
-                <List.Item icon="github" content={github} />
-              </List>
-            </div>
+            <Grid.Column className="profilebox" width={10} textAlign="center">
+              <Grid verticalAlign="middle">
+                <Grid.Row>
+                  <Grid.Column width={4} textAlign="left" />
+                  <Grid.Column width={8} textAlign="center">
+                    <b>{name}</b>
+                  </Grid.Column>
+                  <Grid.Column width={4} textAlign="right">
+                    <span className="ui mini basic icon buttons ">
+                      <button
+                        type="button"
+                        className="ui button"
+                        onClick={onButtonClick}
+                      >
+                        <i className="edit icon" />
+                      </button>
+                      <button
+                        type="button"
+                        className="ui button"
+                        onClick={onDelete}
+                      >
+                        <i className="delete icon" />
+                      </button>
+                    </span>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid textAlign="left">
+                    <List textAlign="left">
+                      <List.Item icon="phone" content={phone} />
+                      <List.Item icon="mail" content={email} />
+                      <List.Item icon="home" content={blog} />
+                      <List.Item icon="github" content={github} />
+                    </List>
+                  </Grid>
+                </Grid.Row>
+              </Grid>
+            </Grid.Column>
           ) : (
             <div className="UserBasicInfo create ten wide column profilebox">
               <Form onSubmit={update}>
@@ -122,8 +144,8 @@ export default class UserBasicInfo extends Component {
                   label="이름"
                   size="mini"
                   control={Input}
-                  onChange={e => this.onChange(e, 'nick')}
-                  value={nick}
+                  onChange={e => this.onChange(e, 'name')}
+                  value={name}
                 />
                 <Form.Field
                   label="전화번호"
@@ -158,21 +180,8 @@ export default class UserBasicInfo extends Component {
               </Form>
             </div>
           )}
-          <div className="column two wide">
-            <span className="ui mini basic icon buttons ">
-              <button
-                type="button"
-                className="ui button"
-                onClick={onButtonClick}
-              >
-                <i className="edit icon" />
-              </button>
-              <button type="button" className="ui button" onClick={() => {}}>
-                <i className="delete icon" />
-              </button>
-            </span>
-          </div>
-        </div>
+          <div className="column two wide" />
+        </Grid>
       </Container>
     );
   }
