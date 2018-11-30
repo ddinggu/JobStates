@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Image, Dropdown } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import options from 'utils/headerHelper';
 import './HeaderContainer.css';
 
 class Header extends Component {
@@ -11,16 +12,15 @@ class Header extends Component {
   };
 
   _onHandleChange = async (e, { value }) => {
-    alert('test');
     await this.setState({ value });
     if (this.state.value === 'signout') {
-      await this.setState({ redirect: true });
+      this.props.push('/logout');
     }
   };
 
   render() {
     const { push } = this.props;
-    const storeProfile = localStorage.getItem('profile');
+    const storeProfile = localStorage.getItem('profile') || '';
     const userProfileImage =
       storeProfile.slice(-3) === '?sz' ? `${storeProfile}=50` : storeProfile;
 
@@ -34,15 +34,9 @@ class Header extends Component {
       />
     );
 
-    const options = [
-      { key: 'user', text: 'Account', icon: 'user' },
-      { key: 'settings', text: 'Settings', icon: 'settings' },
-      { key: 'sign-out', text: 'Sign Out', value: 'signout', icon: 'sign out' },
-    ];
-
     return (
       <div className="nav-container">
-        <span className="nav-logo" onClick={() => push('/')}>
+        <span className="nav-logo" onClick={() => push('/joblist')}>
           JOB | STATES
         </span>
         <nav role="navigation" className="nav-menu">
@@ -83,7 +77,6 @@ class Header extends Component {
             <div style={{ display: 'inline-block' }}>456</div>
           </div>
         </div> */}
-
         <Dropdown
           trigger={trigger}
           pointing="top left"
@@ -91,7 +84,6 @@ class Header extends Component {
           options={options}
           onChange={this._onHandleChange}
         />
-        <span className="nav-profile" />
       </div>
     );
   }
@@ -99,10 +91,6 @@ class Header extends Component {
 
 Header.propTypes = {
   push: PropTypes.func,
-};
-
-Header.defaultProp = {
-  push: () => {},
 };
 
 export default connect(
