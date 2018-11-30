@@ -3,6 +3,7 @@ import { Button, Icon, Form, Grid } from 'semantic-ui-react';
 import * as util from 'utils/jobutils';
 import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
+import debounce from 'lodash/debounce';
 import './JobListHeader.css';
 
 class JobListHeader extends Component {
@@ -24,17 +25,21 @@ class JobListHeader extends Component {
     // console.log(this.state.inputValue)
   };
 
-  _onClickSearch = e => {
-    e.preventDefault();
+  _onClickSearch = debounce(() => {
     const { value, inputValue } = this.state;
     this.props._filterSearch(value, inputValue);
-    this.setState({ inputValue: '' });
-  };
+    // this.setState({ inputValue: '' });
+  }, 400);
 
-  _keyPress = e => {
-    if (e.keyCode == 13) {
-      this._onClickSearch(e);
-    }
+  // _keyPress = e => {
+  //   if (e.keyCode == 13) {
+  //     this.onClickSearch(e);
+  //   }
+  // };
+
+  onInputDebounce = e => {
+    e.preventDefault();
+    this._onClickSearch();
   };
 
   render() {
@@ -50,7 +55,6 @@ class JobListHeader extends Component {
           <Icon name="file outline" />
           등록
         </Button>
-        {/* <Form id="list-form"> */}
         <Grid>
           <Grid.Column width={6} />
           <Grid.Column width={7}>
@@ -58,22 +62,31 @@ class JobListHeader extends Component {
               <Form.Select
                 options={util.options}
                 defaultValue="전체"
-                onChange={this._onSelectChange}
+                onChange={async (e, value) => {
+                  await this._onSelectChange(e, value);
+                  this.onInputDebounce(e);
+                }}
               />
               <Form.Input
                 placeholder="회사명 검색"
                 value={this.state.inputValue}
-                onChange={this._onInputChange}
-                onKeyDown={this._keyPress}
+                onChange={async e => {
+                  await this._onInputChange(e);
+                  this.onInputDebounce(e);
+                }}
+                // onKeyDown={this._keyPress}
               />
-              <Form.Button onClick={this._onClickSearch} type="submit">
+              {/* <Form.Button
+                onClick={this._onClickSearch}
+                type="submit"
+                style={{ marginLeft: '1rem' }}
+              >
                 Search
-              </Form.Button>
+              </Form.Button> */}
             </Form.Input>
           </Grid.Column>
           <Grid.Column width={3} />
         </Grid>
-        {/* </Form> */}
       </div>
     );
   }

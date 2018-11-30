@@ -17,9 +17,10 @@ const failedFetchJobData = () => ({
 
 export const fetchJob = () => async (dispatch) => {
   dispatch(loadingFetchJobData());
-
   try {
     const response = await api.fetchJob();
+    console.log(response.data);
+
     dispatch(successFetchJobData(response.data));
   } catch (error) {
     dispatch(failedFetchJobData());
