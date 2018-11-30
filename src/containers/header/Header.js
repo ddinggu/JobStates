@@ -5,17 +5,14 @@ import { Image, Dropdown } from 'semantic-ui-react';
 import './Header.css';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      optionValue: false,
-    };
-  }
+  state = {
+    optionValue: false,
+  };
 
   componentDidMount() {
     const { fetchHeader } = this.props;
     fetchHeader();
+    console.log(123);
   }
 
   _onDropdownClick = () => {
