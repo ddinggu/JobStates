@@ -106,7 +106,7 @@ class JobPostForm extends Component {
     const { postJobData, loading, error } = this.props;
     return (
       <>
-        {loading ? <CommonLoading /> : null}
+        {/* {loading ? <CommonLoading /> : null} */}
         <Container className="jobdetail">
           <div className="jobPostHeader" style={{ height: '4rem' }}>
             <Button

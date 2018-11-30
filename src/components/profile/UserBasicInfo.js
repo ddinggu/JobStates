@@ -9,8 +9,8 @@ import {
   Button,
   Header,
 } from 'semantic-ui-react';
+import UserImagePortal from 'containers/profile/UserImagePortal';
 import './UserBasicInfo.css';
-import UserImagePortal from '../../containers/profile/UserImagePortal';
 
 export default class UserBasicInfo extends Component {
   constructor(props) {
@@ -50,9 +50,7 @@ export default class UserBasicInfo extends Component {
 } = this.state;
 
     const onSubmitUpdate = () => {
-      const {
- name, phone, email, blog, github 
-} = this.state;
+      const { name, phone, email, blog, github } = this.state;
       const obj = {
         name,
         phone,
@@ -64,6 +62,7 @@ export default class UserBasicInfo extends Component {
       submit(obj, 'profile');
       onButtonClick();
     };
+    const { edit, phone, email, blog, github, update, name } = this.state;
 
     const onDelete = () => {
       const data = {

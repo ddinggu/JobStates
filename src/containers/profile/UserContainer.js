@@ -29,7 +29,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    if (this.props.name === 'default nick') {
+    if (this.props.name === 'default name') {
       return (
         <>
           <CommonLoading />
@@ -87,7 +87,7 @@ UserContainer.propTypes = {
 };
 
 UserContainer.defaultProps = {
-  name: 'default nick',
+  name: 'default name',
   phoneNum: 'default phoneNum',
   email: 'default email',
   snsBlog: 'default snsBlog',

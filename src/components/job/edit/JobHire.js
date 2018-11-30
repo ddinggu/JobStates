@@ -49,18 +49,6 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  // onInputChange = () => {
-  //   let imageForm = new FormData();
-  //   imageForm.append('img', document.getElementById('jobHireImage').files[0]);
-  //   api
-  //     .jobPostImage(imageForm)
-  //     .then(data => {
-  //        this.setState({ hireImage : data.data.url });
-  //       console.log(data)
-  //     })
-  //     .catch(err => console.log('error:::', err));
-  // };
-
   onInputChange = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('jobHireImage').files[0]);
@@ -84,7 +72,6 @@ class JobCompany extends Component {
       salary,
       deadLine,
       address,
-      provider,
       experience,
       statusDate,
       hireType,

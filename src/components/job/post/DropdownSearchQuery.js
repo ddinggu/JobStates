@@ -16,7 +16,6 @@ class DropdownExampleSearchQuery extends Component {
   render() {
     const { searchQuery, value } = this.state;
     const { stateOptions, title, handleArrayChange } = this.props;
-    console.log('final load', value);
 
     return (
       <Dropdown

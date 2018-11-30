@@ -8,7 +8,6 @@ import {
   Input,
   Container,
   Header,
-  Label,
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
@@ -82,7 +81,6 @@ class JobCompany extends Component {
                       <Grid.Column textAlign="center" width={8}>
                         <Header>{this.props.brand}</Header>
                       </Grid.Column>
-                      {/* <Grid.Column width={4} /> */}
                       <Grid.Column width={4} textAlign="right">
                         <span className="linkBtn">
                           <a href={this.props.companyUrl}>
