@@ -23,6 +23,7 @@
   font-size: xx-large;
   margin: 2em;
   font-family: 'Merriweather', serif;
+  cursor: pointer;
 }
 .nav-:hover {
   cursor: pointer;
@@ -63,4 +64,13 @@
 }
 .nav-profile.nick {
   margin: 1em;
+}
+
+.nav-userdetail {
+  padding: 1.2rem;
+  position: fixed;
+  right: 92px;
+  top: 73px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
