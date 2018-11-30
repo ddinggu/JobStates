@@ -7,39 +7,52 @@ import {
   Header,
   Form,
   Input,
+  Image,
+  Container,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { uploadUserImage } from '../../actions/action_userprofile';
+import * as api from 'api/api';
+import { onSubmitPostUser } from 'actions/action_userprofile';
 
 class AddUserImagePortal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-    };
-
-    this.handleClick = () => {
-      this.setState({ open: !this.state.open });
-    };
-
-    this.handleClose = () => {
-      this.setState({ open: false });
-    };
-
-    this.sendImage = () => {
-      const imageForm = new FormData();
-      imageForm.append('img', document.getElementById('imagefile').files[0]);
-      props.uploadUserImage(imageForm);
+      photo:
+        this.props.photo || 'http://cdn.onlinewebfonts.com/svg/img_508630.png',
+      photoKey: '',
     };
   }
+
+  handleClick = () => {
+    this.setState({ open: !this.state.open });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  sendImage = async () => {
+    let imageForm = new FormData();
+    imageForm.append('img', document.getElementById('imagefileUser').files[0]);
+    try {
+      const data = await api.jobPostImage(imageForm);
+      this.setState({ photo: data.data.url, photoKey: data.data.key });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     const { open } = this.state;
     return (
-      <Grid column={2}>
+      <Grid>
         <Grid.Column>
+          <img alt="userphoto" src={this.state.photo} width="100" />
           <Button
             compact
+            style={{ marginLeft: '1rem' }}
             size="mini"
             content={open ? 'ADD PICTURE' : 'ADD PICTURE'}
             negative={open}
@@ -56,9 +69,24 @@ class AddUserImagePortal extends Component {
               }}
             >
               <div>
-                <Form onSubmit={this.sendImage}>
-                  <Input type="file" id="imagefile" />
-                  <Button compact type="submit" content="제출" />
+                <Form>
+                  <Input
+                    control={Input}
+                    type="file"
+                    id="imagefileUser"
+                    onChange={this.sendImage}
+                  />
+                  <Image src={this.state.photo} size="medium" />
+                  <Button
+                    compact
+                    type="submit"
+                    content="제출"
+                    color="blue"
+                    onClick={() => {
+                      this.handleClick();
+                      this.props.onSubmitPostUser(this.state, 'profile');
+                    }}
+                  />
                 </Form>
               </div>
             </Segment>
@@ -69,8 +97,12 @@ class AddUserImagePortal extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  photo: state.fetchedProfile.items.user.photo,
+  photoKey: state.fetchedProfile.items.user.photoKey,
+});
 
 export default connect(
-  null,
-  { uploadUserImage },
+  mapStateToProps,
+  { onSubmitPostUser },
 )(AddUserImagePortal);

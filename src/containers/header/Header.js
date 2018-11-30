@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Image, Dropdown } from 'semantic-ui-react';
 
 import './Header.css';
@@ -10,7 +10,8 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      optionValue: false,
+      value: false,
+      redirect: false,
     };
   }
 
@@ -19,15 +20,24 @@ class Header extends Component {
     fetchHeader();
   }
 
-  _onDropdownClick = () => {
-    this.setState({ optionValue: true });
-    console.log(this.state.optionValue);
+  _onHandleChange = async (e, { value }) => {
+    alert('test');
+    await this.setState({ value });
+    if (this.state.value === 'signout') {
+      await this.setState({ redirect: true });
+    }
+    // console.log('value state::;', this.state.value);
+    // console.log('redirect state::', this.state.redirect);
   };
 
   render() {
     const { header } = this.props;
+    const { redirect } = this.state;
     if (header.length === 0) {
       return <div>loading..</div>;
+    }
+    if (redirect === true) {
+      // return <Redirect to="/" />;
     }
 
     const trigger = (
@@ -43,7 +53,6 @@ class Header extends Component {
       { key: 'user', text: 'Account', icon: 'user' },
       { key: 'settings', text: 'Settings', icon: 'settings' },
       { key: 'sign-out', text: 'Sign Out', value: 'signout', icon: 'sign out' },
-      // { key: 'withdrawal', text: '회원탈퇴', value: 'withdrawal'}
     ];
 
     return (
@@ -62,14 +71,15 @@ class Header extends Component {
           <Link to="/analysis">
             <span className="main-nav-link content-analysis">분석</span>
           </Link>
-          <span className="main-nav-link content-login">로그아웃</span>
+          {/* <span className="main-nav-link content-login">로그아웃</span> */}
         </nav>
         <Dropdown
           trigger={trigger}
           pointing="top left"
           icon={null}
           options={options}
-          onClick={this._onDropdownClick}
+          onChange={this._onHandleChange}
+          // onClick={this._onDropdownClick}
         />
         <span className="nav-profile">
           {/* <span className="nav-profile img">
