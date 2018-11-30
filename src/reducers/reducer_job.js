@@ -47,18 +47,33 @@ const initialState = {
   imgUrl: null,
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
-    case types.FETCH_JOB:
+    case types.FETCH_JOB_BEGIN:
       return {
         ...state,
+        loading: true,
+      };
+
+    case types.FETCH_JOB_SUCCESS:
+      return {
+        ...state,
+        loading: false,
         allJobData: action.payload,
         filterData: action.payload,
       };
+
+    case types.FETCH_JOB_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+
     case types.SEARCH_FILTER:
       return {
         ...state,
-        filterData: state.allJobData.filter((data) => {
+        filterData: state.allJobData.filter(data => {
           if (!action.payload2) {
             return data.status === action.payload;
           }
@@ -67,8 +82,8 @@ export default function (state = initialState, action) {
           }
           if (!!action.payload && !!action.payload2) {
             return (
-              data.status === action.payload
-              && data.brand.indexOf(action.payload2) !== -1
+              data.status === action.payload &&
+              data.brand.indexOf(action.payload2) !== -1
             );
           }
         }),

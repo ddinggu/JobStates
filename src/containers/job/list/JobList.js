@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
-import { Redirect } from 'react-router-dom';
+import { push } from 'connected-react-router';
 import CommonLoading from 'components/common/Loading';
 
 import './JobList.css';
@@ -14,7 +14,6 @@ class JobList extends Component {
 
     this.state = {
       filterFlag: false,
-      redirect: false,
     };
   }
 
@@ -36,6 +35,7 @@ class JobList extends Component {
             id={jobData.hireId}
             onClick={e => {
               getDetailJob(e.currentTarget.id);
+              push('/jobdetail');
             }}
             style={{ cursor: 'pointer' }}
           >
@@ -63,9 +63,8 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, filter } = this.props;
-    const { redirect } = this.state;
-    if (job.length === 0) {
+    const { job, filter, loading, error } = this.props;
+    if (loading) {
       return (
         <>
           <CommonLoading />
@@ -73,17 +72,12 @@ class JobList extends Component {
       );
     }
 
-    if (redirect) {
-      return <Redirect to="/jobdetail" />;
-    }
-
     return (
-      /* equal width => table 적용 */
-      <div>
+      <>
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
           <Grid.Column width={16}>
-          <Table fixed>
+            <Table fixed>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>company</Table.HeaderCell>
@@ -93,14 +87,16 @@ class JobList extends Component {
                 </Table.Row>
               </Table.Header>
             </Table>
-            <Segment>
-              {this.state.filterFlag
-                ? filter.map(this._mapList)
-                : job.map(this._mapList)}
+            <Segment className={job.length ? null : 'container-nonedata'}>
+              {job.length
+                ? this.state.filterFlag
+                  ? filter.map(this._mapList)
+                  : job.map(this._mapList)
+                : '채용공고를 등록해 주세요!!'}
             </Segment>
           </Grid.Column>
         </Grid>
-      </div>
+      </>
     );
   }
 }
@@ -110,10 +106,11 @@ const mapStateToProps = state => {
     job: state.job.allJobData,
     filter: state.job.filterData,
     forRedirect: state.job.currentData,
+    loading: state.job.loading,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchJob, getDetailJob, filterFetchData },
+  { fetchJob, getDetailJob, filterFetchData, push },
 )(JobList);

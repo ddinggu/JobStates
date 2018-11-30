@@ -81,7 +81,6 @@ export default class UserBasicInfo extends Component {
 
     return (
       <Container className="UserBasicInfo">
-        {/* <img alt="userpicture" src={picture} /> */}
         <div className="ui grid centered">
           <Grid>
             <Grid.Column />

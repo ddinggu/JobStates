@@ -4,6 +4,7 @@ import Header from './Header';
 
 const mapStateToProps = state => ({
   header: state.header,
+  notification: state.job.currentData.data.hireStatus,
 });
 
 export default connect(

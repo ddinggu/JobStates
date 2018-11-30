@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
-import * as api from 'api/api';
+import { jobPostImage } from 'api/api';
 
 class JobCompany extends Component {
   state = {
@@ -44,16 +44,12 @@ class JobCompany extends Component {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefile').files[0]);
     try {
-      let data = await api.jobPostImage(imageForm);
+      let data = await jobPostImage(imageForm);
       this.setState({ logo: data.data.url, logoKey: data.data.key });
     } catch (err) {
       console.log(err);
     }
   };
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({ edit: !this.state.edit });
-  // }
 
   render() {
     const {
@@ -148,7 +144,7 @@ class JobCompany extends Component {
                                 this.onImageChange();
                               }}
                             />
-                            <Image src={this.state.logo} avatar />
+                            <Image src={logo} avatar />
                           </List>
                         </Form.Field>
                       </div>

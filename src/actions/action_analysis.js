@@ -10,15 +10,15 @@ const successGetAnalysisData = payload => ({
   payload,
 });
 
-const failedGetAnalysisData = payload => ({
+const failedGetAnalysisData = () => ({
   type: types.GET_ANALYSIS_FAILURE,
-  payload,
 });
 
 const getAnalysis = () => async (dispatch) => {
   dispatch(loadingGetAnalysisData());
   try {
     const responseAnalysisData = await api.getUserAnalysisData();
+
     dispatch(successGetAnalysisData(responseAnalysisData.data));
   } catch (err) {
     console.error(err);
