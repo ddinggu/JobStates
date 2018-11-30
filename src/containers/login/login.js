@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Form,
-  Input,
-  Button,
-  Grid,
-  Segment,
-} from 'semantic-ui-react';
-import { GoogleLoginButton } from 'react-social-login-buttons';
+import { Container, Button, Grid } from 'semantic-ui-react';
 import { createButton } from 'react-social-login-buttons';
 import * as api from 'api/api';
 import './login.css';

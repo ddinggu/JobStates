@@ -28,7 +28,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    if (this.props.nick === 'default name') {
+    if (this.props.name === 'default name') {
       return (
         <>
           <CommonLoading />
@@ -38,7 +38,7 @@ class UserContainer extends Component {
 
     const basicinfo = {
       id: this.props.id,
-      nick: this.props.nick,
+      name: this.props.name,
       email: this.props.email,
       phoneNum: this.props.phoneNum,
       snsBlog: this.props.snsBlog,
@@ -73,7 +73,7 @@ class UserContainer extends Component {
 // ////////////////////////////////////////////////////////////////////////
 
 UserContainer.propTypes = {
-  nick: PropTypes.string,
+  name: PropTypes.string,
   phoneNum: PropTypes.string,
   email: PropTypes.string,
   snsBlog: PropTypes.string,
@@ -84,7 +84,7 @@ UserContainer.propTypes = {
 };
 
 UserContainer.defaultProps = {
-  nick: 'default name',
+  name: 'default name',
   phoneNum: 'default phoneNum',
   email: 'default email',
   snsBlog: 'default snsBlog',
@@ -102,7 +102,7 @@ const mapStateToProps = (state) => {
   if (!(state.fetchedProfile.items === null)) {
     return {
       id: state.fetchedProfile.items.user.id,
-      nick: state.fetchedProfile.items.user.nick,
+      name: state.fetchedProfile.items.user.name,
       email: state.fetchedProfile.items.user.email,
       phoneNum: state.fetchedProfile.items.user.phone,
       snsBlog: state.fetchedProfile.items.user.blog,

@@ -8,10 +8,9 @@ import {
   Form,
   Button,
   Header,
-  Image,
 } from 'semantic-ui-react';
+import UserImagePortal from 'containers/profile/UserImagePortal';
 import './UserBasicInfo.css';
-import UserImagePortal from '../../containers/profile/UserImagePortal';
 
 export default class UserBasicInfo extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ export default class UserBasicInfo extends Component {
       edit: false,
       id: props.basicinfo.id,
       delete: props.funcs.delete,
-      nick: props.basicinfo.nick,
+      name: props.basicinfo.name,
       phone: props.basicinfo.phoneNum,
       email: props.basicinfo.email,
       blog: props.basicinfo.snsBlog,
@@ -49,10 +48,10 @@ export default class UserBasicInfo extends Component {
 
     const onSubmitUpdate = () => {
       const {
- nick, phone, email, blog, github 
+ name, phone, email, blog, github 
 } = this.state;
       const obj = {
-        nick,
+        name,
         phone,
         email,
         blog,
@@ -70,7 +69,7 @@ export default class UserBasicInfo extends Component {
       github,
       picture,
       update,
-      nick,
+      name,
     } = this.state;
 
     // const deletedData = {
@@ -108,7 +107,7 @@ export default class UserBasicInfo extends Component {
           {!edit ? (
             <div className="UserBasicInfo read ten wide column profilebox">
               <List>
-                <List.Item icon="users" content={nick} />
+                <List.Item icon="users" content={name} />
                 <List.Item icon="phone" content={phone} />
                 <List.Item icon="mail" content={email} />
                 <List.Item icon="home" content={blog} />
@@ -122,8 +121,8 @@ export default class UserBasicInfo extends Component {
                   label="이름"
                   size="mini"
                   control={Input}
-                  onChange={e => this.onChange(e, 'nick')}
-                  value={nick}
+                  onChange={e => this.onChange(e, 'name')}
+                  value={name}
                 />
                 <Form.Field
                   label="전화번호"

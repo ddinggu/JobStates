@@ -22,20 +22,12 @@ class JobListHeader extends Component {
     this.setState({
       inputValue: e.target.value,
     });
-    // console.log(this.state.inputValue)
   };
 
   _onClickSearch = debounce(() => {
     const { value, inputValue } = this.state;
     this.props._filterSearch(value, inputValue);
-    // this.setState({ inputValue: '' });
   }, 400);
-
-  // _keyPress = e => {
-  //   if (e.keyCode == 13) {
-  //     this.onClickSearch(e);
-  //   }
-  // };
 
   onInputDebounce = e => {
     e.preventDefault();
@@ -74,15 +66,7 @@ class JobListHeader extends Component {
                   await this._onInputChange(e);
                   this.onInputDebounce(e);
                 }}
-                // onKeyDown={this._keyPress}
               />
-              {/* <Form.Button
-                onClick={this._onClickSearch}
-                type="submit"
-                style={{ marginLeft: '1rem' }}
-              >
-                Search
-              </Form.Button> */}
             </Form.Input>
           </Grid.Column>
           <Grid.Column width={3} />
