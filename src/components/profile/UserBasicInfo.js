@@ -47,9 +47,7 @@ export default class UserBasicInfo extends Component {
     const { submit } = this.props.funcs;
 
     const onSubmitUpdate = () => {
-      const {
- name, phone, email, blog, github 
-} = this.state;
+      const { name, phone, email, blog, github } = this.state;
       const obj = {
         name,
         phone,
@@ -61,16 +59,7 @@ export default class UserBasicInfo extends Component {
       submit(obj, 'profile');
       onButtonClick();
     };
-    const {
-      edit,
-      phone,
-      email,
-      blog,
-      github,
-      picture,
-      update,
-      name,
-    } = this.state;
+    const { edit, phone, email, blog, github, update, name } = this.state;
 
     // const deletedData = {
     //   name,

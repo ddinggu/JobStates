@@ -33,7 +33,7 @@ const header_googlevision = {
 };
 
 // Analysis
-export const getUserAnalysisData = () => axios.get(`${URL}/analysis`, TokenHeader);
+export const getUserAnalysisData = () => axios.get(`${URL}/analytics`, TokenHeader);
 
 // Job
 export const fetchJob = () => axios.get(`${URL}/schedule`, TokenHeader);
@@ -56,7 +56,7 @@ export const postUserImage = data => axios.post(`${URL}/test`, data, TokenHeader
 // ================== TEST with Fixed User ID ================== //
 
 // // Analysis
-// export const getUserAnalysisData = () => axios.get(`${URL}/analysis`, header);
+// export const getUserAnalysisData = () => axios.get(`${URL}/analytics`, header);
 
 // // Job
 // export const fetchJob = () => axios.get(`${URL}/schedule`, header);
