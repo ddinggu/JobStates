@@ -18,13 +18,13 @@ export default class UserBasicInfo extends Component {
     super(props);
     this.state = {
       edit: false,
-      submit: props.funcs.submit,
+      id: props.basicinfo.id,
       delete: props.funcs.delete,
-      name: props.basicinfo.name,
-      phoneNum: props.basicinfo.phoneNum,
+      nick: props.basicinfo.nick,
+      phone: props.basicinfo.phoneNum,
       email: props.basicinfo.email,
-      snsBlog: props.basicinfo.snsBlog,
-      snsGithub: props.basicinfo.snsGithub,
+      blog: props.basicinfo.snsBlog,
+      github: props.basicinfo.snsGithub,
       picture: props.basicinfo.picture,
     };
 
@@ -40,35 +40,37 @@ export default class UserBasicInfo extends Component {
         [attr]: e.target.value,
       });
     };
-
-    this.onSubmitUpdate = (e) => {
-      e.preventDefault();
-      const {
- name, phoneNum, email, snsBlog, snsGithub, submit 
-} = this.state;
-      const obj = {
-        name,
-        phoneNum,
-        email,
-        snsBlog,
-        snsGithub,
-      };
-      this.onButtonClick();
-      submit(obj, 'profile');
-    };
   }
 
   render() {
-    const { onButtonClick, onSubmitUpdate } = this;
+    const { onButtonClick } = this;
+    console.log('funcs', this.props.funcs);
+    const { submit } = this.props.funcs;
+
+    const onSubmitUpdate = () => {
+      const {
+ nick, phone, email, blog, github 
+} = this.state;
+      const obj = {
+        nick,
+        phone,
+        email,
+        blog,
+        github,
+      };
+      console.log('ojb', obj);
+      submit(obj, 'profile');
+      onButtonClick();
+    };
     const {
       edit,
-      name,
-      phoneNum,
+      phone,
       email,
-      snsBlog,
-      snsGithub,
+      blog,
+      github,
       picture,
       update,
+      nick,
     } = this.state;
 
     // const deletedData = {
@@ -106,11 +108,11 @@ export default class UserBasicInfo extends Component {
           {!edit ? (
             <div className="UserBasicInfo read ten wide column profilebox">
               <List>
-                <List.Item icon="users" content={name} />
-                <List.Item icon="phone" content={phoneNum} />
+                <List.Item icon="users" content={nick} />
+                <List.Item icon="phone" content={phone} />
                 <List.Item icon="mail" content={email} />
-                <List.Item icon="home" content={snsBlog} />
-                <List.Item icon="github" content={snsGithub} />
+                <List.Item icon="home" content={blog} />
+                <List.Item icon="github" content={github} />
               </List>
             </div>
           ) : (
@@ -120,15 +122,15 @@ export default class UserBasicInfo extends Component {
                   label="이름"
                   size="mini"
                   control={Input}
-                  onChange={e => this.onChange(e, 'name')}
-                  value={name}
+                  onChange={e => this.onChange(e, 'nick')}
+                  value={nick}
                 />
                 <Form.Field
                   label="전화번호"
                   size="mini"
                   control={Input}
-                  onChange={e => this.onChange(e, 'phoneNum')}
-                  value={phoneNum}
+                  onChange={e => this.onChange(e, 'phone')}
+                  value={phone}
                 />
                 <Form.Field
                   label="이메일 주소"
@@ -141,15 +143,15 @@ export default class UserBasicInfo extends Component {
                   label="대표 블로그"
                   size="mini"
                   control={Input}
-                  onChange={e => this.onChange(e, 'snsBlog')}
-                  value={snsBlog}
+                  onChange={e => this.onChange(e, 'blog')}
+                  value={blog}
                 />
                 <Form.Field
                   label="대표 깃헙"
                   size="mini"
                   control={Input}
-                  onChange={e => this.onChange(e, 'snsGithub')}
-                  value={snsGithub}
+                  onChange={e => this.onChange(e, 'github')}
+                  value={github}
                 />
                 <Button compact content="취소" onClick={onButtonClick} />
                 <Button compact content="변경" onClick={onSubmitUpdate} />
