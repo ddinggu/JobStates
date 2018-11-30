@@ -61,12 +61,12 @@ export default class Login extends Component {
                 <Grid.Row>
                   <Button
                     align="center"
-                    href={`${api.URL}/auth/naver`}
+                    href={`${api.URL}/auth/github`}
                     fluid
                     className="loginbtn"
                     id="naver"
                   >
-                    네이버로 로그인
+                    깃헙으로 로그인
                   </Button>
                 </Grid.Row>
                 <Button

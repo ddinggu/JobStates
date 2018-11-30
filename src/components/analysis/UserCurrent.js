@@ -1,32 +1,54 @@
 import React from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
 import PropTypes from 'prop-types';
+import { Container, Grid, Header } from 'semantic-ui-react';
 import 'react-circular-progressbar/dist/styles.css';
+import './UserCurrent.css';
 
 const UserCurrent = ({
-  allCount, document, pass, fail,
+ allCount, document, pass, fail 
 }) => {
   const progressbar = (state, sum, title) => {
     const ratio = (state / sum) * 100;
     return (
-      <div style={{ width: '20%', display: 'inline-block', margin: '3rem' }}>
-        {title}
-        <CircularProgressbar
-          percentage={ratio}
-          text={`${ratio}%`}
-          initialAnimation
-        />
-      </div>
+      <Grid style={{ width: '25%', display: 'inline-block', margin: '1rem' }}>
+        <Grid.Column>
+          <Grid.Row style={{ marginBottom: '1rem', textAlign: 'center' }}>
+            <b>{title}</b>
+          </Grid.Row>
+          <Grid.Row>
+            <CircularProgressbar
+              percentage={ratio}
+              text={`${ratio}%`}
+              initialAnimation
+            />
+          </Grid.Row>
+        </Grid.Column>
+      </Grid>
     );
   };
 
-  return (
-    <div>
-      <div>현재 유저 상황</div>
-      {progressbar(allCount - document, allCount, '서류 합격률')}
-      {progressbar(pass, allCount, '최종 합격률')}
-      <span>현재 {allCount - fail}개 채용 진행중</span>
+  const progressText = () => (
+    <div className="container-ongoing">
+      <div className="bottom-ongoing">
+        현재 {allCount - fail - pass}개 채용 진행중
+      </div>
     </div>
+  );
+
+  return (
+    <Container className="jobContainer">
+      <Grid textAlign="center">
+        <Grid.Column width={2}>
+          <Header>진행중</Header>
+        </Grid.Column>
+        <Grid.Column textAlign="left" width={12} className="jobbody">
+          {progressbar(allCount - document, allCount, '서류 합격률')}
+          {progressbar(pass, allCount, '최종 합격률')}
+          {progressText()}
+        </Grid.Column>
+      </Grid>
+    </Container>
   );
 };
 

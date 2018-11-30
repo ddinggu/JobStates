@@ -22,8 +22,9 @@ class App extends Component {
     return (
       <Switch>
         <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
-          <Route path="/" exact component={Login} />
+          {/* <HeaderContainer /> */}
           <Route path="/" component={HeaderContainer} />
+          <Route exact path="/" component={Login} />
           <Route path="/user" component={UserContainer} />
           <Route path="/login" component={getToken} />
           <Route path="/joblist" component={JobList} />

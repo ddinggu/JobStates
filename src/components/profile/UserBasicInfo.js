@@ -8,6 +8,7 @@ import {
   Form,
   Button,
   Header,
+  Image,
 } from 'semantic-ui-react';
 import './UserBasicInfo.css';
 import UserImagePortal from '../../containers/profile/UserImagePortal';
@@ -61,7 +62,6 @@ export default class UserBasicInfo extends Component {
       submit(obj, 'profile');
       onButtonClick();
     };
-
     const {
       edit,
       phone,
@@ -87,14 +87,14 @@ export default class UserBasicInfo extends Component {
           <Grid>
             <Grid.Column />
             <Grid.Column textAlign="center">
-              <Grid.Row>
+              {/* <Grid.Row>
                 {' '}
                 <img
                   alt="userpicture"
                   src="http://cdn.onlinewebfonts.com/svg/img_508630.png"
                   width="100"
                 />
-              </Grid.Row>
+              </Grid.Row> */}
               <UserImagePortal />
             </Grid.Column>
             <Grid.Column textAlign="right" floated="right" />

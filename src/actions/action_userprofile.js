@@ -25,6 +25,7 @@ export const fetchUser = () => async (dispatch) => {
 
   try {
     const responseGetUserProfile = await api.getUserProfile();
+    // console.log('herere', responseGetUserProfile);
     dispatch(fetchUserProfileSuccess(responseGetUserProfile.data));
   } catch (err) {
     dispatch(fetchUserProfileFailure(err));

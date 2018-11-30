@@ -3,6 +3,7 @@ import * as types from 'actions/actionTypes';
 const initialState = {
   loading: false,
   error: false,
+  data: {},
 };
 
 function setUserAnalysisData(state = initialState, action) {
@@ -12,8 +13,9 @@ function setUserAnalysisData(state = initialState, action) {
 
     case types.GET_ANALYSIS_SUCCESS:
       return {
-        loading: !state.loading,
-        ...action.payload,
+        ...state,
+        loading: false,
+        data: action.payload,
       };
 
     case types.GET_ANALYSIS_FAILURE:

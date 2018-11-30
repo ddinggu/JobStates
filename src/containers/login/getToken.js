@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
 
 export default class GetToken extends Component {
@@ -10,8 +10,9 @@ export default class GetToken extends Component {
   _getToken = () => {
     console.log('login data in params', this.props.location.search);
     const userInfo = queryString.parse(this.props.location.search);
-    console.log('parsed login data', userInfo);
-    console.log('token in parsed login data', userInfo.token);
+    // console.log('parsed login data', userInfo);
+    // console.log('token in parsed login data', userInfo.token);
+    console.log('이미지 : ', userInfo.profile);
 
     if (userInfo.token) {
       localStorage.setItem('token', userInfo.token);

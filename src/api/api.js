@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { GoogleVision_API_KEY } from 'config/google';
 
 // export const URL = 'http://13.209.99.252:3001';
@@ -8,20 +9,28 @@ const URL_GoogleVision = GoogleVisionURL + GoogleVision_API_KEY;
 
 // ================== WITH TOKEN ================== //
 
-// const TokenHeader = {
-//   headers: {
-//     authorization: localStorage.token,
-//   },
-//   timeout: 2500,
-// };
+const TokenHeader = {
+  headers: {
+    authorization: localStorage.token,
+  },
+  // timeout: 2500,
+};
 
-// const header_googlevision = {
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// };
+// ================== TEST with Fixed User ID ================== //
+const header = {
+  headers: {
+    id: 2,
+  },
+  // timeout: 2500,
+};
 
-// // Analysis
+const header_googlevision = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
+// Analysis
 // export const getUserAnalysisData = () => axios.get(`${URL}/analysis`, TokenHeader);
 
 // // Job
@@ -42,19 +51,10 @@ const URL_GoogleVision = GoogleVisionURL + GoogleVision_API_KEY;
 // export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${part}`, { data, ...TokenHeader });
 // export const postUserImage = data => axios.post(`${URL}/test`, data, TokenHeader);
 
-// ================== TEST with Fixed User ID ================== //
-const header = {
-  headers: {
-    id: 1,
-  },
-  timeout: 2500, // 해당 시간안에 응답이 오지 않으면 에러로 간주
-};
+// // Fetching header
+// export const fetchHeader = () => axios.get(`${URL}/user/profile`, TokenHeader);
 
-const header_googlevision = {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
+// ================== TEST with Fixed User ID ================== //
 
 // Analysis
 export const getUserAnalysisData = () => axios.get(`${URL}/analysis`, header);
@@ -76,3 +76,6 @@ export const postUserProfile = (data, part) => axios.post(`${URL}/user/${part}`,
 export const updateUserProfile = (data, part) => axios.patch(`${URL}/user/${part}`, data, header);
 export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${part}`, { data, ...header });
 export const postUserImage = data => axios.post(`${URL}/test`, data, header);
+
+// Fetching header
+export const fetchHeader = () => axios.get(`${URL}/user/profile`, header);

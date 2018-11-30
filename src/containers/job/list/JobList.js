@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
-import { Redirect } from 'react-router-dom';
+import { push } from 'connected-react-router';
 import CommonLoading from 'components/common/Loading';
 
 import './JobList.css';
@@ -14,7 +14,6 @@ class JobList extends Component {
 
     this.state = {
       filterFlag: false,
-      redirect: false,
     };
   }
 
@@ -36,6 +35,7 @@ class JobList extends Component {
             id={jobData.hireId}
             onClick={e => {
               getDetailJob(e.currentTarget.id);
+              push('/jobdetail');
             }}
             style={{ cursor: 'pointer' }}
           >
@@ -64,7 +64,6 @@ class JobList extends Component {
 
   render() {
     const { job, filter, loading, error } = this.props;
-    const { redirect } = this.state;
     if (loading) {
       return (
         <>
@@ -73,12 +72,7 @@ class JobList extends Component {
       );
     }
 
-    if (redirect) {
-      return <Redirect to="/jobdetail" />;
-    }
-
     return (
-      /* equal width => table 적용 */
       <>
         <JobListHeader _filterSearch={this._filterSearch} />
         <Grid className="job-list container">
@@ -118,5 +112,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchJob, getDetailJob, filterFetchData },
+  { fetchJob, getDetailJob, filterFetchData, push },
 )(JobList);

@@ -198,18 +198,6 @@ export default function(state = initialState, action) {
         loading: false,
         error: true,
       };
-    case types.POST_BRAND_LOGO_BEGIN:
-      return {
-        ...state,
-        loading: true,
-      };
-
-    case types.POST_BRAND_LOGO:
-      console.log('action payload::: ', action.payload);
-      return {
-        ...state,
-        imgUrl: action.payload,
-      };
 
     default:
       return state;
