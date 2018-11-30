@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
 import CommonLoading from 'components/common/Loading';
+import UserInterests from 'components/profile/UserInterests';
 import UserBasicInfo from '../../components/profile/UserBasicInfo';
 import UserEducation from '../../components/profile/UserEducation';
 import UserProject from '../../components/profile/UserProject';
@@ -14,7 +15,6 @@ import {
   onSubmitPatchUser,
   deleteUserProfile,
 } from '../../actions/action_userprofile';
-import UserInterestTech from './UserInterestTech';
 import './UserContainer.css';
 
 class UserContainer extends Component {
@@ -58,7 +58,7 @@ class UserContainer extends Component {
         <UserEducation edu={this.props.education} funcs={funcs} />
         <UserExperience exps={this.props.experience} funcs={funcs} />
         <UserProject project={this.props.project} funcs={funcs} />
-        <UserInterestTech
+        <UserInterests
           userFavField={this.props.userFavField}
           userFavTech={this.props.userFavTech}
           funcs={funcs}

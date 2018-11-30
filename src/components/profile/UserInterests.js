@@ -36,9 +36,29 @@ export default class UserInterestTech extends Component {
 
     this.onSubmit = (part) => {
       if (part === 'tech') {
-        props.funcs.submit(this.state.tech);
+        const data = {
+          favoriteTech: this.state.tech,
+        };
+        props.funcs.submit(data, 'favoritetech');
       } else if (part === 'field') {
-        props.funcs.submit(this.state.field);
+        const data = {
+          favoriteCategory: this.state.field,
+        };
+        props.funcs.submit(data, 'favoritecategory');
+      }
+    };
+
+    this.onDelete = (part) => {
+      if (part === 'tech') {
+        const data = {
+          favoriteTech: [],
+        };
+        props.funcs.submit(data, 'favoritetech');
+      } else if (part === 'field') {
+        const data = {
+          favoriteCategory: [],
+        };
+        props.funcs.submit(data, 'favoritecategory');
       }
     };
   }
@@ -76,7 +96,9 @@ export default class UserInterestTech extends Component {
                           <button
                             type="button"
                             className="ui button"
-                            onClick={() => {}}
+                            onClick={() => {
+                              this.onDelete('field');
+                            }}
                           >
                             <i className="delete icon" />
                           </button>
@@ -122,7 +144,14 @@ export default class UserInterestTech extends Component {
                               this.onButtonClick('field');
                             }}
                           />
-                          <Button compact content="변경" />
+                          <Button
+                            compact
+                            content="변경"
+                            onClick={() => {
+                              this.onButtonClick('field');
+                              this.onSubmit('field');
+                            }}
+                          />
                         </Grid.Row>
                       </Grid>
                     </div>
@@ -150,7 +179,9 @@ export default class UserInterestTech extends Component {
                           <button
                             type="button"
                             className="ui button"
-                            onClick={() => {}}
+                            onClick={() => {
+                              this.onDelete('tech');
+                            }}
                           >
                             <i className="delete icon" />
                           </button>
@@ -160,7 +191,13 @@ export default class UserInterestTech extends Component {
                   </Grid.Row>
                   <div style={this.state.editTech ? { display: 'none' } : null}>
                     <Grid textAlign="center">
-                      <Grid.Row>{userFavTech.map(hireMapping)}</Grid.Row>
+                      <Grid.Row>
+                        {userFavTech.length < 1 ? (
+                          <div>관심 산업을 선택해주세요.</div>
+                        ) : (
+                          userFavTech.map(hireMapping)
+                        )}
+                      </Grid.Row>
                       <Grid.Row />
                     </Grid>
                   </div>
