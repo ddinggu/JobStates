@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
 import CommonLoading from 'components/common/Loading';
 import UserInterests from 'components/profile/UserInterests';
+import HaveTech from 'components/profile/HaveTech';
 import UserBasicInfo from '../../components/profile/UserBasicInfo';
 import UserEducation from '../../components/profile/UserEducation';
 import UserProject from '../../components/profile/UserProject';
@@ -51,13 +52,15 @@ class UserContainer extends Component {
       delete: this.props.delete,
       update: this.props.update,
     };
+    console.log('props in User container', this.props);
 
     return (
-      <Container className="usercontainer">
+      <Container classnick="usercontainer">
         <UserBasicInfo basicinfo={basicinfo} funcs={funcs} />
         <UserEducation edu={this.props.education} funcs={funcs} />
         <UserExperience exps={this.props.experience} funcs={funcs} />
         <UserProject project={this.props.project} funcs={funcs} />
+        <HaveTech haveTech={this.props.haveTech} funcs={funcs} />
         <UserInterests
           userFavField={this.props.userFavField}
           userFavTech={this.props.userFavTech}
@@ -98,7 +101,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   if (!(state.fetchedProfile.items === null)) {
     return {
       id: state.fetchedProfile.items.user.id,
@@ -113,11 +116,12 @@ const mapStateToProps = (state) => {
       project: state.fetchedProfile.items.user.project,
       userFavTech: state.fetchedProfile.items.user.favoriteTech,
       userFavField: state.fetchedProfile.items.user.favoriteCategory,
+      haveTech: state.fetchedProfile.items.user.haveTech,
     };
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
