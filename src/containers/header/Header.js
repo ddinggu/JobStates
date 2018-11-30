@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
 import { Image, Dropdown } from 'semantic-ui-react';
-
 import './Header.css';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: false,
-      redirect: false,
-    };
-  }
+  state = {
+    optionValue: false,
+  };
 
   componentDidMount() {
     const { fetchHeader } = this.props;
     fetchHeader();
+    console.log(123);
   }
 
   _onHandleChange = async (e, { value }) => {
@@ -31,8 +25,7 @@ class Header extends Component {
   };
 
   render() {
-    const { header } = this.props;
-    const { redirect } = this.state;
+    const { header, push } = this.props;
     if (header.length === 0) {
       return <div>loading..</div>;
     }
@@ -57,20 +50,29 @@ class Header extends Component {
 
     return (
       <div className="nav-container">
-        <Link exact to="/">
-          <span className="nav-logo">JOB | STATES</span>
-        </Link>
+        <span className="nav-logo" onClick={() => push('/')}>
+          JOB | STATES
+        </span>
         {/* <a className="logo" /> 나중에 <a href> 태그로 수정하자 (+) nav-link도 각각의 도메인으로 연결 */}
         <nav role="navigation" className="nav-menu">
-          <Link to="/user">
-            <span className="main-nav-link content-mypage">마이페이지</span>
-          </Link>
-          <Link to="/joblist">
-            <span className="main-nav-link content-joblist">정리페이지</span>
-          </Link>
-          <Link to="/analysis">
-            <span className="main-nav-link content-analysis">분석</span>
-          </Link>
+          <span
+            className="main-nav-link content-mypage"
+            onClick={() => push('/user')}
+          >
+            마이페이지
+          </span>
+          <span
+            className="main-nav-link content-joblist"
+            onClick={() => push('/joblist')}
+          >
+            정리페이지
+          </span>
+          <span
+            className="main-nav-link content-analysis"
+            onClick={() => push('/analysis')}
+          >
+            분석
+          </span>
           {/* <span className="main-nav-link content-login">로그아웃</span> */}
         </nav>
         <Dropdown

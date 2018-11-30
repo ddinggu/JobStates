@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import fetchHeader from 'actions/action_header';
+import { push } from 'connected-react-router';
+import { fetchHeader } from 'actions/action_header';
 import Header from './Header';
 
 const mapStateToProps = state => ({
@@ -9,5 +10,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchHeader },
+  { fetchHeader, push },
 )(Header);
