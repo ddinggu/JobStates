@@ -12,35 +12,8 @@ const TokenHeader = {
   headers: {
     authorization: localStorage.token,
   },
-  timeout: 2500,
+  // timeout: 2500,
 };
-
-// const header_googlevision = {
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// };
-
-// // Analysis
-// export const getUserAnalysisData = () => axios.get(`${URL}/analysis`, TokenHeader);
-
-// // Job
-// export const fetchJob = () => axios.get(`${URL}/schedule`, TokenHeader);
-// export const postUserJobPosting = data => axios.post(`${URL}/schedule/write`, data, TokenHeader);
-// export const deletePostingJob = data => axios.delete(`${URL}/schedule`, { data, ...TokenHeader });
-// export const updateJobPostData = (data, part) => axios.patch(`${URL}/schedule/${part}`, data, TokenHeader);
-// export const jobPostImage = data => axios.post(`${URL}/image`, data, TokenHeader);
-
-// // Job_Posting Helper
-// export const getAutoCompleteData = company => axios.get(`${URL}/schedule/search?brand=${company}`, TokenHeader);
-// export const postImageToGetText = imgData => axios.post(URL_GoogleVision, imgData, header_googlevision);
-
-// // User Profile
-// export const getUserProfile = () => axios.get(`${URL}/user/profile`, TokenHeader);
-// export const postUserProfile = (data, part) => axios.post(`${URL}/user/${part}`, data, TokenHeader);
-// export const updateUserProfile = (data, part) => axios.patch(`${URL}/user/${part}`, data, TokenHeader);
-// export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${part}`, { data, ...TokenHeader });
-// export const postUserImage = data => axios.post(`${URL}/test`, data, TokenHeader);
 
 // ================== TEST with Fixed User ID ================== //
 const header = {
@@ -57,39 +30,28 @@ const header_googlevision = {
 };
 
 // Analysis
-export const getUserAnalysisData = () =>
-  axios.get(`${URL}/analysis`, TokenHeader);
+export const getUserAnalysisData = () => axios.get(`${URL}/analysis`, TokenHeader);
 
 // Job
 export const fetchJob = () => axios.get(`${URL}/schedule`, TokenHeader);
-export const postUserJobPosting = data =>
-  axios.post(`${URL}/schedule/write`, data, TokenHeader);
-export const deletePostingJob = data =>
-  axios.delete(`${URL}/schedule`, { data, ...TokenHeader });
-export const updateJobPostData = (data, part) =>
-  axios.patch(`${URL}/schedule/${part}`, data, TokenHeader);
-export const jobPostImage = data =>
-  axios.post(`${URL}/image`, data, TokenHeader);
+export const postUserJobPosting = data => axios.post(`${URL}/schedule/write`, data, TokenHeader);
+export const deletePostingJob = data => axios.delete(`${URL}/schedule`, { data, ...TokenHeader });
+export const updateJobPostData = (data, part) => axios.patch(`${URL}/schedule/${part}`, data, TokenHeader);
+export const jobPostImage = data => axios.post(`${URL}/image`, data, TokenHeader);
 
 // Job_Posting Helper
-export const getAutoCompleteData = company =>
-  axios.get(`${URL}/schedule/search?brand=${company}`, TokenHeader);
-export const postImageToGetText = imgData =>
-  axios.post(URL_GoogleVision, imgData, header_googlevision);
+export const getAutoCompleteData = company => axios.get(`${URL}/schedule/search?brand=${company}`, TokenHeader);
+export const postImageToGetText = imgData => axios.post(URL_GoogleVision, imgData, header_googlevision);
 
 // User Profile
-export const getUserProfile = () =>
-  axios.get(`${URL}/user/profile`, TokenHeader);
-export const postUserProfile = (data, part) =>
-  axios.post(`${URL}/user/${part}`, data, TokenHeader);
-export const updateUserProfile = (data, part) =>
-  axios.patch(`${URL}/user/${part}`, data, TokenHeader);
-export const deleteUserProfile = (data, part) =>
-  axios.delete(`${URL}/user/${part}`, { data, ...TokenHeader });
-export const postUserImage = data =>
-  axios.post(`${URL}/test`, data, TokenHeader);
+export const getUserProfile = () => axios.get(`${URL}/user/profile`, TokenHeader);
+export const postUserProfile = (data, part) => axios.post(`${URL}/user/${part}`, data, TokenHeader);
+export const updateUserProfile = (data, part) => axios.patch(`${URL}/user/${part}`, data, TokenHeader);
+export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${part}`, { data, ...TokenHeader });
+export const postUserImage = data => axios.post(`${URL}/test`, data, TokenHeader);
 
 // Fetching header
+export const fetchHeader = () => axios.get(`${URL}/user/profile`, TokenHeader);
 
 // ================== TEST with Fixed User ID ================== //
 // const header = {

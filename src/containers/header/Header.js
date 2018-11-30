@@ -29,9 +29,6 @@ class Header extends Component {
     if (header.length === 0) {
       return <div>loading..</div>;
     }
-    if (redirect === true) {
-      // return <Redirect to="/" />;
-    }
 
     const trigger = (
       <Image

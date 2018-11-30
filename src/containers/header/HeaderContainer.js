@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { fetchHeader } from 'actions/action_header';
+import fetchHeader from 'actions/action_header';
 import Header from './Header';
 
 const mapStateToProps = state => ({
