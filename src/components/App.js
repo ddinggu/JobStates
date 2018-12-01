@@ -19,18 +19,17 @@ const App = () => (
     <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
       <Route
         path="/"
-        render={props =>
-          props.location.pathname !== '/login' && <HeaderContainer />
+        render={props => props.location.pathname !== '/login' && <HeaderContainer />
         }
       />
       <Route path="/login" component={Login} />
-      <Route path="/logout" component={privateRoute(Logout)} />
-      <Route path="/user" component={privateRoute(UserContainer)} />
+      <Route path="/logout" component={Logout} />
+      <Route path="/user" component={UserContainer} />
       <Route path="/userprofile" component={getToken} />
-      <Route path="/joblist" component={privateRoute(JobList)} />
-      <Route path="/jobpost" component={privateRoute(JobPostForm)} />
-      <Route path="/jobdetail" component={privateRoute(JobDetail)} />
-      <Route path="/analysis" component={privateRoute(AnalysisContainer)} />
+      <Route path="/joblist" component={JobList} />
+      <Route path="/jobpost" component={JobPostForm} />
+      <Route path="/jobdetail" component={JobDetail} />
+      <Route path="/analysis" component={AnalysisContainer} />
     </div>
   </Switch>
 );
