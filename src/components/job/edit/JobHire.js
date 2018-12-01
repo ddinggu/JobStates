@@ -370,7 +370,7 @@ class JobCompany extends Component {
                 <Grid.Row>
                   <div class="ItemsInContainer">
                     <Button compact onClick={this.onEditing}>
-                      취소
+                      취소야
                     </Button>
                     <Button
                       compact

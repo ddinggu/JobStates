@@ -1,5 +1,6 @@
-import * as api from 'api/api';
+import { getUserAnalysisData } from 'api/api';
 import * as types from 'actions/actionTypes';
+import { push } from 'connected-react-router';
 
 const loadingGetAnalysisData = () => ({
   type: types.GET_ANALYSIS_BEGIN,
@@ -10,19 +11,26 @@ const successGetAnalysisData = payload => ({
   payload,
 });
 
-const failedGetAnalysisData = () => ({
+const failedGetAnalysisData = error => ({
   type: types.GET_ANALYSIS_FAILURE,
+  error,
 });
 
 const getAnalysis = () => async (dispatch) => {
   dispatch(loadingGetAnalysisData());
   try {
-    const responseAnalysisData = await api.getUserAnalysisData();
+    const response = await getUserAnalysisData();
 
-    dispatch(successGetAnalysisData(responseAnalysisData.data));
+    if (response.data.code === 200) {
+      dispatch(successGetAnalysisData(response.data));
+    } else {
+      dispatch(failedGetAnalysisData(response.data));
+      alert(response.data.message);
+      dispatch(push('/logout'));
+    }
   } catch (err) {
     console.error(err);
-    dispatch(failedGetAnalysisData(err));
+    dispatch(failedGetAnalysisData({ code: 404, message: 'Internal Error!' }));
   }
 };
 
