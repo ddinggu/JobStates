@@ -101,16 +101,23 @@ export default class Experience extends Component {
             <div>
               <Form className="edit" onSubmit={onSubmitPatch}>
                 <Form.Field
-                  label="학교"
+                  label="회사명"
                   control={Input}
                   onChange={e => this.onChange(e, 'title')}
                   value={title}
                 />
                 <Form.Field
-                  label="재학 기간"
+                  label="근무 기간"
                   control={Input}
                   onChange={e => this.onChange(e, 'term')}
                   value={term}
+                />
+                <Form.Field
+                  label="근무 내용"
+                  control={TextArea}
+                  name="content"
+                  onChange={e => this.onChange(e, 'content')}
+                  value={content}
                 />
                 <Form.Field
                   label="간단 설명"
