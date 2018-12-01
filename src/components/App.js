@@ -27,7 +27,7 @@ const App = () => (
       <Route path="/user" component={UserContainer} />
       <Route path="/userprofile" component={getToken} />
       <Route path="/joblist" component={JobList} />
-      <Route path="/jobpost" component={JobPostForm} />
+      <Route path="/jobpost" component={privateRoute(JobPostForm)} />
       <Route path="/jobdetail" component={JobDetail} />
       <Route path="/analysis" component={AnalysisContainer} />
     </div>
