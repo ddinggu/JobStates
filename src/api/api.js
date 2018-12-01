@@ -56,6 +56,9 @@ export const postUserImage = data => axios.post(`${URL}/test`, data, TokenHeader
 // Fetching header
 export const fetchHeader = () => axios.get(`${URL}/user/profile`, TokenHeader);
 
+// Authenticate Correct User
+export const authenticateUser = () => axios.get(`${URL}/authenticate`, TokenHeader);
+
 // ================== TEST with Fixed User ID ================== //
 
 // // Analysis
