@@ -1,5 +1,5 @@
 import * as types from 'actions/actionTypes';
-import * as api from 'api/api';
+import { postUserJobPosting } from 'api/api';
 import { push } from 'connected-react-router';
 
 const loadingPostJobData = () => ({
@@ -11,21 +11,26 @@ const successPostJobData = payload => ({
   payload,
 });
 
-const failedPostJobData = () => ({
+const failedPostJobData = error => ({
   type: types.POST_JOB_FAILURE,
+  error,
 });
 
 export default jobData => async (dispatch) => {
-  console.log('post log!!', jobData);
   dispatch(loadingPostJobData());
   try {
-    const responsePostJobData = await api.postUserJobPosting(jobData);
-    console.log('postData: ', responsePostJobData);
+    const responsePostJobData = await postUserJobPosting(jobData);
 
-    await dispatch(successPostJobData(responsePostJobData.data));
-    dispatch(push('/jobdetail'));
+    if (responsePostJobData.data.code === 200) {
+      await dispatch(successPostJobData(responsePostJobData.data));
+      dispatch(push('/jobdetail'));
+    } else {
+      dispatch(failedPostJobData(responsePostJobData.data));
+      alert(responsePostJobData.data.message);
+      dispatch(push('/logout'));
+    }
   } catch (err) {
     console.error(err);
-    dispatch(failedPostJobData(err));
+    dispatch(failedPostJobData({ code: 404, message: 'Internal Error!' }));
   }
 };
