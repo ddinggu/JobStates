@@ -1,0 +1,15 @@
+.container-ongoing {
+  display: inline-block;
+  /* vertical-align: middle; */
+  height: 80%;
+  text-align: center;
+  transform: translateY(50%);
+}
+
+.bottom-ongoing {
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+  margin: 2rem;
+  display: inline-block;
+}
