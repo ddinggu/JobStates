@@ -19,7 +19,7 @@ import {
 import './UserContainer.css';
 
 class UserContainer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { fetch } = this.props;
     fetch();
   }
@@ -97,7 +97,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   if (state.fetchedProfile.items !== null) {
     return {
       id: state.fetchedProfile.items.user.id,
@@ -118,7 +118,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
