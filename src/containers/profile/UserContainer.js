@@ -5,16 +5,17 @@ import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
 import CommonLoading from 'components/common/Loading';
 import UserInterests from 'components/profile/UserInterests';
-import UserBasicInfo from '../../components/profile/UserBasicInfo';
-import UserEducation from '../../components/profile/UserEducation';
-import UserProject from '../../components/profile/UserProject';
-import UserExperience from '../../components/profile/UserExperience';
+import HaveTech from 'components/profile/HaveTech';
+import UserBasicInfo from 'components/profile/UserBasicInfo';
+import UserEducation from 'components/profile/UserEducation';
+import UserProject from 'components/profile/UserProject';
+import UserExperience from 'components/profile/UserExperience';
 import {
   fetchUser,
   onSubmitPostUser,
   onSubmitPatchUser,
   deleteUserProfile,
-} from '../../actions/action_userprofile';
+} from 'actions/action_userprofile';
 import './UserContainer.css';
 
 class UserContainer extends Component {
@@ -28,7 +29,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    if (this.props.nick === 'default name') {
+    if (this.props.loading) {
       return (
         <>
           <CommonLoading />
@@ -38,7 +39,7 @@ class UserContainer extends Component {
 
     const basicinfo = {
       id: this.props.id,
-      nick: this.props.nick,
+      name: this.props.name,
       email: this.props.email,
       phoneNum: this.props.phoneNum,
       snsBlog: this.props.snsBlog,
@@ -51,13 +52,15 @@ class UserContainer extends Component {
       delete: this.props.delete,
       update: this.props.update,
     };
+    console.log('props in User container', this.props);
 
     return (
-      <Container className="usercontainer">
+      <Container classnick="usercontainer">
         <UserBasicInfo basicinfo={basicinfo} funcs={funcs} />
         <UserEducation edu={this.props.education} funcs={funcs} />
         <UserExperience exps={this.props.experience} funcs={funcs} />
         <UserProject project={this.props.project} funcs={funcs} />
+        <HaveTech haveTech={this.props.haveTech} funcs={funcs} />
         <UserInterests
           userFavField={this.props.userFavField}
           userFavTech={this.props.userFavTech}
@@ -73,7 +76,7 @@ class UserContainer extends Component {
 // ////////////////////////////////////////////////////////////////////////
 
 UserContainer.propTypes = {
-  nick: PropTypes.string,
+  name: PropTypes.string,
   phoneNum: PropTypes.string,
   email: PropTypes.string,
   snsBlog: PropTypes.string,
@@ -83,26 +86,26 @@ UserContainer.propTypes = {
   isFetching: PropTypes.func,
 };
 
-UserContainer.defaultProps = {
-  nick: 'default name',
-  phoneNum: 'default phoneNum',
-  email: 'default email',
-  snsBlog: 'default snsBlog',
-  snsGithub: 'default snsGithub',
-  picture: 'default img',
-  beginFetch: () => {},
-  isFetching: () => {},
-};
+// UserContainer.defaultProps = {
+//   name: 'default name',
+//   phoneNum: 'default phoneNum',
+//   email: 'default email',
+//   snsBlog: 'default snsBlog',
+//   snsGithub: 'default snsGithub',
+//   picture: 'default img',
+//   beginFetch: () => {},
+//   isFetching: () => {},
+// };
 
 // ////////////////////////////////////////////////////////////////////////
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = (state) => {
-  if (!(state.fetchedProfile.items === null)) {
+const mapStateToProps = state => {
+  if (state.fetchedProfile.items !== null) {
     return {
       id: state.fetchedProfile.items.user.id,
-      nick: state.fetchedProfile.items.user.nick,
+      name: state.fetchedProfile.items.user.name,
       email: state.fetchedProfile.items.user.email,
       phoneNum: state.fetchedProfile.items.user.phone,
       snsBlog: state.fetchedProfile.items.user.blog,
@@ -113,11 +116,13 @@ const mapStateToProps = (state) => {
       project: state.fetchedProfile.items.user.project,
       userFavTech: state.fetchedProfile.items.user.favoriteTech,
       userFavField: state.fetchedProfile.items.user.favoriteCategory,
+      haveTech: state.fetchedProfile.items.user.haveTech,
+      loading: state.fetchedProfile.loading,
     };
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,

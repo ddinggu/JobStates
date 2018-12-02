@@ -21,6 +21,7 @@ import JobAutoComplete from './JobAutoComplete';
 import GoogleVisionPortal from './GoogleVisionPortal';
 import CommonLoading from 'components/common/Loading';
 import { jobPostImage } from 'api/api';
+import './JobPostForm.css';
 
 class JobPostForm extends Component {
   state = {
@@ -106,7 +107,7 @@ class JobPostForm extends Component {
     const { postJobData, loading, error } = this.props;
     return (
       <>
-        {loading ? <CommonLoading /> : null}
+        {/* {loading ? <CommonLoading /> : null} */}
         <Container className="jobdetail">
           <div className="jobPostHeader" style={{ height: '4rem' }}>
             <Button
@@ -201,16 +202,28 @@ class JobPostForm extends Component {
                               <List.Item className="jobpostItem">
                                 회사 로고
                               </List.Item>
-                              <Input
-                                control={Input}
-                                type="file"
-                                name="file"
-                                id="imagefileLogo"
-                                onChange={() => {
-                                  this._sendImageForLogo();
-                                }}
-                              />
-                              <Image src={this.state.logo} avatar alt="" />
+                              <div>
+                                <Image
+                                  src={this.state.logo}
+                                  alt=""
+                                  style={{
+                                    maxWidth: '15%',
+                                    borderRadius: '50%',
+                                  }}
+                                />
+
+                                <div className="upload-btn-wrapper">
+                                  <button className="btn">등록</button>
+                                  <input
+                                    type="file"
+                                    name="file"
+                                    id="imagefileLogo"
+                                    onChange={() => {
+                                      this._sendImageForLogo();
+                                    }}
+                                  />
+                                </div>
+                              </div>
                             </List>
                           </Form.Field>
                         </div>
@@ -415,7 +428,7 @@ class JobPostForm extends Component {
                             <List.Item className="jobpostItem">
                               공고 이미지
                             </List.Item>
-                            <Input
+                            {/* <Input
                               control={Input}
                               type="file"
                               name="file"
@@ -423,7 +436,18 @@ class JobPostForm extends Component {
                               onChange={() => {
                                 this._sendImageForHireImage();
                               }}
-                            />
+                            /> */}
+                            <div className="upload-btn-wrapper">
+                              <button className="btn">등록</button>
+                              <input
+                                type="file"
+                                name="file"
+                                id="imagefileHire"
+                                onChange={() => {
+                                  this._sendImageForHireImage();
+                                }}
+                              />
+                            </div>
                             <Image src={this.state.hireImage} />
                           </List>
                         </Form.Field>

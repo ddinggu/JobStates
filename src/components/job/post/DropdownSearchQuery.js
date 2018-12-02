@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
 
 class DropdownExampleSearchQuery extends Component {
-  state = { searchQuery: '', value: [] };
+  state = { searchQuery: '', value: this.props.value };
 
   handleChange = (e, { searchQuery, value }) =>
     this.setState({ searchQuery, value });
@@ -16,7 +16,6 @@ class DropdownExampleSearchQuery extends Component {
   render() {
     const { searchQuery, value } = this.state;
     const { stateOptions, title, handleArrayChange } = this.props;
-    console.log('final load', value);
 
     return (
       <Dropdown

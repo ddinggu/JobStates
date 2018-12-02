@@ -3,8 +3,9 @@ import axios from 'axios';
 import { GoogleVision_API_KEY } from 'config/google';
 
 // export const URL = 'http://13.209.99.252:3001';
-// export const URL =  'http://ec2-13-209-99-252.ap-northeast-2.compute.amazonaws.com:3001'; // 고정 header id로 테스트 시
-export const URL = 'http://ec2-34-222-6-33.us-west-2.compute.amazonaws.com';
+export const URL =  'http://ec2-13-209-99-252.ap-northeast-2.compute.amazonaws.com:3001'; // 고정 header id로 테스트 시
+// export const URL = 'http://ec2-34-222-6-33.us-west-2.compute.amazonaws.com';
+// export const URL = 'http://10.130.151.17:3001';
 
 const GoogleVisionURL = 'https://vision.googleapis.com/v1/images:annotate?key=';
 const URL_GoogleVision = GoogleVisionURL + GoogleVision_API_KEY;
@@ -57,7 +58,7 @@ export const postUserImage = data => axios.post(`${URL}/test`, data, TokenHeader
 export const fetchHeader = () => axios.get(`${URL}/user/profile`, TokenHeader);
 
 // Authenticate Correct User
-export const authenticateUser = () => axios.get(`${URL}/authenticate`, TokenHeader);
+export const authenticateUser = () => axios.get(`${URL}/auth/check`, TokenHeader);
 
 // ================== TEST with Fixed User ID ================== //
 

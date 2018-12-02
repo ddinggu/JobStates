@@ -8,7 +8,6 @@ import {
   Input,
   Container,
   Header,
-  Label,
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
@@ -52,15 +51,7 @@ class JobCompany extends Component {
   };
 
   render() {
-    const {
-      edit,
-      logo,
-      brand,
-      companyUrl,
-      intro,
-      category,
-      // status,
-    } = this.state;
+    const { edit, logo, brand, companyUrl, intro, category } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
 
@@ -82,7 +73,6 @@ class JobCompany extends Component {
                       <Grid.Column textAlign="center" width={8}>
                         <Header>{this.props.brand}</Header>
                       </Grid.Column>
-                      {/* <Grid.Column width={4} /> */}
                       <Grid.Column width={4} textAlign="right">
                         <span className="linkBtn">
                           <a href={this.props.companyUrl}>
@@ -102,7 +92,7 @@ class JobCompany extends Component {
                     </Grid.Row>
                     <Grid.Row>
                       <List bulleted>
-                        <List.Item className="jobpostItem">산업분야</List.Item>
+                        <List.Item className="jobpostItem">야</List.Item>
                         {this.props.category.map(hireMapping)}
                       </List>
                     </Grid.Row>
@@ -135,7 +125,7 @@ class JobCompany extends Component {
                             <List.Item className="jobpostItem">
                               회사 로고
                             </List.Item>
-                            <Input
+                            {/* <Input
                               control={Input}
                               type="file"
                               name="file"
@@ -144,7 +134,29 @@ class JobCompany extends Component {
                                 this.onImageChange();
                               }}
                             />
-                            <Image src={logo} avatar />
+                            <Image src={logo} avatar /> */}
+                            <div>
+                              <Image
+                                src={this.state.logo}
+                                alt=""
+                                style={{
+                                  maxWidth: '15%',
+                                  borderRadius: '50%',
+                                }}
+                              />
+
+                              <div className="upload-btn-wrapper">
+                                <button className="btn">등록</button>
+                                <input
+                                  type="file"
+                                  name="file"
+                                  id="imagefile"
+                                  onChange={() => {
+                                    this.onImageChange();
+                                  }}
+                                />
+                              </div>
+                            </div>
                           </List>
                         </Form.Field>
                       </div>
