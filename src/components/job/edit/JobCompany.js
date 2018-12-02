@@ -51,15 +51,7 @@ class JobCompany extends Component {
   };
 
   render() {
-    const {
-      edit,
-      logo,
-      brand,
-      companyUrl,
-      intro,
-      category,
-      // status,
-    } = this.state;
+    const { edit, logo, brand, companyUrl, intro, category } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
 

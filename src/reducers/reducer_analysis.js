@@ -15,7 +15,7 @@ function setUserAnalysisData(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        data: action.payload.data,
       };
 
     case types.GET_ANALYSIS_FAILURE:
