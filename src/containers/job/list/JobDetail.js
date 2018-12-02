@@ -21,9 +21,7 @@ class JobDetail extends Component {
   }
 
   render() {
-    const {
- job, editJobData, loading, error, deleteJobData 
-} = this.props;
+    const { job, editJobData, deleteJobData } = this.props;
 
     if (!job.hireId) return <Redirect to="/joblist" />;
 

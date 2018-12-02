@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
 import GoogleVisionPortal from './GoogleVisionPortal';
-import CommonLoading from 'components/common/Loading';
+
 import { jobPostImage } from 'api/api';
 import './JobPostForm.css';
 
@@ -104,7 +104,7 @@ class JobPostForm extends Component {
   };
 
   render() {
-    const { postJobData, loading, error } = this.props;
+    const { postJobData } = this.props;
     return (
       <>
         {/* {loading ? <CommonLoading /> : null} */}

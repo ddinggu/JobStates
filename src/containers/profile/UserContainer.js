@@ -89,6 +89,7 @@ UserContainer.defaultProps = {
   snsBlog: 'default snsBlog',
   snsGithub: 'default snsGithub',
   picture: 'default img',
+  loading: true,
   beginFetch: () => {},
   isFetching: () => {},
 };

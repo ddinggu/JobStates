@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
- Button, Container, Grid, Header, List 
-} from 'semantic-ui-react';
+import { Button, Container, Grid, Header } from 'semantic-ui-react';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import * as jobUtils from 'utils/jobutils';
 
@@ -15,7 +13,7 @@ export default class UserInterestTech extends Component {
       field: [],
     };
 
-    this.onButtonClick = (part) => {
+    this.onButtonClick = part => {
       const { editTech, editField } = this.state;
 
       if (part === 'tech') {
@@ -29,12 +27,12 @@ export default class UserInterestTech extends Component {
       }
     };
 
-    this.onHandleDataChange = (key, shouldChange) => (data) => {
+    this.onHandleDataChange = (key, shouldChange) => data => {
       if (!shouldChange) this.setState({ ...this.state, [key]: data });
       else this.setState({ ...this.state, [key]: data, provider: 'user' });
     };
 
-    this.onSubmit = (part) => {
+    this.onSubmit = part => {
       if (part === 'tech') {
         const data = {
           favoriteTech: this.state.tech,
@@ -48,7 +46,7 @@ export default class UserInterestTech extends Component {
       }
     };
 
-    this.onDelete = (part) => {
+    this.onDelete = part => {
       if (part === 'tech') {
         const data = {
           favoriteTech: [],
@@ -139,7 +137,7 @@ export default class UserInterestTech extends Component {
                           <Button
                             compact
                             content="취소"
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault();
                               this.onButtonClick('field');
                             }}
@@ -220,7 +218,7 @@ export default class UserInterestTech extends Component {
                         <Button
                           compact
                           content="취소"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.preventDefault();
                             this.onButtonClick('tech');
                           }}
