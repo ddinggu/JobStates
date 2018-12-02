@@ -19,11 +19,7 @@ import {
 import './UserContainer.css';
 
 class UserContainer extends Component {
-  constructor() {
-    super();
-  }
-
-  componentDidMount() {
+  componentWillMount() {
     const { fetch } = this.props;
     fetch();
   }
@@ -86,22 +82,22 @@ UserContainer.propTypes = {
   isFetching: PropTypes.func,
 };
 
-// UserContainer.defaultProps = {
-//   name: 'default name',
-//   phoneNum: 'default phoneNum',
-//   email: 'default email',
-//   snsBlog: 'default snsBlog',
-//   snsGithub: 'default snsGithub',
-//   picture: 'default img',
-//   beginFetch: () => {},
-//   isFetching: () => {},
-// };
+UserContainer.defaultProps = {
+  name: 'default name',
+  phoneNum: 'default phoneNum',
+  email: 'default email',
+  snsBlog: 'default snsBlog',
+  snsGithub: 'default snsGithub',
+  picture: 'default img',
+  beginFetch: () => {},
+  isFetching: () => {},
+};
 
 // ////////////////////////////////////////////////////////////////////////
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   if (state.fetchedProfile.items !== null) {
     return {
       id: state.fetchedProfile.items.user.id,
@@ -122,7 +118,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,
