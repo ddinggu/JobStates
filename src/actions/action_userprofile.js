@@ -1,5 +1,6 @@
 import * as types from 'actions/actionTypes';
 import * as api from 'api/api';
+import { push } from 'connected-react-router';
 
 const fetchUserProfileBegin = () => ({
   type: types.FETCH_USER_PROFILE_BEGIN,
@@ -23,12 +24,19 @@ const uploadUserImageSuccess = imgUrl => ({
 export const fetchUser = () => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
 
+  const responseFetchUserData = await api.getUserProfile();
+
   try {
-    const responseGetUserProfile = await api.getUserProfile();
-    // console.log('herere', responseGetUserProfile);
-    dispatch(fetchUserProfileSuccess(responseGetUserProfile.data));
+    if (responseFetchUserData.data.code === 200) {
+      dispatch(fetchUserProfileSuccess(responseFetchUserData.data.data));
+    } else {
+      dispatch(fetchUserProfileFailure(responseFetchUserData.data));
+      alert(responseFetchUserData.data.message);
+      dispatch(push('/logout'));
+    }
   } catch (err) {
-    dispatch(fetchUserProfileFailure(err));
+    console.log('action_userprofile: onSubmitPostUserEdu error', err);
+    dispatch(fetchUserProfileFailure(responseFetchUserData.data));
   }
 };
 
@@ -36,10 +44,19 @@ export const onSubmitPostUser = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
   try {
     const responsePostUserData = await api.postUserProfile(data, part);
-    dispatch(fetchUserProfileSuccess(responsePostUserData.data));
+
+    if (responsePostUserData.data.code === 200) {
+      dispatch(fetchUserProfileSuccess(responsePostUserData.data));
+    } else {
+      dispatch(fetchUserProfileFailure(responsePostUserData.data));
+      alert(responsePostUserData.data.message);
+      dispatch(push('/logout'));
+    }
   } catch (err) {
     console.log('action_userprofile: onSubmitPostUserEdu error', err);
-    dispatch(fetchUserProfileFailure(err));
+    dispatch(
+      fetchUserProfileFailure({ code: 404, message: 'Internal Error!' }),
+    );
   }
 };
 

@@ -3,17 +3,15 @@ import * as filters from 'utils/filter';
 
 const initialState = {
   loading: false,
-  error: false,
   allJobData: [],
   filterData: [],
   currentData: {
-    loading: false,
-    error: false,
     data: {},
   },
   autocompleteData: [],
   filteredAutocompleteData: {},
   imgUrl: null,
+  status: { code: null, message: null },
 };
 
 export default (state = initialState, action) => {
@@ -28,15 +26,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        allJobData: action.payload,
-        filterData: action.payload,
+        allJobData: action.payload.data,
+        filterData: action.payload.data,
+        status: { code: action.payload.code, message: 'success' },
       };
 
     case types.FETCH_JOB_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
+        staus: action.error,
       };
 
     case types.SEARCH_FILTER:
@@ -138,6 +137,7 @@ export default (state = initialState, action) => {
           'hireId',
           action.hireId,
         ),
+        status: { code: 200, message: 'success' },
         currentData: { data: {} },
       };
 
@@ -158,14 +158,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        currentData: { data: { ...state.currentData.data, ...action.data } },
+        status: { code: action.data.code, message: 'success' },
+        currentData: {
+          data: { ...state.currentData.data, ...action.data.data },
+        },
       };
 
     case types.EDIT_JOB_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
+        status: action.error,
       };
 
     default:
