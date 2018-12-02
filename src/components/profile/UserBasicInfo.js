@@ -69,7 +69,7 @@ export default class UserBasicInfo extends Component {
       const data = {
         name: '',
         phone: '',
-        email: 'null@gmail.com',
+        email: null,
         blog: '',
         github: '',
       };
@@ -77,7 +77,7 @@ export default class UserBasicInfo extends Component {
       this.setState({
         name: '',
         phone: '',
-        email: 'null@gmail.com',
+        email: null,
         blog: '',
         github: '',
       });

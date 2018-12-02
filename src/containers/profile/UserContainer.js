@@ -6,16 +6,16 @@ import { Container } from 'semantic-ui-react';
 import CommonLoading from 'components/common/Loading';
 import UserInterests from 'components/profile/UserInterests';
 import HaveTech from 'components/profile/HaveTech';
-import UserBasicInfo from '../../components/profile/UserBasicInfo';
-import UserEducation from '../../components/profile/UserEducation';
-import UserProject from '../../components/profile/UserProject';
-import UserExperience from '../../components/profile/UserExperience';
+import UserBasicInfo from 'components/profile/UserBasicInfo';
+import UserEducation from 'components/profile/UserEducation';
+import UserProject from 'components/profile/UserProject';
+import UserExperience from 'components/profile/UserExperience';
 import {
   fetchUser,
   onSubmitPostUser,
   onSubmitPatchUser,
   deleteUserProfile,
-} from '../../actions/action_userprofile';
+} from 'actions/action_userprofile';
 import './UserContainer.css';
 
 class UserContainer extends Component {
@@ -29,7 +29,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    if (this.props.name === 'default name') {
+    if (this.props.loading) {
       return (
         <>
           <CommonLoading />
@@ -86,23 +86,23 @@ UserContainer.propTypes = {
   isFetching: PropTypes.func,
 };
 
-UserContainer.defaultProps = {
-  name: 'default name',
-  phoneNum: 'default phoneNum',
-  email: 'default email',
-  snsBlog: 'default snsBlog',
-  snsGithub: 'default snsGithub',
-  picture: 'default img',
-  beginFetch: () => {},
-  isFetching: () => {},
-};
+// UserContainer.defaultProps = {
+//   name: 'default name',
+//   phoneNum: 'default phoneNum',
+//   email: 'default email',
+//   snsBlog: 'default snsBlog',
+//   snsGithub: 'default snsGithub',
+//   picture: 'default img',
+//   beginFetch: () => {},
+//   isFetching: () => {},
+// };
 
 // ////////////////////////////////////////////////////////////////////////
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
 const mapStateToProps = state => {
-  if (!(state.fetchedProfile.items === null)) {
+  if (state.fetchedProfile.items !== null) {
     return {
       id: state.fetchedProfile.items.user.id,
       name: state.fetchedProfile.items.user.name,
@@ -117,6 +117,7 @@ const mapStateToProps = state => {
       userFavTech: state.fetchedProfile.items.user.favoriteTech,
       userFavField: state.fetchedProfile.items.user.favoriteCategory,
       haveTech: state.fetchedProfile.items.user.haveTech,
+      loading: state.fetchedProfile.loading,
     };
   }
 };
