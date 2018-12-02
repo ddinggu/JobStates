@@ -16,11 +16,10 @@ const authenticateError = () => ({
 // status에 따라 판단!!
 export const authCheck = () => async (dispatch) => {
   const response = await authenticateUser();
-
   console.log('auth check', response);
 
   try {
-    response.data.status.code === 200
+    response.data.code === 200
       ? dispatch(authenticate())
       : dispatch(unauthenticate());
   } catch (err) {

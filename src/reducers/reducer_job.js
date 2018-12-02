@@ -14,7 +14,7 @@ const initialState = {
   status: { code: null, message: null },
 };
 
-export default function (state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_JOB_BEGIN:
       return {
@@ -174,4 +174,4 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
