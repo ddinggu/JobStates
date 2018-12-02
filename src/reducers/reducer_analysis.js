@@ -2,7 +2,7 @@ import * as types from 'actions/actionTypes';
 
 const initialState = {
   loading: false,
-  error: false,
+  status: { code: null, message: null },
   data: {},
 };
 
@@ -13,15 +13,16 @@ function setUserAnalysisData(state = initialState, action) {
 
     case types.GET_ANALYSIS_SUCCESS:
       return {
-        ...state,
         loading: false,
         data: action.payload.data,
+        status: { code: action.payload.code, message: 'success' },
       };
 
     case types.GET_ANALYSIS_FAILURE:
       return {
         ...state,
-        error: true,
+        loading: false,
+        status: action.error,
       };
 
     default:
