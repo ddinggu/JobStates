@@ -3,11 +3,9 @@ import {
   Button,
   Icon,
   Portal,
-  Segment,
   Form,
   Input,
   Container,
-  Label,
   Grid,
 } from 'semantic-ui-react';
 import './GoogleVisionPortal.css';
@@ -107,7 +105,6 @@ export default class GoogleVision extends Component {
                         id="img"
                         name="image"
                         onChange={this.handleOnFileUpload}
-                        onChange={e => this.handleOnFileUpload(e)}
                         accept=".jpg, .png, .bmp, .jpeg"
                       />
                     </Form.Field>

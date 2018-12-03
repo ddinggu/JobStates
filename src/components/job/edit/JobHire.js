@@ -49,18 +49,6 @@ class JobCompany extends Component {
       [key]: data,
     });
 
-  // onInputChange = () => {
-  //   let imageForm = new FormData();
-  //   imageForm.append('img', document.getElementById('jobHireImage').files[0]);
-  //   api
-  //     .jobPostImage(imageForm)
-  //     .then(data => {
-  //        this.setState({ hireImage : data.data.url });
-  //       console.log(data)
-  //     })
-  //     .catch(err => console.log('error:::', err));
-  // };
-
   onInputChange = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('jobHireImage').files[0]);
@@ -84,7 +72,6 @@ class JobCompany extends Component {
       salary,
       deadLine,
       address,
-      provider,
       experience,
       statusDate,
       hireType,
@@ -323,7 +310,7 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             공고 이미지
                           </List.Item>
-                          <Input
+                          {/* <Input
                             control={Input}
                             type="file"
                             name="file"
@@ -331,7 +318,18 @@ class JobCompany extends Component {
                             onChange={() => {
                               this.onInputChange();
                             }}
-                          />
+                          /> */}
+                          <div className="upload-btn-wrapper">
+                            <button className="btn">등록</button>
+                            <input
+                              type="file"
+                              name="file"
+                              id="jobHireImage"
+                              onChange={() => {
+                                this.onInputChange();
+                              }}
+                            />
+                          </div>
                           <Image src={hireImage} />
                         </List>
                       </Form.Field>
@@ -372,7 +370,7 @@ class JobCompany extends Component {
                 <Grid.Row>
                   <div class="ItemsInContainer">
                     <Button compact onClick={this.onEditing}>
-                      취소
+                      취소야
                     </Button>
                     <Button
                       compact

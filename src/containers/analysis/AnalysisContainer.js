@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import getAnalysis from 'actions/action_analysis';
+import { push } from 'connected-react-router';
 import PropTypes from 'prop-types';
 import DonutChart from 'components/analysis/DonutChart';
 import UserCurrent from 'components/analysis/UserCurrent';
@@ -24,17 +25,12 @@ class AnalysisContainer extends Component {
       meeting,
       pass,
       fail,
-      error,
       loading,
     } = this.props;
     return (
       <>
         {loading ? (
-          <>
-            <Loading />
-          </>
-        ) : error ? (
-          <p>error! </p>
+          <Loading />
         ) : (
           <Container className="jobdetail">
             <UserCurrent
@@ -67,9 +63,9 @@ AnalysisContainer.propTypes = {
   document: PropTypes.number,
   pass: PropTypes.number,
   fail: PropTypes.number,
-  error: PropTypes.bool,
   loading: PropTypes.bool,
   setAnalysisData: PropTypes.func,
+  status: PropTypes.instanceOf(Object),
 };
 
 const mapStateToProps = state => ({
@@ -82,11 +78,13 @@ const mapStateToProps = state => ({
   meeting: state.Analysis.data.meeting,
   pass: state.Analysis.data.pass,
   fail: state.Analysis.data.fail,
-  error: state.Analysis.data.error,
+  loading: state.Analysis.loading,
+  status: state.Analysis.status,
 });
 
 const mapDispatchToProps = dispatch => ({
   setAnalysisData: () => dispatch(getAnalysis()),
+  redirect: () => dispatch(push('/login')),
 });
 
 export default connect(

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Button, Grid } from 'semantic-ui-react';
 import * as api from 'api/api';
-import './login.css';
 import styled from 'styled-components';
 
 const Button_st = styled.button`
@@ -11,8 +10,8 @@ const Button_st = styled.button`
   margin: auto;
   color: white;
   width: 50%;
+  background-color: ${props => (props.google ? '#dd4b39;' : props.kakao ? '#ffeb04;' : '#03c73c;')};
 `;
-
 const Anchor = styled(Button_st.withComponent('a'))``;
 
 export default class Login extends Component {
@@ -25,27 +24,15 @@ export default class Login extends Component {
             <Grid.Column />
             <Grid.Column width={7}>
               <Grid padded>
-                <Anchor
-                  href={`${api.URL}/auth/google`}
-                  className="loginbtn"
-                  id="google"
-                >
+                <Anchor google href={`${api.URL}/auth/google`}>
                   구글로 로그인
                 </Anchor>
                 <Grid.Row>
-                  <Button_st
-                    href={`${api.URL}/auth/github`}
-                    className="loginbtn"
-                    id="naver"
-                  >
+                  <Button_st github href={`${api.URL}/auth/github`}>
                     깃헙으로 로그인
                   </Button_st>
                 </Grid.Row>
-                <Button_st
-                  href={`${api.URL}/auth/kakao`}
-                  className="loginbtn"
-                  id="kakao"
-                >
+                <Button_st kakao href={`${api.URL}/auth/kakao`}>
                   카카오로 로그인
                 </Button_st>
               </Grid>

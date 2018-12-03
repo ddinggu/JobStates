@@ -27,7 +27,7 @@ class JobComment extends Component {
     });
 
   render() {
-    const { edit, commentId, advantage, disAdvantage, strategy } = this.state;
+    const { edit, advantage, disAdvantage, strategy } = this.state;
     const { onSubmitEditData } = this.props;
 
     return (

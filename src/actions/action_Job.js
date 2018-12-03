@@ -11,26 +11,34 @@ const successFetchJobData = payload => ({
   payload,
 });
 
-const failedFetchJobData = () => ({
+const failedFetchJobData = error => ({
   type: types.FETCH_JOB_FAILURE,
+  error,
 });
 
-export const fetchJob = () => async (dispatch) => {
+export const fetchJob = () => async dispatch => {
   dispatch(loadingFetchJobData());
+  const response = await api.fetchJob();
+  console.log(response.data);
   try {
-    const response = await api.fetchJob();
-    console.log(response.data);
-
-    dispatch(successFetchJobData(response.data));
+    if (response.data.code === 200) {
+      dispatch(successFetchJobData(response.data));
+    } else {
+      dispatch(failedFetchJobData(response.data));
+      alert(response.data.message);
+      dispatch(push('/logout'));
+    }
   } catch (error) {
-    dispatch(failedFetchJobData());
+    dispatch(failedFetchJobData({ code: 404, message: 'Internal Error!' }));
+    alert(response.data.message);
+    dispatch(push('/logout'));
   }
 };
 
 export const filterFetchData = (
   filterTargetValue,
   filterTargetInputValue,
-) => (dispatch) => {
+) => dispatch => {
   dispatch({
     type: types.SEARCH_FILTER,
     payload: filterTargetValue,
@@ -38,7 +46,7 @@ export const filterFetchData = (
   });
 };
 
-export const getDetailJob = id => (dispatch) => {
+export const getDetailJob = id => dispatch => {
   dispatch({ type: types.GET_DETAIL_JOB, id });
   dispatch(push('/jobdetail'));
 };
@@ -52,28 +60,25 @@ const successDeleteJobData = hireId => ({
   hireId,
 });
 
-const failedDeleteJobData = () => ({
+const failedDeleteJobData = error => ({
   type: types.DELETE_JOB_FAILURE,
+  error,
 });
 
-export const deleteJobData = data => async (dispatch) => {
+export const deleteJobData = data => async dispatch => {
   dispatch(loadingDeleteJobData());
-
   console.log('delete data: ', data);
 
   try {
-    // 추후 수정 필요!!
     const response = await api.deletePostingJob(data);
-    if (response.status === 500) {
-      dispatch(failedDeleteJobData());
-    } else {
-      console.log('response: ', response);
-
+    if (response.data.code === 200) {
       dispatch(successDeleteJobData(data.hireId));
+    } else {
+      dispatch(failedDeleteJobData(response.data));
       dispatch(push('/joblist'));
     }
   } catch (err) {
     console.error(err);
-    dispatch(failedDeleteJobData());
+    dispatch(failedDeleteJobData({ code: 404, message: 'Internal Error!' }));
   }
 };

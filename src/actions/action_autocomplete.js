@@ -31,9 +31,11 @@ export const filterAutoCompleteData = hireId => async (dispatch) => {
 export const setAutoCompleteData = company => async (dispatch) => {
   dispatch(loadingAutoComplete());
 
+  const responseAutoCompleteData = await api.getAutoCompleteData(company);
+  console.log(responseAutoCompleteData);
+
   try {
-    const responseAutoCompleteData = await api.getAutoCompleteData(company);
-    dispatch(successAutoComplete(responseAutoCompleteData.data));
+    dispatch(successAutoComplete(responseAutoCompleteData.data.data));
   } catch (err) {
     console.error(err);
     dispatch(failedAutoComplete());
