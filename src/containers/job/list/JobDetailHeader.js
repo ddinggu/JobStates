@@ -7,6 +7,7 @@ class JobDetailHeader extends Component {
   toggle = () => this.setState({ open: !this.state.open });
 
   render() {
+    console.log('jobDetailHeader render!!');
     const { open } = this.state;
     const {
       provider,
@@ -41,9 +42,7 @@ class JobDetailHeader extends Component {
 
         <Modal size={'mini'} open={open} onClose={this.toggle}>
           <Modal.Header>삭제</Modal.Header>
-          <Modal.Content>
-            <p>정말 삭제하시겠습니까?</p>
-          </Modal.Content>
+          <Modal.Content />
           <Modal.Actions>
             <Button negative onClick={this.toggle}>
               취소

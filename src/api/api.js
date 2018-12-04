@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GoogleVision_API_KEY } from 'config/google';
 
 // export const URL = 'http://13.209.99.252:3001';
-export const URL =  'http://ec2-13-209-99-252.ap-northeast-2.compute.amazonaws.com:3001'; // 고정 header id로 테스트 시
+export const URL =  'https://www.jobstate.xyz'; // 고정 header id로 테스트 시
 // export const URL = 'http://ec2-34-222-6-33.us-west-2.compute.amazonaws.com';
 // export const URL = 'http://10.130.151.17:3001';
 

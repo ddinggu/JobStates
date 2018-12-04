@@ -5,6 +5,7 @@ import JobListHeader from './JobListHeader';
 import { Grid, Segment, Table } from 'semantic-ui-react';
 import { push } from 'connected-react-router';
 import CommonLoading from 'components/common/Loading';
+// import Perf from 'react-addons-perf';
 
 import './JobList.css';
 
@@ -15,6 +16,7 @@ class JobList extends Component {
     this.state = {
       filterFlag: false,
     };
+    // console.log('JobList Constructor render 1');
   }
 
   componentDidMount() {
@@ -22,6 +24,27 @@ class JobList extends Component {
     const { fetchJob } = this.props;
     fetchJob();
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // Perf.start();
+  //   // console.log('this.props:;', this.props);
+  //   // console.log('nextProps::', nextProps);
+  //   console.log('this.state::', this.state.filterFlag);
+  //   console.log('nextState:::', nextState.filter Flag);
+  //   console.log('비교:', this.state.filterFlag !== nextState.filterFlag);
+  //   // // console.log(nextProps !== this.props);
+  //   // Perf.stop();
+  //   // const measurements = Perf.getLastMeasurements();
+  //   // Perf.printWasted(measurements);
+  //   if (this.state.filterFlag !== nextState.filterFlag) {
+  //     return true;
+  //   }
+  //   // return false;
+  // }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return true;
+  // }
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
@@ -71,6 +94,7 @@ class JobList extends Component {
         </>
       );
     }
+    // console.log('JobList 2 render.. why?');
 
     return (
       <>
