@@ -63,6 +63,8 @@ class JobList extends Component {
   };
 
   render() {
+    console.log('token test !!', localStorage.getItem('token'));
+
     const { job, filter, loading } = this.props;
     if (loading) {
       return (
