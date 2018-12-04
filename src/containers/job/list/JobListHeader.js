@@ -27,7 +27,7 @@ class JobListHeader extends Component {
   _onClickSearch = debounce(() => {
     const { value, inputValue } = this.state;
     this.props._filterSearch(value, inputValue);
-  }, 400);
+  }, 300);
 
   onInputDebounce = e => {
     e.preventDefault();

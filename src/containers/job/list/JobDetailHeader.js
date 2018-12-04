@@ -16,7 +16,6 @@ class JobDetailHeader extends Component {
       hireId,
       scheduleId,
       loading,
-      error,
       deleteJobData,
     } = this.props;
 

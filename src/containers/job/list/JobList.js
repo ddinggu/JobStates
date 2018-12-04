@@ -63,7 +63,7 @@ class JobList extends Component {
             style={{ cursor: 'pointer' }}
           >
             <Table.Cell width={3}>
-              <img src={jobData.logo} width="35px" height="50px" />
+              <img src={jobData.logo} width="35px" height="50px" alt="" />
             </Table.Cell>
             <Table.Cell width={4}>{jobData.brand}</Table.Cell>
             <Table.Cell width={4}>{jobData.title}</Table.Cell>
@@ -86,7 +86,9 @@ class JobList extends Component {
   };
 
   render() {
-    const { job, filter, loading, error } = this.props;
+    console.log('token test !!', localStorage.getItem('token'));
+
+    const { job, filter, loading } = this.props;
     if (loading) {
       return (
         <>

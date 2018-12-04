@@ -16,12 +16,11 @@ const failedFetchJobData = error => ({
   error,
 });
 
-export const fetchJob = () => async (dispatch) => {
+export const fetchJob = () => async dispatch => {
   dispatch(loadingFetchJobData());
+  const response = await api.fetchJob();
+  console.log(response.data);
   try {
-    const response = await api.fetchJob();
-    console.log(response.data);
-
     if (response.data.code === 200) {
       dispatch(successFetchJobData(response.data));
     } else {
@@ -31,13 +30,15 @@ export const fetchJob = () => async (dispatch) => {
     }
   } catch (error) {
     dispatch(failedFetchJobData({ code: 404, message: 'Internal Error!' }));
+    alert(response.data.message);
+    dispatch(push('/logout'));
   }
 };
 
 export const filterFetchData = (
   filterTargetValue,
   filterTargetInputValue,
-) => (dispatch) => {
+) => dispatch => {
   dispatch({
     type: types.SEARCH_FILTER,
     payload: filterTargetValue,
@@ -45,7 +46,7 @@ export const filterFetchData = (
   });
 };
 
-export const getDetailJob = id => (dispatch) => {
+export const getDetailJob = id => dispatch => {
   dispatch({ type: types.GET_DETAIL_JOB, id });
   dispatch(push('/jobdetail'));
 };
@@ -64,7 +65,7 @@ const failedDeleteJobData = error => ({
   error,
 });
 
-export const deleteJobData = data => async (dispatch) => {
+export const deleteJobData = data => async dispatch => {
   dispatch(loadingDeleteJobData());
   console.log('delete data: ', data);
 

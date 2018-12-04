@@ -26,7 +26,6 @@ class AnalysisContainer extends Component {
       pass,
       fail,
       loading,
-      status,
     } = this.props;
     return (
       <>

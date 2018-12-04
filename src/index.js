@@ -8,7 +8,7 @@ import configureStore from './store';
 
 import 'semantic-ui-css/semantic.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
-// import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker';
 
 const history = createBrowserHistory();
 const store = configureStore(history);
@@ -22,4 +22,4 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
-// serviceWorker.unregister();
+serviceWorker.register();

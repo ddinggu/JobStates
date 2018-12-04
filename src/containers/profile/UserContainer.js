@@ -19,10 +19,6 @@ import {
 import './UserContainer.css';
 
 class UserContainer extends Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     const { fetch } = this.props;
     fetch();
