@@ -179,6 +179,9 @@ class JobCompany extends Component {
                             <div className="jobpostItem">공고 이미지</div>
                           </List.Item>
                           <Image src={this.props.hireImage} alt="" />
+                          {this.props.hireImage
+                            ? null
+                            : '등록된 이미지가 없습니다'}
                         </List>
                       </Grid.Column>
                     </Grid>

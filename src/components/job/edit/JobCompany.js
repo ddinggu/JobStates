@@ -93,7 +93,9 @@ class JobCompany extends Component {
                     </Grid.Row>
                     <Grid.Row>
                       <List bulleted>
-                        <List.Item className="jobpostItem">야</List.Item>
+                        <List.Item className="jobpostItem">
+                          요구 기술 스택
+                        </List.Item>
                         {this.props.category.map(hireMapping)}
                       </List>
                     </Grid.Row>
