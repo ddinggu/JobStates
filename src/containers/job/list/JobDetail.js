@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
-
 import { deleteJobData } from 'actions/action_Job';
 import editJobData from 'actions/action_JobEdit';
 

@@ -15,13 +15,14 @@ import PlusButton from 'components/common/PlusButton';
 // import privateRoute from 'container/login/privateRoute';
 import './App.css';
 
+console.log('My Test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
 const App = () => (
   <Switch>
     <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
       <Route
         path="/"
-        render={props =>
-          props.location.pathname !== '/login' && <HeaderContainer />
+        render={props => props.location.pathname !== '/login' && <HeaderContainer />
         }
       />
       <Route path="/login" component={Login} />
