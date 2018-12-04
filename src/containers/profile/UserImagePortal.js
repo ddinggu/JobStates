@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { Button, Grid, Portal, Segment, Form, Image } from 'semantic-ui-react';
+import {
+  Button,
+  Portal,
+  Segment,
+  Header,
+  Form,
+  Input,
+  Image,
+} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as api from 'api/api';
 import { onSubmitPostUser } from 'actions/action_userprofile';
+import * as Styled from 'StyledComponents';
 
 class AddUserImagePortal extends Component {
   constructor(props) {
@@ -37,62 +46,55 @@ class AddUserImagePortal extends Component {
   render() {
     const { open } = this.state;
     return (
-      <Grid>
-        <Grid.Column>
-          <img alt="userphoto" src={this.state.photo} width="100" />
+      <div align="center">
+        <img alt="userphoto" src={this.state.photo} width="100" />
+        <div>
           <Button
             compact
             style={{ marginLeft: '1rem' }}
             size="mini"
-            content={open ? 'ADD PICTURE' : 'ADD PICTURE'}
+            content="ADD PICTURE"
             negative={open}
             positive={!open}
             onClick={this.handleClick}
           />
-          <Portal onClose={this.handleClose} open={open}>
-            <Segment
-              style={{
-                left: '51%',
-                position: 'fixed',
-                top: '20%',
-                zIndex: 1000,
-              }}
-            >
-              <div>
-                <Form>
-                  {/* <Input
-                    control={Input}
+        </div>
+        <Portal onClose={this.handleClose} open={open}>
+          <Segment
+            style={{
+              left: '51%',
+              position: 'fixed',
+              top: '20%',
+              zIndex: 1000,
+            }}
+          >
+            <div>
+              <Form>
+                <div className="upload-btn-wrapper">
+                  <button className="btn">등록</button>
+                  <input
                     type="file"
+                    name="file"
                     id="imagefileUser"
                     onChange={this.sendImage}
-                  /> */}
-                  <div className="upload-btn-wrapper">
-                    <button className="btn">등록</button>
-                    <input
-                      type="file"
-                      name="file"
-                      id="imagefileUser"
-                      onChange={this.sendImage}
-                    />
-                  </div>
-                  <Image src={this.state.photo} size="medium" />
-                  <Button
-                    compact
-                    type="submit"
-                    content="제출"
-                    color="blue"
-                    onClick={() => {
-                      this.handleClick();
-                      this.props.onSubmitPostUser(this.state, 'profile');
-                    }}
                   />
-                </Form>
-              </div>
-            </Segment>
-          </Portal>
-        </Grid.Column>
-        <Grid.Column />
-      </Grid>
+                </div>
+                <Image src={this.state.photo} size="medium" />
+                <Button
+                  compact
+                  type="submit"
+                  content="제출"
+                  color="blue"
+                  onClick={() => {
+                    this.handleClick();
+                    this.props.onSubmitPostUser(this.state, 'profile');
+                  }}
+                />
+              </Form>
+            </div>
+          </Segment>
+        </Portal>
+      </div>
     );
   }
 }

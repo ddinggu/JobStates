@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Button,
-  Container,
-  Input,
-  Form,
-  TextArea,
-  Header,
+ Button, Input, Form, TextArea, Header 
 } from 'semantic-ui-react';
+import * as Styled from 'StyledComponents';
 import ProjectListItem from './ProjectListItem';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
@@ -46,70 +42,52 @@ export default class UserProject extends Component {
       this.onButtonClick();
     };
 
-    // const onSubmitPost_test = (e) => {
-    //   e.preventDefault();
-    //   const { title, term } = this.state;
-    //   const obj = { title, term };
-    //   funcs.submit(obj, 'project');
-    //   this.onButtonClick();
-    // };
-
     return (
-      <Container className="UserProject">
-        <div className="ui grid centered">
-          <span className="column profilename two wide">
-            <Header>Project</Header>
-          </span>
-          <div className="column UserProject read ten wide profilebox">
-            {project.map(proj => (
-              <div>
-                <ProjectListItem key={proj.id} proj={proj} funcs={funcs} />
-              </div>
-            ))}
-            <div className="row" style={create ? null : { display: 'none' }}>
-              <Form onSubmit={onSubmitPost}>
-                <br />
-                <Form.Field>
-                  <label>프로젝트명</label>
-                  <input
-                    size="mini"
-                    onChange={e => this.onChange(e, 'title')}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>프로젝트 기간</label>
-                  <Input size="mini" onChange={e => this.onChange(e, 'term')} />
-                </Form.Field>
-                <Form.Field
-                  control={TextArea}
-                  label="간단 설명"
-                  onChange={e => this.onChange(e, 'description')}
-                />
-                <Button
-                  compact
-                  content="취소"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onButtonClick();
-                  }}
-                />
-                <Button type="submit" compact content="추가" />
-              </Form>
+      <Styled.Wrapper>
+        <Styled.Box column="1" row="1">
+          <Styled.Header>Project</Styled.Header>
+          <Styled.Line />
+        </Styled.Box>
+        <Styled.BoxWithBackground column="2/5" row="1">
+          {create ? (
+            <Form onSubmit={onSubmitPost}>
+              <br />
+              <Form.Field>
+                <label>프로젝트명</label>
+                <input size="mini" onChange={e => this.onChange(e, 'title')} />
+              </Form.Field>
+              <Form.Field>
+                <label>프로젝트 기간</label>
+                <Input size="mini" onChange={e => this.onChange(e, 'term')} />
+              </Form.Field>
+              <Form.Field
+                control={TextArea}
+                label="간단 설명"
+                onChange={e => this.onChange(e, 'description')}
+              />
+              <Button
+                compact
+                content="취소"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onButtonClick();
+                }}
+              />
+              <Button type="submit" compact content="추가" />
+            </Form>
+          ) : null}
+          {project.map(proj => (
+            <div>
+              <ProjectListItem key={proj.id} proj={proj} funcs={funcs} />
             </div>
-          </div>
-          <span className="column two wide">
-            <span className="ui mini basic icon buttons">
-              <button
-                type="button"
-                className="ui button"
-                onClick={onButtonClick}
-              >
-                <i className="plus icon" />
-              </button>
-            </span>
-          </span>
-        </div>
-      </Container>
+          ))}
+          <Styled.SpanPlusButton className="ui mini basic icon buttons">
+            <button type="button" className="ui button" onClick={onButtonClick}>
+              <i className="plus icon" />
+            </button>
+          </Styled.SpanPlusButton>
+        </Styled.BoxWithBackground>
+      </Styled.Wrapper>
     );
   }
 }
