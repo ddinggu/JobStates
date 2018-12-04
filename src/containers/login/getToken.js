@@ -8,25 +8,26 @@ export default class GetToken extends Component {
   };
 
   _getToken = () => {
-    console.log('login data in params', this.props.location.search);
+    const { getLoginData } = this.state;
     const userInfo = queryString.parse(this.props.location.search);
-    // console.log('parsed login data', userInfo);
-    // console.log('token in parsed login data', userInfo.token);
-    console.log('이미지 : ', userInfo.profile);
 
     if (userInfo.token) {
       localStorage.setItem('token', userInfo.token);
       localStorage.setItem('nick', userInfo.nick);
       localStorage.setItem('profile', userInfo.profile);
-    } else alert('에러!!');
+      this.setState({
+        getLoginData: !getLoginData,
+      });
+    } else {
+      alert('로그인 에러! 다시 로그인 해주세요');
+      this.setState({
+        getLoginData: !getLoginData,
+      });
+    }
   };
 
   componentDidMount() {
-    const { getLoginData } = this.state;
     this._getToken();
-    this.setState({
-      getLoginData: !getLoginData,
-    });
   }
 
   render() {
