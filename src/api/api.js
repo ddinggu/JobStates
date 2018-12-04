@@ -4,6 +4,7 @@ import { GoogleVision_API_KEY } from 'config/google';
 
 // export const URL =  'http://ec2-13-209-99-252.ap-northeast-2.compute.amazonaws.com:3001'; // 고정 header id로 테스트 시
 export const URL = 'https://www.jobstate.xyz';
+// export const URL = 'http://13.209.99.252:3001';
 
 // export const URL = 'http://10.130.151.17:3001';
 
@@ -34,44 +35,31 @@ const header_googlevision = {
 };
 
 // Analysis
-export const getUserAnalysisData = () =>
-  axios.get(`${URL}/analytics`, TokenHeader);
+export const getUserAnalysisData = () => axios.get(`${URL}/analytics`, TokenHeader);
 
 // Job
 export const fetchJob = () => axios.get(`${URL}/schedule`, TokenHeader);
-export const postUserJobPosting = data =>
-  axios.post(`${URL}/schedule/write`, data, TokenHeader);
-export const deletePostingJob = data =>
-  axios.delete(`${URL}/schedule`, { data, ...TokenHeader });
-export const updateJobPostData = (data, part) =>
-  axios.patch(`${URL}/schedule/${part}`, data, TokenHeader);
-export const jobPostImage = data =>
-  axios.post(`${URL}/image`, data, TokenHeader);
+export const postUserJobPosting = data => axios.post(`${URL}/schedule/write`, data, TokenHeader);
+export const deletePostingJob = data => axios.delete(`${URL}/schedule`, { data, ...TokenHeader });
+export const updateJobPostData = (data, part) => axios.patch(`${URL}/schedule/${part}`, data, TokenHeader);
+export const jobPostImage = data => axios.post(`${URL}/image`, data, TokenHeader);
 
 // Job_Posting Helper
-export const getAutoCompleteData = company =>
-  axios.get(`${URL}/schedule/search?brand=${company}`, TokenHeader);
-export const postImageToGetText = imgData =>
-  axios.post(URL_GoogleVision, imgData, header_googlevision);
+export const getAutoCompleteData = company => axios.get(`${URL}/schedule/search?brand=${company}`, TokenHeader);
+export const postImageToGetText = imgData => axios.post(URL_GoogleVision, imgData, header_googlevision);
 
 // User Profile
-export const getUserProfile = () =>
-  axios.get(`${URL}/user/profile`, TokenHeader);
-export const postUserProfile = (data, part) =>
-  axios.post(`${URL}/user/${part}`, data, TokenHeader);
-export const updateUserProfile = (data, part) =>
-  axios.patch(`${URL}/user/${part}`, data, TokenHeader);
-export const deleteUserProfile = (data, part) =>
-  axios.delete(`${URL}/user/${part}`, { data, ...TokenHeader });
-export const postUserImage = data =>
-  axios.post(`${URL}/test`, data, TokenHeader);
+export const getUserProfile = () => axios.get(`${URL}/user/profile`, TokenHeader);
+export const postUserProfile = (data, part) => axios.post(`${URL}/user/${part}`, data, TokenHeader);
+export const updateUserProfile = (data, part) => axios.patch(`${URL}/user/${part}`, data, TokenHeader);
+export const deleteUserProfile = (data, part) => axios.delete(`${URL}/user/${part}`, { data, ...TokenHeader });
+export const postUserImage = data => axios.post(`${URL}/test`, data, TokenHeader);
 
 // Fetching header
 export const fetchHeader = () => axios.get(`${URL}/user/profile`, TokenHeader);
 
 // Authenticate Correct User
-export const authenticateUser = () =>
-  axios.get(`${URL}/auth/check`, TokenHeader);
+export const authenticateUser = () => axios.get(`${URL}/auth/check`, TokenHeader);
 
 // ================== TEST with Fixed User ID ================== //
 
