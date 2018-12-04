@@ -9,27 +9,6 @@ import './login.css';
 
 export default class Login extends Component {
   render() {
-    // const confignaver = {
-    //   text: 'Login with Naver',
-    //   icon: 'naver',
-    //   iconFormat: name => `fa fa-${name}`,
-    //   style: { background: '#1EC800' },
-    //   activeStyle: { background: '#1a9e00' },
-    // };
-
-    // console.log('api.url', api.URL);
-
-    // const configkakao = {
-    //   text: 'Login with Kakao',
-    //   icon: 'kakao',
-    //   iconFormat: name => `fa fa-${name}`,
-    //   style: { background: '#ffde01' },
-    //   activeStyle: { background: '#e2c400' },
-    // };
-
-    // const NaverLoginButton = createButton(confignaver);
-    // const KakaoLoginButton = createButton(configkakao);
-
     return (
       <div id="container-login">
         <Container>

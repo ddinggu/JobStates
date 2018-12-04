@@ -35,6 +35,7 @@ class JobListHeader extends Component {
   };
 
   render() {
+    // console.log('JobListHeader 3 render');
     const { push } = this.props;
     return (
       <div id="list-header_contianer">

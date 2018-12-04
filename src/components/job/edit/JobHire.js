@@ -61,6 +61,7 @@ class JobCompany extends Component {
   };
 
   render() {
+    console.log('jobHire render!!');
     const {
       edit,
       title,
