@@ -79,6 +79,7 @@ class JobCompany extends Component {
                             <img
                               src="https://png.pngtree.com/svg/20170904/url_650529.png"
                               height="30px"
+                              alt=""
                             />
                           </a>
                         </span>

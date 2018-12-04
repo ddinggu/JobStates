@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Grid,
-  Portal,
-  Segment,
-  Header,
-  Form,
-  Input,
-  Image,
-  Container,
-} from 'semantic-ui-react';
+import { Button, Grid, Portal, Segment, Form, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as api from 'api/api';
 import { onSubmitPostUser } from 'actions/action_userprofile';

@@ -29,7 +29,6 @@ class JobPostForm extends Component {
     status: null,
     statusDate: new Date(),
     scheduleId: null,
-    logoKey: null,
     logo: null,
     logoKey: null,
     brand: null,
