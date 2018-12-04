@@ -11,8 +11,11 @@ import Login from 'containers/login/login';
 import Logout from 'containers/logout';
 import getToken from 'containers/login/getToken';
 import privateRoute from 'containers/login/privateRoute';
+import PlusButton from 'components/common/PlusButton';
 // import privateRoute from 'container/login/privateRoute';
 import './App.css';
+
+console.log('My Test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
 const App = () => (
   <Switch>
@@ -30,6 +33,7 @@ const App = () => (
       <Route path="/jobpost" component={privateRoute(JobPostForm)} />
       <Route path="/jobdetail" component={JobDetail} />
       <Route path="/analysis" component={AnalysisContainer} />
+      <PlusButton />
     </div>
   </Switch>
 );

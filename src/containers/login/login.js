@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Button, Grid } from 'semantic-ui-react';
-import { createButton } from 'react-social-login-buttons';
 import * as api from 'api/api';
 import './login.css';
 
@@ -10,26 +9,26 @@ import './login.css';
 
 export default class Login extends Component {
   render() {
-    const confignaver = {
-      text: 'Login with Naver',
-      icon: 'naver',
-      iconFormat: name => `fa fa-${name}`,
-      style: { background: '#1EC800' },
-      activeStyle: { background: '#1a9e00' },
-    };
+    // const confignaver = {
+    //   text: 'Login with Naver',
+    //   icon: 'naver',
+    //   iconFormat: name => `fa fa-${name}`,
+    //   style: { background: '#1EC800' },
+    //   activeStyle: { background: '#1a9e00' },
+    // };
 
-    console.log('api.url', api.URL);
+    // console.log('api.url', api.URL);
 
-    const configkakao = {
-      text: 'Login with Kakao',
-      icon: 'kakao',
-      iconFormat: name => `fa fa-${name}`,
-      style: { background: '#ffde01' },
-      activeStyle: { background: '#e2c400' },
-    };
+    // const configkakao = {
+    //   text: 'Login with Kakao',
+    //   icon: 'kakao',
+    //   iconFormat: name => `fa fa-${name}`,
+    //   style: { background: '#ffde01' },
+    //   activeStyle: { background: '#e2c400' },
+    // };
 
-    const NaverLoginButton = createButton(confignaver);
-    const KakaoLoginButton = createButton(configkakao);
+    // const NaverLoginButton = createButton(confignaver);
+    // const KakaoLoginButton = createButton(configkakao);
 
     return (
       <div id="container-login">

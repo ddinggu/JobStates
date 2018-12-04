@@ -19,10 +19,6 @@ import {
 import './UserContainer.css';
 
 class UserContainer extends Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     const { fetch } = this.props;
     fetch();
@@ -86,16 +82,17 @@ UserContainer.propTypes = {
   isFetching: PropTypes.func,
 };
 
-// UserContainer.defaultProps = {
-//   name: 'default name',
-//   phoneNum: 'default phoneNum',
-//   email: 'default email',
-//   snsBlog: 'default snsBlog',
-//   snsGithub: 'default snsGithub',
-//   picture: 'default img',
-//   beginFetch: () => {},
-//   isFetching: () => {},
-// };
+UserContainer.defaultProps = {
+  name: 'default name',
+  phoneNum: 'default phoneNum',
+  email: 'default email',
+  snsBlog: 'default snsBlog',
+  snsGithub: 'default snsGithub',
+  picture: 'default img',
+  loading: true,
+  beginFetch: () => {},
+  isFetching: () => {},
+};
 
 // ////////////////////////////////////////////////////////////////////////
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
