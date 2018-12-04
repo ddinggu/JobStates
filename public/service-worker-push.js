@@ -1,18 +1,19 @@
 self.addEventListener('activate', () => {
-  console.log('Finally active. Ready to start serving content!');
+  console.log('Activate!!!!!');
 });
 
 self.addEventListener('push', (event) => {
-  console.log('[Push] : ', event.data.text());
+  console.log('[Push] : ', event.data.json());
+  event.stopImmediatePropagation();
 
   const data = event.data.json();
+
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
-      // tag: data.title,
+      tag: data.tag,
       data: data.params,
-      requireInteraction: true,
-      // badge: "./punch.png",
+      // requireInteraction: true,
       icon: './punch.png',
     }),
   );
@@ -20,8 +21,14 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   const data = event.notification.data;
-  event.notification.close();
-  console.log(data);
+  // console.log('get Data : ', data);
+  console.log('action!! : ', event.action);
 
+  event.notification.close();
   event.waitUntil(clients.openWindow(data.url === '/' ? '' : data.url));
+});
+
+self.addEventListener('notificationclose', (event) => {
+  console.log('notification close!!!');
+  // log send to server
 });

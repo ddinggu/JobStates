@@ -1,6 +1,6 @@
 import { getVapiedKey, postSubscription, deleteSubscription } from 'api/api';
 
-export const urlB64ToUint8Array = (base64String) => {
+export const urlB64ToUint8Array = base64String => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding)
     .replace(/\-/g, '+')
@@ -19,11 +19,14 @@ export const subscribePush = async () => {
     Notification.requestPermission();
     return;
   }
-  console.log('Subscribe Start!');
+  console.log('Subscribe Step1');
 
   let convertedVapidKey;
 
+  console.log('Subscribe Step2');
+
   const registration = await navigator.serviceWorker.ready;
+  console.log('Subscribe Step3');
   if (!registration.pushManager) {
     alert('Push Unsupported');
     return;
@@ -76,6 +79,8 @@ export const unsubscribePush = async () => {
   if (!subscription) return;
   subscription
     .unsubscribe()
-    .then(() => deleteSubscription().then(() => console.log('delete subscription!!')),)
+    .then(() =>
+      deleteSubscription().then(() => console.log('delete subscription!!')),
+    )
     .catch(err => console.error(err));
 };
