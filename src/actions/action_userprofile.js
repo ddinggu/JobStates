@@ -35,25 +35,26 @@ export const fetchUser = () => async (dispatch) => {
       dispatch(push('/logout'));
     }
   } catch (err) {
-    console.log('action_userprofile: onSubmitPostUserEdu error', err);
+    console.error('action_userprofile: onSubmitPostUserEdu error', err);
     dispatch(fetchUserProfileFailure(responseFetchUserData.data));
   }
 };
 
 export const onSubmitPostUser = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
-  try {
-    const responsePostUserData = await api.postUserProfile(data, part);
+  const responsePostUserData = await api.postUserProfile(data, part);
+  console.log('please!!!!! ', responsePostUserData);
 
+  try {
     if (responsePostUserData.data.code === 200) {
-      dispatch(fetchUserProfileSuccess(responsePostUserData.data));
+      dispatch(fetchUserProfileSuccess(responsePostUserData.data.data));
     } else {
       dispatch(fetchUserProfileFailure(responsePostUserData.data));
       alert(responsePostUserData.data.message);
       dispatch(push('/logout'));
     }
   } catch (err) {
-    console.log('action_userprofile: onSubmitPostUserEdu error', err);
+    console.error('action_userprofile: onSubmitPostUserEdu error', err);
     dispatch(
       fetchUserProfileFailure({ code: 404, message: 'Internal Error!' }),
     );
@@ -62,10 +63,11 @@ export const onSubmitPostUser = (data, part) => async (dispatch) => {
 
 export const onSubmitPatchUser = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
+  console.log('patching data', data);
+  const responsePostUserData = await api.updateUserProfile(data, part);
+  console.log('test!! : ', responsePostUserData);
   try {
-    console.log('patching data', data);
-    const responsePostUserData = await api.updateUserProfile(data, part);
-    dispatch(fetchUserProfileSuccess(responsePostUserData.data));
+    dispatch(fetchUserProfileSuccess(responsePostUserData.data.data));
   } catch (err) {
     dispatch(fetchUserProfileFailure(err));
   }
@@ -77,7 +79,7 @@ export const deleteUserProfile = (data, part) => async (dispatch) => {
     console.log('deleting data', data, part);
     const deletedRes = await api.deleteUserProfile(data, part);
     console.log('deleted', deletedRes.data);
-    dispatch(fetchUserProfileSuccess(deletedRes.data));
+    dispatch(fetchUserProfileSuccess(deletedRes.data.data));
   } catch (err) {
     dispatch(fetchUserProfileFailure(err));
   }

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { GoogleVision_API_KEY } from 'config/google';
 
 export const URL = 'http://13.209.99.252:3001';
+// export const URL = 'https://jobstate.xyz'
 const GoogleVisionURL = 'https://vision.googleapis.com/v1/images:annotate?key=';
 const URL_GoogleVision = GoogleVisionURL + GoogleVision_API_KEY;
 
