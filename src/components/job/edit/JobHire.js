@@ -61,6 +61,7 @@ class JobCompany extends Component {
   };
 
   render() {
+    console.log('jobHire render!!');
     const {
       edit,
       title,
@@ -73,8 +74,6 @@ class JobCompany extends Component {
       deadLine,
       address,
       experience,
-      statusDate,
-      hireType,
     } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
@@ -105,6 +104,7 @@ class JobCompany extends Component {
                           <img
                             src="https://png.pngtree.com/svg/20170904/url_650529.png"
                             height="30px"
+                            alt=""
                           />
                         </a>
                       </span>
@@ -180,6 +180,9 @@ class JobCompany extends Component {
                             <div className="jobpostItem">공고 이미지</div>
                           </List.Item>
                           <Image src={this.props.hireImage} alt="" />
+                          {this.props.hireImage
+                            ? null
+                            : '등록된 이미지가 없습니다'}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -370,7 +373,7 @@ class JobCompany extends Component {
                 <Grid.Row>
                   <div class="ItemsInContainer">
                     <Button compact onClick={this.onEditing}>
-                      취소야
+                      취소
                     </Button>
                     <Button
                       compact

@@ -8,6 +8,10 @@ import JobList from 'containers/job/list/JobList';
 import JobPostForm from 'containers/job/post/JobPostForm';
 import Login from 'containers/login/login';
 import getToken from 'containers/login/getToken';
+import privateRoute from 'containers/login/privateRoute';
+import PlusButton from 'components/common/PlusButton';
+import Logout from 'containers/logout';
+// import privateRoute from 'container/login/privateRoute';
 import './App.css';
 import styled, { createGlobalStyle } from 'styled-components';
 import 'normalize.css';
@@ -19,32 +23,27 @@ createGlobalStyle`
   box-sizing:border-box;
 }
 `;
+console.log('My Test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      showNoti: false,
-    };
-  }
-
-  render() {
-    return (
-      <Switch>
-        <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
-          {/* <HeaderContainer /> */}
-          <Route path="/" component={HeaderContainer} />
-          <Route exact path="/" component={Login} />
-          <Route path="/user" component={UserContainer} />
-          <Route path="/login" component={getToken} />
-          <Route path="/joblist" component={JobList} />
-          <Route path="/jobpost" component={JobPostForm} />
-          <Route path="/jobdetail" component={JobDetail} />
-          <Route path="/analysis" component={AnalysisContainer} />
-        </div>
-      </Switch>
-    );
-  }
-}
+const App = () => (
+  <Switch>
+    <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
+      <Route
+        path="/"
+        render={props => props.location.pathname !== '/login' && <HeaderContainer />
+        }
+      />
+      <Route path="/login" component={Login} />
+      <Route path="/logout" component={Logout} />
+      <Route path="/user" component={UserContainer} />
+      <Route path="/userprofile" component={getToken} />
+      <Route path="/joblist" component={JobList} />
+      <Route path="/jobpost" component={privateRoute(JobPostForm)} />
+      <Route path="/jobdetail" component={JobDetail} />
+      <Route path="/analysis" component={AnalysisContainer} />
+      <PlusButton />
+    </div>
+  </Switch>
+);
 
 export default App;

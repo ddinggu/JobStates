@@ -54,7 +54,7 @@ class JobCompany extends Component {
     const { edit, brand, companyUrl, intro, category } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
-
+    console.log('jobCompany render!!');
     return (
       <Container className="jobContainer">
         <Grid textAlign="center">
@@ -79,6 +79,7 @@ class JobCompany extends Component {
                             <img
                               src="https://png.pngtree.com/svg/20170904/url_650529.png"
                               height="30px"
+                              alt=""
                             />
                           </a>
                         </span>
@@ -92,7 +93,9 @@ class JobCompany extends Component {
                     </Grid.Row>
                     <Grid.Row>
                       <List bulleted>
-                        <List.Item className="jobpostItem">야</List.Item>
+                        <List.Item className="jobpostItem">
+                          요구 기술 스택
+                        </List.Item>
                         {this.props.category.map(hireMapping)}
                       </List>
                     </Grid.Row>
