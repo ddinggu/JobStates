@@ -25,6 +25,8 @@ class UserContainer extends Component {
   }
 
   render() {
+    console.log('redering!!');
+
     if (this.props.loading) {
       return (
         <>

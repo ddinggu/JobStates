@@ -29,7 +29,9 @@ export const fetchUser = () => async (dispatch) => {
   try {
     if (responseFetchUserData.data.code === 200) {
       dispatch(fetchUserProfileSuccess(responseFetchUserData.data.data));
+      console.log(123);
     } else {
+      console.log(456);
       dispatch(fetchUserProfileFailure(responseFetchUserData.data));
       alert(responseFetchUserData.data.message);
       dispatch(push('/logout'));
