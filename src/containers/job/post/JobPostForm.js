@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import JobAutoComplete from './JobAutoComplete';
 import GoogleVisionPortal from './GoogleVisionPortal';
+import * as Styled from 'StyledComponents';
 
 import { jobPostImage } from 'api/api';
 import './JobPostForm.css';
@@ -125,7 +126,10 @@ class JobPostForm extends Component {
           <Container className="jobContainer">
             <Grid textAlign="center">
               <Grid.Column width={2}>
-                <Header>현재 상황</Header>
+                <Styled.Box>
+                  <Styled.Header>현재 상황</Styled.Header>
+                  <Styled.Line />
+                </Styled.Box>
               </Grid.Column>
               <Grid.Column textAlign="left" width={10} className="jobbody">
                 <Grid.Row>

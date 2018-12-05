@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import * as jobUtils from 'utils/jobutils';
 import * as Styled from 'StyledComponents';
@@ -69,22 +69,24 @@ export default class UserInterestTech extends Component {
                 handleArrayChange={this.onHandleDataChange('tech', true)}
                 value={this.state.tech}
               />
-              <Button
-                compact
-                content="취소"
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.onButtonClick();
-                }}
-              />
-              <Button
-                compact
-                content="변경"
-                onClick={() => {
-                  this.onButtonClick();
-                  this.onSubmit();
-                }}
-              />
+              <Styled.DivWithMargin>
+                <Button
+                  compact
+                  content="취소"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.onButtonClick();
+                  }}
+                />
+                <Button
+                  compact
+                  content="변경"
+                  onClick={() => {
+                    this.onButtonClick();
+                    this.onSubmit();
+                  }}
+                />
+              </Styled.DivWithMargin>
             </div>
           </Styled.Box>
           <Styled.SpanEditButton className="ui mini basic icon buttons ">

@@ -37,44 +37,40 @@ class Header extends Component {
 
     return (
       <Styled.HeaderContainer>
-        <Styled.BoxWrapper>
-          <Styled.Box column="1">
-            <Styled.Nav onClick={() => push('/joblist')}>
-              JOB | STATES
-            </Styled.Nav>
-          </Styled.Box>
-          <Styled.Box colum="2">
-            <nav role="navigation" className="nav-menu">
-              <span
-                className="main-nav-link content-mypage"
-                onClick={() => push('/user')}
-              >
-                마이페이지
-              </span>
-              <span
-                className="main-nav-link content-joblist"
-                onClick={() => push('/joblist')}
-              >
-                정리페이지
-              </span>
-              <span
-                className="main-nav-link content-analysis"
-                onClick={() => push('/analysis')}
-              >
-                분석
-              </span>
-            </nav>
-          </Styled.Box>
-          <Styled.Box column="3">
-            <Dropdown
-              trigger={trigger}
-              pointing="top left"
-              icon={null}
-              options={options}
-              onChange={this._onHandleChange}
-            />
-          </Styled.Box>
-        </Styled.BoxWrapper>
+        <Styled.NavLogo onClick={() => push('/joblist')}>
+          JOB | STATES
+        </Styled.NavLogo>
+        {/* <Styled.NavMenu> */}
+        <Styled.NavMenu role="navigation">
+          <span
+            className="main-nav-link content-mypage"
+            onClick={() => push('/user')}
+          >
+            마이페이지
+          </span>
+          <span
+            className="main-nav-link content-joblist"
+            onClick={() => push('/joblist')}
+          >
+            정리페이지
+          </span>
+          <span
+            className="main-nav-link content-analysis"
+            onClick={() => push('/analysis')}
+          >
+            분석
+          </span>
+        </Styled.NavMenu>
+        {/* </Styled.NavMenu> */}
+        <Styled.NavAccount>
+          <Dropdown
+            trigger={trigger}
+            pointing="top left"
+            icon={null}
+            options={options}
+            onChange={this._onHandleChange}
+          />
+        </Styled.NavAccount>
       </Styled.HeaderContainer>
     );
   }

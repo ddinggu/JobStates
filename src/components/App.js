@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import UserContainer from 'containers/profile/UserContainer';
 import AnalysisContainer from 'containers/analysis/AnalysisContainer';
@@ -13,7 +13,7 @@ import PlusButton from 'components/common/PlusButton';
 import Logout from 'containers/logout';
 // import privateRoute from 'container/login/privateRoute';
 import './App.css';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import 'normalize.css';
 
 createGlobalStyle`
