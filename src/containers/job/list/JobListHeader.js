@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Icon, Form, Grid } from 'semantic-ui-react';
 import * as util from 'utils/jobutils';
 import { push } from 'connected-react-router';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import debounce from 'lodash/debounce';
 import './JobListHeader.css';
@@ -76,6 +77,10 @@ class JobListHeader extends Component {
     );
   }
 }
+
+JobListHeader.propType = {
+  push: PropTypes.func,
+};
 
 export default connect(
   null,

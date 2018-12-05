@@ -44,23 +44,19 @@ export default class GoogleVision extends Component {
         text: detectedText.data.responses[0].fullTextAnnotation.text,
       });
     } catch (err) {
-      console.log('error in submitting image to get data', err);
+      console.error(err);
     }
   };
 
   handleOnFileUpload = e => {
-    console.log('here e', e.target.files);
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      console.log('reader.result', reader.result);
       const imageData = reader.result.split(',')[1];
-      console.log('imageData', imageData);
+
       this.onSubmitGoogle(imageData);
     };
-
-    console.log('here fie', file);
   };
 
   render() {
@@ -69,14 +65,14 @@ export default class GoogleVision extends Component {
       <div>
         <Button
           floated="right"
-          labelPosition="left" /* onClick={this.show(true)} */
+          labelPosition="left"
           style={{ marginRight: '2rem' }}
           onClick={this.handleClick}
         >
           <Icon name="sync alternate" />
           이미지 > 텍스트 변환
         </Button>
-        <Portal /*onClose={this.handleClick}*/ open={open}>
+        <Portal open={open}>
           <Container
             label={{
               as: 'a',

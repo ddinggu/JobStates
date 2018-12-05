@@ -9,10 +9,10 @@ import {
   Image,
   Icon,
   List,
-  Header,
   Container,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
+import PropTypes from 'prop-types';
 import * as jobUtils from 'utils/jobutils';
 import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
@@ -23,7 +23,6 @@ import * as Styled from 'StyledComponents';
 
 import { jobPostImage } from 'api/api';
 import './JobPostForm.css';
-import * as Styled from 'StyledComponents';
 
 class JobPostForm extends Component {
   state = {
@@ -576,6 +575,12 @@ class JobPostForm extends Component {
     );
   }
 }
+
+JobPostForm.propType = {
+  loading: PropTypes.bool,
+  postJobData: PropTypes.func,
+  filteredAutocompleteData: PropTypes.instanceOf(Array),
+};
 
 const mapDispatchToProps = dispatch => ({
   postJobData: data => dispatch(postUserJobData(data)),
