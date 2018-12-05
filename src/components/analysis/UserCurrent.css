@@ -13,3 +13,10 @@
   margin: 2rem;
   display: inline-block;
 }
+
+.analysis-none {
+  height: 8rem;
+  font-size: 3rem;
+  margin-top: 6rem;
+  font-weight: bold;
+}

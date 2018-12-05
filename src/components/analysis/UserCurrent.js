@@ -9,7 +9,7 @@ const UserCurrent = ({
  allCount, document, pass, fail 
 }) => {
   const progressbar = (state, sum, title) => {
-    const ratio = (state / sum) * 100;
+    const ratio = (state / sum || 0) * 100;
     return (
       <Grid style={{ width: '25%', display: 'inline-block', margin: '1rem' }}>
         <Grid.Column>
