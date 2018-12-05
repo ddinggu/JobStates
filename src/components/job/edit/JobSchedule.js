@@ -10,6 +10,7 @@ import {
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DatePicker from 'react-datepicker';
+import * as Styled from 'StyledComponents';
 
 class JobSchedule extends Component {
   state = {
@@ -38,7 +39,11 @@ class JobSchedule extends Component {
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            <Header>현재 상황</Header>
+            {/* <Header>현재 상황</Header> */}
+            <Styled.Box>
+              <Styled.Header>현재 상황</Styled.Header>
+              <Styled.Line />
+            </Styled.Box>
           </Grid.Column>
           {!edit ? (
             <Grid.Column textAlign="left" width={10} className="jobbody">
