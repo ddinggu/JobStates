@@ -8,6 +8,7 @@ import {
   List,
   Form,
 } from 'semantic-ui-react';
+import * as Styled from 'StyledComponents';
 
 class JobComment extends Component {
   state = {
@@ -34,7 +35,11 @@ class JobComment extends Component {
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            <Header>메모</Header>
+            {/* <Header>메모</Header> */}
+            <Styled.Box>
+              <Styled.Header>메모</Styled.Header>
+              <Styled.Line />
+            </Styled.Box>
           </Grid.Column>
           {!edit ? (
             <Grid.Column textAlign="left" width={10} className="jobbody">

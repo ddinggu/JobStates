@@ -14,6 +14,7 @@ import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import { jobPostImage } from 'api/api';
+import * as Styled from 'StyledComponents';
 
 class JobCompany extends Component {
   state = {
@@ -82,7 +83,11 @@ class JobCompany extends Component {
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            <Header>채용공고</Header>
+            {/* <Header>채용공고</Header> */}
+            <Styled.Box column="1" row="2">
+              <Styled.Header>채용공고</Styled.Header>
+              <Styled.Line />
+            </Styled.Box>
           </Grid.Column>
           {!edit ? (
             <Grid.Column textAlign="left" width={10} className="jobbody">

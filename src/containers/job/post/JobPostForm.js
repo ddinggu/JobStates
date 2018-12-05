@@ -23,6 +23,7 @@ import * as Styled from 'StyledComponents';
 
 import { jobPostImage } from 'api/api';
 import './JobPostForm.css';
+import * as Styled from 'StyledComponents';
 
 class JobPostForm extends Component {
   state = {
@@ -130,6 +131,7 @@ class JobPostForm extends Component {
                   <Styled.Header>현재 상황</Styled.Header>
                   <Styled.Line />
                 </Styled.Box>
+                {/* <Header>현재 상황</Header> */}
               </Grid.Column>
               <Grid.Column textAlign="left" width={10} className="jobbody">
                 <Grid.Row>
@@ -177,7 +179,11 @@ class JobPostForm extends Component {
             <Grid textAlign="center">
               <Grid.Row>
                 <Grid.Column width={2}>
-                  <Header>회사</Header>
+                  {/* <Header>회사</Header> */}
+                  <Styled.Box>
+                    <Styled.Header>회사</Styled.Header>
+                    <Styled.Line />
+                  </Styled.Box>
                 </Grid.Column>
 
                 <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -297,7 +303,11 @@ class JobPostForm extends Component {
 
             <Grid textAlign="center">
               <Grid.Column width={2}>
-                <Header>채용공고</Header>
+                {/* <Header>채용공고</Header> */}
+                <Styled.Box>
+                  <Styled.Header>채용 공고</Styled.Header>
+                  <Styled.Line />
+                </Styled.Box>
               </Grid.Column>
 
               <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -493,7 +503,11 @@ class JobPostForm extends Component {
 
             <Grid textAlign="center">
               <Grid.Column width={2}>
-                <Header>메모</Header>
+                {/* <Header>메모</Header> */}
+                <Styled.Box>
+                  <Styled.Header>메모</Styled.Header>
+                  <Styled.Line />
+                </Styled.Box>
               </Grid.Column>
 
               <Grid.Column textAlign="left" width={10} className="jobbody">
