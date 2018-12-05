@@ -37,10 +37,7 @@ class Header extends Component {
 
     return (
       <Styled.HeaderContainer>
-        <Styled.NavLogo onClick={() => push('/joblist')}>
-          JOB | STATES
-        </Styled.NavLogo>
-        {/* <Styled.NavMenu> */}
+        <Styled.NavLogo onClick={() => push('/')}>JOB | STATES</Styled.NavLogo>
         <Styled.NavMenu role="navigation">
           <span
             className="main-nav-link content-mypage"
@@ -61,7 +58,6 @@ class Header extends Component {
             분석
           </span>
         </Styled.NavMenu>
-        {/* </Styled.NavMenu> */}
         <Styled.NavAccount>
           <Dropdown
             trigger={trigger}

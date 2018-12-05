@@ -7,6 +7,7 @@ import {
   Input,
   Container,
   Grid,
+  TextArea,
 } from 'semantic-ui-react';
 import './GoogleVisionPortal.css';
 import * as api from 'api/api';
@@ -14,7 +15,7 @@ import * as api from 'api/api';
 export default class GoogleVision extends Component {
   state = {
     open: false,
-    text: '',
+    text: '이미지를 등록해주세요!',
   };
 
   handleClick = () => {
@@ -55,6 +56,7 @@ export default class GoogleVision extends Component {
     reader.onload = () => {
       const imageData = reader.result.split(',')[1];
 
+      this.setState({ text: '로딩중...' });
       this.onSubmitGoogle(imageData);
     };
   };
@@ -95,23 +97,40 @@ export default class GoogleVision extends Component {
                 <Form onSubmit={e => e.preventDefault}>
                   <div className="googleVisionPortal">
                     <Form.Field>
-                      {/* <Input type="file" id="img" /> */}
-                      <Input
-                        type="file"
-                        id="img"
-                        name="image"
-                        onChange={this.handleOnFileUpload}
-                        accept=".jpg, .png, .bmp, .jpeg"
-                      />
+                      <div className="upload-btn-wrapper">
+                        <button className="btn">채용공고 이미지 등록</button>
+                        <input
+                          type="file"
+                          id="img"
+                          name="image"
+                          onChange={this.handleOnFileUpload}
+                          accept=".jpg, .png, .bmp, .jpeg"
+                        />
+                      </div>
                     </Form.Field>
                   </div>
                 </Form>
               </Grid.Row>
+
+              {this.state.text === '로딩중...' ||
+              this.state.text === '이미지를 등록해주세요!' ? (
+                <div className="googleVisionText-none">{this.state.text}</div>
+              ) : (
+                <Grid.Row>
+                  <Form>
+                    <TextArea
+                      className="googleVisionText"
+                      value={this.state.text}
+                    />
+                  </Form>
+                </Grid.Row>
+              )}
               <Grid.Row>
-                <div className="googleVisionText">{this.state.text}</div>
-              </Grid.Row>
-              <Grid.Row>
-                <Button compact onClick={this.handleClick}>
+                <Button
+                  compact
+                  onClick={this.handleClick}
+                  style={{ boderRadius: '100%' }}
+                >
                   닫기
                 </Button>
               </Grid.Row>

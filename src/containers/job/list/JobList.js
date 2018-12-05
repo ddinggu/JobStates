@@ -40,7 +40,7 @@ class JobList extends Component {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <Table.Cell width={3}>
+            <Table.Cell width={2}>
               <Image
                 src={
                   jobData.logo ||
@@ -51,9 +51,9 @@ class JobList extends Component {
                 size="mini"
               />
             </Table.Cell>
-            <Table.Cell width={4}>{jobData.brand}</Table.Cell>
-            <Table.Cell width={4}>{jobData.title}</Table.Cell>
-            <Table.Cell width={4}>{jobData.status}</Table.Cell>
+            <Table.Cell width={3}>{jobData.brand}</Table.Cell>
+            <Table.Cell width={2}>{jobData.status}</Table.Cell>
+            <Table.Cell width={6}>{jobData.title}</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>
@@ -88,10 +88,14 @@ class JobList extends Component {
             <Table fixed>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>회사로고</Table.HeaderCell>
-                  <Table.HeaderCell>회사명</Table.HeaderCell>
-                  <Table.HeaderCell>직무</Table.HeaderCell>
-                  <Table.HeaderCell>지원상태</Table.HeaderCell>
+                  <Table.HeaderCell width={2} style={{ paddingLeft: '25px' }}>
+                    로고
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width={3} style={{ paddingLeft: '23px' }}>
+                    회사명
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width={2}>지원상태</Table.HeaderCell>
+                  <Table.HeaderCell width={6}>직무</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
             </Table>
