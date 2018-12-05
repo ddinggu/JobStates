@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
- Button, Input, Form, TextArea, Header 
+ Button, Input, Form, TextArea 
 } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
 import ProjectListItem from './ProjectListItem';

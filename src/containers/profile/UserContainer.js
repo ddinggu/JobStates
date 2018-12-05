@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -100,7 +100,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   if (state.fetchedProfile.items !== null) {
     return {
       id: state.fetchedProfile.items.user.id,
@@ -121,7 +121,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,

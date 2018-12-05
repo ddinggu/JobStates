@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import {
- Button, Container, Form, TextArea, Input 
+ Button, Form, TextArea, Input 
 } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
-import styled from 'styled-components';
 
 export default class Experience extends Component {
   constructor(props) {
