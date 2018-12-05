@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
- Button, Form, TextArea, Input, Header 
+ Button, Form, TextArea, Input 
 } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
 import ExperienceList from './ExperienceListItem';

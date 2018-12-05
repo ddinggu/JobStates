@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Portal,
-  Segment,
-  Header,
-  Form,
-  Input,
-  Image,
-} from 'semantic-ui-react';
+import { Button, Portal, Segment, Form, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as api from 'api/api';
 import { onSubmitPostUser } from 'actions/action_userprofile';
-import * as Styled from 'StyledComponents';
 
 class AddUserImagePortal extends Component {
   constructor(props) {
