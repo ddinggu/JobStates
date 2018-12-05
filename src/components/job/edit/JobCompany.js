@@ -73,7 +73,10 @@ class JobCompany extends Component {
                   <Grid padded="vertically horizontally">
                     <Grid.Row>
                       <Grid.Column width={4}>
-                        <Image src={this.props.logo} avatar />
+                        <Image
+                          src={this.props.logo || './image/icon-enterprise.png'}
+                          avatar
+                        />
                       </Grid.Column>
                       <Grid.Column textAlign="center" width={8}>
                         <Header>{this.props.brand}</Header>
@@ -133,19 +136,12 @@ class JobCompany extends Component {
                             <List.Item className="jobpostItem">
                               회사 로고
                             </List.Item>
-                            {/* <Input
-                              control={Input}
-                              type="file"
-                              name="file"
-                              id="imagefile"
-                              onChange={() => {
-                                this.onImageChange();
-                              }}
-                            />
-                            <Image src={logo} avatar /> */}
                             <div>
                               <Image
-                                src={this.state.logo}
+                                src={
+                                  this.state.logo ||
+                                  './image/icon-enterprise.png'
+                                }
                                 alt=""
                                 style={{
                                   maxWidth: '15%',
