@@ -9,10 +9,10 @@ import {
   Image,
   Icon,
   List,
-  Header,
   Container,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
+import PropTypes from 'prop-types';
 import * as jobUtils from 'utils/jobutils';
 import postUserJobData from 'actions/action_jobpost';
 import { connect } from 'react-redux';
@@ -130,6 +130,7 @@ class JobPostForm extends Component {
                   <Styled.Header>현재 상황</Styled.Header>
                   <Styled.Line />
                 </Styled.Box>
+                {/* <Header>현재 상황</Header> */}
               </Grid.Column>
               <Grid.Column textAlign="left" width={10} className="jobbody">
                 <Grid.Row>
@@ -177,7 +178,11 @@ class JobPostForm extends Component {
             <Grid textAlign="center">
               <Grid.Row>
                 <Grid.Column width={2}>
-                  <Header>회사</Header>
+                  {/* <Header>회사</Header> */}
+                  <Styled.Box>
+                    <Styled.Header>회사</Styled.Header>
+                    <Styled.Line />
+                  </Styled.Box>
                 </Grid.Column>
 
                 <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -297,7 +302,11 @@ class JobPostForm extends Component {
 
             <Grid textAlign="center">
               <Grid.Column width={2}>
-                <Header>채용공고</Header>
+                {/* <Header>채용공고</Header> */}
+                <Styled.Box>
+                  <Styled.Header>채용 공고</Styled.Header>
+                  <Styled.Line />
+                </Styled.Box>
               </Grid.Column>
 
               <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -493,7 +502,11 @@ class JobPostForm extends Component {
 
             <Grid textAlign="center">
               <Grid.Column width={2}>
-                <Header>메모</Header>
+                {/* <Header>메모</Header> */}
+                <Styled.Box>
+                  <Styled.Header>메모</Styled.Header>
+                  <Styled.Line />
+                </Styled.Box>
               </Grid.Column>
 
               <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -562,6 +575,12 @@ class JobPostForm extends Component {
     );
   }
 }
+
+JobPostForm.propType = {
+  loading: PropTypes.bool,
+  postJobData: PropTypes.func,
+  filteredAutocompleteData: PropTypes.instanceOf(Array),
+};
 
 const mapDispatchToProps = dispatch => ({
   postJobData: data => dispatch(postUserJobData(data)),

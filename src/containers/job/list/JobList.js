@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
+import PropTypes from 'prop-types';
 import { Grid, Segment, Table, Image } from 'semantic-ui-react';
 import { push } from 'connected-react-router';
 import CommonLoading from 'components/common/Loading';
-// import defaultCompanyImg from '/image';
 
 import './JobList.css';
 
@@ -16,7 +16,6 @@ class JobList extends Component {
     this.state = {
       filterFlag: false,
     };
-    // console.log('JobList Constructor render 1');
   }
 
   componentDidMount() {
@@ -24,27 +23,6 @@ class JobList extends Component {
     const { fetchJob } = this.props;
     fetchJob();
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // Perf.start();
-  //   // console.log('this.props:;', this.props);
-  //   // console.log('nextProps::', nextProps);
-  //   console.log('this.state::', this.state.filterFlag);
-  //   console.log('nextState:::', nextState.filter Flag);
-  //   console.log('비교:', this.state.filterFlag !== nextState.filterFlag);
-  //   // // console.log(nextProps !== this.props);
-  //   // Perf.stop();
-  //   // const measurements = Perf.getLastMeasurements();
-  //   // Perf.printWasted(measurements);
-  //   if (this.state.filterFlag !== nextState.filterFlag) {
-  //     return true;
-  //   }
-  //   // return false;
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return true;
-  // }
 
   _mapList = jobData => {
     const { getDetailJob } = this.props;
@@ -62,7 +40,7 @@ class JobList extends Component {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <Table.Cell width={3}>
+            <Table.Cell width={2}>
               <Image
                 src={
                   jobData.logo ||
@@ -73,9 +51,9 @@ class JobList extends Component {
                 size="mini"
               />
             </Table.Cell>
-            <Table.Cell width={4}>{jobData.brand}</Table.Cell>
-            <Table.Cell width={4}>{jobData.title}</Table.Cell>
-            <Table.Cell width={4}>{jobData.status}</Table.Cell>
+            <Table.Cell width={3}>{jobData.brand}</Table.Cell>
+            <Table.Cell width={2}>{jobData.status}</Table.Cell>
+            <Table.Cell width={6}>{jobData.title}</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>
@@ -94,8 +72,6 @@ class JobList extends Component {
   };
 
   render() {
-    // console.log('token test !!', localStorage.getItem('token'));
-
     const { job, filter, loading } = this.props;
     if (loading) {
       return (
@@ -104,8 +80,6 @@ class JobList extends Component {
         </>
       );
     }
-    // console.log('JobList 2 render.. why?');
-
     return (
       <>
         <JobListHeader _filterSearch={this._filterSearch} />
@@ -114,10 +88,14 @@ class JobList extends Component {
             <Table fixed>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>회사로고</Table.HeaderCell>
-                  <Table.HeaderCell>회사명</Table.HeaderCell>
-                  <Table.HeaderCell>직무</Table.HeaderCell>
-                  <Table.HeaderCell>지원상태</Table.HeaderCell>
+                  <Table.HeaderCell width={2} style={{ paddingLeft: '25px' }}>
+                    로고
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width={3} style={{ paddingLeft: '23px' }}>
+                    회사명
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width={2}>지원상태</Table.HeaderCell>
+                  <Table.HeaderCell width={6}>직무</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
             </Table>
@@ -135,11 +113,16 @@ class JobList extends Component {
   }
 }
 
+JobList.propTypes = {
+  job: PropTypes.instanceOf(Array),
+  filter: PropTypes.instanceOf(Object),
+  loading: PropTypes.bool,
+};
+
 const mapStateToProps = state => {
   return {
     job: state.job.allJobData,
     filter: state.job.filterData,
-    forRedirect: state.job.currentData,
     loading: state.job.loading,
   };
 };

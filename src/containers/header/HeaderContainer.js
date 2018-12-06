@@ -29,7 +29,7 @@ class Header extends Component {
       <Image
         className="nav-userprofile"
         circular
-        src={userProfileImage}
+        src={userProfileImage || './image/default_user.png'}
         size="mini"
         style={{ marginRight: '3rem' }}
       />

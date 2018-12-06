@@ -14,6 +14,7 @@ import DatePicker from 'react-datepicker';
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import { jobPostImage } from 'api/api';
+import * as Styled from 'StyledComponents';
 
 class JobCompany extends Component {
   state = {
@@ -82,7 +83,11 @@ class JobCompany extends Component {
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            <Header>채용공고</Header>
+            {/* <Header>채용공고</Header> */}
+            <Styled.Box column="1" row="2">
+              <Styled.Header>채용공고</Styled.Header>
+              <Styled.Line />
+            </Styled.Box>
           </Grid.Column>
           {!edit ? (
             <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -95,7 +100,11 @@ class JobCompany extends Component {
                         <Header>{this.props.title}</Header>
                       </Grid.Row>
                       <Grid.Row>
-                        (채용 마감일 : {this.props.deadLine.substr(0, 10)})
+                        (채용 마감일 :{' '}
+                        {!this.props.deadLine
+                          ? '등록되지 않음'
+                          : this.props.deadLine.substr(0, 10)}
+                        )
                       </Grid.Row>
                     </Grid.Column>
                     <Grid.Column textAlign="right" width={4}>
@@ -118,7 +127,9 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">필요 기술 스택</div>
                           </List.Item>
-                          {this.props.hireTech.map(hireMapping)}
+                          {!this.props.hireTech.length
+                            ? this.props.hireTech.map(hireMapping)
+                            : '등록되지 않음'}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -143,7 +154,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">주요업무</div>
                           </List.Item>
-                          {this.props.importantInfo}
+                          {this.props.importantInfo || '등록되지 않음'}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -155,7 +166,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">채용상세</div>
                           </List.Item>
-                          {this.props.detailInfo}
+                          {this.props.detailInfo || '등록되지 않음'}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -167,7 +178,7 @@ class JobCompany extends Component {
                           <List.Item>
                             <div className="jobpostItem">지역</div>
                           </List.Item>
-                          {this.props.address}
+                          {this.props.address || '등록되지 않음'}
                         </List>
                       </Grid.Column>
                     </Grid>

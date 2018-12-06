@@ -211,3 +211,10 @@ export const NavMenu = styled.nav`
     display: inline;
   }
 `;
+
+export const BottomLine = styled.div`
+  border: 0.5px solid rgb(166, 183, 196);
+  opacity: 0.1;
+  width: 200px;
+  margin-top: 1rem;
+`;
