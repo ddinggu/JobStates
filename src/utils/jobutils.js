@@ -10,7 +10,7 @@ export const selectTech = [
   { key: 'Node.js', value: 'Node.js', text: 'Node.js' },
   { key: 'Amazon AWS', value: 'Amazon AWS', text: 'Amazon AWS' },
   { key: 'Python', value: 'Python', text: 'Python' },
-  { key: 'React.js', value: 'React.js', text: 'React.js' },
+  { key: 'React', value: 'React', text: 'React' },
   { key: 'Redux', value: 'Redux', text: 'Redux' },
   { key: 'MySQL', value: 'MySQL', text: 'MySQL' },
   { key: 'JavaScript', value: 'JavaScript', text: 'JavaScript' },
