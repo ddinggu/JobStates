@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
-  Grid,
-  Button,
-  Container,
-  Form,
-  TextArea,
-  Input,
+ Button, Form, TextArea, Input 
 } from 'semantic-ui-react';
+import * as Styled from 'StyledComponents';
 
 export default class ProjectListItem extends Component {
   constructor(props) {
@@ -60,62 +56,17 @@ export default class ProjectListItem extends Component {
     };
 
     return (
-      <Container>
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={12} txtAlign="left">
-              {' '}
-              {edit ? null : (
-                <div>
-                  <div>
-                    <b>{title}</b> <span>({term})</span>
-                  </div>
-                  <div>{description}</div>
-                </div>
-              )}
-              {edit ? (
-                <div>
-                  <Form className="edit">
-                    <Form.Field
-                      label="프로젝트명"
-                      control={Input}
-                      onChange={e => this.onChange(e, 'title')}
-                      value={title}
-                    />
-                    <Form.Field
-                      label="프로젝트 기간"
-                      control={Input}
-                      onChange={e => this.onChange(e, 'term')}
-                      value={term}
-                    />
-                    <Form.Field
-                      label="간단 설명"
-                      control={TextArea}
-                      name="description"
-                      onChange={e => this.onChange(e, 'description')}
-                      value={description}
-                    />
-                    <Button
-                      compact
-                      content="취소"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        this.onButtonClick();
-                      }}
-                    />
-                    <Button
-                      type="submit"
-                      compact
-                      content="변경"
-                      onClick={onSubmitPatch}
-                    />
-                  </Form>
-                </div>
-              ) : null}
-            </Grid.Column>
-            <Grid.Column width={4} textAlign="right">
-              {' '}
-              <span className="ui mini basic icon buttons">
+      <Fragment>
+        {edit ? null : (
+          <div>
+            <Styled.BoxWrapper>
+              <Styled.Box column="2" row="1">
+                <b>{title}</b> <span>({term})</span>
+              </Styled.Box>
+              <Styled.Box column="1/4" row="2">
+                <div>{description}</div>
+              </Styled.Box>
+              <Styled.SpanEditButtonList className="ui mini basic icon buttons">
                 <button
                   type="button"
                   className="ui button"
@@ -126,11 +77,50 @@ export default class ProjectListItem extends Component {
                 <button type="button" className="ui button" onClick={onDelete}>
                   <i className="delete icon" />
                 </button>
-              </span>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+              </Styled.SpanEditButtonList>
+            </Styled.BoxWrapper>
+          </div>
+        )}
+        {edit ? (
+          <div>
+            <Form className="edit">
+              <Form.Field
+                label="프로젝트명"
+                control={Input}
+                onChange={e => this.onChange(e, 'title')}
+                value={title}
+              />
+              <Form.Field
+                label="프로젝트 기간"
+                control={Input}
+                onChange={e => this.onChange(e, 'term')}
+                value={term}
+              />
+              <Form.Field
+                label="간단 설명"
+                control={TextArea}
+                name="description"
+                onChange={e => this.onChange(e, 'description')}
+                value={description}
+              />
+              <Button
+                compact
+                content="취소"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.onButtonClick();
+                }}
+              />
+              <Button
+                type="submit"
+                compact
+                content="변경"
+                onClick={onSubmitPatch}
+              />
+            </Form>
+          </div>
+        ) : null}
+      </Fragment>
     );
   }
 }

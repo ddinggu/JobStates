@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
- Button, Container, Form, TextArea, Input 
+ Button, Form, TextArea, Input 
 } from 'semantic-ui-react';
+import * as Styled from 'StyledComponents';
 
 export default class EducationList extends Component {
   constructor(props) {
@@ -54,78 +55,69 @@ export default class EducationList extends Component {
     };
 
     return (
-      <Container>
-        <div className="row">
+      <Fragment>
+        {!edit ? (
           <div>
-            <div className="read" style={edit ? { display: 'none' } : null}>
-              <div className="row">
-                <div className="ui grid">
-                  <div className="column four wide left aligned" />
-                  <div className="column eight wide center aligned">
-                    <b>{edu.organization}</b>
-                    &nbsp;<span>({edu.term})</span>
-                  </div>
-                  <div className="column four wide right aligned">
-                    <span className="ui mini basic icon buttons">
-                      <button
-                        type="button"
-                        className="ui button"
-                        onClick={this.onButtonClick}
-                      >
-                        <i className="edit icon" />
-                      </button>
-                      <button
-                        type="button"
-                        className="ui button"
-                        onClick={onDelete}
-                      >
-                        <i className="delete icon" />
-                      </button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
+            <Styled.BoxWrapper>
+              <Styled.Box column="2" row="1">
+                <b>{edu.organization}</b>
+                &nbsp;<span>({edu.term})</span>
+              </Styled.Box>
+              <Styled.Box column="1/4" row="2">
                 <li>{edu.content}</li>
-              </div>
-            </div>
-            {edit ? (
-              <div>
-                <Form onSubmit={onSubmitPatch} className="edit">
-                  <Form.Field
-                    label="학교"
-                    control={Input}
-                    onChange={e => this.onChange(e, 'organization')}
-                    value={organization}
-                  />
-                  <Form.Field
-                    label="재학 기간"
-                    control={Input}
-                    onChange={e => this.onChange(e, 'term')}
-                    value={term}
-                  />
-                  <Form.Field
-                    label="간단 설명"
-                    control={TextArea}
-                    name="content"
-                    onChange={e => this.onChange(e, 'content')}
-                    value={content}
-                  />
-                  <Button
-                    compact
-                    content="취소"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      this.onButtonClick();
-                    }}
-                  />
-                  <Button compact content="추가" />
-                </Form>
-              </div>
-            ) : null}
+              </Styled.Box>
+              <Styled.Box column="2/3" row="3">
+                <Styled.BottomLine />
+              </Styled.Box>
+              <Styled.SpanEditButtonList className="ui mini basic icon buttons">
+                <button
+                  type="button"
+                  className="ui button"
+                  onClick={this.onButtonClick}
+                >
+                  <i className="edit icon" />
+                </button>
+                <button type="button" className="ui button" onClick={onDelete}>
+                  <i className="delete icon" />
+                </button>
+              </Styled.SpanEditButtonList>
+            </Styled.BoxWrapper>
           </div>
-        </div>
-      </Container>
+        ) : null}
+
+        {edit ? (
+          <Form onSubmit={onSubmitPatch} className="edit">
+            <Form.Field
+              label="학교"
+              control={Input}
+              onChange={e => this.onChange(e, 'organization')}
+              value={organization}
+            />
+            <Form.Field
+              label="재학 기간"
+              control={Input}
+              onChange={e => this.onChange(e, 'term')}
+              value={term}
+            />
+            <Form.Field
+              label="간단 설명"
+              control={TextArea}
+              name="content"
+              onChange={e => this.onChange(e, 'content')}
+              value={content}
+            />
+            <Button
+              compact
+              content="취소"
+              onClick={(e) => {
+                e.preventDefault();
+                this.onButtonClick();
+              }}
+            />
+            <Button compact content="추가" />
+          </Form>
+        ) : null}
+      </Fragment>
     );
   }
 }

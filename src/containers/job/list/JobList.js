@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJob, filterFetchData, getDetailJob } from 'actions/action_Job';
 import JobListHeader from './JobListHeader';
-import { Grid, Segment, Table } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Grid, Segment, Table, Image } from 'semantic-ui-react';
 import { push } from 'connected-react-router';
 import CommonLoading from 'components/common/Loading';
 
@@ -39,12 +40,20 @@ class JobList extends Component {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <Table.Cell width={3}>
-              <img src={jobData.logo} width="35px" height="50px" alt="" />
+            <Table.Cell width={2}>
+              <Image
+                src={
+                  jobData.logo ||
+                  process.env.PUBLIC_URL + '/image/icon-enterprise.png'
+                }
+                alt=""
+                circular
+                size="mini"
+              />
             </Table.Cell>
-            <Table.Cell width={4}>{jobData.brand}</Table.Cell>
-            <Table.Cell width={4}>{jobData.title}</Table.Cell>
-            <Table.Cell width={4}>{jobData.status}</Table.Cell>
+            <Table.Cell width={3}>{jobData.brand}</Table.Cell>
+            <Table.Cell width={2}>{jobData.status}</Table.Cell>
+            <Table.Cell width={6}>{jobData.title}</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>
@@ -63,8 +72,6 @@ class JobList extends Component {
   };
 
   render() {
-    console.log('token test !!', localStorage.getItem('token'));
-
     const { job, filter, loading } = this.props;
     if (loading) {
       return (
@@ -73,7 +80,6 @@ class JobList extends Component {
         </>
       );
     }
-
     return (
       <>
         <JobListHeader _filterSearch={this._filterSearch} />
@@ -82,10 +88,14 @@ class JobList extends Component {
             <Table fixed>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>company</Table.HeaderCell>
-                  <Table.HeaderCell>회사명</Table.HeaderCell>
-                  <Table.HeaderCell>직무</Table.HeaderCell>
-                  <Table.HeaderCell>지원상태</Table.HeaderCell>
+                  <Table.HeaderCell width={2} style={{ paddingLeft: '25px' }}>
+                    로고
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width={3} style={{ paddingLeft: '23px' }}>
+                    회사명
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width={2}>지원상태</Table.HeaderCell>
+                  <Table.HeaderCell width={6}>직무</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
             </Table>
@@ -103,11 +113,16 @@ class JobList extends Component {
   }
 }
 
+JobList.propTypes = {
+  job: PropTypes.instanceOf(Array),
+  filter: PropTypes.instanceOf(Object),
+  loading: PropTypes.bool,
+};
+
 const mapStateToProps = state => {
   return {
     job: state.job.allJobData,
     filter: state.job.filterData,
-    forRedirect: state.job.currentData,
     loading: state.job.loading,
   };
 };

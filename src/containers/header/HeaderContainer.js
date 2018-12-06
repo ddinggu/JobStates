@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import options from 'utils/headerHelper';
 import './HeaderContainer.css';
+import * as Styled from 'StyledComponents';
 
 class Header extends Component {
   state = {
@@ -28,18 +29,18 @@ class Header extends Component {
       <Image
         className="nav-userprofile"
         circular
-        src={userProfileImage}
+        src={userProfileImage || './image/default_user.png'}
         size="mini"
         style={{ marginRight: '3rem' }}
       />
     );
 
     return (
-      <div className="nav-container">
-        <span className="nav-logo" onClick={() => push('/joblist')}>
+      <Styled.HeaderContainer>
+        <Styled.NavLogo onClick={() => push('/joblist')}>
           JOB | STATES
-        </span>
-        <nav role="navigation" className="nav-menu">
+        </Styled.NavLogo>
+        <Styled.NavMenu role="navigation">
           <span
             className="main-nav-link content-mypage"
             onClick={() => push('/user')}
@@ -58,33 +59,17 @@ class Header extends Component {
           >
             분석
           </span>
-        </nav>
-        {/* <Image
-          className="nav-userprofile"
-          circular
-          src={userProfileImage}
-          size="mini"
-          style={{ marginRight: '3rem' }}
-          onClick={() => alert('hello!')}
-        /> */}
-        {/* <div className="nav-userdetail">
-          <div style={{ display: 'inline-block' }}>
-            <Image circular src={userProfileImage} size="mini" />
-          </div>
-          <div style={{ display: 'inline-block' }}>
-            <h4>{localStorage.getItem('nick')}</h4>
-            <div style={{ display: 'inline-block' }}>123</div>
-            <div style={{ display: 'inline-block' }}>456</div>
-          </div>
-        </div> */}
-        <Dropdown
-          trigger={trigger}
-          pointing="top left"
-          icon={null}
-          options={options}
-          onChange={this._onHandleChange}
-        />
-      </div>
+        </Styled.NavMenu>
+        <Styled.NavAccount>
+          <Dropdown
+            trigger={trigger}
+            pointing="top left"
+            icon={null}
+            options={options}
+            onChange={this._onHandleChange}
+          />
+        </Styled.NavAccount>
+      </Styled.HeaderContainer>
     );
   }
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container } from 'semantic-ui-react';
 import CommonLoading from 'components/common/Loading';
 import UserInterests from 'components/profile/UserInterests';
 import HaveTech from 'components/profile/HaveTech';
@@ -17,6 +16,7 @@ import {
   deleteUserProfile,
 } from 'actions/action_userprofile';
 import './UserContainer.css';
+import UserImagePortal from 'containers/profile/UserImagePortal';
 
 class UserContainer extends Component {
   componentDidMount() {
@@ -25,6 +25,8 @@ class UserContainer extends Component {
   }
 
   render() {
+    console.log('redering!!');
+
     if (this.props.loading) {
       return (
         <>
@@ -48,10 +50,10 @@ class UserContainer extends Component {
       delete: this.props.delete,
       update: this.props.update,
     };
-    console.log('props in User container', this.props);
 
     return (
-      <Container classnick="usercontainer">
+      <div style={{ margin: '0px 100px;' }}>
+        <UserImagePortal />
         <UserBasicInfo basicinfo={basicinfo} funcs={funcs} />
         <UserEducation edu={this.props.education} funcs={funcs} />
         <UserExperience exps={this.props.experience} funcs={funcs} />
@@ -62,7 +64,7 @@ class UserContainer extends Component {
           userFavTech={this.props.userFavTech}
           funcs={funcs}
         />
-      </Container>
+      </div>
     );
   }
 }
@@ -98,7 +100,7 @@ UserContainer.defaultProps = {
 // /////////////////////// CONNECT REDUX - REACT //////////////////////////
 // ////////////////////////////////////////////////////////////////////////
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   if (state.fetchedProfile.items !== null) {
     return {
       id: state.fetchedProfile.items.user.id,
@@ -119,7 +121,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   const boundActionCreators = bindActionCreators(
     {
       fetch: fetchUser,

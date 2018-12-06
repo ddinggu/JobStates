@@ -1,89 +1,55 @@
 import React, { Component } from 'react';
-import { Container, Button, Grid } from 'semantic-ui-react';
 import * as api from 'api/api';
-import './login.css';
+import styled from 'styled-components';
 
-// import kakaobtn from './Login_KAKAO.png';
-// import naverbtn from './Login_NAVER.png';
-// import naver from './icon.PNG';
+// ============= Styled Components ============= //
+const Button_st = styled.button`
+  border-radius: 50px;
+  border: none;
+  height: 35px;
+  width: 300px;
+  color: black;
+  background-color: ${props => (props.google ? '#dd4b39;' : props.kakao ? '#ffeb04;' : '#b7b7b7;')};
+  display: inline-block;
+`;
+const Anchor = styled(Button_st.withComponent('a'))``;
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-rows: 50px 35px 35px 35px;
+  grid-gap: 5px;
+`;
+
+const Box = styled.div`
+  display: inline-block;
+  text-align: center;
+  line-height: 35px;
+  grid-column: ${props => props.column};
+  grid-row: ${props => props.row};
+`;
+
+// ============================================= //
 
 export default class Login extends Component {
   render() {
-    // const confignaver = {
-    //   text: 'Login with Naver',
-    //   icon: 'naver',
-    //   iconFormat: name => `fa fa-${name}`,
-    //   style: { background: '#1EC800' },
-    //   activeStyle: { background: '#1a9e00' },
-    // };
-
-    // console.log('api.url', api.URL);
-
-    // const configkakao = {
-    //   text: 'Login with Kakao',
-    //   icon: 'kakao',
-    //   iconFormat: name => `fa fa-${name}`,
-    //   style: { background: '#ffde01' },
-    //   activeStyle: { background: '#e2c400' },
-    // };
-
-    // const NaverLoginButton = createButton(confignaver);
-    // const KakaoLoginButton = createButton(configkakao);
-
     return (
-      <div id="container-login">
-        <Container>
-          <Grid centered>
-            <Grid.Row verticalAlign="middle" />
-            <Grid.Row>
-              <Grid.Column />
-              <Grid.Column width={7}>
-                {/* <img alt="naver login" src={naverbtn} />
-              <img alt="kakao login" src={kakaobtn} /> */}
-                <Grid padded>
-                  <Button
-                    align="center"
-                    href={`${api.URL}/auth/google`}
-                    fluid
-                    className="loginbtn"
-                    id="google"
-                  >
-                    구글로 로그인
-                  </Button>
-                  <Grid.Row>
-                    <Button
-                      align="center"
-                      href={`${api.URL}/auth/github`}
-                      fluid
-                      className="loginbtn"
-                      id="naver"
-                    >
-                      깃헙으로 로그인
-                    </Button>
-                  </Grid.Row>
-                  <Button
-                    align="center"
-                    href={`${api.URL}/auth/kakao`}
-                    fluid
-                    className="loginbtn"
-                    id="kakao"
-                  >
-                    카카오로 로그인
-                  </Button>
-                </Grid>
-
-                {/* <Button color="test" fluid>
-                구글 로그인
-              </Button> */}
-                {/* <Button fluid>카카오 로그인</Button>
-              <Button fluid>네이버 로그인</Button> */}
-                {/* <Segment></Segment> */}
-              </Grid.Column>
-              <Grid.Column />
-            </Grid.Row>
-          </Grid>
-        </Container>
-      </div>
+      <Wrapper>
+        <Box column="1/2" row="2/3">
+          <Anchor google href={`${api.URL}/auth/google`}>
+            구글로 로그인
+          </Anchor>
+        </Box>
+        <Box column="1/2" row="3/4">
+          <Anchor github href={`${api.URL}/auth/github`}>
+            깃헙으로 로그인
+          </Anchor>
+        </Box>
+        <Box column="1/2" row="4/5">
+          <Anchor kakao href={`${api.URL}/auth/kakao`}>
+            카카오로 로그인
+          </Anchor>
+        </Box>
+      </Wrapper>
     );
   }
 }

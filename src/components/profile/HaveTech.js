@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {
- Button, Container, Grid, Header 
-} from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import * as jobUtils from 'utils/jobutils';
+import * as Styled from 'StyledComponents';
 
 export default class UserInterestTech extends Component {
   constructor(props) {
@@ -46,97 +45,70 @@ export default class UserInterestTech extends Component {
     const hireMapping = category => <div className="mapping">{category}</div>;
 
     return (
-      <Container>
-        <Grid textAlign="center">
-          <Grid.Column width={2} textAlign="left">
-            <Header>Tech Stacks</Header>
-          </Grid.Column>
-          <Grid.Column textAlign="left" width={10} className="profilebox read">
-            <div>
-              <div>
-                <Grid.Row>
-                  <Grid.Row>
-                    <Grid verticalAlign="middle">
-                      <Grid.Column width={4} textAlign="left" />
-                      <Grid.Column width={8} textAlign="center">
-                        <b>보유 기술</b>
-                      </Grid.Column>
-                      <Grid.Column width={4} textAlign="right">
-                        {' '}
-                        <span className="ui mini basic icon buttons">
-                          <button
-                            type="button"
-                            className="ui button"
-                            onClick={() => this.onButtonClick('field')}
-                          >
-                            <i className="edit icon" />
-                          </button>
-                          <button
-                            type="button"
-                            className="ui button"
-                            onClick={() => {
-                              this.onDelete('field');
-                            }}
-                          >
-                            <i className="delete icon" />
-                          </button>
-                        </span>
-                      </Grid.Column>
-                    </Grid>
-                  </Grid.Row>
-                  <Grid.Row>
-                    <div style={this.state.edit ? { display: 'none' } : null}>
-                      <Grid textAlign="center">
-                        <Grid.Column>
-                          {haveTech.length < 1 ? (
-                            <div>보유 기술을 선택해주세요.</div>
-                          ) : (
-                            haveTech.map(hireMapping)
-                          )}
-                        </Grid.Column>
-                      </Grid>
-                    </div>
-                    <div style={!this.state.edit ? { display: 'none' } : null}>
-                      <Grid textAlign="center">
-                        <Grid.Row>
-                          <DropdownSearchQuery
-                            stateOptions={jobUtils.selectTech}
-                            title="기술 분야"
-                            handleArrayChange={this.onHandleDataChange(
-                              'tech',
-                              true,
-                            )}
-                            value={this.state.tech}
-                          />
-                        </Grid.Row>
-                        <Grid.Row>
-                          <Button
-                            compact
-                            content="취소"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              this.onButtonClick();
-                            }}
-                          />
-                          <Button
-                            compact
-                            content="변경"
-                            onClick={() => {
-                              this.onButtonClick();
-                              this.onSubmit();
-                            }}
-                          />
-                        </Grid.Row>
-                      </Grid>
-                    </div>
-                  </Grid.Row>
-                </Grid.Row>
-              </div>
+      <Styled.Wrapper>
+        <Styled.Box column="1" row="1">
+          <Styled.Header>Tech Stacks</Styled.Header>
+          <Styled.Line />
+        </Styled.Box>
+        <Styled.BoxWithBackground column="2/5" row="1">
+          <Styled.Box column="2" row="1">
+            <b>보유 기술</b>
+          </Styled.Box>{' '}
+          <Styled.Box column="1/4" row="2">
+            <div style={this.state.edit ? { display: 'none' } : null}>
+              {haveTech.length < 1 ? (
+                <div>보유 기술을 선택해주세요.</div>
+              ) : (
+                haveTech.map(hireMapping)
+              )}
             </div>
-          </Grid.Column>
-          <Grid.Column width={2} textAlign="left" />
-        </Grid>
-      </Container>
+            <div style={!this.state.edit ? { display: 'none' } : null}>
+              <DropdownSearchQuery
+                stateOptions={jobUtils.selectTech}
+                title="기술 분야"
+                handleArrayChange={this.onHandleDataChange('tech', true)}
+                value={this.state.tech}
+              />
+              <Styled.DivWithMargin>
+                <Button
+                  compact
+                  content="취소"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.onButtonClick();
+                  }}
+                />
+                <Button
+                  compact
+                  content="변경"
+                  onClick={() => {
+                    this.onButtonClick();
+                    this.onSubmit();
+                  }}
+                />
+              </Styled.DivWithMargin>
+            </div>
+          </Styled.Box>
+          <Styled.SpanEditButton className="ui mini basic icon buttons ">
+            <button
+              type="button"
+              className="ui button"
+              onClick={() => this.onButtonClick('field')}
+            >
+              <i className="edit icon" />
+            </button>
+            <button
+              type="button"
+              className="ui button"
+              onClick={() => {
+                this.onDelete('field');
+              }}
+            >
+              <i className="delete icon" />
+            </button>
+          </Styled.SpanEditButton>
+        </Styled.BoxWithBackground>
+      </Styled.Wrapper>
     );
   }
 }

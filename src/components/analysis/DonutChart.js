@@ -1,8 +1,9 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
-import { Container, Grid, Header } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import color from 'utils/colors';
+import * as Styled from 'StyledComponents';
 
 const DonutChart = ({
  tech, category, allTech, allCategory 
@@ -70,22 +71,27 @@ const DonutChart = ({
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            <Header>
-              유저가 <br /> 선택한 <br /> 데이터
-            </Header>
+            <Styled.Box>
+              <Styled.Header>관심 영역</Styled.Header>
+              <Styled.Line />
+            </Styled.Box>
           </Grid.Column>
           <Grid.Column textAlign="left" width={12} className="jobbody">
-            {[hiringData, categoryData].map((data, idx) => dougnutGraph(data, idx),)}
+            {!tech.length && !category.length ? (
+              <div className="analysis-none">채용 공고를 등록해주세요</div>
+            ) : (
+              [hiringData, categoryData].map((data, idx) => dougnutGraph(data, idx),)
+            )}
           </Grid.Column>
         </Grid>
       </Container>
-
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            <Header>
-              모든 유저가 <br /> 선택한 <br /> 데이터
-            </Header>
+            <Styled.Box>
+              <Styled.Header>모든 유저</Styled.Header>
+              <Styled.Line />
+            </Styled.Box>
           </Grid.Column>
           <Grid.Column textAlign="left" width={12} className="jobbody">
             {[allHiringData, allCategoryData].map((data, idx) => dougnutGraph(data, idx),)}

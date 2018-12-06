@@ -34,7 +34,6 @@ export default function userProfileReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload.error,
-        items: {},
       };
 
     case types.GET_USER_IMAGE_URL:

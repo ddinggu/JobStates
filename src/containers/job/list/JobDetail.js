@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -6,15 +6,15 @@ import { Container } from 'semantic-ui-react';
 import { deleteJobData } from 'actions/action_Job';
 import editJobData from 'actions/action_JobEdit';
 
-import './JobDetail.css';
-
 import JobCompany from 'components/job/edit/JobCompany';
 import JobHire from 'components/job/edit/JobHire';
 import JobComment from 'components/job/edit/JobComment';
 import JobSchedule from 'components/job/edit/JobSchedule';
 import JobDetailHeader from './JobDetailHeader';
 
-class JobDetail extends Component {
+import './JobDetail.css';
+
+class JobDetail extends PureComponent {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -23,7 +23,7 @@ class JobDetail extends Component {
     const { job, editJobData, deleteJobData } = this.props;
 
     if (!job.hireId) return <Redirect to="/joblist" />;
-
+    console.log('jobDetail render');
     return (
       <Container className="jobdetail">
         <JobDetailHeader
@@ -85,14 +85,13 @@ class JobDetail extends Component {
 JobDetail.propTypes = {
   job: PropTypes.instanceOf(Object),
   loading: PropTypes.bool,
-  error: PropTypes.bool,
   editJobData: PropTypes.func,
   deleteJobData: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   job: state.job.currentData.data,
-  forRedirect: state.job.currentData.isMoveToDetail,
+  // forRedirect: state.job.currentData.isMoveToDetail,
   hireId: state.job.currentData.data.hireId,
   loading: state.job.loading,
   error: state.job.error,

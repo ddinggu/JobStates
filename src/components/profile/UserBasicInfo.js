@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container,
-  List,
-  Grid,
-  Input,
-  Form,
-  Button,
-  Header,
+ List, Input, Form, Button 
 } from 'semantic-ui-react';
-import UserImagePortal from 'containers/profile/UserImagePortal';
-import './UserBasicInfo.css';
+import * as Styled from 'StyledComponents';
 
 export default class UserBasicInfo extends Component {
   constructor(props) {
@@ -43,7 +36,7 @@ export default class UserBasicInfo extends Component {
 
   render() {
     const { onButtonClick } = this;
-    console.log('funcs', this.props.funcs);
+    // console.log('funcs', this.props.funcs);
     const { submit } = this.props.funcs;
     const {
  edit, phone, email, blog, github, update, name 
@@ -60,7 +53,6 @@ export default class UserBasicInfo extends Component {
         blog,
         github,
       };
-      console.log('ojb', obj);
       submit(obj, 'profile');
       onButtonClick();
     };
@@ -84,62 +76,43 @@ export default class UserBasicInfo extends Component {
     };
 
     return (
-      <Container>
-        <div className="ui grid centered">
-          <Grid>
-            <Grid.Column />
-            <Grid.Column textAlign="center">
-              <UserImagePortal />
-            </Grid.Column>
-            <Grid.Column textAlign="right" floated="right" />
-          </Grid>
-        </div>
-        <Grid textAlign="center">
-          <Grid.Column className="profilename" width={2}>
-            <Header>Basic Info.</Header>
-          </Grid.Column>
-          {!edit ? (
-            <Grid.Column className="profilebox" width={10} textAlign="center">
-              <Grid verticalAlign="middle">
-                <Grid.Row>
-                  <Grid.Column width={4} textAlign="left" />
-                  <Grid.Column width={8} textAlign="center">
-                    <b>{name}</b>
-                  </Grid.Column>
-                  <Grid.Column width={4} textAlign="right">
-                    <span className="ui mini basic icon buttons ">
-                      <button
-                        type="button"
-                        className="ui button"
-                        onClick={onButtonClick}
-                      >
-                        <i className="edit icon" />
-                      </button>
-                      <button
-                        type="button"
-                        className="ui button"
-                        onClick={onDelete}
-                      >
-                        <i className="delete icon" />
-                      </button>
-                    </span>
-                  </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                  <Grid textAlign="left">
-                    <List textAlign="left">
-                      <List.Item icon="phone" content={phone} />
-                      <List.Item icon="mail" content={email} />
-                      <List.Item icon="home" content={blog} />
-                      <List.Item icon="github" content={github} />
-                    </List>
-                  </Grid>
-                </Grid.Row>
-              </Grid>
-            </Grid.Column>
-          ) : (
-            <div className="UserBasicInfo create ten wide column profilebox">
-              <Form onSubmit={update}>
+      <Styled.Wrapper>
+        <Styled.Box column="1" row="2">
+          <Styled.Header>Basic Info</Styled.Header>
+          <Styled.Line />
+        </Styled.Box>
+        {!edit ? (
+          <Styled.BoxWithBackground column="2/5" row="2">
+            <Styled.BoxWrapper>
+              <Styled.Box column="2" row="1">
+                {name}
+              </Styled.Box>
+              <Styled.Box column="2" row="2">
+                <List textAlign="left">
+                  <List.Item icon="phone" content={phone} />
+                  <List.Item icon="mail" content={email} />
+                  <List.Item icon="home" content={blog} />
+                  <List.Item icon="github" content={github} />
+                </List>
+              </Styled.Box>
+            </Styled.BoxWrapper>
+            <Styled.SpanEditButton className="ui mini basic icon buttons ">
+              <button
+                type="button"
+                className="ui button"
+                onClick={onButtonClick}
+              >
+                <i className="edit icon" />
+              </button>
+              <button type="button" className="ui button" onClick={onDelete}>
+                <i className="delete icon" />
+              </button>
+            </Styled.SpanEditButton>
+          </Styled.BoxWithBackground>
+        ) : (
+          <Styled.BoxWithBackground column="2/5" row="2">
+            <Form onSubmit={update}>
+              <Styled.Box>
                 <Form.Field
                   label="이름"
                   size="mini"
@@ -177,12 +150,12 @@ export default class UserBasicInfo extends Component {
                 />
                 <Button compact content="취소" onClick={onButtonClick} />
                 <Button compact content="변경" onClick={onSubmitUpdate} />
-              </Form>
-            </div>
-          )}
-          <div className="column two wide" />
-        </Grid>
-      </Container>
+              </Styled.Box>
+            </Form>
+          </Styled.BoxWithBackground>
+        )}
+        <div className="column two wide" />
+      </Styled.Wrapper>
     );
   }
 }
