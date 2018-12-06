@@ -13,7 +13,6 @@ export default class UserInterestTech extends Component {
       tech: [],
       field: [],
     };
-
     this.onButtonClick = (part) => {
       const { editTech, editField } = this.state;
 
@@ -63,9 +62,10 @@ export default class UserInterestTech extends Component {
   }
 
   render() {
+    console.log('UserInterestTech rendered');
     const { userFavTech, userFavField } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
-    console.log('here', this.props);
+    // console.log('here', this.props);
     return (
       <Styled.Wrapper>
         <Styled.Box column="1" row="1">

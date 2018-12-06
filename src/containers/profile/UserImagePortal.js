@@ -44,6 +44,7 @@ class AddUserImagePortal extends Component {
   };
 
   render() {
+    console.log('UserImagePortal rendered');
     const { open } = this.state;
     return (
       <div align="center">

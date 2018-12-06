@@ -31,6 +31,7 @@ class UserExperience extends Component {
   }
 
   render() {
+    console.log('UserExperience rendered');
     const { onButtonClick } = this;
     const { create } = this.state;
     const { exps, funcs } = this.props;

@@ -2,9 +2,22 @@ import React, { Component } from 'react';
 import { Button, Icon, Modal, Grid } from 'semantic-ui-react';
 
 class JobDetailHeader extends Component {
-  state = { open: false };
+  state = { open: false, value: '' };
 
   toggle = () => this.setState({ open: !this.state.open });
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.open !== nextState.open) {
+      return true;
+    }
+    if (this.state.value !== nextState.value) {
+      return true;
+    }
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    return false;
+  }
 
   render() {
     console.log('jobDetailHeader render!!');
@@ -51,14 +64,15 @@ class JobDetailHeader extends Component {
               icon={loading ? null : 'checkmark'}
               labelPosition="right"
               content="삭제"
-              onClick={() =>
+              value={this.state.value}
+              onClick={e =>
                 deleteJobData({
                   provider,
                   commentId,
                   companyId,
                   hireId,
                   scheduleId,
-                })
+                })(this.setState({ value: e.target.value }))
               }
               loading={loading}
             />

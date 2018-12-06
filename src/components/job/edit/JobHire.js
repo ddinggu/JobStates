@@ -60,6 +60,49 @@ class JobCompany extends Component {
     }
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.edit !== this.state.edit) {
+      return true;
+    }
+    if (nextState.title !== this.state.title) {
+      return true;
+    }
+    if (nextState.hireTech !== this.state.hireTech) {
+      return true;
+    }
+    if (nextState.hireUrl !== this.state.hireUrl) {
+      return true;
+    }
+    if (nextState.importantInfo !== this.state.importantInfo) {
+      return true;
+    }
+    if (nextState.detailInfo !== this.state.detailInfo) {
+      return true;
+    }
+    if (nextState.hireImage !== this.state.hireImage) {
+      return true;
+    }
+    if (nextState.hireImageKey !== this.state.hireImageKey) {
+      return true;
+    }
+    if (nextState.salary !== this.state.salary) {
+      return true;
+    }
+    if (nextState.deadLine !== this.state.deadLine) {
+      return true;
+    }
+    if (nextState.address !== this.state.address) {
+      return true;
+    }
+    if (nextState.experience !== this.state.experience) {
+      return true;
+    }
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     console.log('jobHire render!!');
     const {

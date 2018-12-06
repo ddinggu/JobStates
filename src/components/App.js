@@ -23,9 +23,10 @@ createGlobalStyle`
   box-sizing:border-box;
 }
 `;
-console.log('My Test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-
-const App = () => (
+//console.log('My Test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+const App = () => { 
+  console.log('App.js rendered');
+  return( 
   <Switch>
     <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
       <Route
@@ -44,6 +45,7 @@ const App = () => (
       <PlusButton />
     </div>
   </Switch>
-);
+  );
+};
 
 export default App;

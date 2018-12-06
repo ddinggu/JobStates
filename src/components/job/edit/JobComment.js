@@ -26,6 +26,25 @@ class JobComment extends Component {
       [key]: e.target.value ? e.target.value : e.target.innerText,
     });
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.edit !== nextState.edit) {
+      return true;
+    }
+    if (this.state.advantage !== nextState.advantage) {
+      return true;
+    }
+    if (this.state.disAdvantage !== nextState.disAdvantage) {
+      return true;
+    }
+    if (this.state.strategy !== nextState.strategy) {
+      return true;
+    }
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     const { edit, advantage, disAdvantage, strategy } = this.state;
     const { onSubmitEditData } = this.props;

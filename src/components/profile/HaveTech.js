@@ -43,7 +43,7 @@ export default class UserInterestTech extends Component {
   render() {
     const { haveTech } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
-
+    console.log('HaveTech rendered');
     return (
       <Styled.Wrapper>
         <Styled.Box column="1" row="1">
