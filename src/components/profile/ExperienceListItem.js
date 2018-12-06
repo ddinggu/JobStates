@@ -71,19 +71,19 @@ export default class Experience extends Component {
                 <div>{description}</div>
                 <li>{content}</li>
               </Styled.Box>
+              <Styled.SpanEditButton className="ui mini basic icon buttons">
+                <button
+                  type="button"
+                  className="ui button"
+                  onClick={this.onButtonClick}
+                >
+                  <i className="edit icon" />
+                </button>
+                <button type="button" className="ui button" onClick={onDelete}>
+                  <i className="delete icon" />
+                </button>
+              </Styled.SpanEditButton>
             </Styled.BoxWrapper>
-            <Styled.SpanEditButton className="ui mini basic icon buttons">
-              <button
-                type="button"
-                className="ui button"
-                onClick={this.onButtonClick}
-              >
-                <i className="edit icon" />
-              </button>
-              <button type="button" className="ui button" onClick={onDelete}>
-                <i className="delete icon" />
-              </button>
-            </Styled.SpanEditButton>
           </div>
         )}
 
