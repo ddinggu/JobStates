@@ -61,7 +61,9 @@ class JobSchedule extends Component {
                   <Grid.Row textAlign="left">
                     <List bulleted>
                       <List.Item className="jobpostItem">전형 일자</List.Item>
-                      {this.props.statusDate.substr(0, 10) || '등록되지 않음'}
+                      {!this.props.statusDate
+                        ? '등록되지 않음'
+                        : this.props.statusDate.substr(0, 10)}
                     </List>
                   </Grid.Row>
                 </Grid>

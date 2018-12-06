@@ -46,7 +46,7 @@ class JobComment extends Component {
                 <Grid.Row>
                   <List bulleted>
                     <List.Item className="jobpostItem">공고 장점</List.Item>
-                    {this.props.advantage}
+                    {this.props.advantage || '등록되지 않음'}
                   </List>
                 </Grid.Row>
               </div>
@@ -54,14 +54,14 @@ class JobComment extends Component {
                 <Grid.Row>
                   <List bulleted>
                     <List.Item className="jobpostItem">공고 단점</List.Item>
-                    {this.props.disAdvantage}
+                    {this.props.disAdvantage || '등록되지 않음'}
                   </List>
                 </Grid.Row>
               </div>
               <Grid.Row className="ItemsInContainer">
                 <List bulleted>
                   <List.Item className="jobpostItem">필요 전략</List.Item>
-                  {this.props.strategy}
+                  {this.props.strategy || '등록되지 않음'}
                 </List>
               </Grid.Row>
             </Grid.Column>

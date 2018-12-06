@@ -68,8 +68,11 @@ export default class Experience extends Component {
               </Styled.Box>
 
               <Styled.Box column="1/4" row="2">
-                <div>{description}</div>
+                <div style={{ marginBottom: '1rem' }}>{description}</div>
                 <li>{content}</li>
+              </Styled.Box>
+              <Styled.Box column="2/3" row="3">
+                <Styled.BottomLine />
               </Styled.Box>
             </Styled.BoxWrapper>
             <Styled.SpanEditButton className="ui mini basic icon buttons">
@@ -104,18 +107,18 @@ export default class Experience extends Component {
                 value={term}
               />
               <Form.Field
-                label="근무 내용"
-                control={TextArea}
-                name="content"
-                onChange={e => this.onChange(e, 'content')}
-                value={content}
-              />
-              <Form.Field
                 label="간단 설명"
                 control={TextArea}
                 name="description"
                 onChange={e => this.onChange(e, 'description')}
                 value={description}
+              />
+              <Form.Field
+                label="근무 내용"
+                control={TextArea}
+                name="content"
+                onChange={e => this.onChange(e, 'content')}
+                value={content}
               />
               <Button
                 compact
