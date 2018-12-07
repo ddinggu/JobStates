@@ -1,79 +1,79 @@
-const CACHE_VERSION = 1;
-const CURRENT_CACHES = {
-  prefetch: `prefetch-cache-v${CACHE_VERSION}`,
-};
-// const DATA_URL = 'https://www.jobstate.xyz';
+// const CACHE_VERSION = 1;
+// const CURRENT_CACHES = {
+//   prefetch: `prefetch-cache-v${CACHE_VERSION}`,
+// };
+// // const DATA_URL = 'https://www.jobstate.xyz';
 
-self.addEventListener('install', (event) => {
-  const urlsToPrefetch = ['/', 'manifest.json', 'favicon.ico'];
+// self.addEventListener('install', (event) => {
+//   const urlsToPrefetch = ['/', 'manifest.json', 'favicon.ico'];
 
-  event.waitUntil(
-    caches
-      .open(CURRENT_CACHES.prefetch)
-      .then(cache => cache.addAll(urlsToPrefetch))
-      .catch(err => console.error(err)),
-  );
-  event.waitUntil(skipWaiting());
-  console.log('[Service Worker] SW installed', event);
-});
+//   event.waitUntil(
+//     caches
+//       .open(CURRENT_CACHES.prefetch)
+//       .then(cache => cache.addAll(urlsToPrefetch))
+//       .catch(err => console.error(err)),
+//   );
+//   event.waitUntil(skipWaiting());
+//   console.log('[Service Worker] SW installed', event);
+// });
 
-self.addEventListener('activate', (event) => {
-  // delete unused cache stores
-  const expectedCacheNames = Object.keys(CURRENT_CACHES).map(
-    key => CURRENT_CACHES[key],
-  );
+// self.addEventListener('activate', (event) => {
+//   // delete unused cache stores
+//   const expectedCacheNames = Object.keys(CURRENT_CACHES).map(
+//     key => CURRENT_CACHES[key],
+//   );
 
-  const openCache = async () => {
-    const cacheNames = await caches.keys();
+//   const openCache = async () => {
+//     const cacheNames = await caches.keys();
 
-    try {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (expectedCacheNames.indexOf(cacheName) === -1) {
-            console.log('[Service Worker] Deleted data cache!! ', cacheName);
-            return caches.delete(cacheName);
-          }
-        }),
-      );
-    } catch (err) {
-      throw err;
-    }
-  };
+//     try {
+//       return Promise.all(
+//         cacheNames.map((cacheName) => {
+//           if (expectedCacheNames.indexOf(cacheName) === -1) {
+//             console.log('[Service Worker] Deleted data cache!! ', cacheName);
+//             return caches.delete(cacheName);
+//           }
+//         }),
+//       );
+//     } catch (err) {
+//       throw err;
+//     }
+//   };
 
-  event.waitUntil(openCache());
-  console.log(
-    '[Service Worker] Finally active. Ready to start serving content!',
-  );
-});
+//   event.waitUntil(openCache());
+//   console.log(
+//     '[Service Worker] Finally active. Ready to start serving content!',
+//   );
+// });
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') {
-    return;
-  }
+// self.addEventListener('fetch', (event) => {
+//   if (event.request.method !== 'GET') {
+//     return;
+//   }
 
-  if (event.request.url.indexOf('jobstate') > -1) {
-    event.respondWith(
-      caches.open(CURRENT_CACHES.prefetch).then(cache => fetch(event.request).then((response) => {
-          cache.put(event.request.url, response.clone());
-          console.log('[Service Worker] cached data!');
-          return response;
-        }),),
-    );
-  } else {
-    event.respondWith(
-      // try to get response from a cache.
-      caches.match(event.request).then((response) => {
-        if (response) {
-          console.log('[Service Worker] Matched response', response);
-        } else {
-          console.log('[Service Worker] Fetched response', event.request);
-        }
+//   if (event.request.url.indexOf('jobstate') > -1) {
+//     event.respondWith(
+//       caches.open(CURRENT_CACHES.prefetch).then(cache => fetch(event.request).then((response) => {
+//           cache.put(event.request.url, response.clone());
+//           console.log('[Service Worker] cached data!');
+//           return response;
+//         }),),
+//     );
+//   } else {
+//     event.respondWith(
+//       // try to get response from a cache.
+//       caches.match(event.request).then((response) => {
+//         if (response) {
+//           console.log('[Service Worker] Matched response', response);
+//         } else {
+//           console.log('[Service Worker] Fetched response', event.request);
+//         }
 
-        return response || fetch(event.request);
-      }),
-    );
-  }
-});
+//         return response || fetch(event.request);
+//       }),
+//     );
+//   }
+// });
 
 self.addEventListener('push', (event) => {
   console.log('[Service Worker] [Push] : ', event.data.text());

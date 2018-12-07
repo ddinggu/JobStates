@@ -42,7 +42,9 @@ class JobDetailHeader extends Component {
 
         <Modal size={'mini'} open={open} onClose={this.toggle}>
           <Modal.Header>삭제</Modal.Header>
-          <Modal.Content />
+          <Modal.Content>
+            <b>삭제 하시겠습니까?</b>
+          </Modal.Content>
           <Modal.Actions>
             <Button negative onClick={this.toggle}>
               취소

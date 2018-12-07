@@ -45,19 +45,19 @@ class Header extends Component {
             className="main-nav-link content-mypage"
             onClick={() => push('/user')}
           >
-            마이페이지
+            프로필
           </span>
           <span
             className="main-nav-link content-joblist"
             onClick={() => push('/joblist')}
           >
-            정리페이지
+            스크랩
           </span>
           <span
             className="main-nav-link content-analysis"
             onClick={() => push('/analysis')}
           >
-            분석
+            대시보드
           </span>
         </Styled.NavMenu>
         <Styled.NavAccount>
