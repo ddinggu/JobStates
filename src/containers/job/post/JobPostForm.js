@@ -151,7 +151,6 @@ class JobPostForm extends Component {
                     </Form.Field>
                   </div>
                 </Grid.Row>
-                <Grid.Row />
 
                 <Grid.Row>
                   <div class="ItemsInContainer">
@@ -328,6 +327,7 @@ class JobPostForm extends Component {
                         </Form.Field>
                       </div>
                     </Grid.Row>
+
                     <Grid.Row>
                       <div class="ItemsInContainer">
                         <Grid>

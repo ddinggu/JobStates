@@ -234,9 +234,7 @@ class JobCompany extends Component {
                             <div className="jobpostItem">공고 이미지</div>
                           </List.Item>
                           <Image src={this.props.hireImage} alt="" />
-                          {this.props.hireImage
-                            ? null
-                            : '등록된 이미지가 없습니다'}
+                          {this.props.hireImage ? null : '등록되지 않음'}
                         </List>
                       </Grid.Column>
                     </Grid>
@@ -367,15 +365,6 @@ class JobCompany extends Component {
                           <List.Item className="jobpostItem">
                             공고 이미지
                           </List.Item>
-                          {/* <Input
-                            control={Input}
-                            type="file"
-                            name="file"
-                            id="jobHireImage"
-                            onChange={() => {
-                              this.onInputChange();
-                            }}
-                          /> */}
                           <div className="upload-btn-wrapper">
                             <button className="btn">등록</button>
                             <input

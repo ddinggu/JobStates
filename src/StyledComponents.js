@@ -218,3 +218,24 @@ export const BottomLine = styled.div`
   width: 200px;
   margin-top: 1rem;
 `;
+
+export const FixDatePickerTimer = styled.span`
+  &
+    .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list {
+    padding-left: unset;
+    padding-right: unset;
+    width: 100px;
+  }
+  & .react-datepicker__input-container {
+    width: 100%;
+  }
+  & .react-datepicker-wrapper {
+    width: 100%;
+  }
+  & .react-datepicker {
+    width: 314px;
+  }
+`;
