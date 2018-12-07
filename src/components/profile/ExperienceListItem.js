@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import {
- Button, Container, Form, TextArea, Input 
-} from 'semantic-ui-react';
+import { Button, Form, TextArea, Input } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
-import styled from 'styled-components';
 
 export default class Experience extends Component {
   constructor(props) {
@@ -32,13 +29,15 @@ export default class Experience extends Component {
   }
 
   render() {
+
     const {
  id, edit, title, term, content, description 
 } = this.state;
 console.log('ExperienceListItem rendered');
+
     const { funcs } = this.props;
 
-    const onSubmitPatch = (e) => {
+    const onSubmitPatch = e => {
       e.preventDefault();
 
       const obj = {
@@ -69,22 +68,26 @@ console.log('ExperienceListItem rendered');
               </Styled.Box>
 
               <Styled.Box column="1/4" row="2">
-                <div>{description}</div>
+                <div style={{ marginBottom: '1rem' }}>{description}</div>
                 <li>{content}</li>
               </Styled.Box>
+
+              <Styled.Box column="2/3" row="3">
+                <Styled.BottomLine />
+              </Styled.Box>
+              <Styled.SpanEditButton className="ui mini basic icon buttons">
+                <button
+                  type="button"
+                  className="ui button"
+                  onClick={this.onButtonClick}
+                >
+                  <i className="edit icon" />
+                </button>
+                <button type="button" className="ui button" onClick={onDelete}>
+                  <i className="delete icon" />
+                </button>
+              </Styled.SpanEditButton>
             </Styled.BoxWrapper>
-            <Styled.SpanEditButton className="ui mini basic icon buttons">
-              <button
-                type="button"
-                className="ui button"
-                onClick={this.onButtonClick}
-              >
-                <i className="edit icon" />
-              </button>
-              <button type="button" className="ui button" onClick={onDelete}>
-                <i className="delete icon" />
-              </button>
-            </Styled.SpanEditButton>
           </div>
         )}
 
@@ -105,23 +108,23 @@ console.log('ExperienceListItem rendered');
                 value={term}
               />
               <Form.Field
-                label="근무 내용"
-                control={TextArea}
-                name="content"
-                onChange={e => this.onChange(e, 'content')}
-                value={content}
-              />
-              <Form.Field
                 label="간단 설명"
                 control={TextArea}
                 name="description"
                 onChange={e => this.onChange(e, 'description')}
                 value={description}
               />
+              <Form.Field
+                label="근무 내용"
+                control={TextArea}
+                name="content"
+                onChange={e => this.onChange(e, 'content')}
+                value={content}
+              />
               <Button
                 compact
                 content="취소"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   this.onButtonClick();
                 }}

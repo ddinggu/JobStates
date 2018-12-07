@@ -6,28 +6,19 @@ import { Container } from 'semantic-ui-react';
 import { deleteJobData } from 'actions/action_Job';
 import editJobData from 'actions/action_JobEdit';
 
-import './JobDetail.css';
-
 import JobCompany from 'components/job/edit/JobCompany';
 import JobHire from 'components/job/edit/JobHire';
 import JobComment from 'components/job/edit/JobComment';
 import JobSchedule from 'components/job/edit/JobSchedule';
 import JobDetailHeader from './JobDetailHeader';
 
+import './JobDetail.css';
+
 class JobDetail extends PureComponent {
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('nextProps::', nextProps);
-  //   const { job } = this.props;
-  //   if (nextProps.job !== job) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   render() {
     const { job, editJobData, deleteJobData } = this.props;
@@ -100,7 +91,6 @@ class JobDetail extends PureComponent {
 JobDetail.propTypes = {
   job: PropTypes.instanceOf(Object),
   loading: PropTypes.bool,
-  error: PropTypes.bool,
   editJobData: PropTypes.func,
   deleteJobData: PropTypes.func,
 };

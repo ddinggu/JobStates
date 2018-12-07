@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import * as jobUtils from 'utils/jobutils';
 import * as Styled from 'StyledComponents';
@@ -13,7 +13,8 @@ export default class UserInterestTech extends Component {
       tech: [],
       field: [],
     };
-    this.onButtonClick = (part) => {
+
+    this.onButtonClick = part => {
       const { editTech, editField } = this.state;
 
       if (part === 'tech') {
@@ -27,12 +28,12 @@ export default class UserInterestTech extends Component {
       }
     };
 
-    this.onHandleDataChange = (key, shouldChange) => (data) => {
+    this.onHandleDataChange = (key, shouldChange) => data => {
       if (!shouldChange) this.setState({ ...this.state, [key]: data });
       else this.setState({ ...this.state, [key]: data, provider: 'user' });
     };
 
-    this.onSubmit = (part) => {
+    this.onSubmit = part => {
       if (part === 'tech') {
         const data = {
           favoriteTech: this.state.tech,
@@ -46,7 +47,7 @@ export default class UserInterestTech extends Component {
       }
     };
 
-    this.onDelete = (part) => {
+    this.onDelete = part => {
       if (part === 'tech') {
         const data = {
           favoriteTech: [],
@@ -91,23 +92,24 @@ export default class UserInterestTech extends Component {
                 handleArrayChange={this.onHandleDataChange('field', true)}
                 value={this.state.field}
               />
-
-              <Button
-                compact
-                content="취소"
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.onButtonClick('field');
-                }}
-              />
-              <Button
-                compact
-                content="변경"
-                onClick={() => {
-                  this.onButtonClick('field');
-                  this.onSubmit('field');
-                }}
-              />
+              <Styled.DivWithMargin>
+                <Button
+                  compact
+                  content="취소"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.onButtonClick('field');
+                  }}
+                />
+                <Button
+                  compact
+                  content="변경"
+                  onClick={() => {
+                    this.onButtonClick('field');
+                    this.onSubmit('field');
+                  }}
+                />
+              </Styled.DivWithMargin>
             </div>
           </Styled.Box>
           <Styled.SpanEditButton className="ui mini basic icon buttons">
@@ -147,22 +149,24 @@ export default class UserInterestTech extends Component {
                   handleArrayChange={this.onHandleDataChange('tech', true)}
                   value={this.state.tech}
                 />
-                <Button
-                  compact
-                  content="취소"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.onButtonClick('tech');
-                  }}
-                />
-                <Button
-                  compact
-                  content="변경"
-                  onClick={() => {
-                    this.onButtonClick('tech');
-                    this.onSubmit('tech');
-                  }}
-                />
+                <Styled.DivWithMargin>
+                  <Button
+                    compact
+                    content="취소"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.onButtonClick('tech');
+                    }}
+                  />
+                  <Button
+                    compact
+                    content="변경"
+                    onClick={() => {
+                      this.onButtonClick('tech');
+                      this.onSubmit('tech');
+                    }}
+                  />
+                </Styled.DivWithMargin>
               </div>
             </Styled.Box>
             <Styled.SpanEditButtonList>

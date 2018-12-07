@@ -12,6 +12,7 @@ import {
 import * as jobUtils from 'utils/jobutils';
 import DropdownSearchQuery from 'components/job/post/DropdownSearchQuery';
 import { jobPostImage } from 'api/api';
+import * as Styled from 'StyledComponents';
 
 class JobCompany extends Component {
   state = {
@@ -88,7 +89,11 @@ class JobCompany extends Component {
         <Grid textAlign="center">
           <Grid.Row>
             <Grid.Column width={2}>
-              <Header>회사</Header>
+              {/* <Header>회사</Header> */}
+              <Styled.Box column="1" row="2">
+                <Styled.Header>회사</Styled.Header>
+                <Styled.Line />
+              </Styled.Box>
             </Grid.Column>
             {!edit ? (
               <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -96,7 +101,10 @@ class JobCompany extends Component {
                   <Grid padded="vertically horizontally">
                     <Grid.Row>
                       <Grid.Column width={4}>
-                        <Image src={this.props.logo} avatar />
+                        <Image
+                          src={this.props.logo || './image/icon-enterprise.png'}
+                          avatar
+                        />
                       </Grid.Column>
                       <Grid.Column textAlign="center" width={8}>
                         <Header>{this.props.brand}</Header>
@@ -158,7 +166,10 @@ class JobCompany extends Component {
                             </List.Item>
                             <div>
                               <Image
-                                src={this.state.logo}
+                                src={
+                                  this.state.logo ||
+                                  './image/icon-enterprise.png'
+                                }
                                 alt=""
                                 style={{
                                   maxWidth: '15%',

@@ -67,6 +67,9 @@ console.log('EducationListItem rendered');
               <Styled.Box column="1/4" row="2">
                 <li>{edu.content}</li>
               </Styled.Box>
+              <Styled.Box column="2/3" row="3">
+                <Styled.BottomLine />
+              </Styled.Box>
               <Styled.SpanEditButtonList className="ui mini basic icon buttons">
                 <button
                   type="button"

@@ -100,7 +100,7 @@ export function unregister() {
 
 export function register(config) {
   if (
-    process.env.NODE_ENV === 'development'
+    process.env.NODE_ENV === 'production'
     && 'serviceWorker' in navigator
     && 'PushManager' in window
   ) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Icon, Modal, Grid } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 class JobDetailHeader extends Component {
   state = { open: false, value: '' };
@@ -82,5 +83,15 @@ class JobDetailHeader extends Component {
     );
   }
 }
+
+JobDetailHeader.propTypes = {
+  provider: PropTypes.string,
+  commentId: PropTypes.number,
+  companyId: PropTypes.number,
+  hireId: PropTypes.number,
+  scheduleId: PropTypes.number,
+  loading: PropTypes.bool,
+  deleteJobData: PropTypes.func,
+};
 
 export default JobDetailHeader;

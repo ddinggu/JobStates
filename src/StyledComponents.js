@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 // ================== Wrapper & Boxes ==================  //
+
+// 5 columns 그리드
 export const Wrapper = styled.div`
   width: 100%;
   text-align: center;
@@ -16,6 +18,7 @@ export const Wrapper = styled.div`
   }
 `;
 
+// 3 columns 그리드
 export const BoxWrapper = styled.div`
   width: 100%;
   text-align: center;
@@ -64,7 +67,7 @@ export const BoxWithBackground = styled(Box)`
 export const SpanEditButtonList = styled.span.attrs({
   className: 'ui mini basic icon buttons ',
 })`
-  top: 50px;
+  top: 10px;
   position: absolute;
   right: 10px;
 
@@ -78,7 +81,7 @@ export const SpanEditButtonList = styled.span.attrs({
 export const SpanEditButton = styled.span.attrs({
   className: 'ui mini basic icon buttons ',
 })`
-  top: 50px;
+  top: 10px;
   position: absolute;
   right: 10px;
 
@@ -129,23 +132,89 @@ export const Line = styled.div`
 // ================== Headers ==================  //
 
 export const HeaderContainer = styled.div`
+  width: 100%;
+  height: 75px;
+  background-color: hsla(0, 0%, 100%, 0.94);
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   z-index: 2;
-  display: flex;
-  height: 75px;
-  padding-top: 0;
-  padding-bottom: 0;
-  align-items: center;
-  border-bottom: 1px solid #f1f1f1;
-  background-color: hsla(0, 0%, 100%, 0.94);
+
+  @media only screen and (min-width: 768px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    height: 75px;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
+    border-bottom: 1px solid #f1f1f1;
+    background-color: hsla(0, 0%, 100%, 0.94);
+  }
 `;
 
-export const Nav = styled.span`
+export const NavLogo = styled.span`
   color: black;
-  font-size: xx-large;
+  font-size: small;
   font-family: 'Merriweather', serif;
   cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 10px;
+
+  @media only screen and (min-width: 768px) {
+    color: black;
+    font-size: xx-large;
+    font-family: 'Merriweather', serif;
+    cursor: pointer;
+    position: absolute;
+    left: 70px;
+    top: 30px;
+  }
+`;
+
+export const NavAccount = styled.span`
+  color: black;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 0px;
+
+  @media only screen and (min-width: 768px) {
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    right: 50px;
+    top: 20px;
+  }
+`;
+
+export const DivWithMargin = styled.div`
+  margin-top: 20px;
+`;
+
+export const NavMenu = styled.nav`
+  position: absolute;
+  top: 32px;
+  font-size: small;
+  left: 20%;
+
+  @media only screen and (min-width: 768px) {
+    position: absolute;
+    align: center;
+    left: 43%;
+    top: 30px;
+    font-size: large;
+    display: inline;
+  }
+`;
+
+export const BottomLine = styled.div`
+  border: 0.5px solid rgb(166, 183, 196);
+  opacity: 0.1;
+  width: 200px;
+  margin-top: 1rem;
 `;

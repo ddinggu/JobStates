@@ -4,10 +4,10 @@ import {
   Button,
   TextArea,
   Container,
-  Header,
   List,
   Form,
 } from 'semantic-ui-react';
+import * as Styled from 'StyledComponents';
 
 class JobComment extends Component {
   state = {
@@ -53,7 +53,11 @@ class JobComment extends Component {
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            <Header>메모</Header>
+            {/* <Header>메모</Header> */}
+            <Styled.Box>
+              <Styled.Header>메모</Styled.Header>
+              <Styled.Line />
+            </Styled.Box>
           </Grid.Column>
           {!edit ? (
             <Grid.Column textAlign="left" width={10} className="jobbody">
@@ -61,7 +65,7 @@ class JobComment extends Component {
                 <Grid.Row>
                   <List bulleted>
                     <List.Item className="jobpostItem">공고 장점</List.Item>
-                    {this.props.advantage}
+                    {this.props.advantage || '등록되지 않음'}
                   </List>
                 </Grid.Row>
               </div>
@@ -69,14 +73,14 @@ class JobComment extends Component {
                 <Grid.Row>
                   <List bulleted>
                     <List.Item className="jobpostItem">공고 단점</List.Item>
-                    {this.props.disAdvantage}
+                    {this.props.disAdvantage || '등록되지 않음'}
                   </List>
                 </Grid.Row>
               </div>
               <Grid.Row className="ItemsInContainer">
                 <List bulleted>
                   <List.Item className="jobpostItem">필요 전략</List.Item>
-                  {this.props.strategy}
+                  {this.props.strategy || '등록되지 않음'}
                 </List>
               </Grid.Row>
             </Grid.Column>

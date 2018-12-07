@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
- List, Input, Form, Button, Header 
+ List, Input, Form, Button 
 } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
 
