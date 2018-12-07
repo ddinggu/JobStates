@@ -45,7 +45,7 @@ class Header extends Component {
             className="main-nav-link content-mypage"
             onClick={() => push('/user')}
           >
-            프로필
+            이력서
           </span>
           <span
             className="main-nav-link content-joblist"
