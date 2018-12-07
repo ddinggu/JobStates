@@ -158,6 +158,7 @@ class JobPostForm extends Component {
                       <List bulleted>
                         <List.Item className="jobpostItem">전형일자</List.Item>
                         <DatePicker
+                          className="datePicker"
                           selected={this.state.statusDate}
                           onChange={this.onHandleDataChange(
                             'statusDate',

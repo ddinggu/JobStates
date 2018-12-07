@@ -13,7 +13,6 @@ import DatePicker from 'react-datepicker';
 import { runInThisContext } from 'vm';
 import * as Styled from 'StyledComponents';
 
-
 class JobSchedule extends Component {
   state = {
     edit: false,
@@ -115,6 +114,7 @@ class JobSchedule extends Component {
                     <List bulleted>
                       <List.Item className="jobpostItem">전형일자</List.Item>
                       <DatePicker
+                        className="datePicker"
                         selected={new Date(statusDate)}
                         onChange={this.onDateChange('statusDate')}
                       />
