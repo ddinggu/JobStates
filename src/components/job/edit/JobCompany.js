@@ -51,6 +51,34 @@ class JobCompany extends Component {
     }
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.edit !== nextState.edit) {
+      return true;
+    }
+    if (this.state.logo !== nextState.logo) {
+      return true;
+    }
+    if (this.state.logoKey !== nextState.logoKey) {
+      return true;
+    }
+    if (this.state.brand !== nextState.brand) {
+      return true;
+    }
+    if (this.state.companyUrl !== nextState.companyUrl) {
+      return true;
+    }
+    if (this.state.intro !== nextState.intro) {
+      return true;
+    }
+    if (this.state.category !== nextState.category) {
+      return true;
+    }
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     const { edit, brand, companyUrl, intro, category } = this.state;
     const { onSubmitEditData } = this.props;

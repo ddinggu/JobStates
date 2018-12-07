@@ -10,7 +10,9 @@ import {
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DatePicker from 'react-datepicker';
+import { runInThisContext } from 'vm';
 import * as Styled from 'StyledComponents';
+
 
 class JobSchedule extends Component {
   state = {
@@ -29,6 +31,22 @@ class JobSchedule extends Component {
     });
 
   onDateChange = key => date => this.setState({ ...this.state, [key]: date });
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.edit !== nextState.edit) {
+      return true;
+    }
+    if (this.state.status !== nextState.status) {
+      return true;
+    }
+    if (this.state.statusDate !== nextState.statusDate) {
+      return true;
+    }
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    return false;
+  }
 
   render() {
     console.log('jobSchedule render!!');

@@ -35,6 +35,7 @@ export default class ProjectListItem extends Component {
     const {
  id, title, description, term, update, edit 
 } = this.state;
+console.log('ProjectListItem rendered');
 
     const onSubmitPatch = (e) => {
       e.preventDefault();
