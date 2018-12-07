@@ -138,12 +138,16 @@ class JobCompany extends Component {
                         <Header>{this.props.title}</Header>
                       </Grid.Row>
                       <Grid.Row>
-                        (채용 마감일 : {this.props.deadLine.substr(0, 10)})
+                        (채용 마감일 :{' '}
+                        {this.props.deadLine
+                          ? this.props.deadLine.substr(0, 10)
+                          : '등록해주세요'}
+                        )
                       </Grid.Row>
                     </Grid.Column>
                     <Grid.Column textAlign="right" width={4}>
                       <span className="linkBtn">
-                        <a href={this.props.hireUrl}>
+                        <a href={`http://${this.props.hireUrl}`}>
                           <img
                             src="https://png.pngtree.com/svg/20170904/url_650529.png"
                             height="30px"
