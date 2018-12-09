@@ -1,12 +1,14 @@
 import React from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
 import PropTypes from 'prop-types';
-import { Container, Grid, Header } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
 import 'react-circular-progressbar/dist/styles.css';
 import './UserCurrent.css';
 
-const UserCurrent = ({ allCount, document, pass, fail }) => {
+const UserCurrent = ({
+ allCount, document, pass, fail 
+}) => {
   const progressbar = (state, sum, title) => {
     const ratio = (state / sum || 0) * 100;
     return (

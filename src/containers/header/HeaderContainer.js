@@ -37,9 +37,7 @@ class Header extends Component {
 
     return (
       <Styled.HeaderContainer>
-        <Styled.NavLogo onClick={() => push('/joblist')}>
-          JOB | STATES
-        </Styled.NavLogo>
+        <Styled.NavLogo onClick={() => push('/')}>JOB | STATES</Styled.NavLogo>
         <Styled.NavMenu role="navigation">
           <span
             className="main-nav-link content-mypage"

@@ -6,6 +6,8 @@ html {
 
 .App {
   background-color: #f7f7f7;
+  position: relative;
+  bottom: -6em;
 }
 
 #root {
