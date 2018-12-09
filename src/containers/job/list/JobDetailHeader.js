@@ -3,9 +3,22 @@ import { Button, Icon, Modal, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 class JobDetailHeader extends Component {
-  state = { open: false };
+  state = { open: false, value: '' };
 
   toggle = () => this.setState({ open: !this.state.open });
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.open !== nextState.open) {
+      return true;
+    }
+    if (this.state.value !== nextState.value) {
+      return true;
+    }
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    return false;
+  }
 
   render() {
     console.log('jobDetailHeader render!!');
@@ -42,7 +55,9 @@ class JobDetailHeader extends Component {
 
         <Modal size={'mini'} open={open} onClose={this.toggle}>
           <Modal.Header>삭제</Modal.Header>
-          <Modal.Content />
+          <Modal.Content>
+            <b>삭제 하시겠습니까?</b>
+          </Modal.Content>
           <Modal.Actions>
             <Button negative onClick={this.toggle}>
               취소
@@ -52,14 +67,15 @@ class JobDetailHeader extends Component {
               icon={loading ? null : 'checkmark'}
               labelPosition="right"
               content="삭제"
-              onClick={() =>
+              value={this.state.value}
+              onClick={e =>
                 deleteJobData({
                   provider,
                   commentId,
                   companyId,
                   hireId,
                   scheduleId,
-                })
+                })(this.setState({ value: e.target.value }))
               }
               loading={loading}
             />

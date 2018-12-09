@@ -1,5 +1,5 @@
 module.exports = {
-  staticFileGlobs: ['build/static/css/**.css', 'build/static/js/**.js'],
+  staticFileGlobs: ['build/**/*.{js,html,css,png,jpg}'],
   swFilePath: './build/service-worker.js',
   stripPrefix: 'build/',
   importScripts: ['./service-worker-push.js'],

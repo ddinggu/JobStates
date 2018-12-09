@@ -15,15 +15,17 @@ import JobDetailHeader from './JobDetailHeader';
 import './JobDetail.css';
 
 class JobDetail extends PureComponent {
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
     const { job, editJobData, deleteJobData } = this.props;
-
     if (!job.hireId) return <Redirect to="/joblist" />;
+
     console.log('jobDetail render');
+
     return (
       <Container className="jobdetail">
         <JobDetailHeader
@@ -35,12 +37,14 @@ class JobDetail extends PureComponent {
           error={job.error}
           deleteJobData={deleteJobData}
         />
+
         <JobSchedule
           scheduleId={job.scheduleId}
           status={job.status}
           statusDate={job.statusDate}
           onSubmitEditData={editJobData}
         />
+
         <JobCompany
           companyId={job.companyId}
           brand={job.brand}
@@ -70,6 +74,7 @@ class JobDetail extends PureComponent {
           experience={job.experience}
           onSubmitEditData={editJobData}
         />
+
         <JobComment
           onSubmitEditData={editJobData}
           commentId={job.commentId}
@@ -77,6 +82,7 @@ class JobDetail extends PureComponent {
           disAdvantage={job.disAdvantage}
           strategy={job.strategy}
         />
+
       </Container>
     );
   }

@@ -22,7 +22,7 @@ export const selectTech = [
   { key: 'MongoDB', value: 'MongoDB', text: 'MongoDB' },
   { key: 'HTML5', value: 'HTML5', text: 'HTML5' },
   { key: 'es6', value: 'es6', text: 'es6' },
-  { key: 'react-native', value: 'react-native', text: 'react-native' },
+  { key: 'react.js-native', value: 'react-native', text: 'react-native' },
   { key: 'Swift', value: 'Swift', text: 'Swift' },
   { key: 'WebSocket', value: 'WebSocket', text: 'WebSocket' },
   { key: 'Sass', value: 'Sass', text: 'Sass' },

@@ -37,27 +37,25 @@ class Header extends Component {
 
     return (
       <Styled.HeaderContainer>
-        <Styled.NavLogo onClick={() => push('/joblist')}>
-          JOB | STATES
-        </Styled.NavLogo>
+        <Styled.NavLogo onClick={() => push('/')}>JOB | STATES</Styled.NavLogo>
         <Styled.NavMenu role="navigation">
           <span
             className="main-nav-link content-mypage"
             onClick={() => push('/user')}
           >
-            마이페이지
+            이력서
           </span>
           <span
             className="main-nav-link content-joblist"
             onClick={() => push('/joblist')}
           >
-            정리페이지
+            스크랩
           </span>
           <span
             className="main-nav-link content-analysis"
             onClick={() => push('/analysis')}
           >
-            분석
+            대시보드
           </span>
         </Styled.NavMenu>
         <Styled.NavAccount>

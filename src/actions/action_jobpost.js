@@ -22,7 +22,7 @@ export default jobData => async (dispatch) => {
     const responsePostJobData = await postUserJobPosting(jobData);
 
     if (responsePostJobData.data.code === 200) {
-      await dispatch(successPostJobData(jobData));
+      await dispatch(successPostJobData(responsePostJobData.data.data));
       dispatch(push('/jobdetail'));
     } else {
       dispatch(failedPostJobData(responsePostJobData.data));

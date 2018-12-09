@@ -9,9 +9,8 @@ import JobPostForm from 'containers/job/post/JobPostForm';
 import Login from 'containers/login/login';
 import getToken from 'containers/login/getToken';
 import privateRoute from 'containers/login/privateRoute';
-import PlusButton from 'components/common/PlusButton';
 import Logout from 'containers/logout';
-// import privateRoute from 'container/login/privateRoute';
+import MainPage from 'components/common/MainPage';
 import './App.css';
 import { createGlobalStyle } from 'styled-components';
 import 'normalize.css';
@@ -23,27 +22,25 @@ createGlobalStyle`
   box-sizing:border-box;
 }
 `;
-console.log('My Test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
-const App = () => (
-  <Switch>
-    <div className="App" style={{ position: 'relative', bottom: '-7em' }}>
-      <Route
-        path="/"
-        render={props => props.location.pathname !== '/login' && <HeaderContainer />
-        }
-      />
-      <Route path="/login" component={Login} />
-      <Route path="/logout" component={Logout} />
-      <Route path="/user" component={UserContainer} />
-      <Route path="/userprofile" component={getToken} />
-      <Route path="/joblist" component={JobList} />
-      <Route path="/jobpost" component={privateRoute(JobPostForm)} />
-      <Route path="/jobdetail" component={JobDetail} />
-      <Route path="/analysis" component={AnalysisContainer} />
-      <PlusButton />
-    </div>
-  </Switch>
-);
+const App = () => {
+  console.log('App.js rendered');
+  return (
+    <Switch>
+      <div className="App">
+        <HeaderContainer />
+        <Route path="/" exact render={MainPage} />
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
+        <Route path="/user" component={UserContainer} />
+        <Route path="/userprofile" component={getToken} />
+        <Route path="/joblist" component={JobList} />
+        <Route path="/jobpost" component={privateRoute(JobPostForm)} />
+        <Route path="/jobdetail" component={JobDetail} />
+        <Route path="/analysis" component={privateRoute(AnalysisContainer)} />
+      </div>
+    </Switch>
+  );
+};
 
 export default App;

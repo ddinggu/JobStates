@@ -31,6 +31,7 @@ export default class UserProject extends Component {
   }
 
   render() {
+    console.log('UserProject rendered');
     const { onButtonClick } = this;
     const { create } = this.state;
     const { project, funcs } = this.props;

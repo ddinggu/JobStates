@@ -1,5 +1,9 @@
 # JobStates
 
+### Version 1.0.2
+
+- Feature : Main page
+
 ### Version 1.0.1
 
 - Regist React-Service-Worker for Browser Web Push Notification

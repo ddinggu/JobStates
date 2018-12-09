@@ -30,6 +30,22 @@ class JobSchedule extends Component {
 
   onDateChange = key => date => this.setState({ ...this.state, [key]: date });
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.edit !== nextState.edit) {
+      return true;
+    }
+    if (this.state.status !== nextState.status) {
+      return true;
+    }
+    if (this.state.statusDate !== nextState.statusDate) {
+      return true;
+    }
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     console.log('jobSchedule render!!');
     const { edit, status, statusDate } = this.state;
@@ -97,6 +113,7 @@ class JobSchedule extends Component {
                     <List bulleted>
                       <List.Item className="jobpostItem">전형일자</List.Item>
                       <DatePicker
+                        className="datePicker"
                         selected={new Date(statusDate)}
                         onChange={this.onDateChange('statusDate')}
                       />

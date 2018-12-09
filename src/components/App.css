@@ -6,6 +6,9 @@ html {
 
 .App {
   background-color: #f7f7f7;
+  position: relative;
+  bottom: -6em;
+  font-size: 16px;
 }
 
 #root {
@@ -21,5 +24,23 @@ html {
   min-width: 4em;
   text-align: center;
   font-size: 0.85714286rem;
-  padding: 0.25rem;
+  padding: 5px 9px;
+  margin-top: 1rem;
+}
+
+.datePicker {
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  margin: 0;
+  outline: 0;
+  -webkit-appearance: none;
+  tap-highlight-color: rgba(255, 255, 255, 0);
+  line-height: 1.21428571em;
+  padding: 0.67857143em 1em;
+  font-size: 1em;
+  background: #fff;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 0.28571429rem;
+  box-shadow: 0 0 0 0 transparent inset;
+  transition: color 0.1s ease, border-color 0.1s ease;
 }
