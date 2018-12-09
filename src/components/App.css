@@ -8,6 +8,7 @@ html {
   background-color: #f7f7f7;
   position: relative;
   bottom: -6em;
+  font-size: 16px;
 }
 
 #root {
@@ -23,7 +24,7 @@ html {
   min-width: 4em;
   text-align: center;
   font-size: 0.85714286rem;
-  padding: 0.25rem;
+  padding: 5px 9px;
   margin-top: 1rem;
 }
 
