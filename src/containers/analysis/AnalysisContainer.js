@@ -21,10 +21,10 @@ class AnalysisContainer extends Component {
       allTech,
       allCategory,
       allCount,
-      document,
-      meeting,
-      pass,
-      fail,
+      documentCount,
+      meetingCount,
+      passCount,
+      failCount,
       loading,
     } = this.props;
     return (
@@ -35,10 +35,10 @@ class AnalysisContainer extends Component {
           <Container className="jobdetail">
             <UserCurrent
               allCount={allCount}
-              document={document}
-              meeting={meeting}
-              pass={pass}
-              fail={fail}
+              documentCount={documentCount}
+              meetingCount={meetingCount}
+              passCount={passCount}
+              failCount={failCount}
             />
             <DonutChart
               tech={tech}
@@ -74,10 +74,10 @@ const mapStateToProps = state => ({
   allTech: state.Analysis.data.allUserHiringTechCount,
   allCategory: state.Analysis.data.allUserHiringCategoryCount,
   allCount: state.Analysis.data.allCount,
-  document: state.Analysis.data.document,
-  meeting: state.Analysis.data.meeting,
-  pass: state.Analysis.data.pass,
-  fail: state.Analysis.data.fail,
+  documentCount: state.Analysis.data.documentCount,
+  meetingCount: state.Analysis.data.meetingCount,
+  passCount: state.Analysis.data.passCount,
+  failCount: state.Analysis.data.failCount,
   loading: state.Analysis.loading,
   status: state.Analysis.status,
 });

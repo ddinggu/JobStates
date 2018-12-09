@@ -10,7 +10,6 @@ import {
 } from 'semantic-ui-react';
 import * as jobUtils from 'utils/jobutils';
 import DatePicker from 'react-datepicker';
-import { runInThisContext } from 'vm';
 import * as Styled from 'StyledComponents';
 
 class JobSchedule extends Component {
