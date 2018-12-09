@@ -7,10 +7,10 @@ import 'react-circular-progressbar/dist/styles.css';
 import './UserCurrent.css';
 
 const UserCurrent = ({
- allCount, document, pass, fail 
+ allCount, pass, fail, documentCount 
 }) => {
   const progressbar = (state, sum, title) => {
-    const ratio = (state / sum || 0) * 100;
+    const ratio = ((state / sum || 0) * 100).toFixed(0);
     return (
       <Grid style={{ width: '25%', display: 'inline-block', margin: '1rem' }}>
         <Grid.Column>
@@ -37,6 +37,8 @@ const UserCurrent = ({
     </div>
   );
 
+  const firstRound = allCount - documentCount;
+
   return (
     <Container className="jobContainer">
       <Grid textAlign="center">
@@ -47,7 +49,7 @@ const UserCurrent = ({
           </Styled.Box>
         </Grid.Column>
         <Grid.Column textAlign="left" width={12} className="jobbody">
-          {progressbar(allCount - document, allCount, '서류 합격률')}
+          {progressbar(firstRound, allCount, '서류 합격률')}
           {progressbar(pass, allCount, '최종 합격률')}
           {progressText()}
         </Grid.Column>
