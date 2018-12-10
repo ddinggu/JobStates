@@ -35,6 +35,12 @@ class Header extends Component {
       />
     );
 
+    const loginButton = (
+      <div className="login-btn" onClick={() => push('/login')}>
+        로그인
+      </div>
+    );
+
     return (
       <Styled.HeaderContainer>
         <Styled.NavLogo onClick={() => push('/')}>JOB | STATES</Styled.NavLogo>
@@ -59,13 +65,17 @@ class Header extends Component {
           </span>
         </Styled.NavMenu>
         <Styled.NavAccount>
-          <Dropdown
-            trigger={trigger}
-            pointing="top left"
-            icon={null}
-            options={options}
-            onChange={this._onHandleChange}
-          />
+          {localStorage.getItem('token') ? (
+            <Dropdown
+              trigger={trigger}
+              pointing="top left"
+              icon={null}
+              options={options}
+              onChange={this._onHandleChange}
+            />
+          ) : (
+            loginButton
+          )}
         </Styled.NavAccount>
       </Styled.HeaderContainer>
     );
