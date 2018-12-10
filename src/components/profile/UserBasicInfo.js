@@ -35,9 +35,7 @@ export default class UserBasicInfo extends Component {
   }
 
   render() {
-    console.log('UserBasicInfo  rendered');
     const { onButtonClick } = this;
-    // console.log('funcs', this.props.funcs);
     const { submit } = this.props.funcs;
     const {
  edit, phone, email, blog, github, update, name 

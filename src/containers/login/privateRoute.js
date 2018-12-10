@@ -31,7 +31,6 @@ export default (ComposedComponent) => {
 
     render() {
       const { isAuthenticated } = this.props;
-      console.log(`isAuthenticated : ${isAuthenticated}`);
 
       return <>{isAuthenticated ? <ComposedComponent /> : null}</>;
     }

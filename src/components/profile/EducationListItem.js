@@ -35,7 +35,6 @@ export default class EducationList extends Component {
     const {
  edit, organization, term, content, id 
 } = this.state;
-console.log('EducationListItem rendered');  
 
     const onSubmitPatch = () => {
       const obj = {

@@ -47,7 +47,6 @@ class JobSchedule extends Component {
   }
 
   render() {
-    console.log('jobSchedule render!!');
     const { edit, status, statusDate } = this.state;
     const { onSubmitEditData } = this.props;
 

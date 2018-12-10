@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {
- Button, Form, TextArea, Input 
-} from 'semantic-ui-react';
+import { Button, Form, TextArea, Input } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
 
 export default class ProjectListItem extends Component {
@@ -32,12 +30,9 @@ export default class ProjectListItem extends Component {
 
   render() {
     const { funcs } = this.props;
-    const {
- id, title, description, term, update, edit 
-} = this.state;
-console.log('ProjectListItem rendered');
+    const { id, title, description, term, update, edit } = this.state;
 
-    const onSubmitPatch = (e) => {
+    const onSubmitPatch = e => {
       e.preventDefault();
       const obj = {
         id,
@@ -107,7 +102,7 @@ console.log('ProjectListItem rendered');
               <Button
                 compact
                 content="취소"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   this.onButtonClick();
                 }}

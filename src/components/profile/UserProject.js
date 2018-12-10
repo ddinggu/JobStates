@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
- Button, Input, Form, TextArea 
-} from 'semantic-ui-react';
+import { Button, Input, Form, TextArea } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
 import ProjectListItem from './ProjectListItem';
 // import { connect } from 'react-redux';
@@ -31,11 +29,10 @@ export default class UserProject extends Component {
   }
 
   render() {
-    console.log('UserProject rendered');
     const { onButtonClick } = this;
     const { create } = this.state;
     const { project, funcs } = this.props;
-    const onSubmitPost = (e) => {
+    const onSubmitPost = e => {
       e.preventDefault();
       const { title, term, description } = this.state;
       const obj = { title, term, description };
@@ -69,7 +66,7 @@ export default class UserProject extends Component {
               <Button
                 compact
                 content="취소"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   onButtonClick();
                 }}

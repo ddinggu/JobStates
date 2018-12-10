@@ -16,8 +16,6 @@ const authenticateError = () => ({
 // status에 따라 판단!!
 export const authCheck = () => async (dispatch) => {
   const response = await authenticateUser();
-  console.log('auth check', response);
-
   try {
     response.data.code === 200
       ? dispatch(authenticate())
@@ -25,12 +23,4 @@ export const authCheck = () => async (dispatch) => {
   } catch (err) {
     dispatch(authenticateError(err));
   }
-};
-
-export const logout = () => {
-  localStorage.clear();
-
-  return {
-    type: types.USER_LOGOUT,
-  };
 };

@@ -83,13 +83,12 @@ class JobCompany extends Component {
     const { edit, brand, companyUrl, intro, category } = this.state;
     const { onSubmitEditData } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
-    console.log('jobCompany render!!');
+
     return (
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Row>
             <Grid.Column width={2}>
-              {/* <Header>회사</Header> */}
               <Styled.Box column="1" row="2">
                 <Styled.Header>회사</Styled.Header>
                 <Styled.Line />

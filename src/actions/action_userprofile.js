@@ -29,9 +29,7 @@ export const fetchUser = () => async (dispatch) => {
   try {
     if (responseFetchUserData.data.code === 200) {
       dispatch(fetchUserProfileSuccess(responseFetchUserData.data.data));
-      console.log(123);
     } else {
-      console.log(456);
       dispatch(fetchUserProfileFailure(responseFetchUserData.data));
       alert(responseFetchUserData.data.message);
       dispatch(push('/logout'));
@@ -45,7 +43,6 @@ export const fetchUser = () => async (dispatch) => {
 export const onSubmitPostUser = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
   const responsePostUserData = await api.postUserProfile(data, part);
-  console.log('please!!!!! ', responsePostUserData);
 
   try {
     if (responsePostUserData.data.code === 200) {
@@ -65,9 +62,7 @@ export const onSubmitPostUser = (data, part) => async (dispatch) => {
 
 export const onSubmitPatchUser = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
-  console.log('patching data', data);
   const responsePostUserData = await api.updateUserProfile(data, part);
-  console.log('test!! : ', responsePostUserData);
   try {
     dispatch(fetchUserProfileSuccess(responsePostUserData.data.data));
   } catch (err) {
@@ -78,9 +73,7 @@ export const onSubmitPatchUser = (data, part) => async (dispatch) => {
 export const deleteUserProfile = (data, part) => async (dispatch) => {
   dispatch(fetchUserProfileBegin());
   try {
-    console.log('deleting data', data, part);
     const deletedRes = await api.deleteUserProfile(data, part);
-    console.log('deleted', deletedRes.data);
     dispatch(fetchUserProfileSuccess(deletedRes.data.data));
   } catch (err) {
     dispatch(fetchUserProfileFailure(err));
@@ -92,7 +85,5 @@ export const uploadUserImage = data => async (dispatch) => {
     const imgUrlResponse = await api.postUserImage(data);
 
     dispatch(uploadUserImageSuccess(imgUrlResponse));
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };

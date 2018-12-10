@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
- Button, Form, TextArea, Input 
-} from 'semantic-ui-react';
+import { Button, Form, TextArea, Input } from 'semantic-ui-react';
 import * as Styled from 'StyledComponents';
 import ExperienceList from './ExperienceListItem';
 
@@ -31,16 +29,13 @@ class UserExperience extends Component {
   }
 
   render() {
-    console.log('UserExperience rendered');
     const { onButtonClick } = this;
     const { create } = this.state;
     const { exps, funcs } = this.props;
 
-    const onSubmitPost = (e) => {
+    const onSubmitPost = e => {
       e.preventDefault();
-      const {
- title, description, term, content 
-} = this.state;
+      const { title, description, term, content } = this.state;
       const obj = {
         title,
         description,

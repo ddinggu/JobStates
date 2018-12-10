@@ -13,8 +13,6 @@ export default (state = initialState, action) => {
       return { ...state, isAuthenticated: false };
     case types.AUTHENTICATION_ERROR:
       return { ...state, error: action.payload };
-    case types.USER_LOGOUT:
-      return { isAuthenticated: false, error: null };
     default:
       return state;
   }
