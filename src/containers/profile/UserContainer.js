@@ -25,10 +25,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    // console.log('redering!!');
-    console.log('UserContainer rendered');
     if (this.props.loading) {
-      console.log('loading render:::::!!!!');
       return (
         <>
           <CommonLoading />

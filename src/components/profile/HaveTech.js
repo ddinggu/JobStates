@@ -20,7 +20,7 @@ export default class UserInterestTech extends Component {
       });
     };
 
-    this.onHandleDataChange = (key, shouldChange) => (data) => {
+    this.onHandleDataChange = (key, shouldChange) => data => {
       if (!shouldChange) this.setState({ ...this.state, [key]: data });
       else this.setState({ ...this.state, [key]: data, provider: 'user' });
     };
@@ -43,7 +43,7 @@ export default class UserInterestTech extends Component {
   render() {
     const { haveTech } = this.props;
     const hireMapping = category => <div className="mapping">{category}</div>;
-    console.log('HaveTech rendered');
+
     return (
       <Styled.Wrapper>
         <Styled.Box column="1" row="1">
@@ -73,7 +73,7 @@ export default class UserInterestTech extends Component {
                 <Button
                   compact
                   content="취소"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     this.onButtonClick();
                   }}

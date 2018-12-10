@@ -6,7 +6,6 @@ const initialState = {
 };
 
 export default function uploadImageReducer(state = initialState, action) {
-  console.log('action payload:::', action.payload);
   switch (action.type) {
     case types.POST_IMAGE_BEGIN:
       return {

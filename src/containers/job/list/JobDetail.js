@@ -15,7 +15,6 @@ import JobDetailHeader from './JobDetailHeader';
 import './JobDetail.css';
 
 class JobDetail extends PureComponent {
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -23,8 +22,6 @@ class JobDetail extends PureComponent {
   render() {
     const { job, editJobData, deleteJobData } = this.props;
     if (!job.hireId) return <Redirect to="/joblist" />;
-
-    console.log('jobDetail render');
 
     return (
       <Container className="jobdetail">
@@ -82,7 +79,6 @@ class JobDetail extends PureComponent {
           disAdvantage={job.disAdvantage}
           strategy={job.strategy}
         />
-
       </Container>
     );
   }

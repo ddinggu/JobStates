@@ -21,7 +21,6 @@ class JobDetailHeader extends Component {
   }
 
   render() {
-    console.log('jobDetailHeader render!!');
     const { open } = this.state;
     const {
       provider,

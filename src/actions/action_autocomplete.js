@@ -23,16 +23,15 @@ export const clearAutoCompleteData = () => ({
   type: types.CLEAR_AUTOCOMPLETEJOB,
 });
 
-export const filterAutoCompleteData = hireId => async (dispatch) => {
+export const filterAutoCompleteData = hireId => async dispatch => {
   await dispatch(filteringAutoCompleteData(hireId));
   dispatch(clearAutoCompleteData());
 };
 
-export const setAutoCompleteData = company => async (dispatch) => {
+export const setAutoCompleteData = company => async dispatch => {
   dispatch(loadingAutoComplete());
 
   const responseAutoCompleteData = await api.getAutoCompleteData(company);
-  console.log(responseAutoCompleteData);
 
   try {
     dispatch(successAutoComplete(responseAutoCompleteData.data.data));

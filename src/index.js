@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 
 const history = createBrowserHistory();
 const store = configureStore(history);
-console.log('index.js rendered');
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>

@@ -9,7 +9,6 @@ import JobPostForm from 'containers/job/post/JobPostForm';
 import Login from 'containers/login/login';
 import getToken from 'containers/login/getToken';
 import privateRoute from 'containers/login/privateRoute';
-import Logout from 'containers/logout';
 import MainPage from 'components/common/MainPage';
 import './App.css';
 import { createGlobalStyle } from 'styled-components';
@@ -23,24 +22,20 @@ createGlobalStyle`
 }
 `;
 
-const App = () => {
-  console.log('App.js rendered');
-  return (
+const App = () => (
     <Switch>
       <div className="App">
         <HeaderContainer />
         <Route path="/" exact render={MainPage} />
         <Route path="/login" component={Login} />
-        <Route path="/logout" component={Logout} />
-        <Route path="/user" component={UserContainer} />
+        <Route path="/user" component={privateRoute(UserContainer)} />
         <Route path="/userprofile" component={getToken} />
-        <Route path="/joblist" component={JobList} />
+        <Route path="/joblist" component={privateRoute(JobList)} />
         <Route path="/jobpost" component={privateRoute(JobPostForm)} />
-        <Route path="/jobdetail" component={JobDetail} />
+        <Route path="/jobdetail" component={privateRoute(JobDetail)} />
         <Route path="/analysis" component={privateRoute(AnalysisContainer)} />
       </div>
     </Switch>
   );
-};
 
 export default App;

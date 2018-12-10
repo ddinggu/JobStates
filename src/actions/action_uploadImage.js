@@ -14,11 +14,8 @@ const uploadImage = data => async (dispatch) => {
   dispatch(loadingUploadImage());
   try {
     const imgUrlResponse = await api.jobPostImage(data);
-    console.log('imgUrl....:::', imgUrlResponse);
     dispatch(uploadImageSuccess(imgUrlResponse));
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 export default uploadImage;

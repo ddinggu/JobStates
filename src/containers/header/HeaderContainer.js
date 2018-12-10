@@ -4,6 +4,7 @@ import { Image, Dropdown } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import options from 'utils/headerHelper';
+import logout from 'utils/logout';
 import './HeaderContainer.css';
 import * as Styled from 'StyledComponents';
 
@@ -15,7 +16,7 @@ class Header extends Component {
   _onHandleChange = async (e, { value }) => {
     await this.setState({ value });
     if (this.state.value === 'signout') {
-      this.props.push('/logout');
+      logout();
     }
   };
 

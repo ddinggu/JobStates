@@ -48,7 +48,7 @@ class JobComment extends Component {
   render() {
     const { edit, advantage, disAdvantage, strategy } = this.state;
     const { onSubmitEditData } = this.props;
-    console.log('jobComment render!');
+
     return (
       <Container className="jobContainer">
         <Grid textAlign="center">

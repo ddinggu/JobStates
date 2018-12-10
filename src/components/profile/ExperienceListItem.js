@@ -29,11 +29,7 @@ export default class Experience extends Component {
   }
 
   render() {
-
-    const {
- id, edit, title, term, content, description 
-} = this.state;
-console.log('ExperienceListItem rendered');
+    const { id, edit, title, term, content, description } = this.state;
 
     const { funcs } = this.props;
 

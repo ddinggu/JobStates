@@ -18,7 +18,6 @@ const failedPatchJobData = error => ({
 
 export default (data, part) => async (dispatch) => {
   dispatch(loadingPatchJobData());
-  // console.log('update data : ', data);
 
   try {
     const response = await api.updateJobPostData(data, part);

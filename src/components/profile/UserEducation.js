@@ -30,7 +30,6 @@ export default class UserEducation extends Component {
   }
 
   render() {
-    console.log('UserEducation rendered');
     const { onButtonClick } = this;
     const { create } = this.state;
     const { edu, funcs } = this.props;
