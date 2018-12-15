@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 
 export default class GetToken extends Component {
-  _getToken = () => {
+  getToken = () => {
     const userInfo = queryString.parse(this.props.location.search);
 
     if (userInfo.token) {
@@ -16,7 +16,7 @@ export default class GetToken extends Component {
   };
 
   async componentDidMount() {
-    await this._getToken();
+    await this.getToken();
     window.location.href = '/joblist';
   }
 

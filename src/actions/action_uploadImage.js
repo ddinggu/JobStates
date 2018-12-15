@@ -15,7 +15,9 @@ const uploadImage = data => async (dispatch) => {
   try {
     const imgUrlResponse = await api.jobPostImage(data);
     dispatch(uploadImageSuccess(imgUrlResponse));
-  } catch (err) {}
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export default uploadImage;

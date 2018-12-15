@@ -13,26 +13,26 @@ class JobListHeader extends Component {
     inputValue: '',
   };
 
-  _onSelectChange = (e, { value }) => {
+  onSelectChange = (e, { value }) => {
     this.setState(prevState => ({
       value,
     }));
   };
 
-  _onInputChange = e => {
+  onInputChange = e => {
     this.setState({
       inputValue: e.target.value,
     });
   };
 
-  _onClickSearch = debounce(() => {
+  onClickSearch = debounce(() => {
     const { value, inputValue } = this.state;
     this.props._filterSearch(value, inputValue);
   }, 300);
 
   onInputDebounce = e => {
     e.preventDefault();
-    this._onClickSearch();
+    this.onClickSearch();
   };
 
   render() {

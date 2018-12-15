@@ -81,7 +81,7 @@ class JobPostForm extends Component {
     else this.setState({ ...this.state, [key]: data, provider: 'user' });
   };
 
-  _sendImageForLogo = async () => {
+  sendImageForLogo = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileLogo').files[0]);
     try {
@@ -92,7 +92,7 @@ class JobPostForm extends Component {
     }
   };
 
-  _sendImageForHireImage = async () => {
+  sendImageForHireImage = async () => {
     let imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefileHire').files[0]);
     try {
@@ -227,7 +227,7 @@ class JobPostForm extends Component {
                                     name="file"
                                     id="imagefileLogo"
                                     onChange={() => {
-                                      this._sendImageForLogo();
+                                      this.sendImageForLogo();
                                     }}
                                   />
                                 </div>
@@ -441,15 +441,6 @@ class JobPostForm extends Component {
                             <List.Item className="jobpostItem">
                               공고 이미지
                             </List.Item>
-                            {/* <Input
-                              control={Input}
-                              type="file"
-                              name="file"
-                              id="imagefileHire"
-                              onChange={() => {
-                                this._sendImageForHireImage();
-                              }}
-                            /> */}
                             <div className="upload-btn-wrapper">
                               <button className="btn">등록</button>
                               <input
@@ -457,7 +448,7 @@ class JobPostForm extends Component {
                                 name="file"
                                 id="imagefileHire"
                                 onChange={() => {
-                                  this._sendImageForHireImage();
+                                  this.sendImageForHireImage();
                                 }}
                               />
                             </div>

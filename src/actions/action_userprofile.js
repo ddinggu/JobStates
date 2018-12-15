@@ -85,5 +85,7 @@ export const uploadUserImage = data => async (dispatch) => {
     const imgUrlResponse = await api.postUserImage(data);
 
     dispatch(uploadUserImageSuccess(imgUrlResponse));
-  } catch (err) {}
+  } catch (err) {
+    console.error(err);
+  }
 };

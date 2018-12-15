@@ -24,7 +24,7 @@ class JobList extends Component {
     fetchJob();
   }
 
-  _mapList = jobData => {
+  mapList = jobData => {
     const { getDetailJob } = this.props;
 
     return (
@@ -60,7 +60,7 @@ class JobList extends Component {
     );
   };
 
-  _filterSearch = (value, inputValue) => {
+  filterSearch = (value, inputValue) => {
     this.props.filterFetchData(value, inputValue);
     if (value === '전체' && !!inputValue) {
       this.setState({ filterFlag: true });

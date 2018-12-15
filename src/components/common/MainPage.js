@@ -15,9 +15,7 @@ const MainPage = () => (
             여러 사이트에 분산된 채용공고들을 저희 사이트를 통해 정리하세요!
           </p>
         </header>
-        <p style={{ textAlign: 'right' }}>
-          {/* <img className="main-image" src="./image/main_default.jpg" alt="" /> */}
-        </p>
+        <p style={{ textAlign: 'right' }} />
       </div>
     </section>
 

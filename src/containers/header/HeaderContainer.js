@@ -13,7 +13,7 @@ class Header extends Component {
     optionValue: false,
   };
 
-  _onHandleChange = async (e, { value }) => {
+  onHandleChange = async (e, { value }) => {
     await this.setState({ value });
     if (this.state.value === 'signout') {
       logout();

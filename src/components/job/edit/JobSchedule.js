@@ -54,7 +54,6 @@ class JobSchedule extends Component {
       <Container className="jobContainer">
         <Grid textAlign="center">
           <Grid.Column width={2}>
-            {/* <Header>현재 상황</Header> */}
             <Styled.Box>
               <Styled.Header>현재 상황</Styled.Header>
               <Styled.Line />
